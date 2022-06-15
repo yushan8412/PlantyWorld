@@ -9,12 +9,21 @@
 /* Begin PBXBuildFile section */
 		809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B4285879F300E84DD7 /* AppDelegate.swift */; };
 		809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B6285879F300E84DD7 /* SceneDelegate.swift */; };
-		809F97B9285879F300E84DD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B8285879F300E84DD7 /* ViewController.swift */; };
+		809F97B9285879F300E84DD7 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B8285879F300E84DD7 /* LobbyViewController.swift */; };
 		809F97BC285879F300E84DD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 809F97BA285879F300E84DD7 /* Main.storyboard */; };
 		809F97BF285879F300E84DD7 /* PlantyWorld.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 809F97BD285879F300E84DD7 /* PlantyWorld.xcdatamodeld */; };
 		809F97C1285879F500E84DD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 809F97C0285879F500E84DD7 /* Assets.xcassets */; };
 		809F97C4285879F500E84DD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 809F97C2285879F500E84DD7 /* LaunchScreen.storyboard */; };
 		809F97D2285977F800E84DD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 809F97D1285977F800E84DD7 /* GoogleService-Info.plist */; };
+		809F97D5285982B700E84DD7 /* PlantsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97D3285982B700E84DD7 /* PlantsCollectionViewCell.swift */; };
+		809F97D6285982B700E84DD7 /* PlantsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809F97D4285982B700E84DD7 /* PlantsCollectionViewCell.xib */; };
+		809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97DA285983CB00E84DD7 /* Extensions.Anchor.swift */; };
+		809F97DE285991C700E84DD7 /* UIView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97DD285991C700E84DD7 /* UIView Extension.swift */; };
+		809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */; };
+		809F97E22859ABAC00E84DD7 /* AddPlantSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 809F97E12859ABAC00E84DD7 /* AddPlantSB.storyboard */; };
+		809F97E42859EAAA00E84DD7 /* PublishModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E32859EAAA00E84DD7 /* PublishModel.swift */; };
+		809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */; };
+		809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,13 +33,22 @@
 		809F97B1285879F300E84DD7 /* PlantyWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantyWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		809F97B4285879F300E84DD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		809F97B6285879F300E84DD7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		809F97B8285879F300E84DD7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		809F97B8285879F300E84DD7 /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		809F97BB285879F300E84DD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		809F97BE285879F300E84DD7 /* PlantyWorld.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlantyWorld.xcdatamodel; sourceTree = "<group>"; };
 		809F97C0285879F500E84DD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		809F97C3285879F500E84DD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		809F97C5285879F500E84DD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		809F97D1285977F800E84DD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		809F97D3285982B700E84DD7 /* PlantsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsCollectionViewCell.swift; sourceTree = "<group>"; };
+		809F97D4285982B700E84DD7 /* PlantsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlantsCollectionViewCell.xib; sourceTree = "<group>"; };
+		809F97DA285983CB00E84DD7 /* Extensions.Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.Anchor.swift; sourceTree = "<group>"; };
+		809F97DD285991C700E84DD7 /* UIView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView Extension.swift"; sourceTree = "<group>"; };
+		809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantVC.swift; sourceTree = "<group>"; };
+		809F97E12859ABAC00E84DD7 /* AddPlantSB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPlantSB.storyboard; sourceTree = "<group>"; };
+		809F97E32859EAAA00E84DD7 /* PublishModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishModel.swift; sourceTree = "<group>"; };
+		809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsModel.swift; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,17 +85,66 @@
 		809F97B3285879F300E84DD7 /* PlantyWorld */ = {
 			isa = PBXGroup;
 			children = (
+				809F97E52859ECBB00E84DD7 /* Manager */,
+				809F97DC285983D000E84DD7 /* Extension */,
+				809F97D9285982FA00E84DD7 /* Model */,
+				809F97D8285982D400E84DD7 /* Controller */,
+				809F97D7285982C000E84DD7 /* View */,
 				809F97B4285879F300E84DD7 /* AppDelegate.swift */,
 				809F97B6285879F300E84DD7 /* SceneDelegate.swift */,
-				809F97B8285879F300E84DD7 /* ViewController.swift */,
-				809F97BA285879F300E84DD7 /* Main.storyboard */,
 				809F97C0285879F500E84DD7 /* Assets.xcassets */,
-				809F97C2285879F500E84DD7 /* LaunchScreen.storyboard */,
 				809F97D1285977F800E84DD7 /* GoogleService-Info.plist */,
 				809F97C5285879F500E84DD7 /* Info.plist */,
 				809F97BD285879F300E84DD7 /* PlantyWorld.xcdatamodeld */,
 			);
 			path = PlantyWorld;
+			sourceTree = "<group>";
+		};
+		809F97D7285982C000E84DD7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				809F97D3285982B700E84DD7 /* PlantsCollectionViewCell.swift */,
+				809F97D4285982B700E84DD7 /* PlantsCollectionViewCell.xib */,
+				809F97BA285879F300E84DD7 /* Main.storyboard */,
+				809F97C2285879F500E84DD7 /* LaunchScreen.storyboard */,
+				809F97E12859ABAC00E84DD7 /* AddPlantSB.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		809F97D8285982D400E84DD7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				809F97B8285879F300E84DD7 /* LobbyViewController.swift */,
+				809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		809F97D9285982FA00E84DD7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				809F97E32859EAAA00E84DD7 /* PublishModel.swift */,
+				809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		809F97DC285983D000E84DD7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				809F97DA285983CB00E84DD7 /* Extensions.Anchor.swift */,
+				809F97DD285991C700E84DD7 /* UIView Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		809F97E52859ECBB00E84DD7 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		AF3B68E8EA64C6DF1856546C /* Pods */ = {
@@ -159,7 +226,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				809F97D2285977F800E84DD7 /* GoogleService-Info.plist in Resources */,
+				809F97E22859ABAC00E84DD7 /* AddPlantSB.storyboard in Resources */,
 				809F97C4285879F500E84DD7 /* LaunchScreen.storyboard in Resources */,
+				809F97D6285982B700E84DD7 /* PlantsCollectionViewCell.xib in Resources */,
 				809F97C1285879F500E84DD7 /* Assets.xcassets in Resources */,
 				809F97BC285879F300E84DD7 /* Main.storyboard in Resources */,
 			);
@@ -232,9 +301,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				809F97BF285879F300E84DD7 /* PlantyWorld.xcdatamodeld in Sources */,
-				809F97B9285879F300E84DD7 /* ViewController.swift in Sources */,
+				809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */,
+				809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */,
+				809F97DE285991C700E84DD7 /* UIView Extension.swift in Sources */,
+				809F97B9285879F300E84DD7 /* LobbyViewController.swift in Sources */,
 				809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */,
+				809F97D5285982B700E84DD7 /* PlantsCollectionViewCell.swift in Sources */,
+				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
+				809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */,
 				809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */,
+				809F97E42859EAAA00E84DD7 /* PublishModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

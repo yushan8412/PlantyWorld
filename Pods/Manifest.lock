@@ -602,6 +602,11 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
+  - Firebase/CoreOnly (9.0.0):
+    - FirebaseCore (= 9.0.0)
+  - Firebase/Firestore (9.0.0):
+    - Firebase/CoreOnly
+    - FirebaseFirestore (~> 9.0.0)
   - FirebaseAnalytics (9.0.0):
     - FirebaseAnalytics/AdIdSupport (= 9.0.0)
     - FirebaseCore (~> 9.0)
@@ -750,6 +755,7 @@ PODS:
     - Libuv-gRPC (= 0.0.10)
   - gRPC-Core/Interface (1.44.0)
   - GTMSessionFetcher/Core (1.7.2)
+  - IQKeyboardManagerSwift (6.5.9)
   - leveldb-library (1.22.1)
   - Libuv-gRPC (0.0.10):
     - Libuv-gRPC/Implementation (= 0.0.10)
@@ -766,15 +772,18 @@ PODS:
   - SwiftLint (0.47.1)
 
 DEPENDENCIES:
+  - Firebase/Firestore
   - FirebaseAnalytics
   - FirebaseAuth
   - FirebaseFirestore
+  - IQKeyboardManagerSwift
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
+    - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
     - FirebaseCore
@@ -788,6 +797,7 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - IQKeyboardManagerSwift
     - leveldb-library
     - Libuv-gRPC
     - nanopb
@@ -797,6 +807,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
+  Firebase: a876fadc5ea653a377693376fd4f885c62704512
   FirebaseAnalytics: ea4f6f4b604a20b4de4d3c7f7a2cb51d9a989040
   FirebaseAuth: eae56c13e1161da89be202b1fae3ca60b4b8d689
   FirebaseCore: e4c0b5d9727eaee0b43f9ed00baff7500c188d7b
@@ -810,12 +821,13 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
+  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: 74e90ffcfbc7c5fd5e895e72bb7894f169e954a4
+PODFILE CHECKSUM: 88faaa9a3153b034f77cbc224e639e414b9a554e
 
 COCOAPODS: 1.11.3
