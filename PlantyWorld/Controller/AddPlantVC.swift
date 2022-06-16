@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
-class AddPlantVC: UIViewController {
-     
+class AddPlantVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     var addBtn = UIButton()
     var picBackground = UIView()
     var imageArea = UIImageView()
@@ -23,6 +24,8 @@ class AddPlantVC: UIViewController {
     var sunTXF = UITextField()
     var waterLB = UILabel()
     var waterTXF = UITextField()
+    var addImageBtn = UIButton()
+    let addPic = UIImage(systemName: "photo.on.rectangle.angled")
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -34,18 +37,70 @@ class AddPlantVC: UIViewController {
         view.addSubview(sunTXF)
         view.addSubview(waterLB)
         view.addSubview(waterTXF)
-        setupBtn()
+        setupAddBtn()
         setupImageArea()
         setupDetilArea()
+        setAddPlantBtn()
         tabBarController?.tabBar.isHidden = true
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.tabBar.isHidden = true
-
     }
     
-    func setupBtn() {
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+        imageArea.image = UIImage(named: "Group")
+        nameTXF.text = ""
+        dateTXF.text = ""
+        sunTXF.text = ""
+        waterTXF.text = ""
+    }
+    
+    func setAddPlantBtn() {
+        picBackground.addSubview(addImageBtn)
+        addImageBtn.anchor(bottom: picBackground.bottomAnchor,
+                           right: picBackground.rightAnchor,
+                           paddingBottom: 16, paddingRight: 16)
+        addImageBtn.setImage(addPic, for: .normal)
+        addImageBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
+//        addImageBtn.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
+    }
+    
+    @objc func uploadFrom() -> UIAlertController {
+        let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "開啟相機拍照", style: .default) { (_) in
+            self.camera()
+        }
+        let libraryAction = UIAlertAction(title: "從相簿中選擇", style: .default) { (_) in
+            self.photopicker()
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        controller.addAction(cameraAction)
+        controller.addAction(libraryAction)
+        controller.addAction(cancelAction)
+        present(controller, animated: true, completion: nil)
+        
+        return UIAlertController()
+    }
+    
+    func camera() {
+        let cameraController = UIImagePickerController()
+        cameraController.delegate = self
+        cameraController.sourceType = .camera
+        present(cameraController, animated: true, completion: nil)
+    }
+    func photopicker() {
+        let photoController = UIImagePickerController()
+        photoController.delegate = self
+        photoController.sourceType = .photoLibrary
+        present(photoController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        let image = info[.originalImage] as? UIImage
+        imageArea.image = image
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func setupAddBtn() {
         view.addSubview(addBtn)
         addBtn.anchor(left: view.leftAnchor,
                       bottom: view.bottomAnchor,
@@ -59,14 +114,13 @@ class AddPlantVC: UIViewController {
     }
     
     @objc func tapDismiss() {
-        
         navigationController?.popViewController(animated: true)
     }
     
     @objc func tapToUpdate() {
         if nameTXF.text != "" && dateTXF.text != "" && sunTXF.text != "" && waterLB.text != "" {
             FirebaseManager.shared.addPlant(name: nameTXF.text!,
-                                            dateOfPurchase: dateTXF.text!,
+                                            date: dateTXF.text!,
                                             sun: sunTXF.text!, water: waterTXF.text!)
             self.waterTXF.text = ""
             self.sunTXF.text = ""
@@ -75,6 +129,29 @@ class AddPlantVC: UIViewController {
         } else {
             print("Error")
         }
+        
+        guard imageArea != nil else { print("=======imageares is nil")
+            return
+        }
+        
+        // create Storage ref
+        let storageRef = Storage.storage().reference()
+        
+        // turn image into data
+        let imageData = imageArea.image!.jpegData(compressionQuality: 0.8)
+        guard imageData != nil else { return }
+        
+        //specify the file path and name
+        let fileRef = storageRef.child("image/\(UUID().uuidString).jpg")
+        
+        //upload data
+        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+            print("=======\(error)")
+            if error == nil && metadata != nil {
+            }
+        }
+        
+        
     }
     
     func setupImageArea() {
@@ -89,8 +166,6 @@ class AddPlantVC: UIViewController {
                          right: picBackground.rightAnchor, paddingTop: 24,
                          paddingLeft: 24, paddingRight: 24, height: 250)
         imageArea.contentMode = .scaleToFill
-        imageArea.image = UIImage(named: "山烏龜")
-        
     }
     
     func setupDetilArea() {
@@ -124,7 +199,7 @@ class AddPlantVC: UIViewController {
         sunTXF.layer.borderWidth = 1
         sunTXF.layer.borderColor = UIColor.gray.cgColor
         sunTXF.font = .systemFont(ofSize: 24)
-
+        
         waterLB.anchor(top: sunTXF.bottomAnchor, left: view.leftAnchor,
                        right: view.rightAnchor, paddingTop: 16,
                        paddingLeft: 64, paddingRight: 64)
@@ -138,20 +213,30 @@ class AddPlantVC: UIViewController {
         
     }
     
-    func popAlert(title: String, message: String) {
-        
-        let alertController = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        let okAction = UIAlertAction(
-            title: "OK",
-            style: .default
-        )
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true)
-        
-    }
+//    @objc func uploadPhoto() {
+//        guard imageArea != nil else { print("=======imageares is nil")
+//            return
+//        }
+//
+//
+//        // create Storage ref
+//        let storageRef = Storage.storage().reference()
+//
+//        // turn image into data
+//        let imageData = imageArea.image!.jpegData(compressionQuality: 0.8)
+//        guard imageData != nil else { return }
+//
+//        //specify the file path and name
+//        let fileRef = storageRef.child("image/\(UUID().uuidString).jpg")
+//
+//        //upload data
+//        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+//            if error == nil && metadata != nil {
+//                print("=======\(error)")
+//            }
+//        }
+//
+//        //save ref to firestore database
+//    }
     
 }

@@ -15,7 +15,7 @@ class FirebaseManager {
     let dataBase = Firestore.firestore()
     var plantsList = [PlantsModel]()
     
-    func addPlant(name: String, dateOfPurchase: String, sun: String, water: String) {
+    func addPlant(name: String, date: String, sun: String, water: String) {
         let plants = dataBase.collection("plants")
         let document = plants.document()
         let data: [String: Any] = [
@@ -24,9 +24,10 @@ class FirebaseManager {
                 "name": Auth.auth().currentUser?.displayName,
                 "id": "123123"],
             "name": name,
-            "date": dateOfPurchase,
+            "date": date,
             "sun": sun,
             "water": water
+//            "image": image
         ]
         document.setData(data) { error in
             if let error = error {
@@ -45,13 +46,14 @@ class FirebaseManager {
             for plant in querySnapshot.documents {
                 let plantObject = plant.data(with: ServerTimestampBehavior.none)
                 let plantName = plantObject["name"] as? String ?? ""
-                let plantDate = plantObject["dateOfPurchase"] as? Date ?? Date(timeIntervalSince1970: 1.0)
+//                let plantDate = plantObject["dateOfPurchase"] as? Date ?? Date(timeIntervalSince1970: 1.0)
+                let plantDate = plantObject["date"] as? String ?? ""
                 let plantSun = plantObject["sun"] as? Int ?? 0
                 let plantWater = plantObject["water"] as? Int ?? 0
                 let plantNote = plantObject["note"] as? String ?? ""
         
                 let plant = PlantsModel(name: plantName ,
-                                        dateOfPurchase: plantDate,
+                                        date: plantDate,
                                         sun: plantSun,
                                         water: plantWater,
                                         note: plantNote)

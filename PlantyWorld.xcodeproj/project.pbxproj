@@ -24,6 +24,11 @@
 		809F97E42859EAAA00E84DD7 /* PublishModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E32859EAAA00E84DD7 /* PublishModel.swift */; };
 		809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */; };
 		809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */; };
+		80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA695285AE18D00BB515C /* PlantDetailVC.swift */; };
+		80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA699285AE4F200BB515C /* PlantDetailCell.swift */; };
+		80ABA69C285AE4F200BB515C /* PlantDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */; };
+		80ABA69F285AF90400BB515C /* PlantDetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA69D285AF90400BB515C /* PlantDetailImageCell.swift */; };
+		80ABA6A0285AF90400BB515C /* PlantDetailImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA69E285AF90400BB515C /* PlantDetailImageCell.xib */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +54,11 @@
 		809F97E32859EAAA00E84DD7 /* PublishModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishModel.swift; sourceTree = "<group>"; };
 		809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsModel.swift; sourceTree = "<group>"; };
+		80ABA695285AE18D00BB515C /* PlantDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailVC.swift; sourceTree = "<group>"; };
+		80ABA699285AE4F200BB515C /* PlantDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailCell.swift; sourceTree = "<group>"; };
+		80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlantDetailCell.xib; sourceTree = "<group>"; };
+		80ABA69D285AF90400BB515C /* PlantDetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailImageCell.swift; sourceTree = "<group>"; };
+		80ABA69E285AF90400BB515C /* PlantDetailImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlantDetailImageCell.xib; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,9 +113,10 @@
 		809F97D7285982C000E84DD7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				80ABA6A1285AF9D900BB515C /* PlantDetailPage */,
+				809F97BA285879F300E84DD7 /* Main.storyboard */,
 				809F97D3285982B700E84DD7 /* PlantsCollectionViewCell.swift */,
 				809F97D4285982B700E84DD7 /* PlantsCollectionViewCell.xib */,
-				809F97BA285879F300E84DD7 /* Main.storyboard */,
 				809F97C2285879F500E84DD7 /* LaunchScreen.storyboard */,
 				809F97E12859ABAC00E84DD7 /* AddPlantSB.storyboard */,
 			);
@@ -117,6 +128,7 @@
 			children = (
 				809F97B8285879F300E84DD7 /* LobbyViewController.swift */,
 				809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */,
+				80ABA695285AE18D00BB515C /* PlantDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -145,6 +157,17 @@
 				809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		80ABA6A1285AF9D900BB515C /* PlantDetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA699285AE4F200BB515C /* PlantDetailCell.swift */,
+				80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */,
+				80ABA69D285AF90400BB515C /* PlantDetailImageCell.swift */,
+				80ABA69E285AF90400BB515C /* PlantDetailImageCell.xib */,
+			);
+			path = PlantDetailPage;
 			sourceTree = "<group>";
 		};
 		AF3B68E8EA64C6DF1856546C /* Pods */ = {
@@ -229,7 +252,9 @@
 				809F97E22859ABAC00E84DD7 /* AddPlantSB.storyboard in Resources */,
 				809F97C4285879F500E84DD7 /* LaunchScreen.storyboard in Resources */,
 				809F97D6285982B700E84DD7 /* PlantsCollectionViewCell.xib in Resources */,
+				80ABA6A0285AF90400BB515C /* PlantDetailImageCell.xib in Resources */,
 				809F97C1285879F500E84DD7 /* Assets.xcassets in Resources */,
+				80ABA69C285AE4F200BB515C /* PlantDetailCell.xib in Resources */,
 				809F97BC285879F300E84DD7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,8 +333,11 @@
 				809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */,
 				809F97D5285982B700E84DD7 /* PlantsCollectionViewCell.swift in Sources */,
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
+				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,
 				809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */,
+				80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */,
 				809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */,
+				80ABA69F285AF90400BB515C /* PlantDetailImageCell.swift in Sources */,
 				809F97E42859EAAA00E84DD7 /* PublishModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +489,8 @@
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -490,6 +520,8 @@
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -16,7 +16,7 @@ struct PublishModel: Comparable {
         return lhs.time < rhs.time
     }
     
-    var author: AnyObject
+    var author: Author
     var title: String
     var content: String
     var time: Date

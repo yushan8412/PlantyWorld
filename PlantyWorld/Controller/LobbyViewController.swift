@@ -8,7 +8,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-
 class LobbyViewController: UIViewController {
 
     @IBOutlet weak var plantsCollectionView: UICollectionView!
@@ -63,6 +62,7 @@ class LobbyViewController: UIViewController {
 
 }
 
+// MARK: collectionView
 extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return plantList.count
@@ -77,14 +77,27 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
         else { return UICollectionViewCell() }
         cell.title.text = plantList[indexPath.item].name
         cell.contentView.layer.cornerRadius = 10
-//        cell.title.text = "test"
         cell.mainPic.image = UIImage(named: "山烏龜")
                 
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+//        self.navigationController?.pushViewController(PlantDetailVC(), animated: true)
+        performSegue(withIdentifier: "showDetailPage", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetailPage" {
+            if let indexPath = plantsCollectionView.indexPathsForSelectedItems?.first {
+                guard let nextVC = segue.destination as? PlantDetailVC else { return }
+                        nextVC.plant = plantList[indexPath.item]
+            }
+        }
+    }
 }
-
+// MARK: FlowLayout
 extension LobbyViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

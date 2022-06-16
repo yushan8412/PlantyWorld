@@ -9,15 +9,16 @@ import Foundation
 
 struct PlantsModel: Comparable {
     static func < (lhs: PlantsModel, rhs: PlantsModel) -> Bool {
-        return lhs.dateOfPurchase < rhs.dateOfPurchase
+        return lhs.date < rhs.date
     }
     static func == (lhs: PlantsModel, rhs: PlantsModel) -> Bool {
-        return lhs.dateOfPurchase < rhs.dateOfPurchase
+        return lhs.date < rhs.date
     }
     
     var name: String
-    var dateOfPurchase: Date
+    var date: String
     var sun: Int
     var water: Int
     var note: String
+//    var image: String
 }
