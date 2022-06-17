@@ -7,5 +7,11 @@ target 'PlantyWorld' do
 
   # Pods for PlantyWorld
 pod 'SwiftLint'
+pod 'FirebaseAuth'
+pod 'FirebaseFirestore'
+pod 'FirebaseAnalytics'
+pod 'Firebase/Firestore'
+pod 'IQKeyboardManagerSwift'
+pod 'Firebase/Storage'
 
 end
