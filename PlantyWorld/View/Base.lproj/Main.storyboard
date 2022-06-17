@@ -81,17 +81,32 @@
             </objects>
             <point key="canvasLocation" x="106" y="1556"/>
         </scene>
-        <!--View Controller-->
+        <!--CommandVC-->
         <scene sceneID="Jjy-1I-oIc">
             <objects>
-                <viewController id="4TJ-yt-Uyz" sceneMemberID="viewController">
+                <viewController id="4TJ-yt-Uyz" customClass="CommandVC" customModule="PlantyWorld" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e6h-Z7-7Pp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lgf-Td-gR8">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="OMW-bn-HcO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lgf-Td-gR8" firstAttribute="top" secondItem="OMW-bn-HcO" secondAttribute="top" id="98w-B6-ONp"/>
+                            <constraint firstItem="OMW-bn-HcO" firstAttribute="bottom" secondItem="lgf-Td-gR8" secondAttribute="bottom" id="Kou-Q0-xtg"/>
+                            <constraint firstItem="OMW-bn-HcO" firstAttribute="trailing" secondItem="lgf-Td-gR8" secondAttribute="trailing" id="YCv-Fc-hJE"/>
+                            <constraint firstItem="lgf-Td-gR8" firstAttribute="leading" secondItem="OMW-bn-HcO" secondAttribute="leading" id="d8z-mU-IZU"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3vE-aj-XNg"/>
+                    <connections>
+                        <outlet property="tableView" destination="lgf-Td-gR8" id="7Ea-Gu-3Eg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mdK-ct-dEP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,13 +10,11 @@ import UIKit
 
 class PlantDetailVC: UIViewController {
     
-//    @IBOutlet weak var tableView: UITableView!
     var tableView = UITableView()
     
     var plant: PlantsModel?
     
     override func viewDidLoad() {
-//        self.navigationController?.navigationBar.backgroundColor = .green
 
         view.backgroundColor = .red
         view.addSubview(tableView)
@@ -25,6 +23,10 @@ class PlantDetailVC: UIViewController {
         self.tableView.register(PlantDetailImageCell.self, forCellReuseIdentifier: PlantDetailImageCell.reuseidentify)
         self.tableView.register(UINib(nibName: "PlantDetailCell", bundle: nil),
                                 forCellReuseIdentifier: "PlantDetailCell")
+        self.tableView.register(UINib(nibName: "DetailSunCell", bundle: nil),
+                                forCellReuseIdentifier: "DetailSunCell")
+        self.tableView.register(UINib(nibName: "DetailWaterCell", bundle: nil),
+                                forCellReuseIdentifier: "DetailWaterCell")
         setup()
     
     }
@@ -47,7 +49,7 @@ class PlantDetailVC: UIViewController {
  // MARK: TableView
 extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,16 +62,30 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "PlantDetailCell") as? PlantDetailCell
         else { return UITableViewCell() }
         
+        guard let sunCell = tableView.dequeueReusableCell(
+            withIdentifier: "DetailSunCell") as? DetailSunCell
+        else { return UITableViewCell() }
+        
+        guard let waterCell = tableView.dequeueReusableCell(
+            withIdentifier: "DetailWaterCell") as? DetailWaterCell
+        else { return UITableViewCell() }
+        
         titleCell.nameLB.text = plant?.name ?? ""
         titleCell.dateLB.text = plant?.date ?? ""
-        print("========\(plant!.date)")
         imageCell.image.image = UIImage(named: "山烏龜")
+        sunCell.sunLB.text = "Sunny"
+        waterCell.waterLB.text = "Water"
         
         if indexPath.row == 0 {
             return imageCell
-        } else {
+        } else if indexPath.row == 1 {
             return titleCell
+        } else if indexPath.row == 2 {
+            return sunCell
+        } else if indexPath.row == 3 {
+            return waterCell
         }
+        return UITableViewCell()
     }
     
 }

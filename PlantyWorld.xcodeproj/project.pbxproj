@@ -29,6 +29,15 @@
 		80ABA69C285AE4F200BB515C /* PlantDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */; };
 		80ABA69F285AF90400BB515C /* PlantDetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA69D285AF90400BB515C /* PlantDetailImageCell.swift */; };
 		80ABA6A0285AF90400BB515C /* PlantDetailImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA69E285AF90400BB515C /* PlantDetailImageCell.xib */; };
+		80ABA6A4285B8D7A00BB515C /* DetailSunCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6A2285B8D7A00BB515C /* DetailSunCell.swift */; };
+		80ABA6A5285B8D7A00BB515C /* DetailSunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6A3285B8D7A00BB515C /* DetailSunCell.xib */; };
+		80ABA6A8285B90F300BB515C /* DetailWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6A6285B90F300BB515C /* DetailWaterCell.swift */; };
+		80ABA6A9285B90F300BB515C /* DetailWaterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6A7285B90F300BB515C /* DetailWaterCell.xib */; };
+		80ABA6AE285C375800BB515C /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6AC285C375800BB515C /* TextFieldCell.swift */; };
+		80ABA6AF285C375800BB515C /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6AD285C375800BB515C /* TextFieldCell.xib */; };
+		80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6B0285C4A0500BB515C /* CommandVC.swift */; };
+		80ABA6B5285C4C6100BB515C /* CommandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6B3285C4C6100BB515C /* CommandCell.swift */; };
+		80ABA6B6285C4C6100BB515C /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6B4285C4C6100BB515C /* CommandCell.xib */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +68,15 @@
 		80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlantDetailCell.xib; sourceTree = "<group>"; };
 		80ABA69D285AF90400BB515C /* PlantDetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailImageCell.swift; sourceTree = "<group>"; };
 		80ABA69E285AF90400BB515C /* PlantDetailImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlantDetailImageCell.xib; sourceTree = "<group>"; };
+		80ABA6A2285B8D7A00BB515C /* DetailSunCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSunCell.swift; sourceTree = "<group>"; };
+		80ABA6A3285B8D7A00BB515C /* DetailSunCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailSunCell.xib; sourceTree = "<group>"; };
+		80ABA6A6285B90F300BB515C /* DetailWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWaterCell.swift; sourceTree = "<group>"; };
+		80ABA6A7285B90F300BB515C /* DetailWaterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailWaterCell.xib; sourceTree = "<group>"; };
+		80ABA6AC285C375800BB515C /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		80ABA6AD285C375800BB515C /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		80ABA6B0285C4A0500BB515C /* CommandVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandVC.swift; sourceTree = "<group>"; };
+		80ABA6B3285C4C6100BB515C /* CommandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCell.swift; sourceTree = "<group>"; };
+		80ABA6B4285C4C6100BB515C /* CommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandCell.xib; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,10 +131,11 @@
 		809F97D7285982C000E84DD7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				80ABA6B7285C4C6C00BB515C /* LobbyPage */,
+				80ABA6B2285C4C4500BB515C /* CommandPage */,
+				80ABA6AB285C373700BB515C /* AddPlantPage */,
 				80ABA6A1285AF9D900BB515C /* PlantDetailPage */,
 				809F97BA285879F300E84DD7 /* Main.storyboard */,
-				809F97D3285982B700E84DD7 /* PlantsCollectionViewCell.swift */,
-				809F97D4285982B700E84DD7 /* PlantsCollectionViewCell.xib */,
 				809F97C2285879F500E84DD7 /* LaunchScreen.storyboard */,
 				809F97E12859ABAC00E84DD7 /* AddPlantSB.storyboard */,
 			);
@@ -129,6 +148,7 @@
 				809F97B8285879F300E84DD7 /* LobbyViewController.swift */,
 				809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */,
 				80ABA695285AE18D00BB515C /* PlantDetailVC.swift */,
+				80ABA6B0285C4A0500BB515C /* CommandVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -164,10 +184,41 @@
 			children = (
 				80ABA699285AE4F200BB515C /* PlantDetailCell.swift */,
 				80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */,
+				80ABA6A2285B8D7A00BB515C /* DetailSunCell.swift */,
+				80ABA6A3285B8D7A00BB515C /* DetailSunCell.xib */,
 				80ABA69D285AF90400BB515C /* PlantDetailImageCell.swift */,
 				80ABA69E285AF90400BB515C /* PlantDetailImageCell.xib */,
+				80ABA6A6285B90F300BB515C /* DetailWaterCell.swift */,
+				80ABA6A7285B90F300BB515C /* DetailWaterCell.xib */,
 			);
 			path = PlantDetailPage;
+			sourceTree = "<group>";
+		};
+		80ABA6AB285C373700BB515C /* AddPlantPage */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA6AC285C375800BB515C /* TextFieldCell.swift */,
+				80ABA6AD285C375800BB515C /* TextFieldCell.xib */,
+			);
+			path = AddPlantPage;
+			sourceTree = "<group>";
+		};
+		80ABA6B2285C4C4500BB515C /* CommandPage */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA6B3285C4C6100BB515C /* CommandCell.swift */,
+				80ABA6B4285C4C6100BB515C /* CommandCell.xib */,
+			);
+			path = CommandPage;
+			sourceTree = "<group>";
+		};
+		80ABA6B7285C4C6C00BB515C /* LobbyPage */ = {
+			isa = PBXGroup;
+			children = (
+				809F97D3285982B700E84DD7 /* PlantsCollectionViewCell.swift */,
+				809F97D4285982B700E84DD7 /* PlantsCollectionViewCell.xib */,
+			);
+			path = LobbyPage;
 			sourceTree = "<group>";
 		};
 		AF3B68E8EA64C6DF1856546C /* Pods */ = {
@@ -250,12 +301,16 @@
 			files = (
 				809F97D2285977F800E84DD7 /* GoogleService-Info.plist in Resources */,
 				809F97E22859ABAC00E84DD7 /* AddPlantSB.storyboard in Resources */,
+				80ABA6A9285B90F300BB515C /* DetailWaterCell.xib in Resources */,
 				809F97C4285879F500E84DD7 /* LaunchScreen.storyboard in Resources */,
 				809F97D6285982B700E84DD7 /* PlantsCollectionViewCell.xib in Resources */,
+				80ABA6A5285B8D7A00BB515C /* DetailSunCell.xib in Resources */,
 				80ABA6A0285AF90400BB515C /* PlantDetailImageCell.xib in Resources */,
+				80ABA6AF285C375800BB515C /* TextFieldCell.xib in Resources */,
 				809F97C1285879F500E84DD7 /* Assets.xcassets in Resources */,
 				80ABA69C285AE4F200BB515C /* PlantDetailCell.xib in Resources */,
 				809F97BC285879F300E84DD7 /* Main.storyboard in Resources */,
+				80ABA6B6285C4C6100BB515C /* CommandCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,16 +380,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80ABA6B5285C4C6100BB515C /* CommandCell.swift in Sources */,
 				809F97BF285879F300E84DD7 /* PlantyWorld.xcdatamodeld in Sources */,
 				809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */,
+				80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */,
 				809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */,
+				80ABA6A4285B8D7A00BB515C /* DetailSunCell.swift in Sources */,
 				809F97DE285991C700E84DD7 /* UIView Extension.swift in Sources */,
 				809F97B9285879F300E84DD7 /* LobbyViewController.swift in Sources */,
+				80ABA6A8285B90F300BB515C /* DetailWaterCell.swift in Sources */,
 				809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */,
 				809F97D5285982B700E84DD7 /* PlantsCollectionViewCell.swift in Sources */,
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
 				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,
 				809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */,
+				80ABA6AE285C375800BB515C /* TextFieldCell.swift in Sources */,
 				80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */,
 				809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */,
 				80ABA69F285AF90400BB515C /* PlantDetailImageCell.swift in Sources */,

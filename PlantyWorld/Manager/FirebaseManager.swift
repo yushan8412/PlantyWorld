@@ -15,7 +15,7 @@ class FirebaseManager {
     let dataBase = Firestore.firestore()
     var plantsList = [PlantsModel]()
     
-    func addPlant(name: String, date: String, sun: String, water: String) {
+    func addPlant(name: String, date: String, sun: String, water: String, image: String) {
         let plants = dataBase.collection("plants")
         let document = plants.document()
         let data: [String: Any] = [
@@ -26,8 +26,8 @@ class FirebaseManager {
             "name": name,
             "date": date,
             "sun": sun,
-            "water": water
-//            "image": image
+            "water": water,
+            "image": image
         ]
         document.setData(data) { error in
             if let error = error {

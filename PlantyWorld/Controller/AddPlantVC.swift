@@ -11,32 +11,43 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 
-class AddPlantVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddPlantVC: UIViewController {
     
     var addBtn = UIButton()
     var picBackground = UIView()
     var imageArea = UIImageView()
-    var nameLB = UILabel()
-    var nameTXF = UITextField()
-    var dateLB = UILabel()
-    var dateTXF = UITextField()
-    var sunLB = UILabel()
-    var sunTXF = UITextField()
-    var waterLB = UILabel()
-    var waterTXF = UITextField()
+//    var nameLB = UILabel()
+//    var nameTXF = UITextField()
+//    var dateLB = UILabel()
+//    var dateTXF = UITextField()
+//    var sunLB = UILabel()
+//    var sunTXF = UITextField()
+//    var waterLB = UILabel()
+//    var waterTXF = UITextField()
     var addImageBtn = UIButton()
     let addPic = UIImage(systemName: "photo.on.rectangle.angled")
+    var tableView = UITableView()
+    let path = "image/\(UUID().uuidString).jpg"
+//    var plant = PlantsModel(name: String, date: String, sun: Int, water: Int, note: String)
     
     override func viewDidLoad() {
+
         view.backgroundColor = .white
-        view.addSubview(nameLB)
-        view.addSubview(nameTXF)
-        view.addSubview(dateLB)
-        view.addSubview(dateTXF)
-        view.addSubview(sunLB)
-        view.addSubview(sunTXF)
-        view.addSubview(waterLB)
-        view.addSubview(waterTXF)
+//        view.addSubview(nameLB)
+//        view.addSubview(nameTXF)
+//        view.addSubview(dateLB)
+//        view.addSubview(dateTXF)
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        self.tableView.register(UINib(nibName: "DetailSunCell", bundle: nil),
+                                forCellReuseIdentifier: "DetailSunCell")
+        self.tableView.register(UINib(nibName: "DetailWaterCell", bundle: nil),
+                                forCellReuseIdentifier: "DetailWaterCell")
+        self.tableView.register(UINib(nibName: "TextFieldCell", bundle: nil),
+                                forCellReuseIdentifier: "TextFieldCell")
+       
         setupAddBtn()
         setupImageArea()
         setupDetilArea()
@@ -47,10 +58,10 @@ class AddPlantVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         imageArea.image = UIImage(named: "Group")
-        nameTXF.text = ""
-        dateTXF.text = ""
-        sunTXF.text = ""
-        waterTXF.text = ""
+//        nameTXF.text = ""
+//        dateTXF.text = ""
+//        sunTXF.text = ""
+//        waterTXF.text = ""
     }
     
     func setAddPlantBtn() {
@@ -60,7 +71,6 @@ class AddPlantVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                            paddingBottom: 16, paddingRight: 16)
         addImageBtn.setImage(addPic, for: .normal)
         addImageBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
-//        addImageBtn.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
     }
     
     @objc func uploadFrom() -> UIAlertController {
@@ -92,14 +102,7 @@ class AddPlantVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        let image = info[.originalImage] as? UIImage
-        imageArea.image = image
-        dismiss(animated: true, completion: nil)
-    }
-    
+
     func setupAddBtn() {
         view.addSubview(addBtn)
         addBtn.anchor(left: view.leftAnchor,
@@ -111,6 +114,8 @@ class AddPlantVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         addBtn.setTitleColor(.black, for: .normal)
         addBtn.addTarget(self, action: #selector(tapDismiss), for: .touchUpInside)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
+        addBtn.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
+
     }
     
     @objc func tapDismiss() {
@@ -118,39 +123,19 @@ class AddPlantVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     @objc func tapToUpdate() {
-        if nameTXF.text != "" && dateTXF.text != "" && sunTXF.text != "" && waterLB.text != "" {
-            FirebaseManager.shared.addPlant(name: nameTXF.text!,
-                                            date: dateTXF.text!,
-                                            sun: sunTXF.text!, water: waterTXF.text!)
-            self.waterTXF.text = ""
-            self.sunTXF.text = ""
-            self.nameTXF.text = ""
-            self.dateTXF.text = ""
-        } else {
-            print("Error")
-        }
-        
-        guard imageArea != nil else { print("=======imageares is nil")
-            return
-        }
-        
-        // create Storage ref
-        let storageRef = Storage.storage().reference()
-        
-        // turn image into data
-        let imageData = imageArea.image!.jpegData(compressionQuality: 0.8)
-        guard imageData != nil else { return }
-        
-        //specify the file path and name
-        let fileRef = storageRef.child("image/\(UUID().uuidString).jpg")
-        
-        //upload data
-        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-            print("=======\(error)")
-            if error == nil && metadata != nil {
-            }
-        }
-        
+//        FirebaseManager.shared.addPlant(name: water, date: <#T##String#>, sun: <#T##String#>, water: <#T##String#>, image: <#T##String#>)
+//        if nameTXF.text != "" && dateTXF.text != "" && sunTXF.text != "" && waterLB.text != "" {
+//            FirebaseManager.shared.addPlant(name: nameTXF.text!,
+//                                            date: dateTXF.text!,
+//                                            sun: sunTXF.text!, water: waterTXF.text!, image: "url")
+//            self.waterTXF.text = ""
+//            self.sunTXF.text = ""
+//            self.nameTXF.text = ""
+//            self.dateTXF.text = ""
+//
+//        } else {
+//            print("Error")
+//        }
         
     }
     
@@ -169,74 +154,72 @@ class AddPlantVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     func setupDetilArea() {
-        nameLB.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
-                      paddingTop: 30, paddingLeft: 64)
-        nameLB.text = "Name"
-        nameTXF.anchor(top: nameLB.bottomAnchor, left: view.leftAnchor,
-                       right: view.rightAnchor, paddingTop: 10,
-                       paddingLeft: 64, paddingRight: 64)
-        nameTXF.layer.borderWidth = 1
-        nameTXF.layer.borderColor = UIColor.gray.cgColor
-        nameTXF.font = .systemFont(ofSize: 24)
         
-        dateLB.anchor(top: nameTXF.bottomAnchor, left: view.leftAnchor,
-                      right: view.rightAnchor, paddingTop: 16,
-                      paddingLeft: 64, paddingRight: 64)
-        dateLB.text = "Date"
-        dateTXF.anchor(top: dateLB.bottomAnchor, left: view.leftAnchor,
-                       right: view.rightAnchor, paddingTop: 10,
-                       paddingLeft: 64, paddingRight: 64)
-        dateTXF.layer.borderWidth = 1
-        dateTXF.layer.borderColor = UIColor.gray.cgColor
-        dateTXF.font = .systemFont(ofSize: 24)
-        
-        sunLB.anchor(top: dateTXF.bottomAnchor, left: view.leftAnchor,
-                     paddingTop: 16, paddingLeft: 64)
-        sunLB.text = "Sunlight"
-        sunTXF.anchor(top: sunLB.bottomAnchor, left: view.leftAnchor,
-                      right: view.rightAnchor, paddingTop: 10,
-                      paddingLeft: 64, paddingRight: 64)
-        sunTXF.layer.borderWidth = 1
-        sunTXF.layer.borderColor = UIColor.gray.cgColor
-        sunTXF.font = .systemFont(ofSize: 24)
-        
-        waterLB.anchor(top: sunTXF.bottomAnchor, left: view.leftAnchor,
-                       right: view.rightAnchor, paddingTop: 16,
-                       paddingLeft: 64, paddingRight: 64)
-        waterLB.text = "Water"
-        waterTXF.anchor(top: waterLB.bottomAnchor, left: view.leftAnchor,
-                        right: view.rightAnchor, paddingTop: 10,
-                        paddingLeft: 64, paddingRight: 64)
-        waterTXF.layer.borderWidth = 1
-        waterTXF.layer.borderColor = UIColor.gray.cgColor
-        waterTXF.font = .systemFont(ofSize: 24)
+        tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
+                         bottom: view.bottomAnchor, right: view.rightAnchor,
+                         paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         
     }
     
-//    @objc func uploadPhoto() {
-//        guard imageArea != nil else { print("=======imageares is nil")
-//            return
-//        }
-//
-//
-//        // create Storage ref
-//        let storageRef = Storage.storage().reference()
-//
-//        // turn image into data
-//        let imageData = imageArea.image!.jpegData(compressionQuality: 0.8)
-//        guard imageData != nil else { return }
-//
-//        //specify the file path and name
-//        let fileRef = storageRef.child("image/\(UUID().uuidString).jpg")
-//
-//        //upload data
-//        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-//            if error == nil && metadata != nil {
-//                print("=======\(error)")
-//            }
-//        }
-//
-//        //save ref to firestore database
-//    }
+    @objc func uploadPhoto() {
+        guard imageArea != nil else {
+            return
+        }
+        // create Storage ref
+        let storageRef = Storage.storage().reference()
+
+        // turn image into data
+        let imageData = imageArea.image!.jpegData(compressionQuality: 0.8)
+        guard imageData != nil else { return }
+
+        // specify the file path and name
+//        let path = "image/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
+
+        // upload data
+        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+            if error == nil && metadata != nil {
+            }
+        }
+        //save ref to firestore database
+        let db = Firestore.firestore()
+        db.collection("image").document().setData(["url": path])
+        
+        
+    }
     
+}
+
+extension AddPlantVC:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        let image = info[.originalImage] as? UIImage
+        imageArea.image = image
+        
+        let uniString = NSUUID().uuidString
+        if let selectedImage = image {
+            print("123123\(uniString), \(image)")
+        }
+        dismiss(animated: true, completion: nil)
+    }
+
+}
+
+extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "TextFieldCell") as? TextFieldCell
+        else { return UITableViewCell() }
+        cell.dateLB.text = "Date"
+        cell.titleLB.text = "Name"
+        cell.sunLB.text = "Sun"
+        cell.waterLB.text = "Water"
+        return cell
+    }
 }
