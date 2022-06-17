@@ -11,13 +11,19 @@ import UIKit
 class PlantDetailVC: UIViewController {
     
     var tableView = UITableView()
+    var calenderBtn = UIButton()
+    var measureBtn = UIButton()
     
     var plant: PlantsModel?
+//    var calendarVC = CalenderVC()
     
     override func viewDidLoad() {
 
-        view.backgroundColor = .red
+        view.backgroundColor = .systemYellow
         view.addSubview(tableView)
+        tableView.addSubview(calenderBtn)
+        tableView.addSubview(measureBtn)
+        
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.register(PlantDetailImageCell.self, forCellReuseIdentifier: PlantDetailImageCell.reuseidentify)
@@ -35,15 +41,32 @@ class PlantDetailVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         
     }
+    override func viewDidLayoutSubviews() {
+        tableView.layoutIfNeeded()
+    }
     
     func setup() {
-        tableView.anchor(top: view.topAnchor, left: view.leftAnchor,
+        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
                          bottom: view.bottomAnchor, right: view.rightAnchor,
                          paddingTop: 0, paddingLeft: 0,
                          paddingBottom: 0, paddingRight: 0)
         tableView.backgroundColor = .systemMint
+        calenderBtn.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
+                           paddingLeft: 32, paddingBottom: 32)
+        measureBtn.anchor(bottom: view.bottomAnchor, right: view.rightAnchor,
+                          paddingBottom: 32, paddingRight: 32)
+        measureBtn.setTitle("123", for: .normal)
+        calenderBtn.setTitle("qwe", for: .normal)
+        measureBtn.backgroundColor = .systemYellow
+        calenderBtn.backgroundColor = .systemYellow
+        calenderBtn.addTarget(self, action: #selector(toCalenderVC), for: .touchUpInside)
+        
     }
     
+    @objc func toCalenderVC () {
+        navigationController?.pushViewController(CalendarVC(), animated: true)
+        
+    }
 }
 
  // MARK: TableView

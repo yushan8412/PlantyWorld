@@ -38,6 +38,7 @@
 		80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6B0285C4A0500BB515C /* CommandVC.swift */; };
 		80ABA6B5285C4C6100BB515C /* CommandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6B3285C4C6100BB515C /* CommandCell.swift */; };
 		80ABA6B6285C4C6100BB515C /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6B4285C4C6100BB515C /* CommandCell.xib */; };
+		80ABA6B9285C973E00BB515C /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6B8285C973D00BB515C /* CalendarVC.swift */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		80ABA6B0285C4A0500BB515C /* CommandVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandVC.swift; sourceTree = "<group>"; };
 		80ABA6B3285C4C6100BB515C /* CommandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCell.swift; sourceTree = "<group>"; };
 		80ABA6B4285C4C6100BB515C /* CommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandCell.xib; sourceTree = "<group>"; };
+		80ABA6B8285C973D00BB515C /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +151,7 @@
 				809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */,
 				80ABA695285AE18D00BB515C /* PlantDetailVC.swift */,
 				80ABA6B0285C4A0500BB515C /* CommandVC.swift */,
+				80ABA6B8285C973D00BB515C /* CalendarVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				809F97B9285879F300E84DD7 /* LobbyViewController.swift in Sources */,
 				80ABA6A8285B90F300BB515C /* DetailWaterCell.swift in Sources */,
 				809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */,
+				80ABA6B9285C973E00BB515C /* CalendarVC.swift in Sources */,
 				809F97D5285982B700E84DD7 /* PlantsCollectionViewCell.swift in Sources */,
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
 				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,

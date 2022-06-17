@@ -16,14 +16,6 @@ class AddPlantVC: UIViewController {
     var addBtn = UIButton()
     var picBackground = UIView()
     var imageArea = UIImageView()
-//    var nameLB = UILabel()
-//    var nameTXF = UITextField()
-//    var dateLB = UILabel()
-//    var dateTXF = UITextField()
-//    var sunLB = UILabel()
-//    var sunTXF = UITextField()
-//    var waterLB = UILabel()
-//    var waterTXF = UITextField()
     var addImageBtn = UIButton()
     let addPic = UIImage(systemName: "photo.on.rectangle.angled")
     var tableView = UITableView()
@@ -33,10 +25,6 @@ class AddPlantVC: UIViewController {
     override func viewDidLoad() {
 
         view.backgroundColor = .white
-//        view.addSubview(nameLB)
-//        view.addSubview(nameTXF)
-//        view.addSubview(dateLB)
-//        view.addSubview(dateTXF)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -185,7 +173,6 @@ class AddPlantVC: UIViewController {
         let db = Firestore.firestore()
         db.collection("image").document().setData(["url": path])
         
-        
     }
     
 }
@@ -208,7 +195,7 @@ extension AddPlantVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
 
 extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -216,10 +203,24 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "TextFieldCell") as? TextFieldCell
         else { return UITableViewCell() }
-        cell.dateLB.text = "Date"
-        cell.titleLB.text = "Name"
-        cell.sunLB.text = "Sun"
-        cell.waterLB.text = "Water"
+        
+        guard let sunCell = tableView.dequeueReusableCell(
+            withIdentifier: "DetailSunCell") as? DetailSunCell
+        else { return UITableViewCell() }
+        
+        guard let waterCell = tableView.dequeueReusableCell(
+            withIdentifier: "DetailWaterCell") as? DetailWaterCell
+        else { return UITableViewCell() }
+        
+        if indexPath.row == 0 {
+            return cell
+        } else if indexPath.row == 1 {
+            return cell
+        } else if indexPath.row == 2 {
+            return sunCell
+        } else if indexPath.row == 3 {
+            return waterCell
+        }
         return cell
     }
 }

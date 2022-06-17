@@ -24,10 +24,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="i3c-IG-A7j">
-                        <rect key="frame" x="8" y="80" width="281.5" height="31"/>
+                        <rect key="frame" x="8" y="80" width="299" height="34"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTW-MU-klc">
-                                <rect key="frame" x="0.0" y="0.0" width="39.5" height="31"/>
+                                <rect key="frame" x="0.0" y="0.0" width="43" height="34"/>
                                 <color key="tintColor" red="0.58345457320000005" green="0.65793158080000003" blue="0.65608557879999996" alpha="0.79469380160000003" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="drop.fill" catalog="system"/>
@@ -36,7 +36,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKn-Cr-OVF">
-                                <rect key="frame" x="60.5" y="0.0" width="39.5" height="31"/>
+                                <rect key="frame" x="64" y="0.0" width="43" height="34"/>
                                 <color key="tintColor" red="0.58345457320000005" green="0.65793158080000003" blue="0.65608557879999996" alpha="0.79469380160000003" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="drop.fill" catalog="system"/>
@@ -45,7 +45,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reU-Ey-br5">
-                                <rect key="frame" x="121" y="0.0" width="39.5" height="31"/>
+                                <rect key="frame" x="128" y="0.0" width="43" height="34"/>
                                 <color key="tintColor" red="0.58345457320000005" green="0.65793158080000003" blue="0.65608557879999996" alpha="0.79469380160000003" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="drop.fill" catalog="system"/>
@@ -54,7 +54,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbW-sc-YZ6">
-                                <rect key="frame" x="181.5" y="0.0" width="39.5" height="31"/>
+                                <rect key="frame" x="192" y="0.0" width="43" height="34"/>
                                 <color key="tintColor" red="0.58345457320000005" green="0.65793158080000003" blue="0.65608557879999996" alpha="0.79469380160000003" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="drop.fill" catalog="system"/>
@@ -63,7 +63,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="176-ms-1ui">
-                                <rect key="frame" x="242" y="0.0" width="39.5" height="31"/>
+                                <rect key="frame" x="256" y="0.0" width="43" height="34"/>
                                 <color key="tintColor" red="0.58345457320000005" green="0.65793158080000003" blue="0.65608557879999996" alpha="0.79469380160000003" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="drop.fill" catalog="system"/>
