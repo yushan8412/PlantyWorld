@@ -14,6 +14,9 @@ class FirebaseManager {
     static let shared = FirebaseManager()
     let dataBase = Firestore.firestore()
     var plantsList = [PlantsModel]()
+    var plant: PlantsModel?
+    
+//    func addplant(plant: PlantsModel) {
     
     func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String]) {
         let plants = dataBase.collection("plants")

@@ -42,6 +42,7 @@
 		80ABA6BD285EDE1300BB515C /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6BB285EDE1300BB515C /* NoteCell.swift */; };
 		80ABA6BE285EDE1300BB515C /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6BC285EDE1300BB515C /* NoteCell.xib */; };
 		80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6C1285F521300BB515C /* ARMeasureVC.swift */; };
+		80ABA6C42860616200BB515C /* ProfilVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6C32860616200BB515C /* ProfilVC.swift */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		80ABA6BB285EDE1300BB515C /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		80ABA6BC285EDE1300BB515C /* NoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCell.xib; sourceTree = "<group>"; };
 		80ABA6C1285F521300BB515C /* ARMeasureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasureVC.swift; sourceTree = "<group>"; };
+		80ABA6C32860616200BB515C /* ProfilVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilVC.swift; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +162,7 @@
 				80ABA6B0285C4A0500BB515C /* CommandVC.swift */,
 				80ABA6B8285C973D00BB515C /* CalendarVC.swift */,
 				80ABA6C1285F521300BB515C /* ARMeasureVC.swift */,
+				80ABA6C32860616200BB515C /* ProfilVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */,
 				80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */,
 				80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */,
+				80ABA6C42860616200BB515C /* ProfilVC.swift in Sources */,
 				809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */,
 				80ABA6A4285B8D7A00BB515C /* DetailSunCell.swift in Sources */,
 				809F97DE285991C700E84DD7 /* UIView Extension.swift in Sources */,

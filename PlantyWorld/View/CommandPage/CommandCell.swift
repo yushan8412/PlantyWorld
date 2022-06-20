@@ -12,6 +12,8 @@ class CommandCell: UITableViewCell {
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var titleLB: UILabel!
     @IBOutlet weak var commandLB: UILabel!
+    @IBOutlet weak var commandBtn: UIButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

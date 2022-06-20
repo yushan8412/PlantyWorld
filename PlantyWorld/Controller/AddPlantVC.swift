@@ -20,6 +20,7 @@ class AddPlantVC: UIViewController {
     let addPic = UIImage(systemName: "photo.on.rectangle.angled")
     var tableView = UITableView()
     let path = "image/\(UUID().uuidString).jpg"
+    var plant: PlantsModel?
     var plantName: String = "name"
     var plantDate: String = "date"
     var plantNote: [String] = ["note????"]
@@ -125,13 +126,11 @@ class AddPlantVC: UIViewController {
             fileReference.putData(data, metadata: nil) { result in
                 switch result {
                 case .success(_):
-                    fileReference.downloadURL { result in
+                    fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.addPlant(name: self.plantName,
-                                                                        date: self.plantDate,
-                                                                        sun: self.sun, water: self.water,
-                                                                        image: "\(url)", note: self.plantNote)
+//                            self.plant?.image = "\(url)"
+                            PlantyWorld.FirebaseManager.shared.addPlant(name: plantName, date: plantDate, sun: sun, water: water, image: "\(url)", note: plantNote)
                         case .failure(_):
                             break
                         }
@@ -245,11 +244,11 @@ extension AddPlantVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.placeholder {
         case "Name":
-            self.plantName = textField.text ?? "no value"
+            plantName = textField.text ?? "no value"
         case "yyyy.mm.dd":
-            self.plantDate = textField.text ?? "no date"
+            plantDate = textField.text ?? "no date"
         case "Write some note":
-            self.plantNote[0] = textField.text ?? "no note"
+            plantNote[0] = textField.text ?? "no note"
         default:
             textField.text = "123"
         }
