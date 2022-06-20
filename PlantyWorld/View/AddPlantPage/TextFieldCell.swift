@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextFieldCell: UITableViewCell {
+class TextFieldCell: UITableViewCell, UITextFieldDelegate {
     var waterLevel: WaterLevel = .one
     var sunLevel: SunLevel = .one
 
@@ -16,7 +16,12 @@ class TextFieldCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        textField.delegate = self
         setup()
+    }
+    
+    override func prepareForReuse() {
+        textField.text = ""
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

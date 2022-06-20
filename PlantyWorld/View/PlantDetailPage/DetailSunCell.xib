@@ -32,7 +32,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="sun.max.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="sunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jZ9-rF-zFl"/>
+                                    <action selector="tapBtnToSunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cXt-Kt-pPc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykH-zL-yGT">
@@ -41,7 +41,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="sun.max.fill" catalog="system" title=""/>
                                 <connections>
-                                    <action selector="sunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MaN-rU-k3I"/>
+                                    <action selector="tapBtnToSunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3qG-sG-gHd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBa-T2-Zxt">
@@ -50,7 +50,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="sun.max.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="sunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="usU-Oi-sqd"/>
+                                    <action selector="tapBtnToSunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Hgu-Fc-VPR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWH-HP-PcD">
@@ -59,7 +59,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="sun.max.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="sunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Znq-gt-lVo"/>
+                                    <action selector="tapBtnToSunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BJp-Lj-Xyl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P27-eP-6xR">
@@ -68,7 +68,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="sun.max.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="sunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="J5R-TA-ffo"/>
+                                    <action selector="tapBtnToSunLevel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="D0X-Ue-Ci6"/>
                                 </connections>
                             </button>
                         </subviews>

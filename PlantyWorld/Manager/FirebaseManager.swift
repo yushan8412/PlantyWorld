@@ -15,7 +15,7 @@ class FirebaseManager {
     let dataBase = Firestore.firestore()
     var plantsList = [PlantsModel]()
     
-    func addPlant(name: String, date: String, sun: String, water: String, image: String) {
+    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String]) {
         let plants = dataBase.collection("plants")
         let document = plants.document()
         let data: [String: Any] = [
@@ -27,6 +27,7 @@ class FirebaseManager {
             "date": date,
             "sun": sun,
             "water": water,
+            "note": note,
             "image": image
         ]
         document.setData(data) { error in
@@ -50,13 +51,16 @@ class FirebaseManager {
                 let plantDate = plantObject["date"] as? String ?? ""
                 let plantSun = plantObject["sun"] as? Int ?? 0
                 let plantWater = plantObject["water"] as? Int ?? 0
-                let plantNote = plantObject["note"] as? String ?? ""
+                let plantNote = plantObject["note"] as? [String] ?? [""]
+                let plantImage = plantObject["image"] as? String ?? ""
         
                 let plant = PlantsModel(name: plantName ,
                                         date: plantDate,
                                         sun: plantSun,
                                         water: plantWater,
-                                        note: plantNote)
+                                        note: plantNote,
+                                        image: plantImage
+                )
                 self.plantsList.append(plant)
             }
             completion(self.plantsList)

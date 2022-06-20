@@ -38,7 +38,7 @@ class PlantDetailImageCell: UITableViewCell {
                      bottom: contentView.bottomAnchor,
                      right: contentView.rightAnchor,
                      paddingTop: 16, paddingLeft: 16,
-                     paddingBottom: 16, paddingRight: 16, height: 200)
+                     paddingBottom: 16, paddingRight: 16, height: 300)
   
     }
     

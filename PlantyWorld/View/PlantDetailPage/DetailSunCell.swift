@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SunLevelDelegate: AnyObject {
+    func passSunLV(_ sunLevel: SunLevel)
+}
+
 enum SunLevel: Int {
     case zero = 0
     case one = 1
@@ -27,8 +31,9 @@ class DetailSunCell: UITableViewCell {
     @IBOutlet weak var sun5: UIButton!
     @IBOutlet weak var sunView: UIStackView!
     
-    @IBAction func sunLevel(_ sender: UIButton) {
-        
+    var delegate: SunLevelDelegate?
+    
+    @IBAction func tapBtnToSunLevel(_ sender: UIButton) {
         switch sender {
         case sun1:
             sunLevel = .one
@@ -37,7 +42,7 @@ class DetailSunCell: UITableViewCell {
             sun3.tintColor = .systemGray
             sun4.tintColor = .systemGray
             sun5.tintColor = .systemGray
-            
+            print(sunLevel.rawValue)
         case sun2:
             sunLevel = .two
             sun1.tintColor = .systemYellow
@@ -45,7 +50,7 @@ class DetailSunCell: UITableViewCell {
             sun3.tintColor = .systemGray
             sun4.tintColor = .systemGray
             sun5.tintColor = .systemGray
-            
+            print(sunLevel.rawValue)
         case sun3:
             sunLevel = .three
             sun1.tintColor = .systemYellow
@@ -53,7 +58,7 @@ class DetailSunCell: UITableViewCell {
             sun3.tintColor = .systemYellow
             sun4.tintColor = .systemGray
             sun5.tintColor = .systemGray
-            
+            print(sunLevel.rawValue)
         case sun4:
             sunLevel = .four
             sun1.tintColor = .systemYellow
@@ -61,7 +66,7 @@ class DetailSunCell: UITableViewCell {
             sun3.tintColor = .systemYellow
             sun4.tintColor = .systemYellow
             sun5.tintColor = .systemGray
-            
+            print(sunLevel.rawValue)
         case sun5:
             sunLevel = .five
             sun1.tintColor = .systemYellow
@@ -69,18 +74,18 @@ class DetailSunCell: UITableViewCell {
             sun3.tintColor = .systemYellow
             sun4.tintColor = .systemYellow
             sun5.tintColor = .systemYellow
-                    
+            print(sunLevel.rawValue)
         default:
             sunLevel = .zero
         }
-        
+        delegate?.passSunLV(sunLevel)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

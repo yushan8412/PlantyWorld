@@ -19,6 +19,6 @@ struct PlantsModel: Comparable {
     var date: String
     var sun: Int
     var water: Int
-    var note: String
-//    var image: String
+    var note: [String]
+    var image: String
 }

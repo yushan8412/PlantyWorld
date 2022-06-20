@@ -39,6 +39,9 @@
 		80ABA6B5285C4C6100BB515C /* CommandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6B3285C4C6100BB515C /* CommandCell.swift */; };
 		80ABA6B6285C4C6100BB515C /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6B4285C4C6100BB515C /* CommandCell.xib */; };
 		80ABA6B9285C973E00BB515C /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6B8285C973D00BB515C /* CalendarVC.swift */; };
+		80ABA6BD285EDE1300BB515C /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6BB285EDE1300BB515C /* NoteCell.swift */; };
+		80ABA6BE285EDE1300BB515C /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6BC285EDE1300BB515C /* NoteCell.xib */; };
+		80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6C1285F521300BB515C /* ARMeasureVC.swift */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +82,9 @@
 		80ABA6B3285C4C6100BB515C /* CommandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCell.swift; sourceTree = "<group>"; };
 		80ABA6B4285C4C6100BB515C /* CommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandCell.xib; sourceTree = "<group>"; };
 		80ABA6B8285C973D00BB515C /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
+		80ABA6BB285EDE1300BB515C /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		80ABA6BC285EDE1300BB515C /* NoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCell.xib; sourceTree = "<group>"; };
+		80ABA6C1285F521300BB515C /* ARMeasureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasureVC.swift; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +139,7 @@
 		809F97D7285982C000E84DD7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				80ABA6BA285EDDF400BB515C /* CalendarPage */,
 				80ABA6B7285C4C6C00BB515C /* LobbyPage */,
 				80ABA6B2285C4C4500BB515C /* CommandPage */,
 				80ABA6AB285C373700BB515C /* AddPlantPage */,
@@ -152,6 +159,7 @@
 				80ABA695285AE18D00BB515C /* PlantDetailVC.swift */,
 				80ABA6B0285C4A0500BB515C /* CommandVC.swift */,
 				80ABA6B8285C973D00BB515C /* CalendarVC.swift */,
+				80ABA6C1285F521300BB515C /* ARMeasureVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -222,6 +230,15 @@
 				809F97D4285982B700E84DD7 /* PlantsCollectionViewCell.xib */,
 			);
 			path = LobbyPage;
+			sourceTree = "<group>";
+		};
+		80ABA6BA285EDDF400BB515C /* CalendarPage */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA6BB285EDE1300BB515C /* NoteCell.swift */,
+				80ABA6BC285EDE1300BB515C /* NoteCell.xib */,
+			);
+			path = CalendarPage;
 			sourceTree = "<group>";
 		};
 		AF3B68E8EA64C6DF1856546C /* Pods */ = {
@@ -305,6 +322,7 @@
 				809F97D2285977F800E84DD7 /* GoogleService-Info.plist in Resources */,
 				809F97E22859ABAC00E84DD7 /* AddPlantSB.storyboard in Resources */,
 				80ABA6A9285B90F300BB515C /* DetailWaterCell.xib in Resources */,
+				80ABA6BE285EDE1300BB515C /* NoteCell.xib in Resources */,
 				809F97C4285879F500E84DD7 /* LaunchScreen.storyboard in Resources */,
 				809F97D6285982B700E84DD7 /* PlantsCollectionViewCell.xib in Resources */,
 				80ABA6A5285B8D7A00BB515C /* DetailSunCell.xib in Resources */,
@@ -387,6 +405,7 @@
 				809F97BF285879F300E84DD7 /* PlantyWorld.xcdatamodeld in Sources */,
 				809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */,
 				80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */,
+				80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */,
 				809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */,
 				80ABA6A4285B8D7A00BB515C /* DetailSunCell.swift in Sources */,
 				809F97DE285991C700E84DD7 /* UIView Extension.swift in Sources */,
@@ -395,6 +414,7 @@
 				809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */,
 				80ABA6B9285C973E00BB515C /* CalendarVC.swift in Sources */,
 				809F97D5285982B700E84DD7 /* PlantsCollectionViewCell.swift in Sources */,
+				80ABA6BD285EDE1300BB515C /* NoteCell.swift in Sources */,
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
 				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,
 				809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */,
@@ -549,7 +569,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
@@ -564,7 +584,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -580,7 +600,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
@@ -595,7 +615,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

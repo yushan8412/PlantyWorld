@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol WaterLevelDelegate: AnyObject {
+    func passWaterLV(_ waterLevel: WaterLevel)
+}
 
 enum WaterLevel: Int {
     case zero = 0
@@ -26,6 +29,7 @@ class DetailWaterCell: UITableViewCell {
     @IBOutlet weak var water5: UIButton!
     @IBOutlet weak var waterView: UIStackView!
     var waterLevel: WaterLevel = .five
+    var delegate: WaterLevelDelegate?
     
     @IBAction func waterLevel(_ sender: UIButton) {
         
@@ -73,6 +77,7 @@ class DetailWaterCell: UITableViewCell {
         default:
             waterLevel = .zero
         }
+        delegate?.passWaterLV(waterLevel)
         
     }
     

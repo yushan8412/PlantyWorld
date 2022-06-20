@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import Kingfisher
 
 class LobbyViewController: UIViewController {
 
@@ -39,6 +40,7 @@ class LobbyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
         FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
+        self.plantsCollectionView.reloadData()
     }
     
     func setupItem() {
@@ -57,7 +59,6 @@ class LobbyViewController: UIViewController {
     
     func toAddVC () {
         navigationController?.pushViewController(addPlantVC, animated: true)
-
     }
 
 }
@@ -77,14 +78,12 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
         else { return UICollectionViewCell() }
         cell.title.text = plantList[indexPath.item].name
         cell.contentView.layer.cornerRadius = 10
-        cell.mainPic.image = UIImage(named: "山烏龜")
+        cell.mainPic.kf.setImage(with: URL(string: plantList[indexPath.row].image))
                 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-//        self.navigationController?.pushViewController(PlantDetailVC(), animated: true)
         performSegue(withIdentifier: "showDetailPage", sender: self)
     }
     

@@ -20,7 +20,12 @@ class AddPlantVC: UIViewController {
     let addPic = UIImage(systemName: "photo.on.rectangle.angled")
     var tableView = UITableView()
     let path = "image/\(UUID().uuidString).jpg"
-//    var plant = PlantsModel(name: String, date: String, sun: Int, water: Int, note: String)
+    var plantName: String = "name"
+    var plantDate: String = "date"
+    var plantNote: [String] = ["note????"]
+    var water: Int = 0
+    var sun: Int = 0
+    var plantImage: String = "111"
     
     override func viewDidLoad() {
 
@@ -41,15 +46,16 @@ class AddPlantVC: UIViewController {
         setupDetilArea()
         setAddPlantBtn()
         tabBarController?.tabBar.isHidden = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         imageArea.image = UIImage(named: "Group")
-//        nameTXF.text = ""
-//        dateTXF.text = ""
-//        sunTXF.text = ""
-//        waterTXF.text = ""
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
     
     func setAddPlantBtn() {
@@ -102,7 +108,7 @@ class AddPlantVC: UIViewController {
         addBtn.setTitleColor(.black, for: .normal)
         addBtn.addTarget(self, action: #selector(tapDismiss), for: .touchUpInside)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
-        addBtn.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
+//        addBtn.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
 
     }
     
@@ -111,21 +117,43 @@ class AddPlantVC: UIViewController {
     }
     
     @objc func tapToUpdate() {
-//        FirebaseManager.shared.addPlant(name: water, date: <#T##String#>, sun: <#T##String#>, water: <#T##String#>, image: <#T##String#>)
-//        if nameTXF.text != "" && dateTXF.text != "" && sunTXF.text != "" && waterLB.text != "" {
-//            FirebaseManager.shared.addPlant(name: nameTXF.text!,
-//                                            date: dateTXF.text!,
-//                                            sun: sunTXF.text!, water: waterTXF.text!, image: "url")
-//            self.waterTXF.text = ""
-//            self.sunTXF.text = ""
-//            self.nameTXF.text = ""
-//            self.dateTXF.text = ""
-//
+        
+        let imageData = self.imageArea.image!.jpegData(compressionQuality: 0.8)
+        guard imageData != nil else {
+            return
+        }
+        let fileReference = Storage.storage().reference().child(UUID().uuidString + ".jpg")
+        if let data  = imageData {
+            fileReference.putData(data, metadata: nil) { result in
+                switch result {
+                case .success(_):
+                    fileReference.downloadURL { result in
+                        switch result {
+                        case .success(let url):
+                            PlantyWorld.FirebaseManager.shared.addPlant(name: self.plantName,
+                                                                        date: self.plantDate,
+                                                                        sun: self.sun, water: self.water,
+                                                                        image: "\(url)", note: self.plantNote)
+                        case .failure(_):
+                            break
+                        }
+                    }
+                case .failure(_):
+                    break
+                }
+            }
+            
+        }
+    }
+        
+//        if plantName != "" && plantDate != "" {
+//        FirebaseManager.shared.addPlant(name: plantName,
+//                                        date: plantDate,
+//                                        sun: sun, water: water, image: path, note: plantNote)
 //        } else {
 //            print("Error")
 //        }
-        
-    }
+//    }
     
     func setupImageArea() {
         view.addSubview(picBackground)
@@ -144,40 +172,40 @@ class AddPlantVC: UIViewController {
     func setupDetilArea() {
         
         tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
-                         bottom: view.bottomAnchor, right: view.rightAnchor,
-                         paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
+                         bottom: addBtn.topAnchor, right: view.rightAnchor,
+                         paddingTop: 8, paddingLeft: 8, paddingBottom: 4, paddingRight: 8)
         
     }
     
-    @objc func uploadPhoto() {
-        guard imageArea != nil else {
-            return
-        }
-        // create Storage ref
-        let storageRef = Storage.storage().reference()
-
-        // turn image into data
-        let imageData = imageArea.image!.jpegData(compressionQuality: 0.8)
-        guard imageData != nil else { return }
-
-        // specify the file path and name
-//        let path = "image/\(UUID().uuidString).jpg"
-        let fileRef = storageRef.child(path)
-
-        // upload data
-        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-            if error == nil && metadata != nil {
-            }
-        }
-        //save ref to firestore database
-        let db = Firestore.firestore()
-        db.collection("image").document().setData(["url": path])
-        
-    }
+//    @objc func uploadPhoto() {
+////        guard imageArea != nil else {
+////            return
+////        }
+//        // create Storage ref
+//        let storageRef = Storage.storage().reference()
+//
+//        // turn image into data
+//        let imageData = imageArea.image!.jpegData(compressionQuality: 0.8)
+//        guard imageData != nil else { return }
+//
+//        // specify the file path and name
+////        let path = "image/\(UUID().uuidString).jpg"
+//        let fileRef = storageRef.child(path)
+//
+//        // upload data
+//        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+//            if error == nil && metadata != nil {
+//            }
+//        }
+//        // save ref to firestore database
+//        let db = Firestore.firestore()
+//        db.collection("image").document().setData(["url": path])
+//
+//    }
     
 }
 
-extension AddPlantVC:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddPlantVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -195,11 +223,11 @@ extension AddPlantVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
 
 extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
+              
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "TextFieldCell") as? TextFieldCell
         else { return UITableViewCell() }
@@ -213,14 +241,63 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
         else { return UITableViewCell() }
         
         if indexPath.row == 0 {
+
+            cell.titleLB.text = "Plant Name"
+            cell.textField.placeholder = "Name"
+            cell.textField.delegate = self
+
             return cell
+            
         } else if indexPath.row == 1 {
+
+            cell.textField.placeholder = "yyyy.mm.dd"
+            cell.titleLB.text = "Date"
+            cell.textField.delegate = self
+
             return cell
+            
         } else if indexPath.row == 2 {
+            
+            sunCell.delegate = self
             return sunCell
+            
         } else if indexPath.row == 3 {
+            
+            waterCell.delegate = self
             return waterCell
+            
+        } else if indexPath.row == 4 {
+            cell.titleLB.text = "Note"
+            cell.textField.placeholder = "Write some note"
+            cell.textField.delegate = self
+
+            return cell
         }
         return cell
+    }
+}
+
+extension AddPlantVC: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField.placeholder {
+        case "Name":
+            self.plantName = textField.text ?? "no value"
+        case "yyyy.mm.dd":
+            self.plantDate = textField.text ?? "no date"
+        case "Write some note":
+            self.plantNote[0] = textField.text ?? "no note"
+        default:
+            textField.text = "123"
+        }
+    }
+}
+extension AddPlantVC: SunLevelDelegate {
+    func passSunLV(_ sunLevel: SunLevel) {
+        self.sun = sunLevel.rawValue
+    }
+}
+extension AddPlantVC: WaterLevelDelegate {
+    func passWaterLV(_ waterLevel: WaterLevel) {
+        self.water = waterLevel.rawValue
     }
 }
