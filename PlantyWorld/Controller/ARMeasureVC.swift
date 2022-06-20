@@ -91,9 +91,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         )
         
         updateText(text: "\(abs(distance))", atPosition: end.position)
-        
-//        distance = √ ((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2)
-        
+                
         meterValue = Double(abs(distance))
         
         var heightMeter = Measurement(value: meterValue ?? 0, unit: UnitLength.meters)
@@ -103,6 +101,8 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         let value = "\(heightCentimeter)"
         let finalMeasurement = String(value.prefix(6))
         updateText(text: finalMeasurement, atPosition: end.position)
+        
+//        print(meterValue)
         
     }
     

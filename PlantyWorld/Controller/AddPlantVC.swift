@@ -86,9 +86,9 @@ class AddPlantVC: UIViewController {
     
     func camera() {
         let cameraController = UIImagePickerController()
-        cameraController.delegate = self
         cameraController.sourceType = .camera
-        present(cameraController, animated: true, completion: nil)
+        cameraController.delegate = self
+        self.present(cameraController, animated: true, completion: nil)
     }
     func photopicker() {
         let photoController = UIImagePickerController()
@@ -108,8 +108,6 @@ class AddPlantVC: UIViewController {
         addBtn.setTitleColor(.black, for: .normal)
         addBtn.addTarget(self, action: #selector(tapDismiss), for: .touchUpInside)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
-//        addBtn.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
-
     }
     
     @objc func tapDismiss() {
@@ -145,15 +143,6 @@ class AddPlantVC: UIViewController {
             
         }
     }
-        
-//        if plantName != "" && plantDate != "" {
-//        FirebaseManager.shared.addPlant(name: plantName,
-//                                        date: plantDate,
-//                                        sun: sun, water: water, image: path, note: plantNote)
-//        } else {
-//            print("Error")
-//        }
-//    }
     
     func setupImageArea() {
         view.addSubview(picBackground)
@@ -177,32 +166,6 @@ class AddPlantVC: UIViewController {
         
     }
     
-//    @objc func uploadPhoto() {
-////        guard imageArea != nil else {
-////            return
-////        }
-//        // create Storage ref
-//        let storageRef = Storage.storage().reference()
-//
-//        // turn image into data
-//        let imageData = imageArea.image!.jpegData(compressionQuality: 0.8)
-//        guard imageData != nil else { return }
-//
-//        // specify the file path and name
-////        let path = "image/\(UUID().uuidString).jpg"
-//        let fileRef = storageRef.child(path)
-//
-//        // upload data
-//        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-//            if error == nil && metadata != nil {
-//            }
-//        }
-//        // save ref to firestore database
-//        let db = Firestore.firestore()
-//        db.collection("image").document().setData(["url": path])
-//
-//    }
-    
 }
 
 extension AddPlantVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -211,11 +174,10 @@ extension AddPlantVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let image = info[.originalImage] as? UIImage
         imageArea.image = image
-        
-        let uniString = NSUUID().uuidString
-        if let selectedImage = image {
-            print("123123\(uniString), \(image)")
-        }
+//        
+//        let uniString = NSUUID().uuidString
+//        if let selectedImage = image {
+//        }
         dismiss(animated: true, completion: nil)
     }
 
@@ -258,11 +220,13 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if indexPath.row == 2 {
             
+            sunCell.sunLB.text = "Sun🌻"
             sunCell.delegate = self
             return sunCell
             
         } else if indexPath.row == 3 {
             
+            waterCell.waterLB.text = "Water🌧"
             waterCell.delegate = self
             return waterCell
             
@@ -292,12 +256,12 @@ extension AddPlantVC: UITextFieldDelegate {
     }
 }
 extension AddPlantVC: SunLevelDelegate {
-    func passSunLV(_ sunLevel: SunLevel) {
-        self.sun = sunLevel.rawValue
+    func passSunLV(_ sunLevel: Int) {
+        self.sun = sunLevel
     }
 }
 extension AddPlantVC: WaterLevelDelegate {
-    func passWaterLV(_ waterLevel: WaterLevel) {
-        self.water = waterLevel.rawValue
+    func passWaterLV(_ waterLevel: Int) {
+        self.water = waterLevel
     }
 }

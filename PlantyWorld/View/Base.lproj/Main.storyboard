@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Lobby View Controller-->
+        <!--My Plants-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="LobbyViewController" id="BYZ-38-t0r" customClass="LobbyViewController" customModule="PlantyWorld" customModuleProvider="target" sceneMemberID="viewController">
@@ -47,7 +47,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8k7-M4-m8d" secondAttribute="trailing" id="ydz-Jo-FRO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uW5-g0-9jL">
+                    <navigationItem key="navigationItem" title="My Plants" id="uW5-g0-9jL">
                         <barButtonItem key="rightBarButtonItem" width="6" style="plain" systemItem="add" id="VP5-U5-w7v">
                             <color key="tintColor" red="1" green="0.33297625689999999" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>

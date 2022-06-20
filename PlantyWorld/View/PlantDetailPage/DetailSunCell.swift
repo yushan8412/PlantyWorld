@@ -8,21 +8,21 @@
 import UIKit
 
 protocol SunLevelDelegate: AnyObject {
-    func passSunLV(_ sunLevel: SunLevel)
+    func passSunLV(_ sunLevel: Int)
 }
 
-enum SunLevel: Int {
-    case zero = 0
-    case one = 1
-    case two = 2
-    case three = 3
-    case four = 4
-    case five = 5
-}
+//enum SunLevel: Int {
+//    case zero = 0
+//    case one = 1
+//    case two = 2
+//    case three = 3
+//    case four = 4
+//    case five = 5
+//}
 
 class DetailSunCell: UITableViewCell {
     
-    var sunLevel: SunLevel = .one
+    var sunLevel: Int = 1
     @IBOutlet weak var sunLB: UILabel!
     @IBOutlet weak var sun1: UIButton!
     @IBOutlet weak var sun2: UIButton!
@@ -36,47 +36,43 @@ class DetailSunCell: UITableViewCell {
     @IBAction func tapBtnToSunLevel(_ sender: UIButton) {
         switch sender {
         case sun1:
-            sunLevel = .one
+            sunLevel = 1
             sun1.tintColor = .systemYellow
             sun2.tintColor = .systemGray
             sun3.tintColor = .systemGray
             sun4.tintColor = .systemGray
             sun5.tintColor = .systemGray
-            print(sunLevel.rawValue)
         case sun2:
-            sunLevel = .two
+            sunLevel = 2
             sun1.tintColor = .systemYellow
             sun2.tintColor = .systemYellow
             sun3.tintColor = .systemGray
             sun4.tintColor = .systemGray
             sun5.tintColor = .systemGray
-            print(sunLevel.rawValue)
         case sun3:
-            sunLevel = .three
+            sunLevel = 3
             sun1.tintColor = .systemYellow
             sun2.tintColor = .systemYellow
             sun3.tintColor = .systemYellow
             sun4.tintColor = .systemGray
             sun5.tintColor = .systemGray
-            print(sunLevel.rawValue)
+//            print(sunLevel.rawValue)
         case sun4:
-            sunLevel = .four
+            sunLevel = 4
             sun1.tintColor = .systemYellow
             sun2.tintColor = .systemYellow
             sun3.tintColor = .systemYellow
             sun4.tintColor = .systemYellow
             sun5.tintColor = .systemGray
-            print(sunLevel.rawValue)
         case sun5:
-            sunLevel = .five
+            sunLevel = 5
             sun1.tintColor = .systemYellow
             sun2.tintColor = .systemYellow
             sun3.tintColor = .systemYellow
             sun4.tintColor = .systemYellow
             sun5.tintColor = .systemYellow
-            print(sunLevel.rawValue)
         default:
-            sunLevel = .zero
+            sunLevel = 0
         }
         delegate?.passSunLV(sunLevel)
     }
@@ -84,13 +80,52 @@ class DetailSunCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
+//        sunColor(sunLevel: sunLevel)
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
-    
+    func sunColor(sunLevel: Int) {
+        switch sunLevel {
+        case 1:
+            sun1.tintColor = .systemYellow
+            sun2.tintColor = .systemGray
+            sun3.tintColor = .systemGray
+            sun4.tintColor = .systemGray
+            sun5.tintColor = .systemGray
+        case 2:
+            sun1.tintColor = .systemYellow
+            sun2.tintColor = .systemYellow
+            sun3.tintColor = .systemGray
+            sun4.tintColor = .systemGray
+            sun5.tintColor = .systemGray
+        case 3:
+            sun1.tintColor = .systemYellow
+            sun2.tintColor = .systemYellow
+            sun3.tintColor = .systemYellow
+            sun4.tintColor = .systemGray
+            sun5.tintColor = .systemGray
+        case 4:
+            sun1.tintColor = .systemYellow
+            sun2.tintColor = .systemYellow
+            sun3.tintColor = .systemYellow
+            sun4.tintColor = .systemYellow
+            sun5.tintColor = .systemGray
+        case 5:
+            sun1.tintColor = .systemYellow
+            sun2.tintColor = .systemYellow
+            sun3.tintColor = .systemYellow
+            sun4.tintColor = .systemYellow
+            sun5.tintColor = .systemYellow
+        default:
+            self.sunLevel = 0
+        }
+        
+    }
+        
     func setup() {
         sunLB.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                      right: contentView.rightAnchor, paddingTop: 8,

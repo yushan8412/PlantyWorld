@@ -88,6 +88,7 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let imageCell = tableView.dequeueReusableCell(
             withIdentifier: PlantDetailImageCell.reuseidentify,
             for: indexPath) as? PlantDetailImageCell
@@ -111,39 +112,34 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
         
         titleCell.nameLB.text = plant?.name ?? ""
         titleCell.dateLB.text = plant?.date ?? ""
-        imageCell.image.image = UIImage(named: "山烏龜")
-        sunCell.sunLB.text = "Sunny"
-        waterCell.waterLB.text = "Water"
+        sunCell.sunLB.text = "Sun🌼"
+        waterCell.waterLB.text = "Water🌧"
         noteCell.noteLB.text = "Note"
         noteCell.noteContent.text = plant?.note[0] ?? "Don't have any note yet"
         imageCell.image.kf.setImage(with: URL(string: plant?.image ?? ""))
         
         if indexPath.row == 0 {
-            return imageCell
-        } else if indexPath.row == 1 {
-            return titleCell
-        } else if indexPath.row == 2 {
-            sunCell.isUserInteractionEnabled = false
             
-//            switch plant?.sun {
-//            case 1:
-//                sunCell.sunLevel = .one
-//            case 2:
-//                sunCell.sunLevel = .two
-//            case 3:
-//                sunCell.sunLevel = .three
-//            case 4:
-//                sunCell.sunLevel = .four
-//            case 5:
-//                sunCell.sunLevel = .five
-//            default: 0
-//                
-//            }
+            return imageCell
+            
+        } else if indexPath.row == 1 {
+            
+            return titleCell
+            
+        } else if indexPath.row == 2 {
+            
+            sunCell.isUserInteractionEnabled = false
+            sunCell.sunColor(sunLevel: plant?.sun ?? 0)
             return sunCell
+            
         } else if indexPath.row == 3 {
+            
             waterCell.isUserInteractionEnabled = false
+            waterCell.waterColor(waterLevel: plant?.water ?? 0)
             return waterCell
+                
         } else if indexPath.row == 4 {
+            
             return noteCell
         }
         

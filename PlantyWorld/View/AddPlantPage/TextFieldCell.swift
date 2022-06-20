@@ -8,8 +8,8 @@
 import UIKit
 
 class TextFieldCell: UITableViewCell, UITextFieldDelegate {
-    var waterLevel: WaterLevel = .one
-    var sunLevel: SunLevel = .one
+    var waterLevel: Int = 1
+    var sunLevel: Int = 1
 
     @IBOutlet weak var titleLB: UILabel!
     @IBOutlet weak var textField: UITextField!

@@ -7,17 +7,17 @@
 
 import UIKit
 protocol WaterLevelDelegate: AnyObject {
-    func passWaterLV(_ waterLevel: WaterLevel)
+    func passWaterLV(_ waterLevel: Int)
 }
-
-enum WaterLevel: Int {
-    case zero = 0
-    case one = 1
-    case two = 2
-    case three = 3
-    case four = 4
-    case five = 5
-}
+//
+//enum WaterLevel: Int {
+//    case zero = 0
+//    case one = 1
+//    case two = 2
+//    case three = 3
+//    case four = 4
+//    case five = 5
+//}
 
 class DetailWaterCell: UITableViewCell {
     
@@ -28,14 +28,14 @@ class DetailWaterCell: UITableViewCell {
     @IBOutlet weak var water4: UIButton!
     @IBOutlet weak var water5: UIButton!
     @IBOutlet weak var waterView: UIStackView!
-    var waterLevel: WaterLevel = .five
+    var waterLevel: Int = 1
     var delegate: WaterLevelDelegate?
     
     @IBAction func waterLevel(_ sender: UIButton) {
         
         switch sender {
         case water1:
-            waterLevel = .one
+            waterLevel = 1
             water1.tintColor = .systemBlue
             water2.tintColor = .systemGray
             water3.tintColor = .systemGray
@@ -43,7 +43,7 @@ class DetailWaterCell: UITableViewCell {
             water5.tintColor = .systemGray
             
         case water2:
-            waterLevel = .two
+            waterLevel = 2
             water1.tintColor = .systemBlue
             water2.tintColor = .systemBlue
             water3.tintColor = .systemGray
@@ -51,7 +51,7 @@ class DetailWaterCell: UITableViewCell {
             water5.tintColor = .systemGray
                         
         case water3:
-            waterLevel = .three
+            waterLevel = 3
             water1.tintColor = .systemBlue
             water2.tintColor = .systemBlue
             water3.tintColor = .systemBlue
@@ -59,7 +59,7 @@ class DetailWaterCell: UITableViewCell {
             water5.tintColor = .systemGray
             
         case water4:
-            waterLevel = .four
+            waterLevel = 4
             water1.tintColor = .systemBlue
             water2.tintColor = .systemBlue
             water3.tintColor = .systemBlue
@@ -67,7 +67,7 @@ class DetailWaterCell: UITableViewCell {
             water5.tintColor = .systemGray
             
         case water5:
-            waterLevel = .five
+            waterLevel = 5
             water1.tintColor = .systemBlue
             water2.tintColor = .systemBlue
             water3.tintColor = .systemBlue
@@ -75,7 +75,7 @@ class DetailWaterCell: UITableViewCell {
             water5.tintColor = .systemBlue
                     
         default:
-            waterLevel = .zero
+            waterLevel = 0
         }
         delegate?.passWaterLV(waterLevel)
         
@@ -104,4 +104,46 @@ class DetailWaterCell: UITableViewCell {
         waterView.distribution = .fillEqually
     }
     
+    func waterColor(waterLevel: Int) {
+        switch waterLevel {
+
+        case 1:
+            water1.tintColor = .systemBlue
+            water2.tintColor = .systemGray
+            water3.tintColor = .systemGray
+            water4.tintColor = .systemGray
+            water5.tintColor = .systemGray
+            
+        case 2:
+            water1.tintColor = .systemBlue
+            water2.tintColor = .systemBlue
+            water3.tintColor = .systemGray
+            water4.tintColor = .systemGray
+            water5.tintColor = .systemGray
+                        
+        case 3:
+            water1.tintColor = .systemBlue
+            water2.tintColor = .systemBlue
+            water3.tintColor = .systemBlue
+            water4.tintColor = .systemGray
+            water5.tintColor = .systemGray
+            
+        case 4:
+            water1.tintColor = .systemBlue
+            water2.tintColor = .systemBlue
+            water3.tintColor = .systemBlue
+            water4.tintColor = .systemBlue
+            water5.tintColor = .systemGray
+            
+        case 5:
+            water1.tintColor = .systemBlue
+            water2.tintColor = .systemBlue
+            water3.tintColor = .systemBlue
+            water4.tintColor = .systemBlue
+            water5.tintColor = .systemBlue
+                    
+        default:
+            self.waterLevel = 0
+        }
+    }
 }
