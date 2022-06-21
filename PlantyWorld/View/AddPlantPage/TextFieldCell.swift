@@ -18,11 +18,12 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         textField.delegate = self
         setup()
+        reloadInputViews()
     }
     
-    override func prepareForReuse() {
-        textField.text = ""
-    }
+//    override func prepareForReuse() {
+//        textField.text = ""
+//    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

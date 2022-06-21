@@ -14,9 +14,11 @@ class FirebaseManager {
     static let shared = FirebaseManager()
     let dataBase = Firestore.firestore()
     var plantsList = [PlantsModel]()
-    var plant: PlantsModel?
     
 //    func addplant(plant: PlantsModel) {
+//        plant.name
+//        plant.date
+//    }
     
     func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String]) {
         let plants = dataBase.collection("plants")
@@ -38,6 +40,29 @@ class FirebaseManager {
                 print("Error\(error)")
             } else {
                 print("Document update!!")
+            }
+        }
+    }
+    
+    func addCommand(name:String, id: String, command: [String], time: Timestamp) {
+        let command = dataBase.collection("command")
+        let document = command.document()
+        let data: [String: Any] = [
+            "author": [
+                "id": "123",
+                "name": Auth.auth().currentUser?.displayName],
+            "title": "New Plant",
+            "content": name,
+            "commands": [
+                "commandID": id,
+                "time": time,
+                "command": command]
+        ]
+        document.setData(data) { error in
+            if let error = error {
+                print("Error\(error)")
+            } else {
+                print("Command update!!")
             }
         }
     }

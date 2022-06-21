@@ -50,7 +50,7 @@ class ProfileVC: UIViewController {
         userName.anchor(top: userBackground.bottomAnchor, paddingTop: 16)
         userName.centerX(inView: view)
         userName.text = "User Name"
-                
+        
     }
     
 }

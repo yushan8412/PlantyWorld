@@ -68,7 +68,7 @@ class AddPlantVC: UIViewController {
         addImageBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
     }
     
-    @objc func uploadFrom() -> UIAlertController {
+    @objc func uploadFrom() {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "開啟相機拍照", style: .default) { (_) in
             self.camera()
@@ -81,16 +81,17 @@ class AddPlantVC: UIViewController {
         controller.addAction(libraryAction)
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
-        
-        return UIAlertController()
     }
     
     func camera() {
-        let cameraController = UIImagePickerController()
-        cameraController.sourceType = .camera
-        cameraController.delegate = self
-        self.present(cameraController, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = .camera
+            imagePicker.delegate = self
+            present(imagePicker, animated: true)
+        }
     }
+    
     func photopicker() {
         let photoController = UIImagePickerController()
         photoController.delegate = self
@@ -125,17 +126,17 @@ class AddPlantVC: UIViewController {
         if let data  = imageData {
             fileReference.putData(data, metadata: nil) { result in
                 switch result {
-                case .success(_):
+                case .success:
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
 //                            self.plant?.image = "\(url)"
                             PlantyWorld.FirebaseManager.shared.addPlant(name: plantName, date: plantDate, sun: sun, water: water, image: "\(url)", note: plantNote)
-                        case .failure(_):
+                        case .failure:
                             break
                         }
                     }
-                case .failure(_):
+                case .failure:
                     break
                 }
             }
@@ -171,15 +172,17 @@ extension AddPlantVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        let image = info[.originalImage] as? UIImage
-        imageArea.image = image
-//        
-//        let uniString = NSUUID().uuidString
-//        if let selectedImage = image {
-//        }
+        if let image = info[.originalImage] as? UIImage {
+            
+            DispatchQueue.main.async {
+                self.imageArea.image = image
+            }
+        } else {
+            print("沒有選到相片")
+        }
         dismiss(animated: true, completion: nil)
     }
-
+    
 }
 
 extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
@@ -200,6 +203,8 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
         guard let waterCell = tableView.dequeueReusableCell(
             withIdentifier: "DetailWaterCell") as? DetailWaterCell
         else { return UITableViewCell() }
+        
+        cell.textField.text = ""
         
         if indexPath.row == 0 {
 

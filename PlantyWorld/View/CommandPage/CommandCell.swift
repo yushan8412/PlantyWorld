@@ -7,13 +7,21 @@
 
 import UIKit
 
+protocol AddCommandBtnDelegate: AnyObject {
+    func didTapped(sender: UIButton)
+}
+
 class CommandCell: UITableViewCell {
     @IBOutlet weak var basicView: UIView!
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var titleLB: UILabel!
     @IBOutlet weak var commandLB: UILabel!
     @IBOutlet weak var commandBtn: UIButton!
+    var delegate: AddCommandBtnDelegate?
     
+    @IBAction func tapToCommand(_ sender: UIButton) {
+        delegate?.didTapped(sender: commandBtn)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,10 +57,12 @@ class CommandCell: UITableViewCell {
                          bottom: basicView.bottomAnchor, right: basicView.rightAnchor,
                          paddingTop: 8, paddingLeft: 8,
                          paddingBottom: 8, paddingRight: 8)
+        commandBtn.anchor(bottom: basicView.bottomAnchor, right: basicView.rightAnchor,
+                          paddingBottom: 8, paddingRight: 8)
+        commandBtn.setImage(UIImage(named: "conversation 1"), for: .normal)
+        commandBtn.backgroundColor = .systemYellow
+        commandBtn.setTitle("", for: .normal)
 
-        
-        
-        
     }
     
 }

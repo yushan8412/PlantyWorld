@@ -20,23 +20,27 @@ class CommandVC: UIViewController {
             }
         }
     }
+    
+    var plant: PlantsModel?
 
     override func viewDidLoad() {
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
-                                forCellReuseIdentifier: "CommandCell")
-        
-        FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
+        super.viewDidLoad()
+            
+            tableView.delegate = self
+            tableView.dataSource = self
+            
+            self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
+                                    forCellReuseIdentifier: "CommandCell")
+            
+            FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+
     }
-    
+
 }
 
 // MARK: TableView
@@ -55,8 +59,26 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
         cell.titleLB.text = plantList[indexPath.row].name
         cell.commandLB.text = plantList[indexPath.row].date
         cell.mainImage.kf.setImage(with: URL(string: plantList[indexPath.row].image))
-                
+        self.plant = plantList[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
+}
+
+extension CommandVC: AddCommandBtnDelegate {
+    func didTapped(sender: UIButton) {
+
+        let addCommandVC = AddCommandVC()
+        addCommandVC.plant = plant
+        addCommandVC.modalPresentationStyle = .overFullScreen
+        navigationController?.present(addCommandVC, animated: true, completion: nil)
+    }
+    
+}
+
+extension CommandVC: BackBtnDelegate {
+    func tappedToDissmis() {
+        dismiss(animated: true)
+    }
 }

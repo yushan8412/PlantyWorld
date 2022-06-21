@@ -43,6 +43,11 @@
 		80ABA6BE285EDE1300BB515C /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6BC285EDE1300BB515C /* NoteCell.xib */; };
 		80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6C1285F521300BB515C /* ARMeasureVC.swift */; };
 		80ABA6C42860616200BB515C /* ProfilVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6C32860616200BB515C /* ProfilVC.swift */; };
+		80ABA6C6286097D400BB515C /* AddCommandVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6C5286097D400BB515C /* AddCommandVC.swift */; };
+		80ABA6CA2861AAD400BB515C /* AddCommandTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6C82861AAD300BB515C /* AddCommandTitleCell.swift */; };
+		80ABA6CB2861AAD400BB515C /* AddCommandTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6C92861AAD300BB515C /* AddCommandTitleCell.xib */; };
+		80ABA6CE2861B94D00BB515C /* CommandsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6CC2861B94D00BB515C /* CommandsCell.swift */; };
+		80ABA6CF2861B94D00BB515C /* CommandsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6CD2861B94D00BB515C /* CommandsCell.xib */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +92,11 @@
 		80ABA6BC285EDE1300BB515C /* NoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCell.xib; sourceTree = "<group>"; };
 		80ABA6C1285F521300BB515C /* ARMeasureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMeasureVC.swift; sourceTree = "<group>"; };
 		80ABA6C32860616200BB515C /* ProfilVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilVC.swift; sourceTree = "<group>"; };
+		80ABA6C5286097D400BB515C /* AddCommandVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommandVC.swift; sourceTree = "<group>"; };
+		80ABA6C82861AAD300BB515C /* AddCommandTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommandTitleCell.swift; sourceTree = "<group>"; };
+		80ABA6C92861AAD300BB515C /* AddCommandTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCommandTitleCell.xib; sourceTree = "<group>"; };
+		80ABA6CC2861B94D00BB515C /* CommandsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsCell.swift; sourceTree = "<group>"; };
+		80ABA6CD2861B94D00BB515C /* CommandsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandsCell.xib; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +151,7 @@
 		809F97D7285982C000E84DD7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				80ABA6C72861AA6700BB515C /* AddCommand */,
 				80ABA6BA285EDDF400BB515C /* CalendarPage */,
 				80ABA6B7285C4C6C00BB515C /* LobbyPage */,
 				80ABA6B2285C4C4500BB515C /* CommandPage */,
@@ -160,6 +171,7 @@
 				809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */,
 				80ABA695285AE18D00BB515C /* PlantDetailVC.swift */,
 				80ABA6B0285C4A0500BB515C /* CommandVC.swift */,
+				80ABA6C5286097D400BB515C /* AddCommandVC.swift */,
 				80ABA6B8285C973D00BB515C /* CalendarVC.swift */,
 				80ABA6C1285F521300BB515C /* ARMeasureVC.swift */,
 				80ABA6C32860616200BB515C /* ProfilVC.swift */,
@@ -244,6 +256,17 @@
 			path = CalendarPage;
 			sourceTree = "<group>";
 		};
+		80ABA6C72861AA6700BB515C /* AddCommand */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA6C82861AAD300BB515C /* AddCommandTitleCell.swift */,
+				80ABA6C92861AAD300BB515C /* AddCommandTitleCell.xib */,
+				80ABA6CC2861B94D00BB515C /* CommandsCell.swift */,
+				80ABA6CD2861B94D00BB515C /* CommandsCell.xib */,
+			);
+			path = AddCommand;
+			sourceTree = "<group>";
+		};
 		AF3B68E8EA64C6DF1856546C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +349,7 @@
 				809F97E22859ABAC00E84DD7 /* AddPlantSB.storyboard in Resources */,
 				80ABA6A9285B90F300BB515C /* DetailWaterCell.xib in Resources */,
 				80ABA6BE285EDE1300BB515C /* NoteCell.xib in Resources */,
+				80ABA6CF2861B94D00BB515C /* CommandsCell.xib in Resources */,
 				809F97C4285879F500E84DD7 /* LaunchScreen.storyboard in Resources */,
 				809F97D6285982B700E84DD7 /* PlantsCollectionViewCell.xib in Resources */,
 				80ABA6A5285B8D7A00BB515C /* DetailSunCell.xib in Resources */,
@@ -334,6 +358,7 @@
 				809F97C1285879F500E84DD7 /* Assets.xcassets in Resources */,
 				80ABA69C285AE4F200BB515C /* PlantDetailCell.xib in Resources */,
 				809F97BC285879F300E84DD7 /* Main.storyboard in Resources */,
+				80ABA6CB2861AAD400BB515C /* AddCommandTitleCell.xib in Resources */,
 				80ABA6B6285C4C6100BB515C /* CommandCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,7 +434,9 @@
 				809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */,
 				80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */,
 				80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */,
+				80ABA6CE2861B94D00BB515C /* CommandsCell.swift in Sources */,
 				80ABA6C42860616200BB515C /* ProfilVC.swift in Sources */,
+				80ABA6C6286097D400BB515C /* AddCommandVC.swift in Sources */,
 				809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */,
 				80ABA6A4285B8D7A00BB515C /* DetailSunCell.swift in Sources */,
 				809F97DE285991C700E84DD7 /* UIView Extension.swift in Sources */,
@@ -422,6 +449,7 @@
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
 				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,
 				809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */,
+				80ABA6CA2861AAD400BB515C /* AddCommandTitleCell.swift in Sources */,
 				80ABA6AE285C375800BB515C /* TextFieldCell.swift in Sources */,
 				80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */,
 				809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */,

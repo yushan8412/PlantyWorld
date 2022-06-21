@@ -110,7 +110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mdK-ct-dEP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1029" y="1556"/>
+            <point key="canvasLocation" x="1028.985507246377" y="1555.5803571428571"/>
         </scene>
         <!--ProfileVC-->
         <scene sceneID="TMz-Bd-WdI">
@@ -191,7 +191,7 @@
         <scene sceneID="rJR-3b-bPJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CyY-3L-OGv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="conversation 1" selectedImage="conversation 1" id="dv9-pZ-PSZ">
+                    <tabBarItem key="tabBarItem" title="" image="locations 1-2" selectedImage="locations 1-2" id="dv9-pZ-PSZ">
                         <color key="badgeColor" systemColor="systemGreenColor"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -269,7 +269,7 @@
     <resources>
         <image name="Natural Food" width="32" height="32"/>
         <image name="ant-design_home-outlined" width="32" height="32"/>
-        <image name="conversation 1" width="32" height="33"/>
+        <image name="locations 1-2" width="35" height="35"/>
         <image name="united 1" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
