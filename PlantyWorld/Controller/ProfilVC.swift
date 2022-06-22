@@ -14,23 +14,29 @@ class ProfileVC: UIViewController {
     var userBackground = UIView()
     var userName = UILabel()
     var userLevel = UILabel()
+    var addFriendBtn = UIButton()
     var plantList: [PlantsModel] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.userLevel.text = "\(self.plantList.count)"
+                self.userLevel.text = "我有\(self.plantList.count)顆植物"
             }
         }
     }
-
+    
+    
     override func viewDidLoad() {
         userBackground.addSubview(userImage)
         setup()
         self.navigationItem.title = "Profile"
         getData()
+        levelColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+//        reloadInputViews()
         userBackground.layoutIfNeeded()
+        getData()
+        levelColor()
     
     }
     
@@ -44,6 +50,7 @@ class ProfileVC: UIViewController {
         view.addSubview(userBackground)
         view.addSubview(userName)
         view.addSubview(userLevel)
+        view.addSubview(addFriendBtn)
         
         userBackground.backgroundColor = .systemYellow
         userBackground.layer.cornerRadius = 100
@@ -60,9 +67,14 @@ class ProfileVC: UIViewController {
         userName.anchor(top: userBackground.bottomAnchor, paddingTop: 16)
         userName.centerX(inView: view)
         userName.text = "User Name"
-        userLevel.anchor(bottom: view.bottomAnchor, right: view.rightAnchor,
-                         paddingBottom: 150, paddingRight: 150)
+        userLevel.anchor(top: userName.bottomAnchor, paddingTop: 8)
+        userLevel.centerX(inView: view)
         userLevel.backgroundColor = .systemYellow
+        
+        addFriendBtn.anchor(top: userLevel.bottomAnchor, paddingTop: 8)
+        addFriendBtn.centerX(inView: view)
+        addFriendBtn.setTitle("+ ADD FRIEND", for: .normal)
+        addFriendBtn.backgroundColor = .systemYellow
         
     }
     
@@ -71,4 +83,11 @@ class ProfileVC: UIViewController {
         print(plantList.count)
     }
     
+    func levelColor() {
+        if plantList.count >= 3 {
+            userBackground.backgroundColor = .blue
+        } else {
+            userBackground.backgroundColor = .red
+        }
+    }
 }

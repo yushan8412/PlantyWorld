@@ -98,7 +98,6 @@ class FirebaseManager {
                 let plantNote = plantObject["note"] as? [String] ?? [""]
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
-//                let plantImages = plantObject["image"] as? String ?? ""
 
                 let plant = PlantsModel(name: plantName ,
                                         date: plantDate,
