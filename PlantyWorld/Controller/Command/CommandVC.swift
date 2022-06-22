@@ -61,7 +61,9 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
         cell.mainImage.kf.setImage(with: URL(string: plantList[indexPath.row].image))
         
         self.plant = plantList[indexPath.row]
+        
         cell.delegate = self
+
         return cell
     }
     
@@ -70,11 +72,16 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
 extension CommandVC: AddCommandBtnDelegate {
     func didTapped(sender: UIButton) {
 
-        let addCommandVC = AddCommandVC()
+        let point = sender.convert(CGPoint.zero, to: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: point) else { return }
         
-        addCommandVC.plant = self.plant
+        let addCommandVC = AddCommandVC()
+    
         addCommandVC.modalPresentationStyle = .overFullScreen
         navigationController?.present(addCommandVC, animated: true, completion: nil)
+        
+        addCommandVC.plant = plantList[indexPath.row]
+        print(addCommandVC.plant)
     }
     
 }

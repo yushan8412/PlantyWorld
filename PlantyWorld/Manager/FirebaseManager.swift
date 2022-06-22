@@ -114,8 +114,8 @@ class FirebaseManager {
         }
     }
     
-    func fetchCommandData(completion: @escaping ([PublishModel]?) -> Void) {
-        dataBase.collection("commands").getDocuments { (querySnapshot, error) in
+    func fetchCommandData(plantID:String, completion: @escaping ([PublishModel]?) -> Void) {
+        dataBase.collection("commands").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, error) in
             guard let querySnapshot = querySnapshot else {
                 return
             }

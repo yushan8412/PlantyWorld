@@ -51,7 +51,7 @@ class AddCommandVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        FirebaseManager.shared.fetchCommandData(completion: { commandlist in self.commandList = commandlist ?? [] })
+        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in self.commandList = commandlist ?? [] })
         self.tableView.reloadData()
         
         tabBarController?.tabBar.isHidden = true
