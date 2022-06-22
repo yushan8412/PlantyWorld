@@ -14,6 +14,7 @@ class ProfileVC: UIViewController {
     var userBackground = UIView()
     var userName = UILabel()
     var userLevel = UILabel()
+    var levelLb = UILabel()
     var addFriendBtn = UIButton()
     var plantList: [PlantsModel] = [] {
         didSet {
@@ -22,7 +23,6 @@ class ProfileVC: UIViewController {
             }
         }
     }
-    
     
     override func viewDidLoad() {
         userBackground.addSubview(userImage)
@@ -51,6 +51,7 @@ class ProfileVC: UIViewController {
         view.addSubview(userName)
         view.addSubview(userLevel)
         view.addSubview(addFriendBtn)
+        view.addSubview(levelLb)
         
         userBackground.backgroundColor = .systemYellow
         userBackground.layer.cornerRadius = 100
@@ -67,13 +68,19 @@ class ProfileVC: UIViewController {
         userName.anchor(top: userBackground.bottomAnchor, paddingTop: 16)
         userName.centerX(inView: view)
         userName.text = "User Name"
-        userLevel.anchor(top: userName.bottomAnchor, paddingTop: 8)
+        
+        levelLb.anchor(top: userName.bottomAnchor, paddingTop: 16)
+        levelLb.centerX(inView: view)
+        levelLb.backgroundColor = .twitterBlue
+        levelLb.text = "123123"
+        
+        userLevel.anchor(top: levelLb.bottomAnchor, paddingTop: 16)
         userLevel.centerX(inView: view)
         userLevel.backgroundColor = .systemYellow
         
-        addFriendBtn.anchor(top: userLevel.bottomAnchor, paddingTop: 8)
+        addFriendBtn.anchor(top: userLevel.bottomAnchor, paddingTop: 16)
         addFriendBtn.centerX(inView: view)
-        addFriendBtn.setTitle("+ ADD FRIEND", for: .normal)
+        addFriendBtn.setTitle(" + ADD FRIEND", for: .normal)
         addFriendBtn.backgroundColor = .systemYellow
         
     }
@@ -84,10 +91,15 @@ class ProfileVC: UIViewController {
     }
     
     func levelColor() {
-        if plantList.count >= 3 {
+        if plantList.count >= 5 {
             userBackground.backgroundColor = .blue
-        } else {
+            levelLb.text = "Level：小試身手"
+        } else if plantList.count >= 10 {
             userBackground.backgroundColor = .red
+            levelLb.text = "Level：小園丁"
+        } else if plantList.count >= 15 {
+            userBackground.backgroundColor = .systemYellow
+            levelLb.text = "Level：綠手指"
         }
     }
 }
