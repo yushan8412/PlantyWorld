@@ -59,6 +59,7 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
         cell.titleLB.text = plantList[indexPath.row].name
         cell.commandLB.text = plantList[indexPath.row].date
         cell.mainImage.kf.setImage(with: URL(string: plantList[indexPath.row].image))
+        
         self.plant = plantList[indexPath.row]
         cell.delegate = self
         return cell
@@ -70,7 +71,8 @@ extension CommandVC: AddCommandBtnDelegate {
     func didTapped(sender: UIButton) {
 
         let addCommandVC = AddCommandVC()
-        addCommandVC.plant = plant
+        
+        addCommandVC.plant = self.plant
         addCommandVC.modalPresentationStyle = .overFullScreen
         navigationController?.present(addCommandVC, animated: true, completion: nil)
     }

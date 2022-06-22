@@ -22,7 +22,7 @@ class CalendarVC: UIViewController {
         view.backgroundColor = .white
         view.addSubview(tableView)
         setup()
-        let tryCalendar = FSCalendar(frame: CGRect(x: 10, y: 80,
+        let tryCalendar = FSCalendar(frame: CGRect(x: 10, y: 100,
                                                    width: UIScreen.width - 20,
                                                    height: UIScreen.height/2 ))
         tryCalendar.dataSource = self

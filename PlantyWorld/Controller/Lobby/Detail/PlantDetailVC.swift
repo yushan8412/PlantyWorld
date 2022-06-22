@@ -117,7 +117,7 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
         noteCell.noteLB.text = "Note"
         noteCell.noteContent.text = plant?.note[0] ?? "Don't have any note yet"
         imageCell.image.kf.setImage(with: URL(string: plant?.image ?? ""))
-        
+                
         if indexPath.row == 0 {
             
             return imageCell

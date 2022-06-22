@@ -22,6 +22,14 @@ class AddCommandVC: UIViewController {
     var tableView = UITableView()
     
     var plant: PlantsModel?
+    var newCommand = "no"
+    var commandList: [PublishModel] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         
@@ -43,6 +51,8 @@ class AddCommandVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        FirebaseManager.shared.fetchCommandData(completion: { commandlist in self.commandList = commandlist ?? [] })
+        self.tableView.reloadData()
         
         tabBarController?.tabBar.isHidden = true
 
@@ -92,43 +102,61 @@ class AddCommandVC: UIViewController {
     func setupSendBtn() {
         sendCommandBtn.backgroundColor = .systemYellow
         sendCommandBtn.setTitle("Send", for: .normal)
+        sendCommandBtn.addTarget(self, action: #selector(tappedToSend), for: .touchUpInside)
     }
     
     func setTextfield() {
         commandField.layer.borderWidth = 0.5
     }
     
-    @objc func tappedToDismiss() {   
+    @objc func tappedToDismiss() {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func tappedToSend() {
+        
+        FirebaseManager.shared.addCommand(name: plant?.name ?? "no name", id: plant?.id ?? "no id", newcommand: commandField.text ?? "nono")
+        self.commandField.text = ""
+//        print(commandList.count)
+        
     }
 }
 
 extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if section == 0 {
+            return 1
+        } else {
+        return commandList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "AddCommandTitleCell") as? AddCommandTitleCell
-        else { return UITableViewCell() }
-        
-        guard let commandCell = tableView.dequeueReusableCell(
-            withIdentifier: "CommandsCell") as? CommandsCell
-        else { return UITableViewCell() }
-        
-        cell.plantImage.kf.setImage(with: URL(string: plant?.image ?? ""))
-        cell.title.text = plant?.name ?? ""
-        cell.date.text = plant?.date ?? ""
-        
-        commandCell.profilePic.image = UIImage(named: "山烏龜")
-        
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
+            
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "AddCommandTitleCell") as? AddCommandTitleCell
+            else { return UITableViewCell() }
+            cell.plantImage.kf.setImage(with: URL(string: plant?.image ?? ""))
+            cell.title.text = plant?.name ?? ""
+            cell.date.text = plant?.date ?? ""
+//            print(commandList)
             return cell
+            
         } else {
+            
+            guard let commandCell = tableView.dequeueReusableCell(
+                withIdentifier: "CommandsCell") as? CommandsCell
+            else { return UITableViewCell() }
+            commandCell.profilePic.image = UIImage(named: "山烏龜")
+            commandCell.command.text = commandList[indexPath.row].commands.command
             return commandCell
+            
         }
         
     }

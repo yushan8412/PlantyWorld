@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PublishModel: Comparable {
+struct PublishModel: Comparable, Codable {
     static func == (lhs: PublishModel, rhs: PublishModel) -> Bool {
         return lhs.time < rhs.time
     }
@@ -18,14 +18,19 @@ struct PublishModel: Comparable {
     
     var author: Author
     var title: String
-    var content: String
-    var time: Date
-    var id: String
+    var commands: Command
+    var plantID: String
+    var time: Int64
     
 }
 
+struct Command: Codable {
+    var command: String
+    var commandID: String
+}
+
 struct Author: Codable {
-    var email: String
-    var name: String
+//    var email: String
+    var name: String?
     var id: String
 }

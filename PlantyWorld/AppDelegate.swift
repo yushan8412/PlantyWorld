@@ -11,14 +11,18 @@ import FirebaseCore
 import FirebaseFirestore
 import Firebase
 import IQKeyboardManagerSwift
+import CoreLocation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let locationManager = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         let db = Firestore.firestore()
         IQKeyboardManager.shared.enable = true
+        locationManager.requestWhenInUseAuthorization()
 
         return true
     }

@@ -14,15 +14,24 @@ class ProfileVC: UIViewController {
     var userBackground = UIView()
     var userName = UILabel()
     var userLevel = UILabel()
-    
+    var plantList: [PlantsModel] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.userLevel.text = "\(self.plantList.count)"
+            }
+        }
+    }
+
     override func viewDidLoad() {
         userBackground.addSubview(userImage)
         setup()
         self.navigationItem.title = "Profile"
+        getData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         userBackground.layoutIfNeeded()
+    
     }
     
     override func viewDidLayoutSubviews() {
@@ -34,6 +43,7 @@ class ProfileVC: UIViewController {
     func setup() {
         view.addSubview(userBackground)
         view.addSubview(userName)
+        view.addSubview(userLevel)
         
         userBackground.backgroundColor = .systemYellow
         userBackground.layer.cornerRadius = 100
@@ -50,7 +60,15 @@ class ProfileVC: UIViewController {
         userName.anchor(top: userBackground.bottomAnchor, paddingTop: 16)
         userName.centerX(inView: view)
         userName.text = "User Name"
+        userLevel.anchor(bottom: view.bottomAnchor, right: view.rightAnchor,
+                         paddingBottom: 150, paddingRight: 150)
+        userLevel.backgroundColor = .systemYellow
         
+    }
+    
+    func getData() {
+        FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
+        print(plantList.count)
     }
     
 }

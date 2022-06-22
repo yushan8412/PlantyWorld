@@ -21,4 +21,5 @@ struct PlantsModel: Comparable {
     var water: Int
     var note: [String]
     var image: String
+    var id: String
 }

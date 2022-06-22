@@ -20,6 +20,7 @@ class AddPlantVC: UIViewController {
     let addPic = UIImage(systemName: "photo.on.rectangle.angled")
     var tableView = UITableView()
     let path = "image/\(UUID().uuidString).jpg"
+    
     var plant: PlantsModel?
     var plantName: String = "name"
     var plantDate: String = "date"
@@ -131,7 +132,10 @@ class AddPlantVC: UIViewController {
                         switch result {
                         case .success(let url):
 //                            self.plant?.image = "\(url)"
-                            PlantyWorld.FirebaseManager.shared.addPlant(name: plantName, date: plantDate, sun: sun, water: water, image: "\(url)", note: plantNote)
+                            PlantyWorld.FirebaseManager.shared.addPlant(name: plantName,
+                                                                        date: plantDate,
+                                                                        sun: sun, water: water,
+                                                                        image: "\(url)", note: plantNote)
                         case .failure:
                             break
                         }

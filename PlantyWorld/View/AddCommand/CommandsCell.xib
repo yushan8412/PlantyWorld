@@ -26,7 +26,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myi-dV-Mu0">
-                                <rect key="frame" x="188" y="15" width="42" height="21"/>
+                                <rect key="frame" x="109" y="18" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kj-q7-It9">
+                                <rect key="frame" x="109" y="0.0" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -41,6 +48,7 @@
             <connections>
                 <outlet property="command" destination="Myi-dV-Mu0" id="WoN-lG-NjD"/>
                 <outlet property="commandView" destination="PVl-e5-364" id="sV5-cy-cEF"/>
+                <outlet property="name" destination="3kj-q7-It9" id="KYb-7n-oCB"/>
                 <outlet property="profilePic" destination="tjv-5H-FqT" id="LqB-10-x8A"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="66.964285714285708"/>

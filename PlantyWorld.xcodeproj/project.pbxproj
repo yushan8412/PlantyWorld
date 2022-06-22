@@ -48,6 +48,7 @@
 		80ABA6CB2861AAD400BB515C /* AddCommandTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6C92861AAD300BB515C /* AddCommandTitleCell.xib */; };
 		80ABA6CE2861B94D00BB515C /* CommandsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6CC2861B94D00BB515C /* CommandsCell.swift */; };
 		80ABA6CF2861B94D00BB515C /* CommandsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6CD2861B94D00BB515C /* CommandsCell.xib */; };
+		80ABA6D12861CC8400BB515C /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D02861CC8300BB515C /* MapVC.swift */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		80ABA6C92861AAD300BB515C /* AddCommandTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCommandTitleCell.xib; sourceTree = "<group>"; };
 		80ABA6CC2861B94D00BB515C /* CommandsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsCell.swift; sourceTree = "<group>"; };
 		80ABA6CD2861B94D00BB515C /* CommandsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandsCell.xib; sourceTree = "<group>"; };
+		80ABA6D02861CC8300BB515C /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,14 +169,10 @@
 		809F97D8285982D400E84DD7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				809F97B8285879F300E84DD7 /* LobbyViewController.swift */,
-				809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */,
-				80ABA695285AE18D00BB515C /* PlantDetailVC.swift */,
-				80ABA6B0285C4A0500BB515C /* CommandVC.swift */,
-				80ABA6C5286097D400BB515C /* AddCommandVC.swift */,
-				80ABA6B8285C973D00BB515C /* CalendarVC.swift */,
-				80ABA6C1285F521300BB515C /* ARMeasureVC.swift */,
+				80ABA6D42862A2BA00BB515C /* Command */,
+				80ABA6D32862A29800BB515C /* Lobby */,
 				80ABA6C32860616200BB515C /* ProfilVC.swift */,
+				80ABA6D02861CC8300BB515C /* MapVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -265,6 +263,35 @@
 				80ABA6CD2861B94D00BB515C /* CommandsCell.xib */,
 			);
 			path = AddCommand;
+			sourceTree = "<group>";
+		};
+		80ABA6D22862A25E00BB515C /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA695285AE18D00BB515C /* PlantDetailVC.swift */,
+				80ABA6C1285F521300BB515C /* ARMeasureVC.swift */,
+				80ABA6B8285C973D00BB515C /* CalendarVC.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		80ABA6D32862A29800BB515C /* Lobby */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA6D22862A25E00BB515C /* Detail */,
+				809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */,
+				809F97B8285879F300E84DD7 /* LobbyViewController.swift */,
+			);
+			path = Lobby;
+			sourceTree = "<group>";
+		};
+		80ABA6D42862A2BA00BB515C /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA6B0285C4A0500BB515C /* CommandVC.swift */,
+				80ABA6C5286097D400BB515C /* AddCommandVC.swift */,
+			);
+			path = Command;
 			sourceTree = "<group>";
 		};
 		AF3B68E8EA64C6DF1856546C /* Pods */ = {
@@ -445,6 +472,7 @@
 				809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */,
 				80ABA6B9285C973E00BB515C /* CalendarVC.swift in Sources */,
 				809F97D5285982B700E84DD7 /* PlantsCollectionViewCell.swift in Sources */,
+				80ABA6D12861CC8400BB515C /* MapVC.swift in Sources */,
 				80ABA6BD285EDE1300BB515C /* NoteCell.swift in Sources */,
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
 				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,
@@ -606,6 +634,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App想取用您的位置";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -637,6 +666,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App想取用您的位置";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

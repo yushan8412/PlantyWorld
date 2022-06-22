@@ -65,17 +65,43 @@
             </objects>
             <point key="canvasLocation" x="-846" y="1556"/>
         </scene>
-        <!--View Controller-->
+        <!--MapVC-->
         <scene sceneID="DMh-Ie-3Hs">
             <objects>
-                <viewController id="dr7-X2-9Vd" sceneMemberID="viewController">
+                <viewController id="dr7-X2-9Vd" customClass="MapVC" customModule="PlantyWorld" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oYn-K1-UsE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3yK-zj-RxF">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKZ-yL-BOR">
+                                <rect key="frame" x="327" y="762" width="67" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="showLocation:" destination="dr7-X2-9Vd" eventType="touchUpInside" id="GbU-3L-wCd"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cak-bY-Nrs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3yK-zj-RxF" firstAttribute="leading" secondItem="cak-bY-Nrs" secondAttribute="leading" id="1oO-OZ-GZ7"/>
+                            <constraint firstItem="cak-bY-Nrs" firstAttribute="bottom" secondItem="3yK-zj-RxF" secondAttribute="bottom" id="5XI-6b-K8w"/>
+                            <constraint firstItem="cak-bY-Nrs" firstAttribute="trailing" secondItem="hKZ-yL-BOR" secondAttribute="trailing" constant="20" id="UiF-wb-SoC"/>
+                            <constraint firstItem="3yK-zj-RxF" firstAttribute="top" secondItem="cak-bY-Nrs" secondAttribute="top" id="ZkO-SG-C50"/>
+                            <constraint firstItem="cak-bY-Nrs" firstAttribute="trailing" secondItem="3yK-zj-RxF" secondAttribute="trailing" id="c0e-IC-ENh"/>
+                            <constraint firstItem="hKZ-yL-BOR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cak-bY-Nrs" secondAttribute="leading" symbolic="YES" id="qFW-Di-WR9"/>
+                            <constraint firstItem="cak-bY-Nrs" firstAttribute="bottom" secondItem="hKZ-yL-BOR" secondAttribute="bottom" constant="20" id="rT1-ai-yUe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MdO-Cg-Dtq"/>
+                    <connections>
+                        <outlet property="location" destination="hKZ-yL-BOR" id="Tnq-cU-bEm"/>
+                        <outlet property="myMap" destination="3yK-zj-RxF" id="ySe-PO-HSq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ypN-IC-UfO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
