@@ -14,23 +14,29 @@ class ProfileVC: UIViewController {
     var userBackground = UIView()
     var userName = UILabel()
     var userLevel = UILabel()
+    var levelLb = UILabel()
+    var addFriendBtn = UIButton()
     var plantList: [PlantsModel] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.userLevel.text = "\(self.plantList.count)"
+                self.userLevel.text = "我有\(self.plantList.count)顆植物"
             }
         }
     }
-
+    
     override func viewDidLoad() {
         userBackground.addSubview(userImage)
         setup()
         self.navigationItem.title = "Profile"
         getData()
+        levelColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+//        reloadInputViews()
         userBackground.layoutIfNeeded()
+        getData()
+        levelColor()
     
     }
     
@@ -44,6 +50,8 @@ class ProfileVC: UIViewController {
         view.addSubview(userBackground)
         view.addSubview(userName)
         view.addSubview(userLevel)
+        view.addSubview(addFriendBtn)
+        view.addSubview(levelLb)
         
         userBackground.backgroundColor = .systemYellow
         userBackground.layer.cornerRadius = 100
@@ -60,9 +68,20 @@ class ProfileVC: UIViewController {
         userName.anchor(top: userBackground.bottomAnchor, paddingTop: 16)
         userName.centerX(inView: view)
         userName.text = "User Name"
-        userLevel.anchor(bottom: view.bottomAnchor, right: view.rightAnchor,
-                         paddingBottom: 150, paddingRight: 150)
+        
+        levelLb.anchor(top: userName.bottomAnchor, paddingTop: 16)
+        levelLb.centerX(inView: view)
+        levelLb.backgroundColor = .twitterBlue
+        levelLb.text = "123123"
+        
+        userLevel.anchor(top: levelLb.bottomAnchor, paddingTop: 16)
+        userLevel.centerX(inView: view)
         userLevel.backgroundColor = .systemYellow
+        
+        addFriendBtn.anchor(top: userLevel.bottomAnchor, paddingTop: 16)
+        addFriendBtn.centerX(inView: view)
+        addFriendBtn.setTitle(" + ADD FRIEND", for: .normal)
+        addFriendBtn.backgroundColor = .systemYellow
         
     }
     
@@ -71,4 +90,16 @@ class ProfileVC: UIViewController {
         print(plantList.count)
     }
     
+    func levelColor() {
+        if plantList.count >= 5 {
+            userBackground.backgroundColor = .blue
+            levelLb.text = "Level：小試身手"
+        } else if plantList.count >= 10 {
+            userBackground.backgroundColor = .red
+            levelLb.text = "Level：小園丁"
+        } else if plantList.count >= 15 {
+            userBackground.backgroundColor = .systemYellow
+            levelLb.text = "Level：綠手指"
+        }
+    }
 }

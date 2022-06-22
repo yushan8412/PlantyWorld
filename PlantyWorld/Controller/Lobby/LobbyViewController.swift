@@ -41,6 +41,7 @@ class LobbyViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
         FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
         self.plantsCollectionView.reloadData()
+        print(plantList.count)
     }
     
     func setupItem() {
@@ -67,6 +68,7 @@ class LobbyViewController: UIViewController {
 extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return plantList.count
+//        print("@@@@@@in TB view  \(plantList.count)")
     }
     
     func collectionView(_ collectionView: UICollectionView,

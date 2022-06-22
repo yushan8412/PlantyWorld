@@ -54,6 +54,7 @@ class AddPlantVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         imageArea.image = UIImage(named: "Group")
+//        reloadInputViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
