@@ -169,10 +169,10 @@
 		809F97D8285982D400E84DD7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				80ABA6D62863F7EC00BB515C /* MAP */,
+				80ABA6D52863F7DB00BB515C /* Profile */,
 				80ABA6D42862A2BA00BB515C /* Command */,
 				80ABA6D32862A29800BB515C /* Lobby */,
-				80ABA6C32860616200BB515C /* ProfilVC.swift */,
-				80ABA6D02861CC8300BB515C /* MapVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -278,9 +278,9 @@
 		80ABA6D32862A29800BB515C /* Lobby */ = {
 			isa = PBXGroup;
 			children = (
-				80ABA6D22862A25E00BB515C /* Detail */,
 				809F97DF2859AA7500E84DD7 /* AddPlantVC.swift */,
 				809F97B8285879F300E84DD7 /* LobbyViewController.swift */,
+				80ABA6D22862A25E00BB515C /* Detail */,
 			);
 			path = Lobby;
 			sourceTree = "<group>";
@@ -292,6 +292,22 @@
 				80ABA6C5286097D400BB515C /* AddCommandVC.swift */,
 			);
 			path = Command;
+			sourceTree = "<group>";
+		};
+		80ABA6D52863F7DB00BB515C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA6C32860616200BB515C /* ProfilVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		80ABA6D62863F7EC00BB515C /* MAP */ = {
+			isa = PBXGroup;
+			children = (
+				80ABA6D02861CC8300BB515C /* MapVC.swift */,
+			);
+			path = MAP;
 			sourceTree = "<group>";
 		};
 		AF3B68E8EA64C6DF1856546C /* Pods */ = {

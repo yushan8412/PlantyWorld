@@ -11,24 +11,16 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestoreSwift
 
-enum FirebaseError: Error {
-    case documentError
-}
-
-enum MasterError: Error {
-    case youKnowNothingError(String)
-}
-
 class FirebaseManager {
     static let shared = FirebaseManager()
     let dataBase = Firestore.firestore()
     var plantsList = [PlantsModel]()
     var commandList = [PublishModel]()
     
-//    func addplant(plant: PlantsModel) {
-//        plant.name
-//        plant.date
-//    }
+    //    func addplant(plant: PlantsModel) {
+    //        plant.name
+    //        plant.date
+    //    }
     
     func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String]) {
         let plants = dataBase.collection("plants")
@@ -91,14 +83,13 @@ class FirebaseManager {
             for plant in querySnapshot.documents {
                 let plantObject = plant.data(with: ServerTimestampBehavior.none)
                 let plantName = plantObject["name"] as? String ?? ""
-//                let plantDate = plantObject["dateOfPurchase"] as? Date ?? Date(timeIntervalSince1970: 1.0)
                 let plantDate = plantObject["date"] as? String ?? ""
                 let plantSun = plantObject["sun"] as? Int ?? 0
                 let plantWater = plantObject["water"] as? Int ?? 0
                 let plantNote = plantObject["note"] as? [String] ?? [""]
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
-
+                
                 let plant = PlantsModel(name: plantName ,
                                         date: plantDate,
                                         sun: plantSun,
@@ -113,34 +104,31 @@ class FirebaseManager {
         }
     }
     
-    func fetchCommandData(plantID:String, completion: @escaping ([PublishModel]?) -> Void) {
+    func fetchCommandData(plantID: String, completion: @escaping ([PublishModel]?) -> Void) {
         dataBase.collection("commands").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, error) in
             guard let querySnapshot = querySnapshot else {
                 return
             }
             self.commandList.removeAll()
             for commands in querySnapshot.documents {
-//                var command: PublishModel?
-//                do {
-//                    command = try commands.data(as: PublishModel.self, decoder: Firestore.Decoder()) {
-//                        self.commandList.append(command)
-//                    }
-//
-//                } catch {
-//                    print("error")
-                    
-//                    completion(.failure(error))
-//                let commandObject = command.data(with: ServerTimestampBehavior.none)
+                //                var command: PublishModel?
+                //                do {
+                //                    command = try commands.data(as: PublishModel.self, decoder: Firestore.Decoder()) {
+                //                        self.commandList.append(command)
+                //                    }
+                //
+                //                } catch {
+                //                    print("error")
+                
+                //                    completion(.failure(error))
+                //                let commandObject = command.data(with: ServerTimestampBehavior.none)
                 let commandObject = commands.data()
-//                print(commandObject)
                 guard let author = commandObject["author"] as? [String: Any] else { return }
-//                print(author)
                 guard let commands = commandObject["commands"] as? [String: Any] else { return }
-//                print(commands)
                 let plantID = commandObject["plantID"] as? String ?? ""
                 let commandTitle = commandObject["title"] as? String ?? ""
                 let commandTime = commandObject["time"] as? Int ?? 0
-
+                
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
                 let commandss = Command(command: commands["command"] as? String ?? "", commandID: commands["commandID"] as? String ?? "")
                 let command = PublishModel(author: authorr, title: commandTitle,
@@ -149,10 +137,9 @@ class FirebaseManager {
                 self.commandList.append(command)
             }
             completion(self.commandList)
-            }
-            
         }
     }
+    
     
     func sinInUp(email: String, name: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
@@ -173,4 +160,10 @@ class FirebaseManager {
         }
     }
     
-
+    func deleteDate(plantID: String ) {
+        let documentRef = dataBase.collection("plants").document("\(plantID)")
+        documentRef.delete()
+        print("deleted doc!!")
+        print(plantID)
+    }
+}
