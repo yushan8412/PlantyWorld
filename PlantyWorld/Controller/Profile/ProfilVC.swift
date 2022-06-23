@@ -33,7 +33,7 @@ class ProfileVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        reloadInputViews()
+        self.tabBarController?.tabBar.isHidden = false
         userBackground.layoutIfNeeded()
         getData()
         levelColor()
@@ -82,12 +82,19 @@ class ProfileVC: UIViewController {
         addFriendBtn.centerX(inView: view)
         addFriendBtn.setTitle(" + ADD FRIEND", for: .normal)
         addFriendBtn.backgroundColor = .systemYellow
+        addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
         
     }
     
     func getData() {
         FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
         print(plantList.count)
+    }
+    
+    @objc func goAddFriendVC() {
+        let addFriendVC = AddFriendVC()
+        navigationController?.pushViewController(addFriendVC, animated: true)
+
     }
     
     func levelColor() {

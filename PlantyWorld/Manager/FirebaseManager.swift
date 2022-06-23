@@ -138,7 +138,8 @@ class FirebaseManager {
                 let commandTime = commandObject["time"] as? Int ?? 0
                 
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
-                let commandss = Command(command: commands["command"] as? String ?? "", commandID: commands["commandID"] as? String ?? "")
+                let commandss = Command(command: commands["command"] as? String ?? "",
+                                        commandID: commands["commandID"] as? String ?? "")
                 let command = PublishModel(author: authorr, title: commandTitle,
                                            commands: commandss, plantID: plantID,
                                            time: Int64(commandTime))
@@ -148,7 +149,7 @@ class FirebaseManager {
         }
     }
     
-    func fetchEvent(completion: @escaping ([CalendarModel]?) -> Void) {
+    func fetchEvent(plantID: String, completion: @escaping ([CalendarModel]?) -> Void) {
             dataBase.collection("events").getDocuments { (querySnapshot, _) in
                 guard let querySnapshot = querySnapshot else {
                     return

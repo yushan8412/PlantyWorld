@@ -81,7 +81,6 @@ extension CommandVC: AddCommandBtnDelegate {
         navigationController?.present(addCommandVC, animated: true, completion: nil)
         
         addCommandVC.plant = plantList[indexPath.row]
-        print(addCommandVC.plant)
     }
     
 }

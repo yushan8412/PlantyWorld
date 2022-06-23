@@ -26,7 +26,6 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         setup()
-        print(plant)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,9 +130,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         let value = "\(heightCentimeter)"
         let finalMeasurement = String(value.prefix(6))
         updateText(text: finalMeasurement, atPosition: end.position)
-        
-        print(distance)
-        
+                
     }
     
     func updateText(text: String, atPosition position: SCNVector3) {
