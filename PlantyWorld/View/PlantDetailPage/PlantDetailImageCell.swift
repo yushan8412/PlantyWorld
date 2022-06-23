@@ -39,6 +39,7 @@ class PlantDetailImageCell: UITableViewCell {
                      right: contentView.rightAnchor,
                      paddingTop: 16, paddingLeft: 16,
                      paddingBottom: 16, paddingRight: 16, height: 300)
+        image.contentMode = .scaleAspectFill
   
     }
     

@@ -8,21 +8,22 @@
 import Foundation
 import UIKit
 import Kingfisher
+import SwiftUI
 
 class PlantDetailVC: UIViewController {
     
     var tableView = UITableView()
     var calenderBtn = UIButton()
     var measureBtn = UIButton()
+    var deleteBtn = UIButton()
+    var btnStackView = UIStackView()
     
     var plant: PlantsModel?
     
     override func viewDidLoad() {
 
-        view.backgroundColor = .systemYellow
         view.addSubview(tableView)
-        tableView.addSubview(calenderBtn)
-        tableView.addSubview(measureBtn)
+        view.addSubview(btnStackView)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -36,6 +37,7 @@ class PlantDetailVC: UIViewController {
         self.tableView.register(UINib(nibName: "NoteCell", bundle: nil),
                                 forCellReuseIdentifier: "NoteCell")
         setup()
+        setupStackView()
     
     }
     
@@ -45,24 +47,41 @@ class PlantDetailVC: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         tableView.layoutIfNeeded()
+    
+    }
+    
+    func setupStackView() {
+        btnStackView.axis = .horizontal
+        btnStackView.alignment = .center
+        btnStackView.distribution = .equalSpacing
+        
+        btnStackView.addArrangedSubview(calenderBtn)
+        btnStackView.addArrangedSubview(measureBtn)
+        btnStackView.addArrangedSubview(deleteBtn)
+        
     }
     
     func setup() {
+        
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
-                         bottom: view.bottomAnchor, right: view.rightAnchor,
+                         bottom: btnStackView.topAnchor, right: view.rightAnchor,
                          paddingTop: 0, paddingLeft: 0,
-                         paddingBottom: 0, paddingRight: 0)
-        tableView.backgroundColor = .systemMint
-        calenderBtn.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
-                           paddingLeft: 32, paddingBottom: 32)
-        measureBtn.anchor(bottom: view.bottomAnchor, right: view.rightAnchor,
-                          paddingBottom: 32, paddingRight: 32)
+                         paddingBottom: 8, paddingRight: 0)
+        tableView.backgroundColor = .white
+        
+        btnStackView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
+                            right: view.rightAnchor, paddingLeft: 24,
+                            paddingBottom: 24, paddingRight: 24)
+        
+        deleteBtn.setTitle("Delete", for: .normal)
         measureBtn.setTitle("Measure", for: .normal)
         calenderBtn.setTitle("Calendar", for: .normal)
+        deleteBtn.backgroundColor = .systemYellow
         measureBtn.backgroundColor = .systemYellow
         calenderBtn.backgroundColor = .systemYellow
         calenderBtn.addTarget(self, action: #selector(toCalenderVC), for: .touchUpInside)
         measureBtn.addTarget(self, action: #selector(toMeasureVC), for: .touchUpInside)
+        deleteBtn.addTarget(self, action: #selector(tapToDelete), for: .touchUpInside)
         
     }
     
@@ -78,6 +97,24 @@ class PlantDetailVC: UIViewController {
         let measureVC = MeasureVC()
         
         navigationController?.pushViewController(measureVC, animated: true)
+    }
+    
+    @objc func tapToDelete() {
+        let deleteAlert = UIAlertController(title: "Delete", message: "Are You Sure? \n All Data Will Be Lost.",
+                                            preferredStyle: UIAlertController.Style.alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+            self.deletPlant()
+        }
+        deleteAlert.addAction(deleteAction)
+
+        present(deleteAlert, animated: true, completion: nil)
+    }
+    
+    func deletPlant() {
+        FirebaseManager.shared.deleteDate(plantID: self.plant?.id ?? "" )
+//        print(plantID)
     }
 }
 
