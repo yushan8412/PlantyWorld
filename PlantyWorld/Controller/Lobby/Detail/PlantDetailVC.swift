@@ -66,8 +66,8 @@ class PlantDetailVC: UIViewController {
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
                          bottom: btnStackView.topAnchor, right: view.rightAnchor,
                          paddingTop: 0, paddingLeft: 0,
-                         paddingBottom: 8, paddingRight: 0)
-        tableView.backgroundColor = .white
+                         paddingBottom: 0, paddingRight: 0)
+//        tableView.backgroundColor = .white
         
         btnStackView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                             right: view.rightAnchor, paddingLeft: 24,
@@ -95,6 +95,7 @@ class PlantDetailVC: UIViewController {
     
     @objc func toMeasureVC() {
         let measureVC = MeasureVC()
+        measureVC.plant = self.plant
         
         navigationController?.pushViewController(measureVC, animated: true)
     }
@@ -108,13 +109,12 @@ class PlantDetailVC: UIViewController {
             self.deletPlant()
         }
         deleteAlert.addAction(deleteAction)
-
         present(deleteAlert, animated: true, completion: nil)
     }
     
     func deletPlant() {
         FirebaseManager.shared.deleteDate(plantID: self.plant?.id ?? "" )
-//        print(plantID)
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 

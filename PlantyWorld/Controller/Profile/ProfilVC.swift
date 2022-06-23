@@ -91,7 +91,10 @@ class ProfileVC: UIViewController {
     }
     
     func levelColor() {
-        if plantList.count >= 5 {
+        if plantList.count < 5 {
+            userBackground.backgroundColor = .gray
+            levelLb.text = "Level：新人"
+        } else if plantList.count >= 5 {
             userBackground.backgroundColor = .blue
             levelLb.text = "Level：小試身手"
         } else if plantList.count >= 10 {

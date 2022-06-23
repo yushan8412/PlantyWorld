@@ -15,6 +15,13 @@ class CalendarVC: UIViewController {
     var tableView = UITableView()
     var tryCalendar: FSCalendar!
     var plant: PlantsModel?
+    var eventsList: [CalendarModel] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                print(self.eventsList)
+            }
+        }
+    }
 
     override func viewDidLoad() {
         tableView.delegate = self
@@ -32,6 +39,8 @@ class CalendarVC: UIViewController {
         calendarUI()
         self.tableView.register(UINib(nibName: "NoteCell", bundle: nil),
                                 forCellReuseIdentifier: "NoteCell")
+        
+        FirebaseManager.shared.fetchEvent(completion: { eventsList in self.eventsList = eventsList ?? [] })
        
     }
     
@@ -70,5 +79,8 @@ extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension CalendarVC: FSCalendarDelegate, FSCalendarDataSource {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print(date)
+    }
 
 }

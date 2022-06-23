@@ -60,14 +60,15 @@ class AddCommandVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         commandView.layoutIfNeeded()
-        commandView.layer.cornerRadius = 30
+        cornerRadius()
         
     }
     
     func setupUI() {
         view.backgroundColor = UIColor.init(white: 0.1, alpha: 0.3)
         view.addSubview(commandView)
-        
+        commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+
         commandView.backgroundColor = .white
         commandView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                            right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0,
@@ -93,6 +94,13 @@ class AddCommandVC: UIViewController {
                               paddingTop: 16, paddingLeft: 16, paddingBottom: 32, paddingRight: 16)
     }
     
+    func cornerRadius() {
+        commandView.layer.cornerRadius = 30
+        commandView.clipsToBounds = true
+        commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+
+    }
+    
     func setupBackBtn() {
         backBtn.backgroundColor = .blue
         backBtn.setTitle("X", for: .normal)
@@ -116,9 +124,10 @@ class AddCommandVC: UIViewController {
     
     @objc func tappedToSend() {
         
-        FirebaseManager.shared.addCommand(name: plant?.name ?? "no name", id: plant?.id ?? "no id", newcommand: commandField.text ?? "nono")
+        FirebaseManager.shared.addCommand(name: plant?.name ?? "no name",
+                                          id: plant?.id ?? "no id",
+                                          newcommand: commandField.text ?? "nono")
         self.commandField.text = ""
-//        print(commandList.count)
         
     }
 }

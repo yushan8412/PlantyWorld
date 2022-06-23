@@ -49,6 +49,7 @@
 		80ABA6CE2861B94D00BB515C /* CommandsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6CC2861B94D00BB515C /* CommandsCell.swift */; };
 		80ABA6CF2861B94D00BB515C /* CommandsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6CD2861B94D00BB515C /* CommandsCell.xib */; };
 		80ABA6D12861CC8400BB515C /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D02861CC8300BB515C /* MapVC.swift */; };
+		80ABA6D828643E2B00BB515C /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D728643E2B00BB515C /* CalendarModel.swift */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		80ABA6CC2861B94D00BB515C /* CommandsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsCell.swift; sourceTree = "<group>"; };
 		80ABA6CD2861B94D00BB515C /* CommandsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandsCell.xib; sourceTree = "<group>"; };
 		80ABA6D02861CC8300BB515C /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		80ABA6D728643E2B00BB515C /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +184,7 @@
 			children = (
 				809F97E32859EAAA00E84DD7 /* PublishModel.swift */,
 				809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */,
+				80ABA6D728643E2B00BB515C /* CalendarModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -338,8 +341,8 @@
 				809F97AD285879F300E84DD7 /* Sources */,
 				809F97AE285879F300E84DD7 /* Frameworks */,
 				809F97AF285879F300E84DD7 /* Resources */,
-				809F97CB2858905600E84DD7 /* ShellScript */,
 				D3348C6156804A8DD85FE0FC /* [CP] Embed Pods Frameworks */,
+				809F97CB2858905600E84DD7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -450,7 +453,7 @@
 		};
 		D3348C6156804A8DD85FE0FC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -493,6 +496,7 @@
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
 				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,
 				809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */,
+				80ABA6D828643E2B00BB515C /* CalendarModel.swift in Sources */,
 				80ABA6CA2861AAD400BB515C /* AddCommandTitleCell.swift in Sources */,
 				80ABA6AE285C375800BB515C /* TextFieldCell.swift in Sources */,
 				80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */,
