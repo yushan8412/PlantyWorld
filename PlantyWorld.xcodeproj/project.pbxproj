@@ -51,6 +51,7 @@
 		80ABA6CF2861B94D00BB515C /* CommandsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6CD2861B94D00BB515C /* CommandsCell.xib */; };
 		80ABA6D12861CC8400BB515C /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D02861CC8300BB515C /* MapVC.swift */; };
 		80ABA6D828643E2B00BB515C /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D728643E2B00BB515C /* CalendarModel.swift */; };
+		80BDB819286563BC00FDB525 /* Extension Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDB818286563BC00FDB525 /* Extension Color.swift */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		80ABA6CD2861B94D00BB515C /* CommandsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandsCell.xib; sourceTree = "<group>"; };
 		80ABA6D02861CC8300BB515C /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		80ABA6D728643E2B00BB515C /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
+		80BDB818286563BC00FDB525 /* Extension Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension Color.swift"; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +198,7 @@
 			children = (
 				809F97DA285983CB00E84DD7 /* Extensions.Anchor.swift */,
 				809F97DD285991C700E84DD7 /* UIView Extension.swift */,
+				80BDB818286563BC00FDB525 /* Extension Color.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 			files = (
 				80ABA6B5285C4C6100BB515C /* CommandCell.swift in Sources */,
 				809F97BF285879F300E84DD7 /* PlantyWorld.xcdatamodeld in Sources */,
+				80BDB819286563BC00FDB525 /* Extension Color.swift in Sources */,
 				809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */,
 				80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */,
 				80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */,
@@ -582,7 +586,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -636,7 +640,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -669,7 +673,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -701,7 +705,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

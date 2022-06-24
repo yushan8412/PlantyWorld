@@ -51,9 +51,9 @@ class AddCommandVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "",
-                                                completion: { commandlist in self.commandList = commandlist ?? [] })
-        self.tableView.reloadData()
+        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
+            self.commandList = commandlist ?? []
+            self.tableView.reloadData()})
         
         tabBarController?.tabBar.isHidden = true
 
@@ -129,6 +129,11 @@ class AddCommandVC: UIViewController {
                                           id: plant?.id ?? "no id",
                                           newcommand: commandField.text ?? "nono")
         self.commandField.text = ""
+        self.tableView.reloadData()
+        
+    }
+    
+    func filterEvent(date: String) {
         
     }
 }
@@ -155,7 +160,6 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
             cell.plantImage.kf.setImage(with: URL(string: plant?.image ?? ""))
             cell.title.text = plant?.name ?? ""
             cell.date.text = plant?.date ?? ""
-//            print(commandList)
             return cell
             
         } else {

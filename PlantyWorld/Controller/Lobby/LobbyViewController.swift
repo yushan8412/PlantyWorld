@@ -27,7 +27,10 @@ class LobbyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .peach
+        navigationController?.navigationBar.backgroundColor = .peach
+        tabBarController?.tabBar.backgroundColor = .peach
+        plantsCollectionView.backgroundColor = .pyellow
         plantsCollectionView.delegate = self
         plantsCollectionView.dataSource = self
         

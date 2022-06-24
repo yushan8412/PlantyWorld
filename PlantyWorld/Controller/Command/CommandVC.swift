@@ -47,6 +47,7 @@ class CommandVC: UIViewController {
 extension CommandVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(plantList.count)
         return plantList.count
     }
     

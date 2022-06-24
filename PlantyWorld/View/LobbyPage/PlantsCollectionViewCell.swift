@@ -20,7 +20,7 @@ class PlantsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(title)
         contentView.addSubview(mainPic)
         contentView.addSubview(waterDrop)
-        contentView.backgroundColor = .systemMint
+        contentView.backgroundColor = .pgreen
         setup()
     }
 

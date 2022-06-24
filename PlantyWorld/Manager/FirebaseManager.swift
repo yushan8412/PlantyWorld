@@ -16,7 +16,8 @@ class FirebaseManager {
     var plantsList = [PlantsModel]()
     var commandList = [PublishModel]()
     var eventList = [CalendarModel]()
-    
+    var dayEvent: CalendarModel?
+
     //    func addplant(plant: PlantsModel) {
     //        plant.name
     //        plant.date
@@ -148,9 +149,9 @@ class FirebaseManager {
             completion(self.commandList)
         }
     }
-    
+    // wherefield auth ID
     func fetchEvent(plantID: String, completion: @escaping ([CalendarModel]?) -> Void) {
-            dataBase.collection("events").getDocuments { (querySnapshot, _) in
+        dataBase.collection("events").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, _) in
                 guard let querySnapshot = querySnapshot else {
                     return
                 }
@@ -160,6 +161,10 @@ class FirebaseManager {
                     let eventContent = eventObject["content"] as? String ?? ""
                     let eventDate = eventObject["date"] as? Date ?? Date()
                     let eventID = eventObject["plantID"] as? String ?? ""
+//                    var formatter = DateFormatter()
+//                    formatter.dateFormat = "yyyy-MM-dd"
+//                    formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+//                    var eventDates = formatter.string(from: eventDate)
                     
                     let plant = CalendarModel(eventDate: eventDate,
                                               content: eventContent,
@@ -194,6 +199,8 @@ class FirebaseManager {
     func deleteDate(plantID: String ) {
         let documentRef = dataBase.collection("plants").document("\(plantID)")
         documentRef.delete()
+//        let commandRef = dataBase.collection("command").document.whereField("plantID", isEqualTo: plantID)
+        
         print("deleted doc!!")
     }
 }

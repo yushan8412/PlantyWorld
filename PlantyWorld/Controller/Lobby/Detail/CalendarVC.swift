@@ -18,17 +18,20 @@ class CalendarVC: UIViewController {
     var addField = UITextField()
     var addBtn = UIButton()
     var sticker = UILabel()
-    var eventsList: [CalendarModel] = [] {
+    var eventList: [CalendarModel] = [] {
         didSet {
             DispatchQueue.main.async {
-                print(self.eventsList)
+                print(self.eventList)
             }
         }
     }
 
     override func viewDidLoad() {
+        fetchData()
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
         view.backgroundColor = .white
         setup()
         let tryCalendar = FSCalendar(frame: CGRect(x: 10, y: 100,
@@ -43,9 +46,11 @@ class CalendarVC: UIViewController {
         self.tableView.register(UINib(nibName: "NoteCell", bundle: nil),
                                 forCellReuseIdentifier: "NoteCell")
         
-        FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
-                                          completion: { eventsList in self.eventsList = eventsList ?? [] })
-       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
+        self.tableView.reloadData()
     }
     
     func setup() {
@@ -64,11 +69,13 @@ class CalendarVC: UIViewController {
         addField.anchor(left: sticker.rightAnchor, bottom: view.bottomAnchor,
                         right: addBtn.leftAnchor, paddingLeft: 8, paddingBottom: 24, paddingRight: 8)
         addField.placeholder = "Leave some note "
+        addField.borderStyle = .roundedRect
+        
         addBtn.anchor(bottom: view.bottomAnchor, right: view.rightAnchor, paddingBottom: 24, paddingRight: 24)
         addBtn.setTitle("add", for: .normal)
         addBtn.backgroundColor = .blue
         addBtn.setContentHuggingPriority(UILayoutPriority(254), for: .horizontal)
-        addField.borderStyle = .roundedRect
+        addBtn.addTarget(self, action: #selector(addData), for: .touchUpInside)
         
     }
     
@@ -78,25 +85,39 @@ class CalendarVC: UIViewController {
         calendar.backgroundColor = .systemPink
         calendar.appearance.weekdayTextColor = .systemYellow
         calendar.appearance.headerTitleColor = .systemYellow
+        
     }
     
-    func addData() {
-        
+    func fetchData() {
+        FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "", completion: { eventList in self.eventList = eventList ?? []
+            self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
+        })
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+//        let eventdates = formatter.date(from: eventsList ?? "")
+//        print("@@@\(eventdates)")
+    }
+    
+    @objc func addData() {
+        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "")
+        self.addField.text = ""
+        self.tableView.reloadData()
     }
     
 }
 
 extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return plant?.note.count ?? 1
+        return eventList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "NoteCell") as? NoteCell
         else { return UITableViewCell() }
-        cell.noteLB.text = "Note"
-        cell.noteContent.text = "入手日期：\(String(describing: plant?.date ?? ""))"
+        cell.noteLB.text = "Event \(indexPath.row + 1)"
+        cell.noteContent.text = eventList[indexPath.row].content
         
         return cell
     }
@@ -105,8 +126,16 @@ extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
 
 extension CalendarVC: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
         let offsetDate = date.addingTimeInterval(28800)
-        print(offsetDate)
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        let dates = formatter.string(from: offsetDate)
+        
+        print(dates)
+
     }
 
 }
