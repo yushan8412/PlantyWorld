@@ -120,7 +120,7 @@ class AddPlantVC: UIViewController {
     
     @objc func tapToUpdate() {
         
-        let imageData = self.imageArea.image!.jpegData(compressionQuality: 0.8)
+        let imageData = self.imageArea.image!.jpegData(compressionQuality: 0.5)
         guard imageData != nil else {
             return
         }

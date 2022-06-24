@@ -9,14 +9,15 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 import Firebase
-import FirebaseFirestoreSwift
 
 class FirebaseManager {
     static let shared = FirebaseManager()
     let dataBase = Firestore.firestore()
     var plantsList = [PlantsModel]()
     var commandList = [PublishModel]()
-    
+    var eventList = [CalendarModel]()
+    var dayEvent: CalendarModel?
+
     //    func addplant(plant: PlantsModel) {
     //        plant.name
     //        plant.date
@@ -51,6 +52,25 @@ class FirebaseManager {
         }
     }
     
+    func addEvent(content: String, plantID: String) {
+        let events = dataBase.collection("events")
+        let document = events.document()
+        let timeInterval = Date()
+        let data: [String: Any] = [
+            "authorID": "123" ,
+            "date": timeInterval,
+            "content": content,
+            "plantID": plantID
+        ]
+        document.setData(data) { error in
+            if let error = error {
+                print("Error\(error)")
+            } else {
+                print("Event update!!")
+            }
+        }
+    }
+    
     func addCommand(name: String, id: String, newcommand: String) {
         let command = dataBase.collection("commands")
         let document = command.document()
@@ -63,7 +83,7 @@ class FirebaseManager {
             "plantID": id,
             "commands": [
                 "commandID": document.documentID,
-                "command": "here is new command \(newcommand)"],
+                "command": "command:\(newcommand)"],
             "time": timeInterval
         ]
         document.setData(data) { error in
@@ -111,17 +131,6 @@ class FirebaseManager {
             }
             self.commandList.removeAll()
             for commands in querySnapshot.documents {
-                //                var command: PublishModel?
-                //                do {
-                //                    command = try commands.data(as: PublishModel.self, decoder: Firestore.Decoder()) {
-                //                        self.commandList.append(command)
-                //                    }
-                //
-                //                } catch {
-                //                    print("error")
-                
-                //                    completion(.failure(error))
-                //                let commandObject = command.data(with: ServerTimestampBehavior.none)
                 let commandObject = commands.data()
                 guard let author = commandObject["author"] as? [String: Any] else { return }
                 guard let commands = commandObject["commands"] as? [String: Any] else { return }
@@ -130,7 +139,8 @@ class FirebaseManager {
                 let commandTime = commandObject["time"] as? Int ?? 0
                 
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
-                let commandss = Command(command: commands["command"] as? String ?? "", commandID: commands["commandID"] as? String ?? "")
+                let commandss = Command(command: commands["command"] as? String ?? "",
+                                        commandID: commands["commandID"] as? String ?? "")
                 let command = PublishModel(author: authorr, title: commandTitle,
                                            commands: commandss, plantID: plantID,
                                            time: Int64(commandTime))
@@ -139,7 +149,33 @@ class FirebaseManager {
             completion(self.commandList)
         }
     }
-    
+    // wherefield auth ID
+    func fetchEvent(plantID: String, completion: @escaping ([CalendarModel]?) -> Void) {
+        dataBase.collection("events").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, _) in
+                guard let querySnapshot = querySnapshot else {
+                    return
+                }
+                self.eventList.removeAll()
+                for event in querySnapshot.documents {
+                    let eventObject = event.data(with: ServerTimestampBehavior.none)
+                    let eventContent = eventObject["content"] as? String ?? ""
+                    let eventDate = eventObject["date"] as? Date ?? Date()
+                    let eventID = eventObject["plantID"] as? String ?? ""
+//                    var formatter = DateFormatter()
+//                    formatter.dateFormat = "yyyy-MM-dd"
+//                    formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+//                    var eventDates = formatter.string(from: eventDate)
+                    
+                    let plant = CalendarModel(eventDate: eventDate,
+                                              content: eventContent,
+                                              plantID: eventID
+                    )
+                    self.eventList.append(plant)
+                }
+                completion(self.eventList)
+                print("get events data")
+            }
+        }
     
     func sinInUp(email: String, name: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
@@ -163,7 +199,8 @@ class FirebaseManager {
     func deleteDate(plantID: String ) {
         let documentRef = dataBase.collection("plants").document("\(plantID)")
         documentRef.delete()
+//        let commandRef = dataBase.collection("command").document.whereField("plantID", isEqualTo: plantID)
+        
         print("deleted doc!!")
-        print(plantID)
     }
 }

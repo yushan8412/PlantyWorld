@@ -37,9 +37,10 @@ class PlantDetailImageCell: UITableViewCell {
                      left: contentView.leftAnchor,
                      bottom: contentView.bottomAnchor,
                      right: contentView.rightAnchor,
-                     paddingTop: 16, paddingLeft: 16,
-                     paddingBottom: 16, paddingRight: 16, height: 300)
+                     paddingTop: 16, paddingLeft: 0,
+                     paddingBottom: 16, paddingRight: 0, height: 300)
         image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
   
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8021B0E62864906100DA508A /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021B0E52864906100DA508A /* AddFriendVC.swift */; };
 		809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B4285879F300E84DD7 /* AppDelegate.swift */; };
 		809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B6285879F300E84DD7 /* SceneDelegate.swift */; };
 		809F97B9285879F300E84DD7 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B8285879F300E84DD7 /* LobbyViewController.swift */; };
@@ -49,12 +50,15 @@
 		80ABA6CE2861B94D00BB515C /* CommandsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6CC2861B94D00BB515C /* CommandsCell.swift */; };
 		80ABA6CF2861B94D00BB515C /* CommandsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6CD2861B94D00BB515C /* CommandsCell.xib */; };
 		80ABA6D12861CC8400BB515C /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D02861CC8300BB515C /* MapVC.swift */; };
+		80ABA6D828643E2B00BB515C /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D728643E2B00BB515C /* CalendarModel.swift */; };
+		80BDB819286563BC00FDB525 /* Extension Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDB818286563BC00FDB525 /* Extension Color.swift */; };
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		028CD96F77904254EB42D3C5 /* Pods-PlantyWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.release.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.release.xcconfig"; sourceTree = "<group>"; };
 		7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlantyWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8021B0E52864906100DA508A /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		809F97B1285879F300E84DD7 /* PlantyWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantyWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		809F97B4285879F300E84DD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		809F97B6285879F300E84DD7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 		80ABA6CC2861B94D00BB515C /* CommandsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsCell.swift; sourceTree = "<group>"; };
 		80ABA6CD2861B94D00BB515C /* CommandsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandsCell.xib; sourceTree = "<group>"; };
 		80ABA6D02861CC8300BB515C /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		80ABA6D728643E2B00BB515C /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
+		80BDB818286563BC00FDB525 /* Extension Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension Color.swift"; sourceTree = "<group>"; };
 		EF1E7D370C3A451E85AA42C5 /* Pods-PlantyWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.debug.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +188,7 @@
 			children = (
 				809F97E32859EAAA00E84DD7 /* PublishModel.swift */,
 				809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */,
+				80ABA6D728643E2B00BB515C /* CalendarModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,6 +198,7 @@
 			children = (
 				809F97DA285983CB00E84DD7 /* Extensions.Anchor.swift */,
 				809F97DD285991C700E84DD7 /* UIView Extension.swift */,
+				80BDB818286563BC00FDB525 /* Extension Color.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -298,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				80ABA6C32860616200BB515C /* ProfilVC.swift */,
+				8021B0E52864906100DA508A /* AddFriendVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -338,8 +347,8 @@
 				809F97AD285879F300E84DD7 /* Sources */,
 				809F97AE285879F300E84DD7 /* Frameworks */,
 				809F97AF285879F300E84DD7 /* Resources */,
-				809F97CB2858905600E84DD7 /* ShellScript */,
 				D3348C6156804A8DD85FE0FC /* [CP] Embed Pods Frameworks */,
+				809F97CB2858905600E84DD7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -450,7 +459,7 @@
 		};
 		D3348C6156804A8DD85FE0FC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -474,9 +483,11 @@
 			files = (
 				80ABA6B5285C4C6100BB515C /* CommandCell.swift in Sources */,
 				809F97BF285879F300E84DD7 /* PlantyWorld.xcdatamodeld in Sources */,
+				80BDB819286563BC00FDB525 /* Extension Color.swift in Sources */,
 				809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */,
 				80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */,
 				80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */,
+				8021B0E62864906100DA508A /* AddFriendVC.swift in Sources */,
 				80ABA6CE2861B94D00BB515C /* CommandsCell.swift in Sources */,
 				80ABA6C42860616200BB515C /* ProfilVC.swift in Sources */,
 				80ABA6C6286097D400BB515C /* AddCommandVC.swift in Sources */,
@@ -493,6 +504,7 @@
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
 				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,
 				809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */,
+				80ABA6D828643E2B00BB515C /* CalendarModel.swift in Sources */,
 				80ABA6CA2861AAD400BB515C /* AddCommandTitleCell.swift in Sources */,
 				80ABA6AE285C375800BB515C /* TextFieldCell.swift in Sources */,
 				80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */,
@@ -574,7 +586,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -628,7 +640,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -661,7 +673,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -693,7 +705,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -33,7 +33,7 @@ class ProfileVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        reloadInputViews()
+        self.tabBarController?.tabBar.isHidden = false
         userBackground.layoutIfNeeded()
         getData()
         levelColor()
@@ -82,6 +82,7 @@ class ProfileVC: UIViewController {
         addFriendBtn.centerX(inView: view)
         addFriendBtn.setTitle(" + ADD FRIEND", for: .normal)
         addFriendBtn.backgroundColor = .systemYellow
+        addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
         
     }
     
@@ -90,8 +91,17 @@ class ProfileVC: UIViewController {
         print(plantList.count)
     }
     
+    @objc func goAddFriendVC() {
+        let addFriendVC = AddFriendVC()
+        navigationController?.pushViewController(addFriendVC, animated: true)
+
+    }
+    
     func levelColor() {
-        if plantList.count >= 5 {
+        if plantList.count < 5 {
+            userBackground.backgroundColor = .gray
+            levelLb.text = "Level：新人"
+        } else if plantList.count >= 5 {
             userBackground.backgroundColor = .blue
             levelLb.text = "Level：小試身手"
         } else if plantList.count >= 10 {

@@ -47,6 +47,7 @@ class CommandVC: UIViewController {
 extension CommandVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(plantList.count)
         return plantList.count
     }
     
@@ -81,7 +82,6 @@ extension CommandVC: AddCommandBtnDelegate {
         navigationController?.present(addCommandVC, animated: true, completion: nil)
         
         addCommandVC.plant = plantList[indexPath.row]
-        print(addCommandVC.plant)
     }
     
 }

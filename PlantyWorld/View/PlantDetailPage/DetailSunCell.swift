@@ -11,15 +11,6 @@ protocol SunLevelDelegate: AnyObject {
     func passSunLV(_ sunLevel: Int)
 }
 
-//enum SunLevel: Int {
-//    case zero = 0
-//    case one = 1
-//    case two = 2
-//    case three = 3
-//    case four = 4
-//    case five = 5
-//}
-
 class DetailSunCell: UITableViewCell {
     
     var sunLevel: Int = 1

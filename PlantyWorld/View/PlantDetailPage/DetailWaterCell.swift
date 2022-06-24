@@ -9,15 +9,6 @@ import UIKit
 protocol WaterLevelDelegate: AnyObject {
     func passWaterLV(_ waterLevel: Int)
 }
-//
-//enum WaterLevel: Int {
-//    case zero = 0
-//    case one = 1
-//    case two = 2
-//    case three = 3
-//    case four = 4
-//    case five = 5
-//}
 
 class DetailWaterCell: UITableViewCell {
     
