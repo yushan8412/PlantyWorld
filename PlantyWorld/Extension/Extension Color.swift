@@ -14,5 +14,11 @@ extension UIColor {
     static let peach = UIColor(red: 236/255, green: 179/255, blue: 144/255, alpha: 1)
     static let dPeach = UIColor(red: 223/255, green: 120/255, blue: 97/255, alpha: 1)
     
+    static let lightGreen = UIColor(red: 206/255, green: 229/255, blue: 208/255, alpha: 1)
+    static let lightYellow = UIColor(red: 243/255, green: 240/255, blue: 215/255, alpha: 1)
+    static let lightPeach = UIColor(red: 254/255, green: 210/255, blue: 170/255, alpha: 1)
+    static let lightOrange = UIColor(red: 255/255, green: 191/255, blue: 134/255, alpha: 1)
     
+    static let waterBlue = UIColor(red: 66/255, green: 194/255, blue: 255/255, alpha: 1)
+ 
 }

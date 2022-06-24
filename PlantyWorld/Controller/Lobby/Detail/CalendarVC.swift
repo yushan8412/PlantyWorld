@@ -25,14 +25,13 @@ class CalendarVC: UIViewController {
             }
         }
     }
+    var dayEvent: [CalendarModel] = []
 
     override func viewDidLoad() {
-        fetchData()
-        
         tableView.delegate = self
         tableView.dataSource = self
         
-        view.backgroundColor = .white
+        view.backgroundColor = .lightPeach
         setup()
         let tryCalendar = FSCalendar(frame: CGRect(x: 10, y: 100,
                                                    width: UIScreen.width - 20,
@@ -46,10 +45,23 @@ class CalendarVC: UIViewController {
         self.tableView.register(UINib(nibName: "NoteCell", bundle: nil),
                                 forCellReuseIdentifier: "NoteCell")
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        let todays = formatter.string(from: Date())
+        
+        getOneDayDate(date: todays)
+                
     }
     
     override func viewWillAppear(_ animated: Bool) {
         fetchData()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        let todays = formatter.string(from: Date())
+        
+        getOneDayDate(date: todays)
         self.tableView.reloadData()
     }
     
@@ -62,6 +74,7 @@ class CalendarVC: UIViewController {
                          bottom: addField.topAnchor, right: view.rightAnchor,
                          paddingTop: UIScreen.height/2 + 110, paddingLeft: 0,
                          paddingBottom: 0, paddingRight: 0)
+        tableView.backgroundColor = .lightPeach
         sticker.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, paddingLeft: 24, paddingBottom: 24)
         sticker.text = "🌸"
         sticker.font = UIFont.systemFont(ofSize: 30)
@@ -80,11 +93,11 @@ class CalendarVC: UIViewController {
     }
     
     func calendarUI() {
-        self.calendar.appearance.selectionColor = .systemYellow
-        calendar.appearance.todayColor = .systemMint
-        calendar.backgroundColor = .systemPink
-        calendar.appearance.weekdayTextColor = .systemYellow
-        calendar.appearance.headerTitleColor = .systemYellow
+        self.calendar.appearance.selectionColor = .dPeach
+        calendar.appearance.todayColor = .pgreen
+        calendar.backgroundColor = .lightYellow
+        calendar.appearance.weekdayTextColor = .black
+        calendar.appearance.headerTitleColor = .black
         
     }
     
@@ -92,11 +105,6 @@ class CalendarVC: UIViewController {
         FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "", completion: { eventList in self.eventList = eventList ?? []
             self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
         })
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-//        let eventdates = formatter.date(from: eventsList ?? "")
-//        print("@@@\(eventdates)")
     }
     
     @objc func addData() {
@@ -105,11 +113,25 @@ class CalendarVC: UIViewController {
         self.tableView.reloadData()
     }
     
+    func getOneDayDate(date: String) {
+        self.dayEvent.removeAll()
+ 
+        for event in eventList {
+            if event.eventDate == date {
+                dayEvent.append(event)
+            }
+            self.tableView.reloadData()
+        }
+        print(dayEvent)
+    }
+    
 }
 
 extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return eventList.count
+//        print(dayEvent.count)
+//        return eventList.count
+        return dayEvent.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,7 +139,8 @@ extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "NoteCell") as? NoteCell
         else { return UITableViewCell() }
         cell.noteLB.text = "Event \(indexPath.row + 1)"
-        cell.noteContent.text = eventList[indexPath.row].content
+//        cell.noteContent.text = eventList[indexPath.row].content
+        cell.noteContent.text = dayEvent[indexPath.row].content
         
         return cell
     }
@@ -134,7 +157,9 @@ extension CalendarVC: FSCalendarDelegate, FSCalendarDataSource {
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
         let dates = formatter.string(from: offsetDate)
         
+        getOneDayDate(date: dates)
         print(dates)
+        self.tableView.reloadData()
 
     }
 

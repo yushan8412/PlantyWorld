@@ -133,9 +133,9 @@ class AddCommandVC: UIViewController {
         
     }
     
-    func filterEvent(date: String) {
-        
-    }
+//    func filterEvent(date: String) {
+//
+//    }
 }
 
 extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
@@ -146,6 +146,7 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
+            print(commandList)
         return commandList.count
         }
     }
