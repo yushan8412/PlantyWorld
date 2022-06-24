@@ -187,8 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				809F97E32859EAAA00E84DD7 /* PublishModel.swift */,
-				809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */,
 				80ABA6D728643E2B00BB515C /* CalendarModel.swift */,
+				809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

@@ -27,43 +27,43 @@ class DetailWaterCell: UITableViewCell {
         switch sender {
         case water1:
             waterLevel = 1
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemGray
-            water3.tintColor = .systemGray
-            water4.tintColor = .systemGray
-            water5.tintColor = .systemGray
+            water1.tintColor = .waterBlue
+            water2.tintColor = .systemGray5
+            water3.tintColor = .systemGray4
+            water4.tintColor = .systemGray3
+            water5.tintColor = .systemGray2
             
         case water2:
             waterLevel = 2
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemBlue
-            water3.tintColor = .systemGray
-            water4.tintColor = .systemGray
-            water5.tintColor = .systemGray
+            water1.tintColor = .waterBlue
+            water2.tintColor = .waterBlue
+            water3.tintColor = .systemGray4
+            water4.tintColor = .systemGray4
+            water5.tintColor = .systemGray4
                         
         case water3:
             waterLevel = 3
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemBlue
-            water3.tintColor = .systemBlue
-            water4.tintColor = .systemGray
-            water5.tintColor = .systemGray
+            water1.tintColor = .waterBlue
+            water2.tintColor = .waterBlue
+            water3.tintColor = .waterBlue
+            water4.tintColor = .systemGray4
+            water5.tintColor = .systemGray4
             
         case water4:
             waterLevel = 4
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemBlue
-            water3.tintColor = .systemBlue
-            water4.tintColor = .systemBlue
-            water5.tintColor = .systemGray
+            water1.tintColor = .waterBlue
+            water2.tintColor = .waterBlue
+            water3.tintColor = .waterBlue
+            water4.tintColor = .waterBlue
+            water5.tintColor = .systemGray4
             
         case water5:
             waterLevel = 5
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemBlue
-            water3.tintColor = .systemBlue
-            water4.tintColor = .systemBlue
-            water5.tintColor = .systemBlue
+            water1.tintColor = .waterBlue
+            water2.tintColor = .waterBlue
+            water3.tintColor = .waterBlue
+            water4.tintColor = .waterBlue
+            water5.tintColor = .waterBlue
                     
         default:
             waterLevel = 0
@@ -99,39 +99,39 @@ class DetailWaterCell: UITableViewCell {
         switch waterLevel {
 
         case 1:
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemGray
-            water3.tintColor = .systemGray
-            water4.tintColor = .systemGray
-            water5.tintColor = .systemGray
+            water1.tintColor = .waterBlue
+            water2.tintColor = .systemGray5
+            water3.tintColor = .systemGray4
+            water4.tintColor = .systemGray3
+            water5.tintColor = .systemGray2
             
         case 2:
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemBlue
-            water3.tintColor = .systemGray
-            water4.tintColor = .systemGray
-            water5.tintColor = .systemGray
+            water1.tintColor = .waterBlue
+            water2.tintColor = .waterBlue
+            water3.tintColor = .systemGray3
+            water4.tintColor = .systemGray3
+            water5.tintColor = .systemGray3
                         
         case 3:
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemBlue
-            water3.tintColor = .systemBlue
-            water4.tintColor = .systemGray
-            water5.tintColor = .systemGray
+            water1.tintColor = .waterBlue
+            water2.tintColor = .waterBlue
+            water3.tintColor = .waterBlue
+            water4.tintColor = .systemGray3
+            water5.tintColor = .systemGray3
             
         case 4:
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemBlue
-            water3.tintColor = .systemBlue
-            water4.tintColor = .systemBlue
-            water5.tintColor = .systemGray
+            water1.tintColor = .waterBlue
+            water2.tintColor = .waterBlue
+            water3.tintColor = .waterBlue
+            water4.tintColor = .waterBlue
+            water5.tintColor = .systemGray3
             
         case 5:
-            water1.tintColor = .systemBlue
-            water2.tintColor = .systemBlue
-            water3.tintColor = .systemBlue
-            water4.tintColor = .systemBlue
-            water5.tintColor = .systemBlue
+            water1.tintColor = .waterBlue
+            water2.tintColor = .waterBlue
+            water3.tintColor = .waterBlue
+            water4.tintColor = .waterBlue
+            water5.tintColor = .waterBlue
                     
         default:
             self.waterLevel = 0

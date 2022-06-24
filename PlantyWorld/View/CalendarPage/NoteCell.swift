@@ -14,6 +14,7 @@ class NoteCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
+        contentView.backgroundColor = .lightPeach
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

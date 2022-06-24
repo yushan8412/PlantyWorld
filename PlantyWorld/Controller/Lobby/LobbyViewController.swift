@@ -28,7 +28,15 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .peach
-        navigationController?.navigationBar.backgroundColor = .peach
+        
+//        let scrollEdgeAppearance =  UINavigationBarAppearance()
+//        scrollEdgeAppearance.backgroundColor = .peach
+//        UINavigationBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
+//        let standardAppearance =  UINavigationBarAppearance()
+//        standardAppearance.backgroundColor = .peach
+//        UINavigationBar.appearance().standardAppearance = standardAppearance
+
+//        navigationController?.navigationBar.backgroundColor = .peach
         tabBarController?.tabBar.backgroundColor = .peach
         plantsCollectionView.backgroundColor = .pyellow
         plantsCollectionView.delegate = self

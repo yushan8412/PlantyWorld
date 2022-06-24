@@ -55,10 +55,16 @@ class FirebaseManager {
     func addEvent(content: String, plantID: String) {
         let events = dataBase.collection("events")
         let document = events.document()
+        
         let timeInterval = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        let dates = formatter.string(from: timeInterval)
+        
         let data: [String: Any] = [
             "authorID": "123" ,
-            "date": timeInterval,
+            "date": dates,
             "content": content,
             "plantID": plantID
         ]
@@ -75,6 +81,11 @@ class FirebaseManager {
         let command = dataBase.collection("commands")
         let document = command.document()
         let timeInterval = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        let dates = formatter.string(from: timeInterval)
+        
         let data: [String: Any] = [
             "author": [
                 "id": "123",
@@ -137,7 +148,7 @@ class FirebaseManager {
                 let plantID = commandObject["plantID"] as? String ?? ""
                 let commandTitle = commandObject["title"] as? String ?? ""
                 let commandTime = commandObject["time"] as? Int ?? 0
-                
+
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
                 let commandss = Command(command: commands["command"] as? String ?? "",
                                         commandID: commands["commandID"] as? String ?? "")
@@ -149,6 +160,24 @@ class FirebaseManager {
             completion(self.commandList)
         }
     }
+    
+//    func fetchCommandData(plantID: String, completion: @escaping (Result<[PublishModel], Error>) -> Void) {
+//        dataBase.collection("commands").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, error) in
+//            if let error = error {
+//                print("Error\(error)")
+//                completion(.failure(error))
+//            } else if let querySnapshot = querySnapshot {
+//                let events = querySnapshot.documents.compactMap({ querySnapshot in
+//                    try? querySnapshot.data(as: PublishModel.self)
+//
+//                })
+//                let eventOnData = events.compactMap { event -> PublishModel? in
+//                    if event.eventDate.hasSame
+//                }
+//            }
+//        }
+//    }
+    
     // wherefield auth ID
     func fetchEvent(plantID: String, completion: @escaping ([CalendarModel]?) -> Void) {
         dataBase.collection("events").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, _) in
@@ -158,17 +187,21 @@ class FirebaseManager {
                 self.eventList.removeAll()
                 for event in querySnapshot.documents {
                     let eventObject = event.data(with: ServerTimestampBehavior.none)
+//                    guard let eventObject = event else { return }
+//                    let eventContent = eventObject["content"]
+                    
                     let eventContent = eventObject["content"] as? String ?? ""
-                    let eventDate = eventObject["date"] as? Date ?? Date()
+                    let eventDate = eventObject["date"] as? String ?? "nono"
                     let eventID = eventObject["plantID"] as? String ?? ""
-//                    var formatter = DateFormatter()
-//                    formatter.dateFormat = "yyyy-MM-dd"
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
 //                    formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-//                    var eventDates = formatter.string(from: eventDate)
+//                    let dateString = formatter.string(from: eventDate)
                     
                     let plant = CalendarModel(eventDate: eventDate,
                                               content: eventContent,
-                                              plantID: eventID
+                                              plantID: eventID,
+                                              dateString: eventDate
                     )
                     self.eventList.append(plant)
                 }
