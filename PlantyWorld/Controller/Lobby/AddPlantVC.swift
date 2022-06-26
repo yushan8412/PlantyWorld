@@ -31,7 +31,7 @@ class AddPlantVC: UIViewController {
     
     override func viewDidLoad() {
 
-        view.backgroundColor = .white
+        view.backgroundColor = .pyellow
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -54,7 +54,6 @@ class AddPlantVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         imageArea.image = UIImage(named: "Group")
-//        reloadInputViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,6 +66,7 @@ class AddPlantVC: UIViewController {
                            right: picBackground.rightAnchor,
                            paddingBottom: 16, paddingRight: 16)
         addImageBtn.setImage(addPic, for: .normal)
+        addImageBtn.tintColor = .pgreen
         addImageBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
     }
     
@@ -107,11 +107,12 @@ class AddPlantVC: UIViewController {
                       bottom: view.bottomAnchor,
                       right: view.rightAnchor,
                       paddingLeft: 24, paddingBottom: 32, paddingRight: 24)
-        addBtn.backgroundColor = .systemPink
+        addBtn.backgroundColor = .dPeach
         addBtn.setTitle("ADD", for: .normal)
         addBtn.setTitleColor(.black, for: .normal)
         addBtn.addTarget(self, action: #selector(tapDismiss), for: .touchUpInside)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
+        addBtn.layer.cornerRadius = 10
     }
     
     @objc func tapDismiss() {
@@ -155,7 +156,8 @@ class AddPlantVC: UIViewController {
         picBackground.anchor(top: view.topAnchor, left: view.leftAnchor,
                              right: view.rightAnchor, paddingTop: 100,
                              paddingLeft: 64, paddingRight: 64, height: 300)
-        picBackground.backgroundColor = .systemMint
+        picBackground.backgroundColor = .lightGreen
+        picBackground.layer.cornerRadius = 20
         
         imageArea.anchor(top: picBackground.topAnchor, left: picBackground.leftAnchor,
                          right: picBackground.rightAnchor, paddingTop: 24,
@@ -168,6 +170,7 @@ class AddPlantVC: UIViewController {
         tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
                          bottom: addBtn.topAnchor, right: view.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 4, paddingRight: 8)
+        tableView.backgroundColor = .pyellow
         
     }
     
@@ -209,6 +212,10 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "DetailWaterCell") as? DetailWaterCell
         else { return UITableViewCell() }
         
+        sunCell.backgroundColor = .pyellow
+        waterCell.backgroundColor = .pyellow
+        cell.backgroundColor = .pyellow
+        
         cell.textField.text = ""
         
         if indexPath.row == 0 {
@@ -216,6 +223,7 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             cell.titleLB.text = "Plant Name"
             cell.textField.placeholder = "Name"
             cell.textField.delegate = self
+//            cell.selectedBackgroundView?.backgroundColor = .clear
 
             return cell
             

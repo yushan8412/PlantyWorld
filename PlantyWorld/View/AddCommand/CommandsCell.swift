@@ -16,6 +16,8 @@ class CommandsCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+//        selectedBackgroundView?.backgroundColor = .clear
+
         setup()
     }
     
@@ -23,13 +25,17 @@ class CommandsCell: UITableViewCell {
         commandView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                            bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
                            paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
-        commandView.backgroundColor = .systemYellow
+        commandView.backgroundColor = .pgreen
+        commandView.layer.cornerRadius = 20
+        
         commandView.addSubview(profilePic)
         profilePic.anchor(top: commandView.topAnchor, left: commandView.leftAnchor,
                           paddingTop: 8, paddingLeft: 8, width: 50, height: 50)
+        profilePic.layer.cornerRadius = 25
+        
         commandView.addSubview(name)
         name.anchor(top: commandView.topAnchor, left: profilePic.rightAnchor, paddingTop: 8, paddingLeft: 8)
-        name.backgroundColor = .systemYellow
+//        name.backgroundColor = .systemYellow
         
         commandView.addSubview(command)
         command.anchor(top: name.bottomAnchor, left: profilePic.rightAnchor,
@@ -37,7 +43,7 @@ class CommandsCell: UITableViewCell {
                        right: commandView.rightAnchor, paddingTop: 8,
                        paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         command.numberOfLines = 0
-        command.backgroundColor = .systemYellow
+//        command.backgroundColor = .systemYellow
     }
     
 }

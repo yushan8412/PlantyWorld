@@ -48,7 +48,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Plants" id="uW5-g0-9jL">
-                        <barButtonItem key="rightBarButtonItem" width="6" style="plain" systemItem="add" id="VP5-U5-w7v">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="VP5-U5-w7v">
                             <color key="tintColor" red="1" green="0.33297625689999999" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addPlant:" destination="BYZ-38-t0r" id="fxB-jo-bB3"/>
@@ -77,9 +77,9 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKZ-yL-BOR">
-                                <rect key="frame" x="327" y="762" width="67" height="31"/>
+                                <rect key="frame" x="312.5" y="762" width="81.5" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="我的位置"/>
                                 <connections>
                                     <action selector="showLocation:" destination="dr7-X2-9Vd" eventType="touchUpInside" id="GbU-3L-wCd"/>
                                 </connections>
@@ -260,30 +260,8 @@
                     <view key="view" contentMode="scaleToFill" id="Rj1-rU-jwU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4Ht-Be-FK3">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlantDetailImageCell" id="gWX-RR-LC9" customClass="PlantDetailImageCell" customModule="PlantyWorld" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gWX-RR-LC9" id="deq-PR-36D">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="9sf-wK-iGc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="9sf-wK-iGc" firstAttribute="bottom" secondItem="4Ht-Be-FK3" secondAttribute="bottom" id="OfM-j6-UO4"/>
-                            <constraint firstItem="4Ht-Be-FK3" firstAttribute="top" secondItem="9sf-wK-iGc" secondAttribute="top" id="QFL-uX-QQN"/>
-                            <constraint firstItem="4Ht-Be-FK3" firstAttribute="leading" secondItem="9sf-wK-iGc" secondAttribute="leading" id="Wuv-4p-nWW"/>
-                            <constraint firstItem="9sf-wK-iGc" firstAttribute="trailing" secondItem="4Ht-Be-FK3" secondAttribute="trailing" id="Z5q-6m-NOm"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2EM-lS-rGp"/>
                 </viewController>

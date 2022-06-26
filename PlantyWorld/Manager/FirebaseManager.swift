@@ -120,8 +120,11 @@ class FirebaseManager {
                 let plantNote = plantObject["note"] as? [String] ?? [""]
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
+                guard let author = plantObject["author"] as? [String: Any] else { return }
+                let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
                 
-                let plant = PlantsModel(name: plantName ,
+                let plant = PlantsModel(author: authorr,
+                                        name: plantName ,
                                         date: plantDate,
                                         sun: plantSun,
                                         water: plantWater,
@@ -178,7 +181,7 @@ class FirebaseManager {
 //        }
 //    }
     
-    // wherefield auth ID
+    // wherefield auth ID（狀況：時間fetch不下來，所以都改 String 
     func fetchEvent(plantID: String, completion: @escaping ([CalendarModel]?) -> Void) {
         dataBase.collection("events").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, _) in
                 guard let querySnapshot = querySnapshot else {

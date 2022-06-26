@@ -15,7 +15,9 @@ protocol BackBtnDelegate: AnyObject {
 class AddCommandVC: UIViewController {
     
     var commandView = UIView()
-    var backBtn = UIButton()
+    
+    var backBtn = UIButton(type: .close)
+    
 //    var delegate: BackBtnDelegate?
     var commandField = UITextField()
     var sendCommandBtn = UIButton()
@@ -70,12 +72,13 @@ class AddCommandVC: UIViewController {
         view.addSubview(commandView)
         commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
 
-        commandView.backgroundColor = .white
+        commandView.backgroundColor = .lightYellow
         commandView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                            right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0,
                            paddingRight: 0, height: 500)
         
         commandView.addSubview(tableView)
+        tableView.backgroundColor = .lightYellow
         tableView.anchor(top: commandView.topAnchor, left: commandView.leftAnchor,
                           right: commandView.rightAnchor,
                          paddingTop: 24, paddingLeft: 0, paddingRight: 0)
@@ -103,19 +106,24 @@ class AddCommandVC: UIViewController {
     }
     
     func setupBackBtn() {
-        backBtn.backgroundColor = .blue
-        backBtn.setTitle("X", for: .normal)
+//        backBtn.backgroundColor = .dPeach
+        backBtn.setTitle("", for: .normal)
+//        backBtn.buttonType = .close
+//        backBtn.setImage(UIImage(systemName: "canael"), for: <#T##UIControl.State#>)
+        backBtn.tintColor = .black
         backBtn.addTarget(self, action: #selector(tappedToDismiss), for: .touchUpInside)
     }
     
     func setupSendBtn() {
-        sendCommandBtn.backgroundColor = .systemYellow
+        sendCommandBtn.layer.cornerRadius = 10
+        sendCommandBtn.backgroundColor = .dPeach
         sendCommandBtn.setTitle("Send", for: .normal)
         sendCommandBtn.addTarget(self, action: #selector(tappedToSend), for: .touchUpInside)
     }
     
     func setTextfield() {
-        commandField.layer.borderWidth = 0.5
+        commandField.borderStyle = .roundedRect
+        commandField.placeholder = "Leave Some Command"
     }
     
     @objc func tappedToDismiss() {
@@ -158,6 +166,7 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: "AddCommandTitleCell") as? AddCommandTitleCell
             else { return UITableViewCell() }
+            cell.backgroundColor = .lightYellow
             cell.plantImage.kf.setImage(with: URL(string: plant?.image ?? ""))
             cell.title.text = plant?.name ?? ""
             cell.date.text = plant?.date ?? ""
@@ -168,7 +177,9 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
             guard let commandCell = tableView.dequeueReusableCell(
                 withIdentifier: "CommandsCell") as? CommandsCell
             else { return UITableViewCell() }
+            commandCell.backgroundColor = .lightYellow
             commandCell.profilePic.image = UIImage(named: "山烏龜")
+            commandCell.name.text = commandList[indexPath.row].author.id
             commandCell.command.text = commandList[indexPath.row].commands.command
             return commandCell
             

@@ -25,6 +25,8 @@ class CommandCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+//        contentView.layer.cornerRadius = 30
+//        contentView.backgroundColor = .lightGreen
         setup()
     }
 
@@ -34,13 +36,14 @@ class CommandCell: UITableViewCell {
     }
     
     func setup() {
+        contentView.backgroundColor = .pyellow
         basicView.anchor(top: contentView.topAnchor,
                          left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor,
                          right: contentView.rightAnchor,
                          paddingTop: 12, paddingLeft: 24,
                          paddingBottom: 12, paddingRight: 24, height: 255)
-        basicView.backgroundColor = .systemGray4
+        basicView.backgroundColor = .pgreen
         basicView.layer.cornerRadius = 20
         
         mainImage.anchor(top: basicView.topAnchor, left: basicView.leftAnchor,
@@ -60,7 +63,8 @@ class CommandCell: UITableViewCell {
         commandBtn.anchor(bottom: basicView.bottomAnchor, right: basicView.rightAnchor,
                           paddingBottom: 8, paddingRight: 8)
         commandBtn.setImage(UIImage(named: "conversation 1"), for: .normal)
-        commandBtn.backgroundColor = .systemYellow
+        commandBtn.backgroundColor = .peach
+        commandBtn.layer.cornerRadius = 22
         commandBtn.setTitle("", for: .normal)
 
     }
