@@ -62,8 +62,9 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
                          paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         saveBtn.anchor(bottom: sceneView.bottomAnchor, right: sceneView.rightAnchor,
                        paddingBottom: 16, paddingRight: 16)
-        saveBtn.setTitle("SAVE", for: .normal)
-        saveBtn.backgroundColor = .systemYellow
+        saveBtn.setTitle(" SAVE ", for: .normal)
+        saveBtn.backgroundColor = .dPeach
+        saveBtn.layer.cornerRadius = 10
         saveBtn.addTarget(self, action: #selector(tapToSave), for: .touchUpInside)
         
     }

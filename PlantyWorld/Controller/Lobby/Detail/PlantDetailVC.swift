@@ -24,6 +24,7 @@ class PlantDetailVC: UIViewController {
 
         view.addSubview(tableView)
         view.addSubview(btnStackView)
+        view.backgroundColor = .lightYellow
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -67,18 +68,32 @@ class PlantDetailVC: UIViewController {
                          bottom: btnStackView.topAnchor, right: view.rightAnchor,
                          paddingTop: 0, paddingLeft: 0,
                          paddingBottom: 0, paddingRight: 0)
-//        tableView.backgroundColor = .white
+        tableView.backgroundColor = .lightYellow
         
         btnStackView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                             right: view.rightAnchor, paddingLeft: 24,
-                            paddingBottom: 24, paddingRight: 24)
+                            paddingBottom: 32, paddingRight: 24)
+        btnStackView.backgroundColor = .lightYellow
         
-        deleteBtn.setTitle("Delete", for: .normal)
-        measureBtn.setTitle("Measure", for: .normal)
-        calenderBtn.setTitle("Calendar", for: .normal)
-        deleteBtn.backgroundColor = .systemYellow
-        measureBtn.backgroundColor = .systemYellow
-        calenderBtn.backgroundColor = .systemYellow
+//        deleteBtn.setTitle(" Delete ", for: .normal)
+        deleteBtn.setImage(UIImage(named: "fa6-regular_trash-can-3"), for: .normal)
+        deleteBtn.layer.cornerRadius = 5
+        deleteBtn.anchor(width: 50, height: 38)
+        
+//        calenderBtn.setTitle(" Calendar ", for: .normal)
+        calenderBtn.setImage(UIImage(named: "Vector-3"), for: .normal)
+        calenderBtn.layer.cornerRadius = 5
+        calenderBtn.anchor(width: 50, height: 38)
+
+        measureBtn.anchor(width: 50, height: 38)
+//        measureBtn.setTitle("Measure ", for: .normal)
+        measureBtn.setImage(UIImage(named: "Group-3"), for: .normal)
+        measureBtn.layer.cornerRadius = 5
+        
+//        deleteBtn.backgroundColor = .pgreen
+//        measureBtn.backgroundColor = .pgreen
+//        calenderBtn.backgroundColor = .pgreen
+        
         calenderBtn.addTarget(self, action: #selector(toCalenderVC), for: .touchUpInside)
         measureBtn.addTarget(self, action: #selector(toMeasureVC), for: .touchUpInside)
         deleteBtn.addTarget(self, action: #selector(tapToDelete), for: .touchUpInside)
@@ -157,26 +172,31 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
                 
         if indexPath.row == 0 {
             
+            imageCell.backgroundColor = .lightYellow
+            imageCell.isUserInteractionEnabled = false
             return imageCell
             
         } else if indexPath.row == 1 {
             
+            titleCell.backgroundColor = .lightYellow
+            titleCell.isUserInteractionEnabled = false
             return titleCell
             
         } else if indexPath.row == 2 {
-            
+            sunCell.backgroundColor = .lightYellow
             sunCell.isUserInteractionEnabled = false
             sunCell.sunColor(sunLevel: plant?.sun ?? 0)
             return sunCell
             
         } else if indexPath.row == 3 {
             
+            waterCell.backgroundColor = .lightYellow
             waterCell.isUserInteractionEnabled = false
             waterCell.waterColor(waterLevel: plant?.water ?? 0)
             return waterCell
                 
         } else if indexPath.row == 4 {
-            
+            noteCell.backgroundColor = .lightYellow
             return noteCell
         }
         

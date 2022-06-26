@@ -29,24 +29,24 @@ class DetailSunCell: UITableViewCell {
         case sun1:
             sunLevel = 1
             sun1.tintColor = .systemYellow
-            sun2.tintColor = .systemGray
-            sun3.tintColor = .systemGray
-            sun4.tintColor = .systemGray
-            sun5.tintColor = .systemGray
+            sun2.tintColor = .systemGray2
+            sun3.tintColor = .systemGray2
+            sun4.tintColor = .systemGray2
+            sun5.tintColor = .systemGray2
         case sun2:
             sunLevel = 2
             sun1.tintColor = .systemYellow
             sun2.tintColor = .systemYellow
-            sun3.tintColor = .systemGray
-            sun4.tintColor = .systemGray
-            sun5.tintColor = .systemGray
+            sun3.tintColor = .systemGray2
+            sun4.tintColor = .systemGray2
+            sun5.tintColor = .systemGray2
         case sun3:
             sunLevel = 3
             sun1.tintColor = .systemYellow
             sun2.tintColor = .systemYellow
             sun3.tintColor = .systemYellow
-            sun4.tintColor = .systemGray
-            sun5.tintColor = .systemGray
+            sun4.tintColor = .systemGray2
+            sun5.tintColor = .systemGray2
 //            print(sunLevel.rawValue)
         case sun4:
             sunLevel = 4
@@ -54,7 +54,7 @@ class DetailSunCell: UITableViewCell {
             sun2.tintColor = .systemYellow
             sun3.tintColor = .systemYellow
             sun4.tintColor = .systemYellow
-            sun5.tintColor = .systemGray
+            sun5.tintColor = .systemGray2
         case sun5:
             sunLevel = 5
             sun1.tintColor = .systemYellow
@@ -120,10 +120,10 @@ class DetailSunCell: UITableViewCell {
     func setup() {
         sunLB.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                      right: contentView.rightAnchor, paddingTop: 8,
-                     paddingLeft: 8, paddingRight: 8)
+                     paddingLeft: 16, paddingRight: 8)
         sunView.anchor(top: sunLB.bottomAnchor, left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
-                         paddingTop: 8, paddingLeft: 24, paddingBottom: 8, paddingRight: 54)
+                         paddingTop: 4, paddingLeft: 24, paddingBottom: 4, paddingRight: 54)
         sunView.distribution = .fillEqually
         sunView.alignment = .center
     }

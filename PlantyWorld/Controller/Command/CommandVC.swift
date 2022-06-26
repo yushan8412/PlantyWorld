@@ -25,14 +25,15 @@ class CommandVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-            tableView.delegate = self
-            tableView.dataSource = self
-            
-            self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
-                                    forCellReuseIdentifier: "CommandCell")
-            
-            FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .pyellow
+        
+        self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
+                                forCellReuseIdentifier: "CommandCell")
+        
+        FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
         
     }
     

@@ -11,7 +11,7 @@ import UIKit
 class AddFriendVC: UIViewController {
     
     override func viewDidLoad() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .lightOrange
         self.tabBarController?.tabBar.isHidden = true
         
     }

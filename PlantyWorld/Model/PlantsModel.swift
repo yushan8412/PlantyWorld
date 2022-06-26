@@ -15,6 +15,7 @@ struct PlantsModel: Comparable {
         return lhs.date < rhs.date
     }
     
+    var author: Author
     var name: String
     var date: String
     var sun: Int

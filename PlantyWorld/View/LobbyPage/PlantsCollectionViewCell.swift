@@ -46,8 +46,9 @@ class PlantsCollectionViewCell: UICollectionViewCell {
                        right: contentView.rightAnchor,
                        paddingTop: 8, paddingLeft: 12,
                        paddingBottom: 12, paddingRight: 12, width: 120)
-        mainPic.contentMode = .scaleToFill
-        
+        mainPic.contentMode = .scaleAspectFill
+        mainPic.clipsToBounds = true
+
     }
 
 }

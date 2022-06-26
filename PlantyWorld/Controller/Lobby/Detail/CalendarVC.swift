@@ -11,7 +11,6 @@ import FSCalendar
 
 class CalendarVC: UIViewController {
     
-//    var calendar = UIDatePicker()
     var tableView = UITableView()
     var calendar: FSCalendar!
     var plant: PlantsModel?
@@ -85,8 +84,9 @@ class CalendarVC: UIViewController {
         addField.borderStyle = .roundedRect
         
         addBtn.anchor(bottom: view.bottomAnchor, right: view.rightAnchor, paddingBottom: 24, paddingRight: 24)
-        addBtn.setTitle("add", for: .normal)
-        addBtn.backgroundColor = .blue
+        addBtn.setTitle(" add ", for: .normal)
+        addBtn.backgroundColor = .pgreen
+        addBtn.layer.cornerRadius = 10
         addBtn.setContentHuggingPriority(UILayoutPriority(254), for: .horizontal)
         addBtn.addTarget(self, action: #selector(addData), for: .touchUpInside)
         
@@ -129,8 +129,6 @@ class CalendarVC: UIViewController {
 
 extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print(dayEvent.count)
-//        return eventList.count
         return dayEvent.count
     }
     
@@ -138,9 +136,11 @@ extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "NoteCell") as? NoteCell
         else { return UITableViewCell() }
+        cell.backgroundColor = .lightPeach
         cell.noteLB.text = "Event \(indexPath.row + 1)"
-//        cell.noteContent.text = eventList[indexPath.row].content
         cell.noteContent.text = dayEvent[indexPath.row].content
+        cell.bgView.backgroundColor = .lightGreen
+        cell.bgView.layer.cornerRadius = 20
         
         return cell
     }

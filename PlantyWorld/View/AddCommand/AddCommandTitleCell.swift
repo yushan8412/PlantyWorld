@@ -26,7 +26,8 @@ class AddCommandTitleCell: UITableViewCell {
         plantImage.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                           bottom: contentView.bottomAnchor, paddingTop: 8,
                           paddingLeft: 8, paddingBottom: 8, width: 100, height: 80)
-        plantImage.contentMode = .scaleToFill
+        plantImage.contentMode = .scaleAspectFill
+        plantImage.layer.cornerRadius = 15
         
         title.anchor(top: contentView.topAnchor, left: plantImage.rightAnchor,
                      right: contentView.rightAnchor, paddingTop: 8,

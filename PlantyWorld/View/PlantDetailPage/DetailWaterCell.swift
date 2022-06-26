@@ -28,26 +28,26 @@ class DetailWaterCell: UITableViewCell {
         case water1:
             waterLevel = 1
             water1.tintColor = .waterBlue
-            water2.tintColor = .systemGray5
-            water3.tintColor = .systemGray4
-            water4.tintColor = .systemGray3
+            water2.tintColor = .systemGray2
+            water3.tintColor = .systemGray2
+            water4.tintColor = .systemGray2
             water5.tintColor = .systemGray2
             
         case water2:
             waterLevel = 2
             water1.tintColor = .waterBlue
             water2.tintColor = .waterBlue
-            water3.tintColor = .systemGray4
-            water4.tintColor = .systemGray4
-            water5.tintColor = .systemGray4
+            water3.tintColor = .systemGray2
+            water4.tintColor = .systemGray2
+            water5.tintColor = .systemGray2
                         
         case water3:
             waterLevel = 3
             water1.tintColor = .waterBlue
             water2.tintColor = .waterBlue
             water3.tintColor = .waterBlue
-            water4.tintColor = .systemGray4
-            water5.tintColor = .systemGray4
+            water4.tintColor = .systemGray2
+            water5.tintColor = .systemGray2
             
         case water4:
             waterLevel = 4
@@ -55,7 +55,7 @@ class DetailWaterCell: UITableViewCell {
             water2.tintColor = .waterBlue
             water3.tintColor = .waterBlue
             water4.tintColor = .waterBlue
-            water5.tintColor = .systemGray4
+            water5.tintColor = .systemGray2
             
         case water5:
             waterLevel = 5
@@ -85,13 +85,13 @@ class DetailWaterCell: UITableViewCell {
     func setup() {
         waterLB.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                      right: contentView.rightAnchor, paddingTop: 8,
-                     paddingLeft: 8, paddingRight: 8)
+                     paddingLeft: 16, paddingRight: 8)
     }
     
     func setupStackView() {
         waterView.anchor(top: waterLB.bottomAnchor, left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
-                         paddingTop: 8, paddingLeft: 24, paddingBottom: 8, paddingRight: 54)
+                         paddingTop: 4, paddingLeft: 24, paddingBottom: 4, paddingRight: 54)
         waterView.distribution = .fillEqually
     }
     
@@ -100,31 +100,31 @@ class DetailWaterCell: UITableViewCell {
 
         case 1:
             water1.tintColor = .waterBlue
-            water2.tintColor = .systemGray5
-            water3.tintColor = .systemGray4
-            water4.tintColor = .systemGray3
+            water2.tintColor = .systemGray2
+            water3.tintColor = .systemGray2
+            water4.tintColor = .systemGray2
             water5.tintColor = .systemGray2
             
         case 2:
             water1.tintColor = .waterBlue
             water2.tintColor = .waterBlue
-            water3.tintColor = .systemGray3
-            water4.tintColor = .systemGray3
-            water5.tintColor = .systemGray3
+            water3.tintColor = .systemGray2
+            water4.tintColor = .systemGray2
+            water5.tintColor = .systemGray2
                         
         case 3:
             water1.tintColor = .waterBlue
             water2.tintColor = .waterBlue
             water3.tintColor = .waterBlue
-            water4.tintColor = .systemGray3
-            water5.tintColor = .systemGray3
+            water4.tintColor = .systemGray2
+            water5.tintColor = .systemGray2
             
         case 4:
             water1.tintColor = .waterBlue
             water2.tintColor = .waterBlue
             water3.tintColor = .waterBlue
             water4.tintColor = .waterBlue
-            water5.tintColor = .systemGray3
+            water5.tintColor = .systemGray2
             
         case 5:
             water1.tintColor = .waterBlue
