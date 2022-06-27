@@ -23,4 +23,5 @@ struct PlantsModel: Comparable {
     var note: [String]
     var image: String
     var id: String
+    var createdTime: Int
 }

@@ -75,25 +75,18 @@ class PlantDetailVC: UIViewController {
                             paddingBottom: 32, paddingRight: 24)
         btnStackView.backgroundColor = .lightYellow
         
-//        deleteBtn.setTitle(" Delete ", for: .normal)
         deleteBtn.setImage(UIImage(named: "fa6-regular_trash-can-3"), for: .normal)
         deleteBtn.layer.cornerRadius = 5
         deleteBtn.anchor(width: 50, height: 38)
         
-//        calenderBtn.setTitle(" Calendar ", for: .normal)
         calenderBtn.setImage(UIImage(named: "Vector-3"), for: .normal)
         calenderBtn.layer.cornerRadius = 5
         calenderBtn.anchor(width: 50, height: 38)
 
         measureBtn.anchor(width: 50, height: 38)
-//        measureBtn.setTitle("Measure ", for: .normal)
         measureBtn.setImage(UIImage(named: "Group-3"), for: .normal)
         measureBtn.layer.cornerRadius = 5
-        
-//        deleteBtn.backgroundColor = .pgreen
-//        measureBtn.backgroundColor = .pgreen
-//        calenderBtn.backgroundColor = .pgreen
-        
+             
         calenderBtn.addTarget(self, action: #selector(toCalenderVC), for: .touchUpInside)
         measureBtn.addTarget(self, action: #selector(toMeasureVC), for: .touchUpInside)
         deleteBtn.addTarget(self, action: #selector(tapToDelete), for: .touchUpInside)

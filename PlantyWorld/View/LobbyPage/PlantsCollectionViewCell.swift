@@ -45,9 +45,15 @@ class PlantsCollectionViewCell: UICollectionViewCell {
                        bottom: contentView.bottomAnchor,
                        right: contentView.rightAnchor,
                        paddingTop: 8, paddingLeft: 12,
-                       paddingBottom: 12, paddingRight: 12, width: 120)
+                       paddingBottom: 12, paddingRight: 12)
         mainPic.contentMode = .scaleAspectFill
         mainPic.clipsToBounds = true
+        
+        waterDrop.anchor(top: contentView.topAnchor, right: contentView.rightAnchor,
+                         paddingTop: 8, paddingRight: 8, width: 25, height: 30)
+        waterDrop.image = UIImage(named: "Vector-5")
+        // water reminder? UIButtom timer
+        
 
     }
 

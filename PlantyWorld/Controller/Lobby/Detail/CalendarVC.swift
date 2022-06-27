@@ -102,7 +102,8 @@ class CalendarVC: UIViewController {
     }
     
     func fetchData() {
-        FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "", completion: { eventList in self.eventList = eventList ?? []
+        FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
+                                          completion: { eventList in self.eventList = eventList ?? []
             self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
         })
     }
@@ -110,6 +111,11 @@ class CalendarVC: UIViewController {
     @objc func addData() {
         FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "")
         self.addField.text = ""
+        
+        FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
+                                          completion: { eventList in self.eventList = eventList ?? []
+            self.tableView.reloadData() 
+        })
         self.tableView.reloadData()
     }
     

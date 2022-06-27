@@ -162,7 +162,7 @@ class ProfileVC: UIViewController {
             levelLb.text = " Level：Green Finger "
         } else if plantList.count >= 5 {
             userBackground.backgroundColor = .blue
-            levelLb.text = "Level：小試身手"
+            levelLb.text = " Level：Green Finger "
         } else if plantList.count >= 10 {
             userBackground.backgroundColor = .red
             levelLb.text = "Level：小園丁"

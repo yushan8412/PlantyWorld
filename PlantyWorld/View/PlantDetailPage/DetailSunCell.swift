@@ -71,7 +71,7 @@ class DetailSunCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-//        sunColor(sunLevel: sunLevel)
+        sunLB.textColor = .black
         
     }
     

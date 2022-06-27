@@ -82,8 +82,8 @@ class FirebaseManager {
         let document = command.document()
         let timeInterval = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyyMMddhhmmss"
+//        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
         let dates = formatter.string(from: timeInterval)
         
         let data: [String: Any] = [
@@ -95,7 +95,7 @@ class FirebaseManager {
             "commands": [
                 "commandID": document.documentID,
                 "command": "command:\(newcommand)"],
-            "time": timeInterval
+            "time": dates
         ]
         document.setData(data) { error in
             if let error = error {
@@ -107,7 +107,7 @@ class FirebaseManager {
     }
     
     func fetchData(completion: @escaping ([PlantsModel]?) -> Void) {
-        dataBase.collection("plants").getDocuments { (querySnapshot, _) in
+        dataBase.collection("plants").order(by: "createdTime", descending: true).getDocuments { (querySnapshot, _) in
             guard let querySnapshot = querySnapshot else {
                 return }
             self.plantsList.removeAll()
@@ -120,6 +120,7 @@ class FirebaseManager {
                 let plantNote = plantObject["note"] as? [String] ?? [""]
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
+                let createdTime = plantObject["createdTime"] as? Int ?? 0
                 guard let author = plantObject["author"] as? [String: Any] else { return }
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
                 
@@ -130,7 +131,8 @@ class FirebaseManager {
                                         water: plantWater,
                                         note: plantNote,
                                         image: plantImage,
-                                        id: plantID
+                                        id: plantID,
+                                        createdTime: createdTime
                 )
                 self.plantsList.append(plant)
             }
@@ -150,17 +152,21 @@ class FirebaseManager {
                 guard let commands = commandObject["commands"] as? [String: Any] else { return }
                 let plantID = commandObject["plantID"] as? String ?? ""
                 let commandTitle = commandObject["title"] as? String ?? ""
-                let commandTime = commandObject["time"] as? Int ?? 0
+                let commandTime = commandObject["time"] as? String ?? "notime"
 
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
                 let commandss = Command(command: commands["command"] as? String ?? "",
                                         commandID: commands["commandID"] as? String ?? "")
                 let command = PublishModel(author: authorr, title: commandTitle,
                                            commands: commandss, plantID: plantID,
-                                           time: Int64(commandTime))
+                                           time: String(commandTime))
                 self.commandList.append(command)
             }
+            self.commandList.sort { data, data1 in
+                return Int(data.time) ?? 0 > Int(data1.time) ?? 1
+            }
             completion(self.commandList)
+            
         }
     }
     
