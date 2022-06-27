@@ -84,7 +84,14 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     
     func addEvent() {
         FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") 身高 \((distance ?? 0 ) * 100) cm",
-                                        plantID: plant?.id ?? "noID")
+                                        plantID: plant?.id ?? "noID") { result in
+            switch result {
+            case .success:
+                print("update")
+            case .failure:
+                print("failure")
+            }
+        }
     }
     
     func addDot(at hitResult: ARHitTestResult) {

@@ -11,11 +11,12 @@ import FirebaseAuth
 
 extension UIViewController {
     
-    func showAlert(title: String, message: String, buttonTitle: String) {
+    func showAlert(title: String, message: String, buttonTitle: String, vc: UIViewController) {
         let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
         controller.addAction(okAction)
-        self.present(controller, animated: true, completion: nil)
+        vc.present(controller, animated: true, completion: nil)
+        
     }
     
     func showLoginAlert() {

@@ -112,12 +112,12 @@ class AddPlantVC: UIViewController {
         addBtn.backgroundColor = .dPeach
         addBtn.setTitle("ADD", for: .normal)
         addBtn.setTitleColor(.black, for: .normal)
-        addBtn.addTarget(self, action: #selector(tapDismiss), for: .touchUpInside)
+//        addBtn.addTarget(self, action: #selector(tapDismiss), for: .touchUpInside)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
         addBtn.layer.cornerRadius = 10
     }
     
-    @objc func tapDismiss() {
+    func tapDismiss() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -138,7 +138,16 @@ class AddPlantVC: UIViewController {
                             PlantyWorld.FirebaseManager.shared.addPlant(name: plantName,
                                                                         date: plantDate,
                                                                         sun: sun, water: water,
-                                                                        image: "\(url)", note: plantNote)
+                                                                        image: "\(url)", note: plantNote) { result in
+                                switch result {
+                                case .success:
+                                    print("123")
+                                    self.tapDismiss()
+                                case .failure:
+                                    print("error")
+                                }
+                            }
+                            
                         case .failure:
                             break
                         }
@@ -149,7 +158,7 @@ class AddPlantVC: UIViewController {
             }
             
         }
-        navigationController?.popToRootViewController(animated: true)
+        self.addBtn.isEnabled = false
     }
     
     func setupImageArea() {

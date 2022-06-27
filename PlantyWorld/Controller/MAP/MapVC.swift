@@ -23,6 +23,7 @@ class MapVC: UIViewController {
     }
  
     override func viewDidLoad() {
+        self.navigationController?.navigationBar.backgroundColor = .clear
       
         myMap.showsUserLocation = true
         showFlowerStore()

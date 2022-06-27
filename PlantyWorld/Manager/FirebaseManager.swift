@@ -23,7 +23,8 @@ class FirebaseManager {
     //        plant.date
     //    }
     
-    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String]) {
+    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void)
+    {
         let plants = dataBase.collection("plants")
         let document = plants.document()
         let timeInterval = Date()
@@ -45,14 +46,14 @@ class FirebaseManager {
         ]
         document.setData(data) { error in
             if let error = error {
-                print("Error\(error)")
+                completion(.failure(error))
             } else {
-                print("Document update!!")
+                completion(.success(()))
             }
         }
     }
     
-    func addEvent(content: String, plantID: String) {
+    func addEvent(content: String, plantID: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let events = dataBase.collection("events")
         let document = events.document()
         

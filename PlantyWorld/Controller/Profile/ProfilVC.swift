@@ -10,6 +10,9 @@ import UIKit
 import SwiftUI
 
 class ProfileVC: UIViewController {
+    
+    var backView = UIView()
+    
     var userImage = UIImageView()
     var userBackground = UIView()
     var userName = UILabel()
@@ -34,13 +37,15 @@ class ProfileVC: UIViewController {
     }
     
     override func viewDidLoad() {
-        userBackground.addSubview(userImage)
-        view.backgroundColor = .lightYellow
+        view.addSubview(backView)
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "Soft")!)
+        self.navigationItem.title = "Profile"
         setup()
         setUI()
-        self.navigationItem.title = "Profile"
         getData()
         levelColor()
+        setBtn()
+        setUserImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,27 +63,57 @@ class ProfileVC: UIViewController {
     }
     
     func setup() {
-        view.addSubview(userBackground)
-        view.addSubview(userName)
-//        view.addSubview(userPlants)
-//        view.addSubview(addFriendBtn)
-//        view.addSubview(levelLb)
+        backView.addSubview(userBackground)
+        backView.addSubview(userName)
         
-        view.addSubview(levelBG)
-        view.addSubview(userPlantsBG)
-        view.addSubview(addFBG)
+        backView.addSubview(levelBG)
+        backView.addSubview(userPlantsBG)
+        backView.addSubview(addFBG)
         
+        backView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
+                        right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0,
+                        paddingRight: 0, height: UIScreen.height * 2/3)
+        backView.backgroundColor = .lightYellow
+        backView.layer.cornerRadius = 40
+    
         levelBG.addSubview(levelLb)
         userPlantsBG.addSubview(userPlants)
         userPlantsBG.addSubview(plantsImage)
         addFBG.addSubview(addFriendBtn)
         
+        userName.anchor(top: userBackground.bottomAnchor, paddingTop: 16)
+        userName.centerX(inView: view)
+        userName.text = "User Name"
         
+        levelBG.anchor(top: userName.bottomAnchor, paddingTop: 12, width: 250, height: 50)
+        levelBG.centerX(inView: view)
+
+        userPlantsBG.anchor(top: levelBG.bottomAnchor, paddingTop: 12, width: 250, height: 50)
+        userPlantsBG.centerX(inView: view)
+       
+        addFBG.anchor(top: userPlantsBG.bottomAnchor, paddingTop: 12, width: 250, height: 50)
+        addFBG.centerX(inView: view)
+
+        levelLb.anchor(top: levelBG.topAnchor, left: levelBG.leftAnchor,
+                       bottom: levelBG.bottomAnchor, right: levelBG.rightAnchor,
+                       paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
+        plantsImage.anchor(top: userPlantsBG.topAnchor, left: userPlantsBG.leftAnchor,
+                           bottom: userPlantsBG.bottomAnchor, paddingTop: 2,
+                           paddingLeft: 8, paddingBottom: 2, width: 50)
+        userPlants.anchor(top: userPlantsBG.topAnchor, left: plantsImage.rightAnchor,
+                          bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
+                          paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
+        
+    }
+    
+    func setUserImage() {
+        
+        userBackground.addSubview(userImage)
         userBackground.backgroundColor = .systemYellow
         userBackground.layer.cornerRadius = 125
         
         userBackground.centerX(inView: view)
-        userBackground.anchor(top: view.topAnchor, paddingTop: 120, width: 250, height: 250)
+        userBackground.anchor(top: view.topAnchor, paddingTop: UIScreen.height * 5/24, width: 250, height: 250)
         
         userImage.anchor(top: userBackground.topAnchor, left: userBackground.leftAnchor,
                          bottom: userBackground.bottomAnchor, right: userBackground.rightAnchor,
@@ -86,45 +121,17 @@ class ProfileVC: UIViewController {
         userImage.image = UIImage(named: "山烏龜")
         userImage.contentMode = .scaleToFill
         
-        userName.anchor(top: userBackground.bottomAnchor, paddingTop: 16)
-        userName.centerX(inView: view)
-        userName.text = "User Name"
+    }
+    
+    func setBtn() {
         
-        levelBG.anchor(top: userName.bottomAnchor, paddingTop: 12, width: 250, height: 80)
-        levelBG.centerX(inView: view)
-
-        userPlantsBG.anchor(top: levelBG.bottomAnchor, paddingTop: 12, width: 250, height: 80)
-        userPlantsBG.centerX(inView: view)
-       
-        addFBG.anchor(top: userPlantsBG.bottomAnchor, paddingTop: 12, width: 250, height: 80)
-        addFBG.centerX(inView: view)
-
-        levelLb.anchor(top: levelBG.topAnchor, left: levelBG.leftAnchor,
-                       bottom: levelBG.bottomAnchor, right: levelBG.rightAnchor,
-                       paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
-        plantsImage.anchor(top: userPlantsBG.topAnchor, left: userPlantsBG.leftAnchor,
-                           bottom: userPlantsBG.bottomAnchor, paddingTop: 8,
-                           paddingLeft: 8, paddingBottom: 8, width: 60)
-        userPlants.anchor(top: userPlantsBG.topAnchor, left: plantsImage.rightAnchor,
-                          bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
-                          paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
+        addFriendBtn.anchor(top: addFBG.topAnchor, left: addFBG.leftAnchor,
+                            bottom: addFBG.bottomAnchor, right: addFBG.rightAnchor,
+                            paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         
-        addFriendBtn.anchor(top: addFBG.topAnchor, left: addFBG.leftAnchor, bottom: addFBG.bottomAnchor, right: addFBG.rightAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
-        
-        
-//        levelLb.backgroundColor = .twitterBlue
-//        levelLb.text = "123123"
-//
-//        userPlants.anchor(top: levelLb.bottomAnchor, paddingTop: 16)
-//        userPlants.centerX(inView: view)
-//        userPlants.backgroundColor = .systemYellow
-//
-//        addFriendBtn.anchor(top: userPlants.bottomAnchor, paddingTop: 16)
-//        addFriendBtn.centerX(inView: view)
         addFriendBtn.setTitle(" + ADD FRIEND", for: .normal)
         addFriendBtn.tintColor = .black
         addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
-        
     }
     
     func setUI() {
@@ -151,8 +158,11 @@ class ProfileVC: UIViewController {
     }
     
     @objc func goAddFriendVC() {
-        let addFriendVC = AddFriendVC()
-        navigationController?.pushViewController(addFriendVC, animated: true)
+//        let addFriendVC = AddFriendVC()
+//        navigationController?.pushViewController(addFriendVC, animated: true)
+        
+        let loginVC = LoginVC()
+        navigationController?.pushViewController(loginVC, animated: true)
 
     }
     
