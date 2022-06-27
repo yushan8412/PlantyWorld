@@ -137,13 +137,13 @@ class AddCommandVC: UIViewController {
                                           id: plant?.id ?? "no id",
                                           newcommand: commandField.text ?? "nono")
         self.commandField.text = ""
+        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
+            self.commandList = commandlist ?? []
+            self.tableView.reloadData()})
         self.tableView.reloadData()
         
     }
     
-//    func filterEvent(date: String) {
-//
-//    }
 }
 
 extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {

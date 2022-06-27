@@ -76,6 +76,7 @@ class DetailWaterCell: UITableViewCell {
         super.awakeFromNib()
         setup()
         setupStackView()
+        waterLB.textColor = .black
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

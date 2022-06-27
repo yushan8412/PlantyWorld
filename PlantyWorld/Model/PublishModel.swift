@@ -20,7 +20,7 @@ struct PublishModel: Comparable, Codable {
     var title: String
     var commands: Command
     var plantID: String
-    var time: Int64
+    var time: String
     
 }
 

@@ -1,49 +1,40 @@
 //
-//  TextFieldCell.swift
+//  TextViewCell.swift
 //  PlantyWorld
 //
-//  Created by Yushan Yang on 2022/6/17.
+//  Created by Yushan Yang on 2022/6/27.
 //
 
 import UIKit
 
-class TextFieldCell: UITableViewCell, UITextFieldDelegate {
-    var waterLevel: Int = 1
-    var sunLevel: Int = 1
+class TextViewCell: UITableViewCell, UITextViewDelegate {
 
-    @IBOutlet weak var titleLB: UILabel!
-    @IBOutlet weak var textField: UITextField!
-
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var textView: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        textField.delegate = self
-        textField.backgroundColor = .white
-        textField.tintColor = .black
-        titleLB.textColor = .black
         setup()
-        reloadInputViews()
+        contentView.backgroundColor = .pyellow
     }
-    
-//    override func prepareForReuse() {
-//        textField.text = ""
-//    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     func setup() {
-        titleLB.anchor(top: contentView.topAnchor,
+        title.anchor(top: contentView.topAnchor,
                        left: contentView.leftAnchor,
                        right: contentView.rightAnchor,
                        paddingTop: 8, paddingLeft: 16, paddingRight: 8)
-        textField.anchor(top: titleLB.bottomAnchor,
+        textView.anchor(top: title.bottomAnchor,
                          left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor,
                          right: contentView.rightAnchor,
                          paddingTop: 8, paddingLeft: 8,
-                         paddingBottom: 8, paddingRight: 8)
-       
+                         paddingBottom: 8, paddingRight: 8, height: 100)
+        textView.layer.borderWidth = 0.5
+        textView.layer.cornerRadius = 10
     }
     
 }

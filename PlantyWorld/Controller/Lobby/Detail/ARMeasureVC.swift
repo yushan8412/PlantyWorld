@@ -70,7 +70,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func tapToSave() {
-        let deleteAlert = UIAlertController(title: "Save data", message: "Save \((distance ?? 0) * 100) as your data?",
+        let deleteAlert = UIAlertController(title: "Save data", message: "Save \((distance ?? 0) * 100) cm as your data?",
                                             preferredStyle: UIAlertController.Style.alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -83,7 +83,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     }
     
     func addEvent() {
-        FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") 身高 \((distance ?? 0 ) * 100)",
+        FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") 身高 \((distance ?? 0 ) * 100) cm",
                                         plantID: plant?.id ?? "noID")
     }
     

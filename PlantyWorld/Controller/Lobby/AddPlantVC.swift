@@ -42,6 +42,8 @@ class AddPlantVC: UIViewController {
                                 forCellReuseIdentifier: "DetailWaterCell")
         self.tableView.register(UINib(nibName: "TextFieldCell", bundle: nil),
                                 forCellReuseIdentifier: "TextFieldCell")
+        self.tableView.register(UINib(nibName: "TextViewCell", bundle: nil),
+                                forCellReuseIdentifier: "TextViewCell")
        
         setupAddBtn()
         setupImageArea()
@@ -133,7 +135,6 @@ class AddPlantVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-//                            self.plant?.image = "\(url)"
                             PlantyWorld.FirebaseManager.shared.addPlant(name: plantName,
                                                                         date: plantDate,
                                                                         sun: sun, water: water,
@@ -148,6 +149,7 @@ class AddPlantVC: UIViewController {
             }
             
         }
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func setupImageArea() {
@@ -212,6 +214,10 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "DetailWaterCell") as? DetailWaterCell
         else { return UITableViewCell() }
         
+        guard let textViewCell = tableView.dequeueReusableCell(
+            withIdentifier: "TextViewCell") as? TextViewCell
+        else { return UITableViewCell() }
+        
         sunCell.backgroundColor = .pyellow
         waterCell.backgroundColor = .pyellow
         cell.backgroundColor = .pyellow
@@ -248,11 +254,15 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             return waterCell
             
         } else if indexPath.row == 4 {
-            cell.titleLB.text = "Note"
-            cell.textField.placeholder = "Write some note"
-            cell.textField.delegate = self
-
-            return cell
+//            cell.titleLB.text = "Note"
+//            cell.textField.placeholder = "Write some note"
+//            cell.textField.delegate = self
+//            return cell
+            
+            textViewCell.title.text = "Note📝"
+            textViewCell.textView.text = "write some note"
+            textViewCell.textView.delegate = self
+            return textViewCell
         }
         return cell
     }
@@ -265,11 +275,17 @@ extension AddPlantVC: UITextFieldDelegate {
             plantName = textField.text ?? "no value"
         case "yyyy.mm.dd":
             plantDate = textField.text ?? "no date"
-        case "Write some note":
-            plantNote[0] = textField.text ?? "no note"
+//        case "Write some note":
+//            plantNote[0] = textField.text ?? "no note"
         default:
             textField.text = "123"
         }
+    }
+}
+
+extension AddPlantVC: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        plantNote[0] = textView.text ?? "no note"
     }
 }
 extension AddPlantVC: SunLevelDelegate {

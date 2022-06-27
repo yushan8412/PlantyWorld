@@ -19,6 +19,8 @@ class PlantDetailCell: UITableViewCell {
         super.awakeFromNib()
         setupFont()
         setupLayout()
+        nameLB.textColor = .black
+        dateLB.textColor = .black
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -38,6 +38,7 @@ class LobbyViewController: UIViewController {
 
 //        navigationController?.navigationBar.backgroundColor = .peach
         tabBarController?.tabBar.backgroundColor = .peach
+//        self.tabBarController?.tabBarItem.badgeColor = .blue
         plantsCollectionView.backgroundColor = .pyellow
         plantsCollectionView.delegate = self
         plantsCollectionView.dataSource = self
