@@ -23,7 +23,7 @@ class FirebaseManager {
     //        plant.date
     //    }
     
-    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void)
+    func addPlant(uid: String, name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void)
     {
         let plants = dataBase.collection("plants")
         let document = plants.document()
@@ -34,6 +34,7 @@ class FirebaseManager {
                 "email": "ws123123@gmail.com",
                 "name": Auth.auth().currentUser?.displayName,
                 "id": "123123"],
+            "userID": uid,
             "plantID": "\(plantid)",
             "name": name,
             "date": date,
@@ -61,11 +62,11 @@ class FirebaseManager {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-        let dates = formatter.string(from: timeInterval)
+        let date = formatter.string(from: timeInterval)
         
         let data: [String: Any] = [
             "authorID": "123" ,
-            "date": dates,
+            "date": date,
             "content": content,
             "plantID": plantID
         ]
@@ -74,6 +75,7 @@ class FirebaseManager {
                 print("Error\(error)")
             } else {
                 print("Event update!!")
+                completion(.success(()))
             }
         }
     }
@@ -106,9 +108,9 @@ class FirebaseManager {
             }
         }
     }
-    
-    func fetchData(completion: @escaping ([PlantsModel]?) -> Void) {
-        dataBase.collection("plants").order(by: "createdTime", descending: true).getDocuments { (querySnapshot, _) in
+    //.order(by: "createdTime", descending: true)
+    func fetchData(uid: String, completion: @escaping ([PlantsModel]?) -> Void) {
+        dataBase.collection("plants").whereField("userID", isEqualTo: uid).getDocuments { (querySnapshot, _) in
             guard let querySnapshot = querySnapshot else {
                 return }
             self.plantsList.removeAll()

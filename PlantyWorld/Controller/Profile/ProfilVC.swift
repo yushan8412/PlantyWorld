@@ -11,6 +11,8 @@ import SwiftUI
 
 class ProfileVC: UIViewController {
     
+    var userId: String = ""
+    
     var backView = UIView()
     
     var userImage = UIImageView()
@@ -27,11 +29,13 @@ class ProfileVC: UIViewController {
     var addFBG = UIView()
     var addFriendBtn = UIButton()
     
+    var userData: User?
+    
     var plantList: [PlantsModel] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.userPlants.text = " 我有\(self.plantList.count)顆植物 "
-                self.userName.text = " \(self.plantList[0].author.id) "
+                self.userName.text = " \(self.userData?.userID ?? "") "
             }
         }
     }
@@ -53,6 +57,7 @@ class ProfileVC: UIViewController {
         userBackground.layoutIfNeeded()
         getData()
         levelColor()
+        getUserData()
     
     }
     
@@ -87,6 +92,7 @@ class ProfileVC: UIViewController {
         
         levelBG.anchor(top: userName.bottomAnchor, paddingTop: 12, width: 250, height: 50)
         levelBG.centerX(inView: view)
+        levelLb.textColor = .white
 
         userPlantsBG.anchor(top: levelBG.bottomAnchor, paddingTop: 12, width: 250, height: 50)
         userPlantsBG.centerX(inView: view)
@@ -103,6 +109,7 @@ class ProfileVC: UIViewController {
         userPlants.anchor(top: userPlantsBG.topAnchor, left: plantsImage.rightAnchor,
                           bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
                           paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
+        userPlants.textColor = .white
         
     }
     
@@ -153,17 +160,32 @@ class ProfileVC: UIViewController {
     }
     
     func getData() {
-        FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchData(uid: userUid, completion: { plantList in self.plantList = plantList ?? [] })
         print(plantList.count)
+    }
+    
+    func getUserData() {
+        UserManager.shared.fetchUserData(userID: userUid) { result in
+            switch result {
+            case let .success(user):
+                print("get data")
+                self.userData = user
+            case .failure:
+                print("failure")
+            }
+        }
     }
     
     @objc func goAddFriendVC() {
 //        let addFriendVC = AddFriendVC()
 //        navigationController?.pushViewController(addFriendVC, animated: true)
-        
+//        let addCommandVC = AddCommandVC()
+    
         let loginVC = LoginVC()
-        navigationController?.pushViewController(loginVC, animated: true)
-
+//        navigationController?.pushViewController(loginVC, animated: true)
+        loginVC.modalPresentationStyle = .overFullScreen
+        navigationController?.present(loginVC, animated: true, completion: nil)
+        
     }
     
     func levelColor() {

@@ -61,6 +61,7 @@ class CalendarVC: UIViewController {
         let todays = formatter.string(from: Date())
         
         getOneDayDate(date: todays)
+        
         self.tableView.reloadData()
     }
     
@@ -82,6 +83,8 @@ class CalendarVC: UIViewController {
                         right: addBtn.leftAnchor, paddingLeft: 8, paddingBottom: 24, paddingRight: 8)
         addField.placeholder = "Leave some note "
         addField.borderStyle = .roundedRect
+        addField.backgroundColor = .white
+        addField.textColor = .black
         
         addBtn.anchor(bottom: view.bottomAnchor, right: view.rightAnchor, paddingBottom: 24, paddingRight: 24)
         addBtn.setTitle(" add ", for: .normal)
@@ -108,14 +111,16 @@ class CalendarVC: UIViewController {
         })
     }
     
-    @objc func addData() {
+    @objc func addData(date: String) {
         FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "") { [self] result in
             switch result {
             case .success:
                 FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "") { result in
+                    
                     self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
-                    print("now~~~~")
+                    print("get~~~")
                 }
+
             case .failure:
                 print(" failure ")
             }

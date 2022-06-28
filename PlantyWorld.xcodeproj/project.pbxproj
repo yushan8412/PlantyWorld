@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8021B0E62864906100DA508A /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021B0E52864906100DA508A /* AddFriendVC.swift */; };
+		809276D8286AA43400C21701 /* Extension.Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809276D7286AA43400C21701 /* Extension.Alert.swift */; };
 		809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B4285879F300E84DD7 /* AppDelegate.swift */; };
 		809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B6285879F300E84DD7 /* SceneDelegate.swift */; };
 		809F97B9285879F300E84DD7 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97B8285879F300E84DD7 /* LobbyViewController.swift */; };
@@ -65,6 +66,7 @@
 		028CD96F77904254EB42D3C5 /* Pods-PlantyWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.release.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.release.xcconfig"; sourceTree = "<group>"; };
 		7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlantyWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8021B0E52864906100DA508A /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
+		809276D7286AA43400C21701 /* Extension.Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.Alert.swift; sourceTree = "<group>"; };
 		809F97B1285879F300E84DD7 /* PlantyWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantyWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		809F97B4285879F300E84DD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		809F97B6285879F300E84DD7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				809F97DD285991C700E84DD7 /* UIView Extension.swift */,
 				80BDB818286563BC00FDB525 /* Extension Color.swift */,
 				80BDB82128697E3400FDB525 /* Extension VC.swift */,
+				809276D7286AA43400C21701 /* Extension.Alert.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */,
 				80ABA69F285AF90400BB515C /* PlantDetailImageCell.swift in Sources */,
 				809F97E42859EAAA00E84DD7 /* PublishModel.swift in Sources */,
+				809276D8286AA43400C21701 /* Extension.Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -56,6 +56,7 @@ class AddPlantVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         imageArea.image = UIImage(named: "Group")
+        addBtn.isEnabled = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,7 +136,8 @@ class AddPlantVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.addPlant(name: plantName,
+                            PlantyWorld.FirebaseManager.shared.addPlant(uid: userUid,
+                                                                        name: plantName,
                                                                         date: plantDate,
                                                                         sun: sun, water: water,
                                                                         image: "\(url)", note: plantNote) { result in
@@ -237,8 +239,8 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
 
             cell.titleLB.text = "Plant Name"
             cell.textField.placeholder = "Name"
+            cell.textField.textColor = .black
             cell.textField.delegate = self
-//            cell.selectedBackgroundView?.backgroundColor = .clear
 
             return cell
             
@@ -246,6 +248,7 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
 
             cell.textField.placeholder = "yyyy.mm.dd"
             cell.titleLB.text = "Date"
+            cell.textField.textColor = .black
             cell.textField.delegate = self
 
             return cell

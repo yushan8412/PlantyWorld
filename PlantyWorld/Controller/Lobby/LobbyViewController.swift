@@ -51,7 +51,7 @@ class LobbyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
-        FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchData(uid: userUid, completion: { plantList in self.plantList = plantList ?? [] })
         self.plantsCollectionView.reloadData()
         print(plantList.count)
     }

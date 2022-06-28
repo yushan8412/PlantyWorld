@@ -33,7 +33,7 @@ class CommandVC: UIViewController {
         self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
                                 forCellReuseIdentifier: "CommandCell")
         
-        FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchData(uid: userUid, completion: { plantList in self.plantList = plantList ?? [] })
         
     }
     
