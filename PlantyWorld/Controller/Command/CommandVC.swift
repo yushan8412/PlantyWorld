@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Kingfisher
+import FirebaseAuth
 
 class CommandVC: UIViewController {
     
@@ -39,6 +40,13 @@ class CommandVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
+            return
+        }
 
     }
 

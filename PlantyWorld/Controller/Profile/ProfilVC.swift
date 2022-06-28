@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import SwiftUI
+import FirebaseAuth
 
 class ProfileVC: UIViewController {
     
@@ -28,6 +28,8 @@ class ProfileVC: UIViewController {
     
     var addFBG = UIView()
     var addFriendBtn = UIButton()
+    
+    var logoutBtn = UIButton()
     
     var userData: User?
     
@@ -50,6 +52,7 @@ class ProfileVC: UIViewController {
         levelColor()
         setBtn()
         setUserImage()
+        setLogout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +61,14 @@ class ProfileVC: UIViewController {
         getData()
         levelColor()
         getUserData()
+        
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
+            return
+        }
     
     }
     
@@ -67,6 +78,44 @@ class ProfileVC: UIViewController {
         userImage.layer.masksToBounds = true
     }
     
+    func setLogout() {
+        view.addSubview(logoutBtn)
+        logoutBtn.isEnabled = true
+        logoutBtn.anchor(top: view.topAnchor, right: view.rightAnchor,
+                         paddingTop: 100, paddingRight: 20)
+        logoutBtn.setTitle(" LOG OUT ", for: .normal)
+        logoutBtn.backgroundColor = .dPeach
+        logoutBtn.addTarget(self, action: #selector(tapToLogout), for: .touchUpInside)
+//        logoutBtn.addTarget(self, action: #selector(tapToLogout), for: .touchUpInside)
+    }
+    
+    @objc func tapToLogout() {
+            let controller = UIAlertController(title: "登出提醒", message: "確定要登出嗎?", preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: "確定", style: .default) { _ in
+
+                do {
+
+                    try Auth.auth().signOut()
+                    self.navigationController?.popToRootViewController(animated: true)
+                    print("sign outtttt")
+
+                } catch let signOutError as NSError {
+
+                   print("Error signing out: \(signOutError)")
+
+                }
+            }
+
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+
+            controller.addAction(okAction)
+
+            controller.addAction(cancelAction)
+
+            present(controller, animated: true, completion: nil)
+        }
+
     func setup() {
         backView.addSubview(userBackground)
         backView.addSubview(userName)

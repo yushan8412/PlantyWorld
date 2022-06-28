@@ -8,6 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import Kingfisher
+import FirebaseAuth
 
 class LobbyViewController: UIViewController {
 
@@ -54,6 +55,16 @@ class LobbyViewController: UIViewController {
         FirebaseManager.shared.fetchData(uid: userUid, completion: { plantList in self.plantList = plantList ?? [] })
         self.plantsCollectionView.reloadData()
         print(plantList.count)
+        
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+            self.plantsCollectionView.isHidden = true
+        } else {
+            self.plantsCollectionView.isHidden = false
+            return
+        }
     }
     
     func setupItem() {
