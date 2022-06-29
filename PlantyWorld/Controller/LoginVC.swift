@@ -28,7 +28,7 @@ class LoginVC: UIViewController {
         bgView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                       right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0,
                       paddingRight: 0, height: 350)
-        bgView.backgroundColor = .pgreen
+        bgView.backgroundColor = UIColor(patternImage: UIImage(named: "viewww")!)
         bgView.layer.cornerRadius = 30
         
         closeBtn.anchor(top: bgView.topAnchor, right: bgView.rightAnchor,

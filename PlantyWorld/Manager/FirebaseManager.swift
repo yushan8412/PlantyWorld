@@ -108,6 +108,7 @@ class FirebaseManager {
             }
         }
     }
+    
     //.order(by: "createdTime", descending: true)
     func fetchData(uid: String, completion: @escaping ([PlantsModel]?) -> Void) {
         dataBase.collection("plants").whereField("userID", isEqualTo: uid).getDocuments { (querySnapshot, _) in

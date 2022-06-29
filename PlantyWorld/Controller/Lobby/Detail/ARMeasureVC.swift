@@ -22,6 +22,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         view.addSubview(sceneView)
+        view.backgroundColor = .dPeach
         sceneView.addSubview(saveBtn)
         sceneView.delegate = self
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
