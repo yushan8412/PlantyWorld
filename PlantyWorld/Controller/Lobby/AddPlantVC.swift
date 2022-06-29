@@ -266,10 +266,6 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             return waterCell
             
         } else if indexPath.row == 4 {
-//            cell.titleLB.text = "Note"
-//            cell.textField.placeholder = "Write some note"
-//            cell.textField.delegate = self
-//            return cell
             
             textViewCell.title.text = "Note📝"
             textViewCell.textView.text = "write some note"
@@ -287,8 +283,6 @@ extension AddPlantVC: UITextFieldDelegate {
             plantName = textField.text ?? "no value"
         case "yyyy.mm.dd":
             plantDate = textField.text ?? "no date"
-//        case "Write some note":
-//            plantNote[0] = textField.text ?? "no note"
         default:
             textField.text = "123"
         }

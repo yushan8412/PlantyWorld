@@ -143,6 +143,41 @@ class FirebaseManager {
         }
     }
     
+    
+    func fetchAllData(completion: @escaping ([PlantsModel]?) -> Void) {
+        dataBase.collection("plants").getDocuments { (querySnapshot, _) in
+            guard let querySnapshot = querySnapshot else {
+                return }
+            self.plantsList.removeAll()
+            for plant in querySnapshot.documents {
+                let plantObject = plant.data(with: ServerTimestampBehavior.none)
+                let plantName = plantObject["name"] as? String ?? ""
+                let plantDate = plantObject["date"] as? String ?? ""
+                let plantSun = plantObject["sun"] as? Int ?? 0
+                let plantWater = plantObject["water"] as? Int ?? 0
+                let plantNote = plantObject["note"] as? [String] ?? [""]
+                let plantImage = plantObject["image"] as? String ?? ""
+                let plantID = plantObject["plantID"] as? String ?? ""
+                let createdTime = plantObject["createdTime"] as? Int ?? 0
+                guard let author = plantObject["author"] as? [String: Any] else { return }
+                let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
+                
+                let plant = PlantsModel(author: authorr,
+                                        name: plantName ,
+                                        date: plantDate,
+                                        sun: plantSun,
+                                        water: plantWater,
+                                        note: plantNote,
+                                        image: plantImage,
+                                        id: plantID,
+                                        createdTime: createdTime
+                )
+                self.plantsList.append(plant)
+            }
+            completion(self.plantsList)
+        }
+    }
+    
     func fetchCommandData(plantID: String, completion: @escaping ([PublishModel]?) -> Void) {
         dataBase.collection("commands").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, error) in
             guard let querySnapshot = querySnapshot else {

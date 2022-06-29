@@ -167,16 +167,13 @@ extension LoginVC {
         let uid = user.uid
         let email = user.email
         CustomFunc.customAlert(title: "使用者資訊", message: "UID：\(uid)\nEmail：\(email!)", vc: self, actionHandler: nil)
-        UserManager.shared.addUser(name: user.displayName ?? "no name", uid: uid, email: email ?? "no email")
+        UserManager.shared.addUser(name: user.displayName ?? "no name", uid: uid, email: email ?? "no email", image: "no image yet")
+
         userUid = uid
                 
         print("@@@@ \(userUid)")
         
         self.dismiss(animated: true)
-//        
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                    guard let homeVC = mainStoryboard.instantiateViewController(withIdentifier: "LobbyViewController") as? LobbyViewController else { return }
-//                    self.navigationController?.pushViewController(homeVC, animated: true)
     }
 }
 

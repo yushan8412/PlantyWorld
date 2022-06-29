@@ -21,33 +21,77 @@ class UserManager {
     
     var userData: User?
     
-    func addUser(name: String, uid: String, email: String) {
-//        guard let currentUser = Auth.auth().currentUser else {
-//            return
-//        }
+    func addUser(name: String, uid: String, email: String, image: String) {
+//        func addUser(name: String, uid: String, email: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
 
+//        guard let currentUser = Auth.auth().currentUser else { return }
+        
+//        let userID = currentUser.uid
         let user = dataBase.collection("user")
-        let document = user.document()
+        let document = user.document(uid)
         let timeInterval = Date()
-//        let userID = document.documentID
-//        let uid = currentUser.uid
         let data: [String: Any] = [
             "email": email,
             "auth": currentUser,
-//            "auth": Auth.auth().currentUser?.displayName ?? "nil",
             "id": uid,
             "name": name,
+            "image": image,
             "createdTime": timeInterval
         ]
+//
+//        checkUser(userID: userID) { isExists in
+//            if !isExists {
+//                do {
+//
+//                    try  document.setData(data)
+//
+//                    completion(true)
+//                    print("user data update")
+//
+//                } catch {
+//
+//                    completion(false)
+//                    print("Fail to create user.")
+//                }
+//            }
+//        }
+
         
+//
         document.setData(data) { error in
             if let error = error {
                 print("Error\(error)")
             } else {
-                print("Document update!!")
+                print("User Document update!!")
             }
         }
     }
+    
+    
+    func checkUser(userID: String, completion: @escaping (_ isExist: Bool) -> Void) {
+        
+        let userRef = dataBase.collection("user")
+        
+        userRef.document(userID).getDocument { document, _ in
+            if let document = document {
+                
+                if document.exists {
+                    
+                    completion(true)
+                    
+                } else {
+                    
+                    completion(false)
+                }
+                
+            } else {
+                
+                completion(false)
+            }
+        }
+    }
+        
+    
     
     func fetchUserData(userID: String, completion: @escaping (Result<User, Error>) -> Void) {
         dataBase.collection("user").whereField("id", isEqualTo: userID).getDocuments { (querySnapshot, _) in
@@ -59,12 +103,13 @@ class UserManager {
                 let userName = userdata["name"] as? String ?? ""
                 let userEmail = userdata["email"] as? String ?? ""
                 let userID = userdata["id"] as? String ?? ""
+                let userImage = userdata["image"] as? String ?? ""
 //                let userImage = userdata["image"] as? String ?? ""
                 
-                let user = User(userID: userID, name: userName, useremail: userEmail)
+                let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail)
                 self.userData = user
             }
-            completion(.success(self.userData ?? User(userID: "", name: "", useremail: "")))
+            completion(.success(self.userData ?? User(userID: "", name: "", userImage: "", useremail: "")))
             
             print("0000\(self.userData)")
         }
