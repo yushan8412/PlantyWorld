@@ -98,7 +98,8 @@ class FirebaseManager {
             "commands": [
                 "commandID": document.documentID,
                 "command": "command:\(newcommand)"],
-            "time": dates
+            "time": dates,
+            "UserId": Auth.auth().currentUser?.uid
         ]
         document.setData(data) { error in
             if let error = error {
@@ -179,7 +180,7 @@ class FirebaseManager {
         }
     }
     
-    func fetchCommandData(plantID: String, completion: @escaping ([PublishModel]?) -> Void) {
+    func fetchCommandData(plantID: String, completion: @escaping ([PublishModel]) -> Void) {
         dataBase.collection("commands").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, error) in
             guard let querySnapshot = querySnapshot else {
                 return
@@ -192,13 +193,14 @@ class FirebaseManager {
                 let plantID = commandObject["plantID"] as? String ?? ""
                 let commandTitle = commandObject["title"] as? String ?? ""
                 let commandTime = commandObject["time"] as? String ?? "notime"
+                let userID = commandObject["UserId"] as? String ?? ""
 
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
                 let commandss = Command(command: commands["command"] as? String ?? "",
                                         commandID: commands["commandID"] as? String ?? "")
                 let command = PublishModel(author: authorr, title: commandTitle,
                                            commands: commandss, plantID: plantID,
-                                           time: String(commandTime))
+                                           time: String(commandTime), userID: userID)
                 self.commandList.append(command)
             }
             self.commandList.sort { data, data1 in

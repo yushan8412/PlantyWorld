@@ -198,7 +198,6 @@
 				80ABA6D42862A2BA00BB515C /* Command */,
 				80ABA6D32862A29800BB515C /* Lobby */,
 				80BDB81E2869761600FDB525 /* LoginVC.swift */,
-				809276D9286C26E500C21701 /* EditProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -332,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				80ABA6C32860616200BB515C /* ProfilVC.swift */,
+				809276D9286C26E500C21701 /* EditProfileVC.swift */,
 				8021B0E52864906100DA508A /* AddFriendVC.swift */,
 			);
 			path = Profile;

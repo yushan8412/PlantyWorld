@@ -86,6 +86,20 @@ class AddFriendVC: UIViewController {
                     print(email)
                         
                 } else {
+                    let alertController = UIAlertController(
+                        title: "找不到這個好友",
+                        message: "要不要確認一下好友 Email?",
+                        preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(
+                        title: "確認",
+                        style: .cancel,
+                        handler: nil)
+                    alertController.addAction(cancelAction)
+
+                    self.present(
+                        alertController,
+                        animated: true,
+                        completion: nil)
                     
                     print("nobody here")
                     print(email)
@@ -119,6 +133,7 @@ class AddFriendVC: UIViewController {
                 db.collection("user").document(Auth.auth().currentUser?.uid ?? "").updateData([
                     "followList": FieldValue.arrayUnion([ "\(self.friendData?.userID ?? "")"])
                     //document.update -> don't have this member in document, so need to connect it with .reference
+                    // arrayUnion -> same data can't be appent twice
                 ])
             })
         alertController.addAction(okAction)

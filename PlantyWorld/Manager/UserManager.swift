@@ -107,7 +107,6 @@ class UserManager {
             }
             completion(.success(self.userData ?? User(userID: "", name: "", userImage: "", useremail: "")))
             
-            print("0000\(self.userData)")
         }
     }
     

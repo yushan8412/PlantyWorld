@@ -12,13 +12,25 @@ import Kingfisher
 protocol BackBtnDelegate: AnyObject {
     func tappedToDissmis()
 }
+
+struct UserData: Codable {
+    var user: User
+    var comment: PublishModel
+}
+
+
 class AddCommandVC: UIViewController {
     
     var commandView = UIView()
     
+    var user: [UserData] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     var backBtn = UIButton(type: .close)
     
-//    var delegate: BackBtnDelegate?
     var commandField = UITextField()
     var sendCommandBtn = UIButton()
     var tableView = UITableView()
@@ -42,6 +54,9 @@ class AddCommandVC: UIViewController {
         setupSendBtn()
         setTextfield()
         view.isOpaque = false
+        //        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
+        //            self.commandList = commandlist ?? []
+        //            self.tableView.reloadData()})
         
         self.tableView.register(UINib(nibName: "AddCommandTitleCell", bundle: nil),
                                 forCellReuseIdentifier: "AddCommandTitleCell")
@@ -49,16 +64,47 @@ class AddCommandVC: UIViewController {
                                 forCellReuseIdentifier: "CommandsCell")
         
         tabBarController?.tabBar.isHidden = true
-
+        self.tableView.reloadData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
-            self.commandList = commandlist ?? []
-            self.tableView.reloadData()})
+        getComment()
+        
+//        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
+//            self.commandList = commandlist ?? []
+////            self.userData = []
+//            for command in self.commandList {
+//
+//                UserManager.shared.fetchUserData(userID: command.userID) { result in
+//                    switch result {
+//                    case let .success(user):
+//
+//                        if command.userID == user.userID {
+//                            let userData = UserData(
+//                                user: user, comment: command
+//                            )
+//
+//                            self.user.append(userData)
+//                        }
+//
+//                        //                        commandCell.profilePic.kf.setImage(with: URL(string: self.userData?.userImage ?? ""))
+//                        //                        commandCell.name.text = self.userData?.name
+//                        print("get user data: \(self.user)")
+//
+//                        DispatchQueue.main.async {
+//                            self.tableView.reloadData()
+//                        }
+//                    case .failure:
+//                        print("failure")
+//                    }
+//                }
+//            }
+//
+//            self.tableView.reloadData()})
         
         tabBarController?.tabBar.isHidden = true
-
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -71,7 +117,7 @@ class AddCommandVC: UIViewController {
         view.backgroundColor = UIColor.init(white: 0.1, alpha: 0.3)
         view.addSubview(commandView)
         commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-
+        
         commandView.backgroundColor = .lightYellow
         commandView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                            right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0,
@@ -80,13 +126,13 @@ class AddCommandVC: UIViewController {
         commandView.addSubview(tableView)
         tableView.backgroundColor = .lightYellow
         tableView.anchor(top: commandView.topAnchor, left: commandView.leftAnchor,
-                          right: commandView.rightAnchor,
+                         right: commandView.rightAnchor,
                          paddingTop: 24, paddingLeft: 0, paddingRight: 0)
         
         tableView.addSubview(backBtn)
         backBtn.anchor(top: commandView.topAnchor, right: commandView.rightAnchor,
                        paddingTop: 36, paddingRight: 8)
-
+        
         commandView.addSubview(commandField)
         commandField.anchor(top: tableView.bottomAnchor, left: commandView.leftAnchor,
                             bottom: commandView.bottomAnchor, paddingTop: 16,
@@ -102,14 +148,11 @@ class AddCommandVC: UIViewController {
         commandView.layer.cornerRadius = 30
         commandView.clipsToBounds = true
         commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-
+        
     }
     
     func setupBackBtn() {
-//        backBtn.backgroundColor = .dPeach
         backBtn.setTitle("", for: .normal)
-//        backBtn.buttonType = .close
-//        backBtn.setImage(UIImage(systemName: "canael"), for: <#T##UIControl.State#>)
         backBtn.tintColor = .black
         backBtn.addTarget(self, action: #selector(tappedToDismiss), for: .touchUpInside)
     }
@@ -139,7 +182,35 @@ class AddCommandVC: UIViewController {
         self.commandField.text = ""
         FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
             self.commandList = commandlist ?? []
-            self.tableView.reloadData()})  //要在這裡面reload        
+            self.getComment()
+            self.tableView.reloadData()})  //要在這裡面reload
+    }
+
+    func getComment() {
+        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "") { comments in
+            for comment in comments {
+                self.addUserData(comment: comment)
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
+    
+    func addUserData(comment: PublishModel) {
+        self.user.removeAll()
+        UserManager.shared.fetchUserData(userID: comment.userID) { result in
+            switch result {
+            case let .success(user):
+                let userData = UserData(user: user, comment: comment)
+                self.user.append(userData)
+                self.user.sort { $0.comment.time > $1.comment.time }
+                self.tableView.reloadSections(IndexSet(integer: 1), with: .fade)
+            case.failure:
+                print("Error")
+                
+            }
+          
+        }
     }
     
 }
@@ -152,8 +223,7 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            print(commandList)
-        return commandList.count
+            return user.count
         }
     }
     
@@ -175,10 +245,12 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
             guard let commandCell = tableView.dequeueReusableCell(
                 withIdentifier: "CommandsCell") as? CommandsCell
             else { return UITableViewCell() }
+  
             commandCell.backgroundColor = .lightYellow
-            commandCell.profilePic.image = UIImage(named: "山烏龜")
-            commandCell.name.text = commandList[indexPath.row].author.id
-            commandCell.command.text = commandList[indexPath.row].commands.command
+            commandCell.command.text = user[indexPath.row].comment.commands.command
+            commandCell.profilePic.kf.setImage(with: URL(string: user[indexPath.row].user.userImage))
+            commandCell.name.text = user[indexPath.row].user.name
+            
             return commandCell
             
         }
