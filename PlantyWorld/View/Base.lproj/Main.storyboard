@@ -141,8 +141,8 @@
         <!--ProfileVC-->
         <scene sceneID="TMz-Bd-WdI">
             <objects>
-                <viewController id="lst-TP-qOg" customClass="ProfileVC" customModule="PlantyWorld" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6e5-7i-tr4">
+                <viewController storyboardIdentifier="ProfileVC" id="lst-TP-qOg" customClass="ProfileVC" customModule="PlantyWorld" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="ProfileVC" id="6e5-7i-tr4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="DNn-lc-2sK"/>

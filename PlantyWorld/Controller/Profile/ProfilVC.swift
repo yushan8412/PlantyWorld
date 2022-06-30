@@ -57,27 +57,31 @@ class ProfileVC: UIViewController {
         setEditBtn()
         setupStackView()
         levelColor()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         self.tabBarController?.tabBar.isHidden = false
         
-        if userData?.userImage == "" {
-            self.userImage.image = UIImage(named: "About us")
-        } else {
-            userImage.kf.setImage(with: URL(string: userData?.userImage ?? ""))
-        }
 
         userBackground.layoutIfNeeded()
         getData()
         getUserData()
         levelColor()
         
+        if userData?.userImage == "" {
+            self.userImage.image = UIImage(named: "About us")
+        } else {
+            userImage.kf.setImage(with: URL(string: userData?.userImage ?? ""))
+        }
+        
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()
             loginVC.modalPresentationStyle = .overFullScreen
             navigationController?.present(loginVC, animated: true, completion: nil)
+            self.userName.text = "User Name"
+            self.userImage.image = UIImage(named: "About us")
         } else {
             return
         }
@@ -212,8 +216,10 @@ class ProfileVC: UIViewController {
     
     @objc func goEditVC() {
         let editVC = EditProfileVC()
+        editVC.userData = self.userData
         editVC.modalPresentationStyle = .overFullScreen
         navigationController?.present(editVC, animated: true, completion: nil)
+        
     }
     
     @objc func tapToLogout() {
@@ -225,6 +231,7 @@ class ProfileVC: UIViewController {
 
                     try Auth.auth().signOut()
                     self.navigationController?.popToRootViewController(animated: true)
+                    userUid = ""
                     print("sign outtttt")
 
                 } catch let signOutError as NSError {
@@ -244,12 +251,12 @@ class ProfileVC: UIViewController {
     }
     
     func getData() {
-        FirebaseManager.shared.fetchData(uid: userUid, completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
         print(plantList.count)
     }
     
     func getUserData() {
-        UserManager.shared.fetchUserData(userID: userUid) { result in
+        UserManager.shared.fetchUserData(userID: Auth.auth().currentUser?.uid ?? "") { result in
             switch result {
             case let .success(user):
                 print("get data")
@@ -281,14 +288,12 @@ class ProfileVC: UIViewController {
     }
     
     @objc func goAddFriendVC() {
-//        let addFriendVC = AddFriendVC()
-//        navigationController?.pushViewController(addFriendVC, animated: true)
-//        let addCommandVC = AddCommandVC()
-    
-        let loginVC = LoginVC()
-//        navigationController?.pushViewController(loginVC, animated: true)
-        loginVC.modalPresentationStyle = .overFullScreen
-        navigationController?.present(loginVC, animated: true, completion: nil)
+        let addFriendVC = AddFriendVC()
+        navigationController?.pushViewController(addFriendVC, animated: true)
+        
+//        let loginVC = LoginVC()
+//        loginVC.modalPresentationStyle = .overFullScreen
+//        navigationController?.present(loginVC, animated: true, completion: nil)
         
     }
     

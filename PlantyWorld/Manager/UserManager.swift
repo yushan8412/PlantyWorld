@@ -36,6 +36,7 @@ class UserManager {
             "id": uid,
             "name": name,
             "image": image,
+            "followList": [],
             "createdTime": timeInterval
         ]
         //
@@ -100,7 +101,6 @@ class UserManager {
                 let userEmail = userdata["email"] as? String ?? ""
                 let userID = userdata["id"] as? String ?? ""
                 let userImage = userdata["image"] as? String ?? ""
-                //                let userImage = userdata["image"] as? String ?? ""
                 
                 let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail)
                 self.userData = user

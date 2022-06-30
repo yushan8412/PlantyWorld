@@ -136,11 +136,10 @@ class AddPlantVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.addPlant(uid: userUid,
-                                                                        name: plantName,
+                            PlantyWorld.FirebaseManager.shared.addPlant(name:plantName,
                                                                         date: plantDate,
-                                                                        sun: sun, water: water,
-                                                                        image: "\(url)", note: plantNote) { result in
+                                                                        sun: sun,
+                                                                        water: water,image: "\(url)", note: plantNote) { result in
                                 switch result {
                                 case .success:
                                     print("123")

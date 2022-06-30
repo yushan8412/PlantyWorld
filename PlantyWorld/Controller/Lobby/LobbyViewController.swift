@@ -29,17 +29,8 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .peach
-        
-//        let scrollEdgeAppearance =  UINavigationBarAppearance()
-//        scrollEdgeAppearance.backgroundColor = .peach
-//        UINavigationBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
-//        let standardAppearance =  UINavigationBarAppearance()
-//        standardAppearance.backgroundColor = .peach
-//        UINavigationBar.appearance().standardAppearance = standardAppearance
 
-//        navigationController?.navigationBar.backgroundColor = .peach
         tabBarController?.tabBar.backgroundColor = .peach
-//        self.tabBarController?.tabBarItem.badgeColor = .blue
         plantsCollectionView.backgroundColor = .pyellow
         plantsCollectionView.delegate = self
         plantsCollectionView.dataSource = self
@@ -52,7 +43,8 @@ class LobbyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
-        FirebaseManager.shared.fetchData(uid: userUid, completion: { plantList in self.plantList = plantList ?? [] })
+        self.plantList.removeAll()
+        FirebaseManager.shared.fetchData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
         self.plantsCollectionView.reloadData()
         print(plantList.count)
         
@@ -60,9 +52,9 @@ class LobbyViewController: UIViewController {
             let loginVC = LoginVC()
             loginVC.modalPresentationStyle = .overFullScreen
             navigationController?.present(loginVC, animated: true, completion: nil)
-            self.plantsCollectionView.isHidden = true
+            self.plantsCollectionView.numberOfItems(inSection: 0) == 0
         } else {
-            self.plantsCollectionView.isHidden = false
+//            self.plantsCollectionView.isHidden = false
             return
         }
     }

@@ -2,6 +2,7 @@ import UIKit
 import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 import AuthenticationServices // Sign in with Apple 的主體框架
 import CryptoKit // 用來產生隨機字串 (Nonce) 的
+import SwiftUI
 
 var userUid: String = ""
 
@@ -14,10 +15,26 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(bgView)
-//        view.backgroundColor = .lightOrange
-//        view.backgroundColor = UIColor.init(white: 0.1, alpha: 0.3)
+
         self.tabBarController?.tabBar.isHidden = false
         self.setSignInWithAppleBtn()
+        
+        // Do any additional setup after loading the view.
+            Auth.auth().addStateDidChangeListener { (auth, user) in
+                if user != nil {
+                    guard let vc = self.storyboard?.instantiateViewController(
+                        withIdentifier: "ProfileVC") as? ProfileVC
+                    else {
+                        return
+//                        fatalError("can't find AccountViewController")
+                    }
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    return
+                }
+            }
+            
+
         self.observeAppleIDState()
         self.checkAppleIDCredentialState(userID: appleUserID ?? "")
         setupBG()
@@ -166,10 +183,15 @@ extension LoginVC {
         }
         let uid = user.uid
         let email = user.email
-        CustomFunc.customAlert(title: "使用者資訊", message: "UID：\(uid)\nEmail：\(email!)", vc: self, actionHandler: nil)
-        UserManager.shared.addUser(name: user.displayName ?? "no name", uid: uid, email: email ?? "no email", image: "no image yet")
+        
+//        UserManager.shared.checkUser(userID: Auth.auth().currentUser?.uid ?? "") 
+        
+        
+        UserManager.shared.addUser(name: user.displayName ?? "no name",
+                                   uid: uid, email: email ?? "no email",
+                                   image: "no image yet")
 
-        userUid = uid
+        userUid = currentUser?.uid ?? ""
                 
         print("@@@@ \(userUid)")
         

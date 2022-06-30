@@ -23,7 +23,7 @@ class FirebaseManager {
     //        plant.date
     //    }
     
-    func addPlant(uid: String, name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void)
+    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void)
     {
         let plants = dataBase.collection("plants")
         let document = plants.document()
@@ -34,7 +34,7 @@ class FirebaseManager {
                 "email": "ws123123@gmail.com",
                 "name": Auth.auth().currentUser?.displayName,
                 "id": "123123"],
-            "userID": uid,
+            "userID": Auth.auth().currentUser?.uid,
             "plantID": "\(plantid)",
             "name": name,
             "date": date,

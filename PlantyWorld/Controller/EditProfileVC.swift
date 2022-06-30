@@ -15,19 +15,28 @@ class EditProfileVC: UIViewController {
     
     var userImage = UIImageView()
     var nameLB = UILabel()
+    var emailLB = UILabel()
+    var email = UILabel()
     var userTF = UITextField()
     var addPicBtn = UIButton()
     var comfirmBtn = UIButton()
     var backBtn = UIButton(type: .close)
     let addPic = UIImage(named: "add-photo")
+    var userData: User?
 
     override func viewDidLoad() {
+        view.layoutIfNeeded()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "bg4")!)
         setup()
         setBtnUp()
+        userTF.layer.cornerRadius = 10
+        email.layer.cornerRadius = 10
+        print("123123123123 \(userData)")
+
     }
     
     override func viewDidLayoutSubviews() {
+        view.layoutIfNeeded()
         
     }
     
@@ -38,9 +47,11 @@ class EditProfileVC: UIViewController {
         view.addSubview(backBtn)
         view.addSubview(comfirmBtn)
         view.addSubview(addPicBtn)
+        view.addSubview(emailLB)
+        view.addSubview(email)
         
         userImage.centerX(inView: view)
-        userImage.anchor(top: view.topAnchor, paddingTop: 200, width: 250, height: 250)
+        userImage.anchor(top: view.topAnchor, paddingTop: 180, width: 250, height: 250)
         userImage.image = UIImage(named: "About us")
         userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
@@ -51,13 +62,24 @@ class EditProfileVC: UIViewController {
         nameLB.textColor = .black
         nameLB.text = " Your Name "
         
-        userTF.anchor(top: nameLB.bottomAnchor, paddingTop: 16, width: 200)
+        userTF.anchor(top: nameLB.bottomAnchor, paddingTop: 16, width: 200, height: 40)
         userTF.centerX(inView: view)
         userTF.backgroundColor = .white
         userTF.textColor = .black
         userTF.placeholder = "Name"
-        userTF.borderStyle = .roundedRect
         userTF.layer.borderWidth = 0.5
+
+        emailLB.anchor(top: userTF.bottomAnchor, paddingTop: 16)
+        emailLB.centerX(inView: view)
+        emailLB.text = "Email"
+        emailLB.textColor = .black
+
+        email.anchor(top: emailLB.bottomAnchor, paddingTop: 16, width: 300, height: 40)
+        email.centerX(inView: view)
+        email.text = " \(userData?.useremail ?? "" )"
+        email.textColor = .darkGray
+        email.backgroundColor = .white
+        email.layer.borderWidth = 0.5
         
         backBtn.anchor(top: view.topAnchor, right: view.rightAnchor, paddingTop: 48, paddingRight: 24)
         backBtn.backgroundColor = .black
@@ -67,7 +89,8 @@ class EditProfileVC: UIViewController {
         comfirmBtn.setTitle("Comfirm", for: .normal)
         comfirmBtn.backgroundColor = .dPeach
         
-        addPicBtn.anchor(bottom: userImage.bottomAnchor, right: userImage.rightAnchor, paddingBottom: 8, paddingRight: 8)
+        addPicBtn.anchor(bottom: userImage.bottomAnchor, right:
+                            userImage.rightAnchor, paddingBottom: 8, paddingRight: 8)
         addPicBtn.setImage(addPic, for: .normal)
         addPicBtn.tintColor = .black
         
@@ -130,7 +153,7 @@ class EditProfileVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            UserManager.shared.updateUserInfo(uid: userUid, image: "\(url)", name: userTF.text ?? "empty name") { result in
+                            UserManager.shared.updateUserInfo(uid: Auth.auth().currentUser?.uid ?? "", image: "\(url)", name: userTF.text ?? "empty name") { result in
                                 switch result {
                                 case .success:
                                     self.dismissVC()
