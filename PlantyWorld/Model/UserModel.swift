@@ -9,8 +9,9 @@ import Foundation
 
 struct User: Codable {
     let userID: String
-    var name: String?
-    var userImageURL: String?
-    var userImageID: String?
-    var blockedUserID: [String]?
+    var name: String
+    var userImage: String
+//    var userImageID: String
+    var useremail: String
+//    var blockedUserID: [String]
 }

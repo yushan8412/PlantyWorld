@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Kingfisher
+import FirebaseAuth
 
 class CommandVC: UIViewController {
     
@@ -33,12 +34,22 @@ class CommandVC: UIViewController {
         self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
                                 forCellReuseIdentifier: "CommandCell")
         
-        FirebaseManager.shared.fetchData(completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchAllData(completion: { plantList in self.plantList = plantList ?? [] })
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        
+        FirebaseManager.shared.fetchAllData(completion: { plantList in self.plantList = plantList ?? [] })
+        
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
+            return
+        }
 
     }
 

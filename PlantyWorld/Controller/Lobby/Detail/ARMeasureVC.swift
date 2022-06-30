@@ -22,6 +22,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         view.addSubview(sceneView)
+        view.backgroundColor = .dPeach
         sceneView.addSubview(saveBtn)
         sceneView.delegate = self
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
@@ -83,8 +84,19 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     }
     
     func addEvent() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        let todays = formatter.string(from: Date())
         FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") 身高 \((distance ?? 0 ) * 100) cm",
-                                        plantID: plant?.id ?? "noID")
+                                        plantID: plant?.id ?? "noID") { result in
+            switch result {
+            case .success:
+                print("update")
+            case .failure:
+                print("failure")
+            }
+        }
     }
     
     func addDot(at hitResult: ARHitTestResult) {

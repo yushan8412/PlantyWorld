@@ -23,7 +23,8 @@ class FirebaseManager {
     //        plant.date
     //    }
     
-    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String]) {
+    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void)
+    {
         let plants = dataBase.collection("plants")
         let document = plants.document()
         let timeInterval = Date()
@@ -33,6 +34,7 @@ class FirebaseManager {
                 "email": "ws123123@gmail.com",
                 "name": Auth.auth().currentUser?.displayName,
                 "id": "123123"],
+            "userID": Auth.auth().currentUser?.uid,
             "plantID": "\(plantid)",
             "name": name,
             "date": date,
@@ -45,14 +47,14 @@ class FirebaseManager {
         ]
         document.setData(data) { error in
             if let error = error {
-                print("Error\(error)")
+                completion(.failure(error))
             } else {
-                print("Document update!!")
+                completion(.success(()))
             }
         }
     }
     
-    func addEvent(content: String, plantID: String) {
+    func addEvent(content: String, plantID: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let events = dataBase.collection("events")
         let document = events.document()
         
@@ -60,11 +62,11 @@ class FirebaseManager {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-        let dates = formatter.string(from: timeInterval)
+        let date = formatter.string(from: timeInterval)
         
         let data: [String: Any] = [
             "authorID": "123" ,
-            "date": dates,
+            "date": date,
             "content": content,
             "plantID": plantID
         ]
@@ -73,6 +75,7 @@ class FirebaseManager {
                 print("Error\(error)")
             } else {
                 print("Event update!!")
+                completion(.success(()))
             }
         }
     }
@@ -106,8 +109,44 @@ class FirebaseManager {
         }
     }
     
-    func fetchData(completion: @escaping ([PlantsModel]?) -> Void) {
-        dataBase.collection("plants").order(by: "createdTime", descending: true).getDocuments { (querySnapshot, _) in
+    //.order(by: "createdTime", descending: true)
+    func fetchData(uid: String, completion: @escaping ([PlantsModel]?) -> Void) {
+        dataBase.collection("plants").whereField("userID", isEqualTo: uid).getDocuments { (querySnapshot, _) in
+            guard let querySnapshot = querySnapshot else {
+                return }
+            self.plantsList.removeAll()
+            for plant in querySnapshot.documents {
+                let plantObject = plant.data(with: ServerTimestampBehavior.none)
+                let plantName = plantObject["name"] as? String ?? ""
+                let plantDate = plantObject["date"] as? String ?? ""
+                let plantSun = plantObject["sun"] as? Int ?? 0
+                let plantWater = plantObject["water"] as? Int ?? 0
+                let plantNote = plantObject["note"] as? [String] ?? [""]
+                let plantImage = plantObject["image"] as? String ?? ""
+                let plantID = plantObject["plantID"] as? String ?? ""
+                let createdTime = plantObject["createdTime"] as? Int ?? 0
+                guard let author = plantObject["author"] as? [String: Any] else { return }
+                let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
+                
+                let plant = PlantsModel(author: authorr,
+                                        name: plantName ,
+                                        date: plantDate,
+                                        sun: plantSun,
+                                        water: plantWater,
+                                        note: plantNote,
+                                        image: plantImage,
+                                        id: plantID,
+                                        createdTime: createdTime
+                )
+                self.plantsList.append(plant)
+            }
+            completion(self.plantsList)
+        }
+    }
+    
+    
+    func fetchAllData(completion: @escaping ([PlantsModel]?) -> Void) {
+        dataBase.collection("plants").getDocuments { (querySnapshot, _) in
             guard let querySnapshot = querySnapshot else {
                 return }
             self.plantsList.removeAll()

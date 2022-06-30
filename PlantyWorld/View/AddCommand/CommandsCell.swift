@@ -35,7 +35,6 @@ class CommandsCell: UITableViewCell {
         
         commandView.addSubview(name)
         name.anchor(top: commandView.topAnchor, left: profilePic.rightAnchor, paddingTop: 8, paddingLeft: 8)
-//        name.backgroundColor = .systemYellow
         
         commandView.addSubview(command)
         command.anchor(top: name.bottomAnchor, left: profilePic.rightAnchor,
@@ -43,7 +42,6 @@ class CommandsCell: UITableViewCell {
                        right: commandView.rightAnchor, paddingTop: 8,
                        paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         command.numberOfLines = 0
-//        command.backgroundColor = .systemYellow
     }
     
 }

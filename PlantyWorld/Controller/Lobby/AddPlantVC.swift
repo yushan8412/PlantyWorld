@@ -56,6 +56,7 @@ class AddPlantVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         imageArea.image = UIImage(named: "Group")
+        addBtn.isEnabled = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,12 +113,12 @@ class AddPlantVC: UIViewController {
         addBtn.backgroundColor = .dPeach
         addBtn.setTitle("ADD", for: .normal)
         addBtn.setTitleColor(.black, for: .normal)
-        addBtn.addTarget(self, action: #selector(tapDismiss), for: .touchUpInside)
+//        addBtn.addTarget(self, action: #selector(tapDismiss), for: .touchUpInside)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
         addBtn.layer.cornerRadius = 10
     }
     
-    @objc func tapDismiss() {
+    func tapDismiss() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -135,10 +136,19 @@ class AddPlantVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.addPlant(name: plantName,
+                            PlantyWorld.FirebaseManager.shared.addPlant(name:plantName,
                                                                         date: plantDate,
-                                                                        sun: sun, water: water,
-                                                                        image: "\(url)", note: plantNote)
+                                                                        sun: sun,
+                                                                        water: water,image: "\(url)", note: plantNote) { result in
+                                switch result {
+                                case .success:
+                                    print("123")
+                                    self.tapDismiss()
+                                case .failure:
+                                    print("error")
+                                }
+                            }
+                            
                         case .failure:
                             break
                         }
@@ -149,7 +159,7 @@ class AddPlantVC: UIViewController {
             }
             
         }
-        navigationController?.popToRootViewController(animated: true)
+        self.addBtn.isEnabled = false
     }
     
     func setupImageArea() {
@@ -228,8 +238,8 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
 
             cell.titleLB.text = "Plant Name"
             cell.textField.placeholder = "Name"
+            cell.textField.textColor = .black
             cell.textField.delegate = self
-//            cell.selectedBackgroundView?.backgroundColor = .clear
 
             return cell
             
@@ -237,6 +247,7 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
 
             cell.textField.placeholder = "yyyy.mm.dd"
             cell.titleLB.text = "Date"
+            cell.textField.textColor = .black
             cell.textField.delegate = self
 
             return cell
@@ -254,10 +265,6 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             return waterCell
             
         } else if indexPath.row == 4 {
-//            cell.titleLB.text = "Note"
-//            cell.textField.placeholder = "Write some note"
-//            cell.textField.delegate = self
-//            return cell
             
             textViewCell.title.text = "Note📝"
             textViewCell.textView.text = "write some note"
@@ -275,8 +282,6 @@ extension AddPlantVC: UITextFieldDelegate {
             plantName = textField.text ?? "no value"
         case "yyyy.mm.dd":
             plantDate = textField.text ?? "no date"
-//        case "Write some note":
-//            plantNote[0] = textField.text ?? "no note"
         default:
             textField.text = "123"
         }

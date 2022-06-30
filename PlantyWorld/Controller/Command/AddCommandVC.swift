@@ -139,9 +139,7 @@ class AddCommandVC: UIViewController {
         self.commandField.text = ""
         FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
             self.commandList = commandlist ?? []
-            self.tableView.reloadData()})
-        self.tableView.reloadData()
-        
+            self.tableView.reloadData()})  //要在這裡面reload        
     }
     
 }

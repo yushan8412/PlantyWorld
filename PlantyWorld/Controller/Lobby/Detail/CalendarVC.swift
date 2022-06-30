@@ -15,7 +15,8 @@ class CalendarVC: UIViewController {
     var calendar: FSCalendar!
     var plant: PlantsModel?
     var addField = UITextField()
-    var addBtn = UIButton()
+    
+    var addEventBtn = UIButton()
     var sticker = UILabel()
     var eventList: [CalendarModel] = [] {
         didSet {
@@ -61,12 +62,13 @@ class CalendarVC: UIViewController {
         let todays = formatter.string(from: Date())
         
         getOneDayDate(date: todays)
+        
         self.tableView.reloadData()
     }
     
     func setup() {
         view.addSubview(tableView)
-        view.addSubview(addBtn)
+        view.addSubview(addEventBtn)
         view.addSubview(addField)
         view.addSubview(sticker)
         tableView.anchor(top: view.topAnchor, left: view.leftAnchor,
@@ -79,16 +81,18 @@ class CalendarVC: UIViewController {
         sticker.font = UIFont.systemFont(ofSize: 30)
         sticker.setContentHuggingPriority(UILayoutPriority(255), for: .horizontal)
         addField.anchor(left: sticker.rightAnchor, bottom: view.bottomAnchor,
-                        right: addBtn.leftAnchor, paddingLeft: 8, paddingBottom: 24, paddingRight: 8)
+                        right: addEventBtn.leftAnchor, paddingLeft: 8, paddingBottom: 24, paddingRight: 8)
         addField.placeholder = "Leave some note "
         addField.borderStyle = .roundedRect
+        addField.backgroundColor = .white
+        addField.textColor = .black
         
-        addBtn.anchor(bottom: view.bottomAnchor, right: view.rightAnchor, paddingBottom: 24, paddingRight: 24)
-        addBtn.setTitle(" add ", for: .normal)
-        addBtn.backgroundColor = .pgreen
-        addBtn.layer.cornerRadius = 10
-        addBtn.setContentHuggingPriority(UILayoutPriority(254), for: .horizontal)
-        addBtn.addTarget(self, action: #selector(addData), for: .touchUpInside)
+        addEventBtn.anchor(bottom: view.bottomAnchor, right: view.rightAnchor, paddingBottom: 24, paddingRight: 24)
+        addEventBtn.setTitle(" add ", for: .normal)
+        addEventBtn.backgroundColor = .pgreen
+        addEventBtn.layer.cornerRadius = 10
+        addEventBtn.setContentHuggingPriority(UILayoutPriority(254), for: .horizontal)
+        addEventBtn.addTarget(self, action: #selector(addData), for: .touchUpInside)
         
     }
     
@@ -108,16 +112,69 @@ class CalendarVC: UIViewController {
         })
     }
     
+    
     @objc func addData() {
-        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "")
+       FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "") { [self] result in
+            switch result {
+            case .success:
+                FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "") { result in
+                    self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
+                    print("now~~~~")
+                }
+            case .failure:
+                print(" failure ")
+            }
+
+        }
+
         self.addField.text = ""
         
         FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
-                                          completion: { eventList in self.eventList = eventList ?? []
-            self.tableView.reloadData() 
+
+                                          completion: { eventList in self.eventList = eventList ?? []; self.tableView.reloadData()
         })
         self.tableView.reloadData()
     }
+
+    
+//    @objc func addData(date: String) {
+//        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "") { [self] result in
+//            switch result{
+//            case .success:
+//                self.addField.text = ""
+//
+//                FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
+//                                                  completion: { eventList in self.eventList = eventList ?? []
+//                    self.tableView.reloadData()
+//                })
+//            case .failure:
+//                print("error")
+//            }
+//        }
+//
+//           self.tableView.reloadData()
+//        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "") { [self] result in
+//            switch result {
+//            case .success:
+//                FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "") { result in
+//
+//                    self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
+//                    print("get~~~")
+//                }
+//
+//            case .failure:
+//                print(" failure ")
+//            }
+//
+//        }
+//
+//        self.addField.text = ""
+        
+//        FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
+//                                          completion: { eventList in self.eventList = eventList ?? []; self.tableView.reloadData()
+//        })
+//        self.tableView.reloadData()
+//    }
     
     func getOneDayDate(date: String) {
         self.dayEvent.removeAll()
