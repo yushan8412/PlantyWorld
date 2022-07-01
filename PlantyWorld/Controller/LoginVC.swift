@@ -2,7 +2,7 @@ import UIKit
 import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 import AuthenticationServices // Sign in with Apple 的主體框架
 import CryptoKit // 用來產生隨機字串 (Nonce) 的
-import SwiftUI
+import FirebaseFirestore
 
 var userUid: String = ""
 
@@ -181,22 +181,46 @@ extension LoginVC {
             CustomFunc.customAlert(title: "無法取得使用者資料！", message: "", vc: self, actionHandler: nil)
             return
         }
-        let uid = user.uid
-        let email = user.email
-        
-//        UserManager.shared.checkUser(userID: Auth.auth().currentUser?.uid ?? "") 
-        
-        
-        UserManager.shared.addUser(name: user.displayName ?? "no name",
-                                   uid: uid, email: email ?? "no email",
-                                   image: "no image yet")
+       
+        self.checkEmail(uid: Auth.auth().currentUser?.uid ?? "" )
 
         userUid = currentUser?.uid ?? ""
                 
         print("@@@@ \(userUid)")
         
         self.dismiss(animated: true)
+        presentingViewController?.viewWillAppear(true)
+        
     }
+    
+    func checkEmail(uid: String) {
+        let db = Firestore.firestore()
+        
+        // 在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
+        db.collection("user").whereField("id", isEqualTo: uid).getDocuments { (querySnapshot, error) in
+            
+            if let querySnapshot = querySnapshot {
+                if let document = querySnapshot.documents.first {
+                    for data in querySnapshot.documents {
+                        let userdata = data.data(with: ServerTimestampBehavior.none)
+                        let userName = userdata["name"] as? String ?? ""
+                        let userEmail = userdata["email"] as? String ?? ""
+                        let userID = userdata["id"] as? String ?? ""
+                        let userImage = userdata["image"] as? String ?? ""
+                        let followList = userdata["followList"] as? [String] ?? [""]
+
+                        let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail, followList: followList)
+                    }
+                    print("User already exist")
+                        
+                } else {
+                    
+                    UserManager.shared.addUser(name: "no name yet", uid: Auth.auth().currentUser?.uid ?? "", email: Auth.auth().currentUser?.email ?? "", image: "no image yet")
+                }
+            }
+        }
+    }
+
 }
 
 // MARK: - ASAuthorizationControllerDelegate

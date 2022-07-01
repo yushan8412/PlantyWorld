@@ -12,7 +12,6 @@ import FirebaseStorage
 import FirebaseAuth
 import Firebase
 
-
 class AddFriendVC: UIViewController {
     
     var titleLB = UILabel()
@@ -62,7 +61,7 @@ class AddFriendVC: UIViewController {
     func checkEmail(email: String) {
         let db = Firestore.firestore()
         
-        //在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
+        // 在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
         db.collection("user").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
             
             if let querySnapshot = querySnapshot {
@@ -75,15 +74,14 @@ class AddFriendVC: UIViewController {
                         let userEmail = userdata["email"] as? String ?? ""
                         let userID = userdata["id"] as? String ?? ""
                         let userImage = userdata["image"] as? String ?? ""
+                        let followList = userdata["followList"] as? [String] ?? [""]
                         
-                        let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail)
+                        let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail, followList: followList)
                         self.friendData = user
 
                     }
                     print(document.data())
                     print("your friend is exist")
-                    print(self.friendData)
-                    print(email)
                         
                 } else {
                     let alertController = UIAlertController(
@@ -107,15 +105,14 @@ class AddFriendVC: UIViewController {
             }
         }
     }
-
     
     func confirm() {
         // 建立一個提示框
         let db = Firestore.firestore()
 
         let alertController = UIAlertController(
-            title: "送出好友邀請",
-            message: "確認要送出了嗎？",
+            title: "追蹤好友植物",
+            message: "確認要加入追蹤清單了嗎？",
             preferredStyle: .alert)
         
         // 建立[取消]按鈕
@@ -132,7 +129,7 @@ class AddFriendVC: UIViewController {
             handler: { _ in
                 db.collection("user").document(Auth.auth().currentUser?.uid ?? "").updateData([
                     "followList": FieldValue.arrayUnion([ "\(self.friendData?.userID ?? "")"])
-                    //document.update -> don't have this member in document, so need to connect it with .reference
+                    // document.update -> don't have this member in document, so need to connect it with .reference
                     // arrayUnion -> same data can't be appent twice
                 ])
             })
@@ -145,13 +142,4 @@ class AddFriendVC: UIViewController {
             completion: nil)
     }
 
-    
-
-    
-//    @objc func goNextVC() {
-//
-//        let loginVC = LoginVC()
-//
-//        navigationController?.pushViewController(loginVC, animated: true)
-//    }
 }

@@ -40,7 +40,6 @@ class ProfileVC: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.userPlants.text = " 我有\(self.plantList.count)顆植物 "
-                self.userName.text = " \(self.userData?.name ?? "出事拉～") "
             }
         }
     }
@@ -64,17 +63,16 @@ class ProfileVC: UIViewController {
         
         self.tabBarController?.tabBar.isHidden = false
         
-
         userBackground.layoutIfNeeded()
         getData()
         getUserData()
         levelColor()
         
-        if userData?.userImage == "" {
-            self.userImage.image = UIImage(named: "About us")
-        } else {
-            userImage.kf.setImage(with: URL(string: userData?.userImage ?? ""))
-        }
+//        if userData?.userImage == "" {
+//            self.userImage.image = UIImage(named: "About us")
+//        } else {
+//            userImage.kf.setImage(with: URL(string: userData?.userImage ?? ""))
+//        }
         
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()
@@ -145,9 +143,7 @@ class ProfileVC: UIViewController {
         
         userName.anchor(top: userBackground.bottomAnchor, paddingTop: 8, height: 30)
         userName.centerX(inView: view)
-        userName.text = "User Name"
         userName.textColor = .darkGray
-        userName.backgroundColor = .black
         userName.setContentHuggingPriority(UILayoutPriority(255), for: .vertical)
         
     }
@@ -159,7 +155,7 @@ class ProfileVC: UIViewController {
         userBackground.layer.cornerRadius = 125
         
         userBackground.centerX(inView: view)
-        userBackground.anchor(top: view.topAnchor, paddingTop: UIScreen.height * 5/24, width: 250, height: 250)
+        userBackground.anchor(top: view.topAnchor, paddingTop: UIScreen.height * 3/16, width: 250, height: 250)
         
         userImage.anchor(top: userBackground.topAnchor, left: userBackground.leftAnchor,
                          bottom: userBackground.bottomAnchor, right: userBackground.rightAnchor,
@@ -239,6 +235,7 @@ class ProfileVC: UIViewController {
                    print("Error signing out: \(signOutError)")
 
                 }
+                self.viewWillAppear(true)
             }
 
             let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -251,24 +248,34 @@ class ProfileVC: UIViewController {
     }
     
     func getData() {
-        FirebaseManager.shared.fetchData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
-        print(plantList.count)
+        FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
     }
     
     func getUserData() {
-        UserManager.shared.fetchUserData(userID: Auth.auth().currentUser?.uid ?? "") { result in
-            switch result {
-            case let .success(user):
-                print("get data")
-                self.userData = user
-            case .failure:
-                print("failure")
+
+        if Auth.auth().currentUser != nil {
+            
+            UserManager.shared.fetchUserData(userID: Auth.auth().currentUser?.uid ?? "") { result in
+                switch result {
+                case let .success(user):
+                    print("get data")
+                    self.userData = user
+                    self.userImage.kf.setImage(with: URL(string: self.userData?.userImage ?? ""))
+                    self.userName.text = self.userData?.name ?? "something went wrong"
+                case .failure:
+                    print("failure")
+                }
             }
+        } else {
+            self.userImage.image = UIImage(named: "About us")
+            self.userName.text = "User Name"
         }
     }
-    
+        
     @objc func deleteuser() {
-        let alert  = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account?", preferredStyle: .alert)
+        let alert  = UIAlertController(title: "Delete Account",
+                                       message: "Are you sure you want to delete your account?",
+                                       preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "YES", style: .destructive) { (_) in
             self.deleteAccount()
         }

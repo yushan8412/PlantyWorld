@@ -23,8 +23,7 @@ class FirebaseManager {
     //        plant.date
     //    }
     
-    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void)
-    {
+    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void) {
         let plants = dataBase.collection("plants")
         let document = plants.document()
         let timeInterval = Date()
@@ -54,16 +53,10 @@ class FirebaseManager {
         }
     }
     
-    func addEvent(content: String, plantID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addEvent(content: String, plantID: String, date: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let events = dataBase.collection("events")
         let document = events.document()
-        
-        let timeInterval = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-        let date = formatter.string(from: timeInterval)
-        
+           
         let data: [String: Any] = [
             "authorID": "123" ,
             "date": date,
@@ -97,7 +90,7 @@ class FirebaseManager {
             "plantID": id,
             "commands": [
                 "commandID": document.documentID,
-                "command": "command:\(newcommand)"],
+                "command": "comment:\(newcommand)"],
             "time": dates,
             "UserId": Auth.auth().currentUser?.uid
         ]
@@ -105,13 +98,13 @@ class FirebaseManager {
             if let error = error {
                 print("Error\(error)")
             } else {
-                print("Command update!!")
+                print("Comment update!!")
             }
         }
     }
     
-    //.order(by: "createdTime", descending: true)
-    func fetchData(uid: String, completion: @escaping ([PlantsModel]?) -> Void) {
+    // .order(by: "createdTime", descending: true)
+    func fetchUserPlantsData(uid: String, completion: @escaping ([PlantsModel]) -> Void) {
         dataBase.collection("plants").whereField("userID", isEqualTo: uid).getDocuments { (querySnapshot, _) in
             guard let querySnapshot = querySnapshot else {
                 return }
@@ -142,11 +135,11 @@ class FirebaseManager {
                 self.plantsList.append(plant)
             }
             completion(self.plantsList)
+            
         }
     }
     
-    
-    func fetchAllData(completion: @escaping ([PlantsModel]?) -> Void) {
+    func fetchAllPlants(completion: @escaping ([PlantsModel]?) -> Void) {
         dataBase.collection("plants").getDocuments { (querySnapshot, _) in
             guard let querySnapshot = querySnapshot else {
                 return }
@@ -211,23 +204,6 @@ class FirebaseManager {
         }
     }
     
-//    func fetchCommandData(plantID: String, completion: @escaping (Result<[PublishModel], Error>) -> Void) {
-//        dataBase.collection("commands").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, error) in
-//            if let error = error {
-//                print("Error\(error)")
-//                completion(.failure(error))
-//            } else if let querySnapshot = querySnapshot {
-//                let events = querySnapshot.documents.compactMap({ querySnapshot in
-//                    try? querySnapshot.data(as: PublishModel.self)
-//
-//                })
-//                let eventOnData = events.compactMap { event -> PublishModel? in
-//                    if event.eventDate.hasSame
-//                }
-//            }
-//        }
-//    }
-    
     // wherefield auth ID（狀況：時間fetch不下來，所以都改 String 
     func fetchEvent(plantID: String, completion: @escaping ([CalendarModel]?) -> Void) {
         dataBase.collection("events").whereField("plantID", isEqualTo: plantID).getDocuments { (querySnapshot, _) in
@@ -237,17 +213,40 @@ class FirebaseManager {
                 self.eventList.removeAll()
                 for event in querySnapshot.documents {
                     let eventObject = event.data(with: ServerTimestampBehavior.none)
-//                    guard let eventObject = event else { return }
-//                    let eventContent = eventObject["content"]
-                    
+               
                     let eventContent = eventObject["content"] as? String ?? ""
                     let eventDate = eventObject["date"] as? String ?? "nono"
                     let eventID = eventObject["plantID"] as? String ?? ""
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
-//                    formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-//                    let dateString = formatter.string(from: eventDate)
-                    
+
+                    let plant = CalendarModel(eventDate: eventDate,
+                                              content: eventContent,
+                                              plantID: eventID,
+                                              dateString: eventDate
+                    )
+                    self.eventList.append(plant)
+                }
+                completion(self.eventList)
+                print("get events data")
+            }
+        }
+    
+    func fetchOneDayEvent(plantID: String, date: String, completion: @escaping ([CalendarModel]?) -> Void) {
+        dataBase.collection("events").whereField("plantID", isEqualTo: plantID).whereField("date", isEqualTo: date).getDocuments { (querySnapshot, _) in
+                guard let querySnapshot = querySnapshot else {
+                    return
+                }
+                self.eventList.removeAll()
+                for event in querySnapshot.documents {
+                    let eventObject = event.data(with: ServerTimestampBehavior.none)
+               
+                    let eventContent = eventObject["content"] as? String ?? ""
+                    let eventDate = eventObject["date"] as? String ?? "nono"
+                    let eventID = eventObject["plantID"] as? String ?? ""
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+
                     let plant = CalendarModel(eventDate: eventDate,
                                               content: eventContent,
                                               plantID: eventID,
@@ -282,8 +281,6 @@ class FirebaseManager {
     func deleteDate(plantID: String ) {
         let documentRef = dataBase.collection("plants").document("\(plantID)")
         documentRef.delete()
-//        let commandRef = dataBase.collection("command").document.whereField("plantID", isEqualTo: plantID)
-        
         print("deleted doc!!")
     }
 }

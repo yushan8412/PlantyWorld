@@ -18,7 +18,6 @@ struct UserData: Codable {
     var comment: PublishModel
 }
 
-
 class AddCommandVC: UIViewController {
     
     var commandView = UIView()
@@ -54,10 +53,7 @@ class AddCommandVC: UIViewController {
         setupSendBtn()
         setTextfield()
         view.isOpaque = false
-        //        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
-        //            self.commandList = commandlist ?? []
-        //            self.tableView.reloadData()})
-        
+      
         self.tableView.register(UINib(nibName: "AddCommandTitleCell", bundle: nil),
                                 forCellReuseIdentifier: "AddCommandTitleCell")
         self.tableView.register(UINib(nibName: "CommandsCell", bundle: nil),
@@ -70,41 +66,7 @@ class AddCommandVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getComment()
-        
-//        FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "", completion: { commandlist in
-//            self.commandList = commandlist ?? []
-////            self.userData = []
-//            for command in self.commandList {
-//
-//                UserManager.shared.fetchUserData(userID: command.userID) { result in
-//                    switch result {
-//                    case let .success(user):
-//
-//                        if command.userID == user.userID {
-//                            let userData = UserData(
-//                                user: user, comment: command
-//                            )
-//
-//                            self.user.append(userData)
-//                        }
-//
-//                        //                        commandCell.profilePic.kf.setImage(with: URL(string: self.userData?.userImage ?? ""))
-//                        //                        commandCell.name.text = self.userData?.name
-//                        print("get user data: \(self.user)")
-//
-//                        DispatchQueue.main.async {
-//                            self.tableView.reloadData()
-//                        }
-//                    case .failure:
-//                        print("failure")
-//                    }
-//                }
-//            }
-//
-//            self.tableView.reloadData()})
-        
         tabBarController?.tabBar.isHidden = true
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -136,12 +98,12 @@ class AddCommandVC: UIViewController {
         commandView.addSubview(commandField)
         commandField.anchor(top: tableView.bottomAnchor, left: commandView.leftAnchor,
                             bottom: commandView.bottomAnchor, paddingTop: 16,
-                            paddingLeft: 16, paddingBottom: 35)
+                            paddingLeft: 16, paddingBottom: 35, height: 40)
         
         commandView.addSubview(sendCommandBtn)
         sendCommandBtn.anchor(top: tableView.bottomAnchor, left: commandField.rightAnchor,
                               bottom: commandView.bottomAnchor, right: commandView.rightAnchor,
-                              paddingTop: 16, paddingLeft: 16, paddingBottom: 32, paddingRight: 16)
+                              paddingTop: 16, paddingLeft: 16, paddingBottom: 35, paddingRight: 16, height: 40)
     }
     
     func cornerRadius() {
@@ -160,13 +122,17 @@ class AddCommandVC: UIViewController {
     func setupSendBtn() {
         sendCommandBtn.layer.cornerRadius = 10
         sendCommandBtn.backgroundColor = .dPeach
-        sendCommandBtn.setTitle("Send", for: .normal)
+        sendCommandBtn.setTitle(" Send ", for: .normal)
         sendCommandBtn.addTarget(self, action: #selector(tappedToSend), for: .touchUpInside)
     }
     
     func setTextfield() {
         commandField.borderStyle = .roundedRect
+        commandField.layer.borderWidth = 0.5
         commandField.placeholder = "Leave Some Command"
+        commandField.textColor = .darkGray
+        commandField.backgroundColor = .white
+        commandField.layer.cornerRadius = 10
     }
     
     @objc func tappedToDismiss() {

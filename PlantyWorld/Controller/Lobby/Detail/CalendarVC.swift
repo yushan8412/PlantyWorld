@@ -25,7 +25,14 @@ class CalendarVC: UIViewController {
             }
         }
     }
-    var dayEvent: [CalendarModel] = []
+    var dayEvent: [CalendarModel] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    
+    var pickedDate = String()
+
 
     override func viewDidLoad() {
         tableView.delegate = self
@@ -45,24 +52,16 @@ class CalendarVC: UIViewController {
         self.tableView.register(UINib(nibName: "NoteCell", bundle: nil),
                                 forCellReuseIdentifier: "NoteCell")
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-        let todays = formatter.string(from: Date())
-        
-        getOneDayDate(date: todays)
                 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchData()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
         let todays = formatter.string(from: Date())
         
-        getOneDayDate(date: todays)
-        
+        fetchData(date: todays)
         self.tableView.reloadData()
     }
     
@@ -105,22 +104,22 @@ class CalendarVC: UIViewController {
         
     }
     
-    func fetchData() {
-        FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
-                                          completion: { eventList in self.eventList = eventList ?? []
-            self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
-        })
+    func fetchData(date: String) {
+        FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "", date: date) { events in self.dayEvent = events ?? []
+            print(self.dayEvent.count)
+            
+        }
+        
     }
     
-    
     @objc func addData() {
-       FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "") { [self] result in
+        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "", date: pickedDate) { [self] result in
             switch result {
             case .success:
-                FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "") { result in
-                    self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
-                    print("now~~~~")
+                FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "", date: pickedDate) { events in
+                    self.dayEvent = events ?? []
                 }
+                self.tableView.reloadData()
             case .failure:
                 print(" failure ")
             }
@@ -135,46 +134,6 @@ class CalendarVC: UIViewController {
         })
         self.tableView.reloadData()
     }
-
-    
-//    @objc func addData(date: String) {
-//        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "") { [self] result in
-//            switch result{
-//            case .success:
-//                self.addField.text = ""
-//
-//                FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
-//                                                  completion: { eventList in self.eventList = eventList ?? []
-//                    self.tableView.reloadData()
-//                })
-//            case .failure:
-//                print("error")
-//            }
-//        }
-//
-//           self.tableView.reloadData()
-//        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "") { [self] result in
-//            switch result {
-//            case .success:
-//                FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "") { result in
-//
-//                    self.tableView.reloadData() // 這邊要在抓完資料的時候 reload data
-//                    print("get~~~")
-//                }
-//
-//            case .failure:
-//                print(" failure ")
-//            }
-//
-//        }
-//
-//        self.addField.text = ""
-        
-//        FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
-//                                          completion: { eventList in self.eventList = eventList ?? []; self.tableView.reloadData()
-//        })
-//        self.tableView.reloadData()
-//    }
     
     func getOneDayDate(date: String) {
         self.dayEvent.removeAll()
@@ -182,12 +141,10 @@ class CalendarVC: UIViewController {
         for event in eventList {
             if event.eventDate == date {
                 dayEvent.append(event)
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
         }
-        print(dayEvent)
     }
-    
 }
 
 extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
@@ -219,9 +176,10 @@ extension CalendarVC: FSCalendarDelegate, FSCalendarDataSource {
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
         let dates = formatter.string(from: offsetDate)
-        
-        getOneDayDate(date: dates)
+        self.pickedDate = dates
+        fetchData(date: dates)
         print(dates)
+        
         self.tableView.reloadData()
 
     }

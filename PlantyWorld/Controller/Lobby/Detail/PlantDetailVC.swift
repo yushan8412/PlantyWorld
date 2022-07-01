@@ -25,6 +25,8 @@ class PlantDetailVC: UIViewController {
         view.addSubview(tableView)
         view.addSubview(btnStackView)
         view.backgroundColor = .lightYellow
+        tableView.contentInsetAdjustmentBehavior = .never
+
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -64,7 +66,7 @@ class PlantDetailVC: UIViewController {
     
     func setup() {
         
-        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
+        tableView.anchor(top: view.topAnchor, left: view.leftAnchor,
                          bottom: btnStackView.topAnchor, right: view.rightAnchor,
                          paddingTop: 0, paddingLeft: 0,
                          paddingBottom: 0, paddingRight: 0)
@@ -190,6 +192,8 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
                 
         } else if indexPath.row == 4 {
             noteCell.backgroundColor = .lightYellow
+            noteCell.isUserInteractionEnabled = false
+
             return noteCell
         }
         

@@ -29,8 +29,16 @@ class LobbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .peach
+        
+        let barAppearance = UINavigationBarAppearance()
+        barAppearance.configureWithTransparentBackground()
+        UINavigationBar.appearance().standardAppearance = barAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = barAppearance
 
-        tabBarController?.tabBar.backgroundColor = .peach
+        
+        self.navigationController?.navigationBar.alpha = 0
+        UINavigationBar.appearance().backgroundColor = .clear
+        tabBarController?.tabBar.backgroundColor = .clear
         plantsCollectionView.backgroundColor = .pyellow
         plantsCollectionView.delegate = self
         plantsCollectionView.dataSource = self
@@ -44,7 +52,7 @@ class LobbyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
         self.plantList.removeAll()
-        FirebaseManager.shared.fetchData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
         self.plantsCollectionView.reloadData()
         print(plantList.count)
         

@@ -89,7 +89,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
         let todays = formatter.string(from: Date())
         FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") 身高 \((distance ?? 0 ) * 100) cm",
-                                        plantID: plant?.id ?? "noID") { result in
+                                        plantID: plant?.id ?? "noID", date: todays) { result in
             switch result {
             case .success:
                 print("update")

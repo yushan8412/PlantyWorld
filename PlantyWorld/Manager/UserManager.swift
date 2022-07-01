@@ -22,11 +22,7 @@ class UserManager {
     var userData: User?
     
     func addUser(name: String, uid: String, email: String, image: String) {
-        //        func addUser(name: String, uid: String, email: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
-        
-        //        guard let currentUser = Auth.auth().currentUser else { return }
-        
-        //        let userID = currentUser.uid
+
         let user = dataBase.collection("user")
         let document = user.document(uid)
         let timeInterval = Date()
@@ -39,25 +35,7 @@ class UserManager {
             "followList": [],
             "createdTime": timeInterval
         ]
-        //
-        //        checkUser(userID: userID) { isExists in
-        //            if !isExists {
-        //                do {
-        //
-        //                    try  document.setData(data)
-        //
-        //                    completion(true)
-        //                    print("user data update")
-        //
-        //                } catch {
-        //
-        //                    completion(false)
-        //                    print("Fail to create user.")
-        //                }
-        //            }
-        //        }
-        
-        //
+    
         document.setData(data) { error in
             if let error = error {
                 print("Error\(error)")
@@ -94,18 +72,18 @@ class UserManager {
         dataBase.collection("user").whereField("id", isEqualTo: userID).getDocuments { (querySnapshot, _) in
             guard let querySnapshot = querySnapshot else {
                 return }
-            //            self.userData
             for data in querySnapshot.documents {
                 let userdata = data.data(with: ServerTimestampBehavior.none)
                 let userName = userdata["name"] as? String ?? ""
                 let userEmail = userdata["email"] as? String ?? ""
                 let userID = userdata["id"] as? String ?? ""
                 let userImage = userdata["image"] as? String ?? ""
-                
-                let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail)
+                let followList = userdata["followList"] as? [String] ?? [""]
+
+                let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail, followList: followList)
                 self.userData = user
             }
-            completion(.success(self.userData ?? User(userID: "", name: "", userImage: "", useremail: "")))
+            completion(.success(self.userData ?? User(userID: "", name: "", userImage: "", useremail: "", followList: [""])))
             
         }
     }

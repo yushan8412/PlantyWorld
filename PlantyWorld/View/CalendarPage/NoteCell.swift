@@ -17,6 +17,7 @@ class NoteCell: UITableViewCell {
         setup()
         noteLB.textColor = .black
         noteContent.textColor = .black
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
