@@ -19,6 +19,8 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     var plant: PlantsModel?
     
     var distance: Float?
+    var showValue: Double?
+    var finalMeasurement: String?
     
     override func viewDidLoad() {
         view.addSubview(sceneView)
@@ -58,8 +60,8 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     }
     
     func setup() {
-        sceneView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
-                         bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,
+        sceneView.anchor(top: view.topAnchor, left: view.leftAnchor,
+                         bottom: view.bottomAnchor, right: view.rightAnchor,
                          paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         saveBtn.anchor(bottom: sceneView.bottomAnchor, right: sceneView.rightAnchor,
                        paddingBottom: 16, paddingRight: 16)
@@ -71,7 +73,8 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func tapToSave() {
-        let deleteAlert = UIAlertController(title: "Save data", message: "Save \((distance ?? 0) * 100) cm as your data?",
+        let deleteAlert = UIAlertController(title: "Save data",
+                                            message: "Save \(finalMeasurement ?? "") cm as your data?",
                                             preferredStyle: UIAlertController.Style.alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -88,8 +91,8 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
         let todays = formatter.string(from: Date())
-        FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") 身高 \((distance ?? 0 ) * 100) cm",
-                                        plantID: plant?.id ?? "noID") { result in
+        FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") 身高 \(finalMeasurement ?? "")cm",
+                                        plantID: plant?.id ?? "noID", date: todays) { result in
             switch result {
             case .success:
                 print("update")
@@ -141,8 +144,8 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         let heightCentimeter = heightMeter.converted(to: UnitLength.centimeters)
         
         let value = "\(heightCentimeter)"
-        let finalMeasurement = String(value.prefix(6))
-        updateText(text: finalMeasurement, atPosition: end.position)
+        self.finalMeasurement = String(value.prefix(4))
+        updateText(text: finalMeasurement ?? "", atPosition: end.position)
                 
     }
     

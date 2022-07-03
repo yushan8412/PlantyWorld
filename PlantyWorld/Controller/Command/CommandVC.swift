@@ -21,27 +21,33 @@ class CommandVC: UIViewController {
             }
         }
     }
+    var user: User?
     
     var plant: PlantsModel?
-
+    
+    var followList: [String]?
+    
+    var allPost = [PlantsModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Planty Wall"
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .pyellow
+        
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "32e3a86d9a8999f0632a696f3500c675")!)
         
         self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
                                 forCellReuseIdentifier: "CommandCell")
-        
-        FirebaseManager.shared.fetchAllData(completion: { plantList in self.plantList = plantList ?? [] })
-        
+        tableView.backgroundColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        self.followList?.removeAll()
         
-        FirebaseManager.shared.fetchAllData(completion: { plantList in self.plantList = plantList ?? [] })
+        getUserFriendList()
         
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()
@@ -50,17 +56,55 @@ class CommandVC: UIViewController {
         } else {
             return
         }
-
+        
+    }
+    
+    func getUserFriendList() {
+        if Auth.auth().currentUser != nil {
+            self.followList?.removeAll()
+            UserManager.shared.fetchUserData(userID: Auth.auth().currentUser?.uid ?? "") { result in
+                switch result {
+                case .failure:
+                    print("Error")
+                case .success(let user):
+                    self.user = user
+                    self.followList = self.user?.followList
+                    self.followList?.append(Auth.auth().currentUser?.uid ?? "no user")
+                    print(self.followList)
+                    self.getAllPost()
+                }
+            }
+        } else {
+            self.allPost.removeAll()
+            self.tableView.reloadData()
+        }
     }
 
+    func getAllPost() {
+        self.allPost.removeAll()
+        
+        for aID in followList ?? [] {
+            FirebaseManager.shared.fetchUserPlantsData(uid: aID) { plants in
+                for plant in plants {
+                    print(plant)
+                    self.allPost.append(plant)
+                    self.allPost.sort {
+                        $0.createdTime < $1.createdTime
+                    }
+                    self.tableView.reloadData()
+                }
+            }
+        }
+
+    }
+    
 }
 
 // MARK: TableView
 extension CommandVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(plantList.count)
-        return plantList.count
+        return allPost.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,11 +113,11 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "CommandCell") as? CommandCell
         else { return UITableViewCell() }
         
-        cell.titleLB.text = plantList[indexPath.row].name
-        cell.commandLB.text = plantList[indexPath.row].date
-        cell.mainImage.kf.setImage(with: URL(string: plantList[indexPath.row].image))
+        cell.titleLB.text = allPost[indexPath.row].name
+        cell.commandLB.text = allPost[indexPath.row].date
+        cell.mainImage.kf.setImage(with: URL(string: allPost[indexPath.row].image))
         
-        self.plant = plantList[indexPath.row]
+        self.plant = allPost[indexPath.row]
         
         cell.delegate = self
 
@@ -93,7 +137,7 @@ extension CommandVC: AddCommandBtnDelegate {
         addCommandVC.modalPresentationStyle = .overFullScreen
         navigationController?.present(addCommandVC, animated: true, completion: nil)
         
-        addCommandVC.plant = plantList[indexPath.row]
+        addCommandVC.plant = allPost[indexPath.row]
     }
     
 }

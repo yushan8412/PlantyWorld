@@ -12,7 +12,6 @@ import FirebaseStorage
 import FirebaseAuth
 import Firebase
 
-
 class AddFriendVC: UIViewController {
     
     var titleLB = UILabel()
@@ -22,7 +21,7 @@ class AddFriendVC: UIViewController {
     var friendData: User?
     
     override func viewDidLoad() {
-        view.backgroundColor = .lightOrange
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "1b9beeb0bfdab5dfba24167cc6e87579")!)
         self.tabBarController?.tabBar.isHidden = true
         view.addSubview(titleLB)
         view.addSubview(searchBtn)
@@ -37,17 +36,21 @@ class AddFriendVC: UIViewController {
         titleLB.centerX(inView: view)
         titleLB.text = " Enter Your Frends Email "
         titleLB.textColor = .darkGray
+        titleLB.font = UIFont(name: "Chalkboard SE", size: 24)
         
-        searchTXF.center(inView: view, yConstant: -100)
+        searchTXF.center(inView: view, yConstant: 0)
         searchTXF.anchor(width: 300, height: 40)
         searchTXF.backgroundColor = .white
         searchTXF.textColor = .black
         searchTXF.placeholder = " Friend's Email "
+        searchTXF.layer.borderWidth = 0.5
         
         searchBtn.anchor(top: searchTXF.bottomAnchor, paddingTop: 16)
         searchBtn.centerX(inView: view)
         searchBtn.setTitle(" Search ", for: .normal)
-        searchBtn.backgroundColor = .dPeach
+        searchBtn.backgroundColor = .pgreen
+        searchBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        searchBtn.layer.cornerRadius = 20
         
         searchBtn.addTarget(self, action: #selector(searchFriend), for: .touchUpInside)
 
@@ -62,7 +65,7 @@ class AddFriendVC: UIViewController {
     func checkEmail(email: String) {
         let db = Firestore.firestore()
         
-        //在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
+        // 在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
         db.collection("user").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
             
             if let querySnapshot = querySnapshot {
@@ -75,17 +78,30 @@ class AddFriendVC: UIViewController {
                         let userEmail = userdata["email"] as? String ?? ""
                         let userID = userdata["id"] as? String ?? ""
                         let userImage = userdata["image"] as? String ?? ""
+                        let followList = userdata["followList"] as? [String] ?? [""]
                         
-                        let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail)
+                        let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail, followList: followList)
                         self.friendData = user
 
                     }
                     print(document.data())
                     print("your friend is exist")
-                    print(self.friendData)
-                    print(email)
                         
                 } else {
+                    let alertController = UIAlertController(
+                        title: "找不到這個好友",
+                        message: "要不要確認一下好友 Email?",
+                        preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(
+                        title: "確認",
+                        style: .cancel,
+                        handler: nil)
+                    alertController.addAction(cancelAction)
+
+                    self.present(
+                        alertController,
+                        animated: true,
+                        completion: nil)
                     
                     print("nobody here")
                     print(email)
@@ -93,15 +109,14 @@ class AddFriendVC: UIViewController {
             }
         }
     }
-
     
     func confirm() {
         // 建立一個提示框
         let db = Firestore.firestore()
 
         let alertController = UIAlertController(
-            title: "送出好友邀請",
-            message: "確認要送出了嗎？",
+            title: "追蹤好友植物",
+            message: "確認要加入追蹤清單了嗎？",
             preferredStyle: .alert)
         
         // 建立[取消]按鈕
@@ -118,7 +133,8 @@ class AddFriendVC: UIViewController {
             handler: { _ in
                 db.collection("user").document(Auth.auth().currentUser?.uid ?? "").updateData([
                     "followList": FieldValue.arrayUnion([ "\(self.friendData?.userID ?? "")"])
-                    //document.update -> don't have this member in document, so need to connect it with .reference
+                    // document.update -> don't have this member in document, so need to connect it with .reference
+                    // arrayUnion -> same data can't be appent twice
                 ])
             })
         alertController.addAction(okAction)
@@ -130,13 +146,4 @@ class AddFriendVC: UIViewController {
             completion: nil)
     }
 
-    
-
-    
-//    @objc func goNextVC() {
-//
-//        let loginVC = LoginVC()
-//
-//        navigationController?.pushViewController(loginVC, animated: true)
-//    }
 }

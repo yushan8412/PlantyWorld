@@ -1,8 +1,8 @@
 //
-//  AddPlantViewController.swift
+//  EditVC.swift
 //  PlantyWorld
 //
-//  Created by Yushan Yang on 2022/6/15.
+//  Created by Yushan Yang on 2022/7/2.
 //
 
 import Foundation
@@ -10,10 +10,12 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseStorage
+import Kingfisher
 import Lottie
 
-class AddPlantVC: UIViewController {
+class EditVC: UIViewController {
     
+    var plant: PlantsModel?
     var addBtn = UIButton()
     var picBackground = UIView()
     var imageArea = UIImageView()
@@ -22,16 +24,14 @@ class AddPlantVC: UIViewController {
     var tableView = UITableView()
     let path = "image/\(UUID().uuidString).jpg"
     
-    var plant: PlantsModel?
     var plantName: String = "name"
     var plantDate: String = "date"
-    var plantNote: String = ""
+    var plantNote: String = "note????"
     var water: Int = 0
     var sun: Int = 0
     var plantImage: String = "111"
     
     override func viewDidLoad() {
-
         view.backgroundColor = .pyellow
         view.addSubview(tableView)
         tableView.delegate = self
@@ -51,25 +51,17 @@ class AddPlantVC: UIViewController {
         setupDetilArea()
         setAddPlantBtn()
         tabBarController?.tabBar.isHidden = true
-        
+        print(plant)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
-        imageArea.image = UIImage(named: "Group")
+//        imageArea.kf.setImage(with: URL(string: plant?.image ?? ""))
         addBtn.isEnabled = true
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
-    
-    func lottie() {
-        let animationView = loadAnimation(name: "51686-a-botanical-wreath-loading", loopMode: .loop)
-        
-        animationView.play()
 
-    }
     
     func setAddPlantBtn() {
         picBackground.addSubview(addImageBtn)
@@ -119,7 +111,7 @@ class AddPlantVC: UIViewController {
                       right: view.rightAnchor,
                       paddingLeft: 24, paddingBottom: 32, paddingRight: 24)
         addBtn.backgroundColor = .dPeach
-        addBtn.setTitle("ADD", for: .normal)
+        addBtn.setTitle("UPDATE", for: .normal)
         addBtn.setTitleColor(.black, for: .normal)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
         addBtn.layer.cornerRadius = 10
@@ -143,10 +135,7 @@ class AddPlantVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.addPlant(name:plantName,
-                                                                        date: plantDate,
-                                                                        sun: sun,
-                                                                        water: water,image: "\(url)", note: plantNote) { result in
+                            PlantyWorld.FirebaseManager.shared.updatePlantInfo(plantID: plant?.id ?? "", image: "\(url)", name: plantName, water: water, sun: sun, note: plantNote) { result in
                                 switch result {
                                 case .success:
                                     print("123")
@@ -167,7 +156,6 @@ class AddPlantVC: UIViewController {
             
         }
         self.addBtn.isEnabled = false
-        self.lottie()
     }
     
     func setupImageArea() {
@@ -182,7 +170,9 @@ class AddPlantVC: UIViewController {
         imageArea.anchor(top: picBackground.topAnchor, left: picBackground.leftAnchor,
                          right: picBackground.rightAnchor, paddingTop: 24,
                          paddingLeft: 24, paddingRight: 24, height: 250)
-        imageArea.contentMode = .scaleToFill
+        imageArea.contentMode = .scaleAspectFill
+        imageArea.clipsToBounds = true
+        imageArea.kf.setImage(with: URL(string: plant?.image ?? ""))
     }
     
     func setupDetilArea() {
@@ -195,8 +185,7 @@ class AddPlantVC: UIViewController {
     }
     
 }
-
-extension AddPlantVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -213,7 +202,7 @@ extension AddPlantVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     
 }
 
-extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
+extension EditVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
@@ -245,7 +234,7 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
 
             cell.titleLB.text = "Plant Name"
-            cell.textField.placeholder = "Name"
+            cell.textField.text = plant?.name
             cell.textField.textColor = .black
             cell.textField.delegate = self
 
@@ -253,7 +242,7 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if indexPath.row == 1 {
 
-            cell.textField.placeholder = "yyyy.mm.dd"
+            cell.textField.text = plant?.date
             cell.titleLB.text = "Date"
             cell.textField.textColor = .black
             cell.textField.delegate = self
@@ -275,7 +264,7 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 4 {
             
             textViewCell.title.text = "Note📝"
-            textViewCell.textView.text = "write some note"
+            textViewCell.textView.text = plant?.note
             textViewCell.textView.delegate = self
             return textViewCell
         }
@@ -283,12 +272,12 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension AddPlantVC: UITextFieldDelegate {
+extension EditVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.placeholder {
-        case "Name":
+        case "\(plant?.name ?? "")":
             plantName = textField.text ?? "no value"
-        case "yyyy.mm.dd":
+        case "\(plant?.date ?? "")":
             plantDate = textField.text ?? "no date"
         default:
             textField.text = "123"
@@ -296,19 +285,19 @@ extension AddPlantVC: UITextFieldDelegate {
     }
 }
 
-
-extension AddPlantVC: UITextViewDelegate {
+extension EditVC: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         plantNote = textView.text ?? "no note"
     }
 }
-extension AddPlantVC: SunLevelDelegate {
+extension EditVC: SunLevelDelegate {
     func passSunLV(_ sunLevel: Int) {
         self.sun = sunLevel
     }
 }
-extension AddPlantVC: WaterLevelDelegate {
+extension EditVC: WaterLevelDelegate {
     func passWaterLV(_ waterLevel: Int) {
         self.water = waterLevel
     }
 }
+

@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Codable, Equatable {
     let userID: String
     var name: String
     var userImage: String
-//    var userImageID: String
     var useremail: String
+    var followList: [String]
 //    var blockedUserID: [String]
 }

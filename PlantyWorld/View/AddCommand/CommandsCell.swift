@@ -16,9 +16,14 @@ class CommandsCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        selectedBackgroundView?.backgroundColor = .clear
-
         setup()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profilePic.image = UIImage(named: "About us")
+        name.text = "User Name"
+        command.text = "Command"
     }
     
     func setup() {
@@ -32,16 +37,21 @@ class CommandsCell: UITableViewCell {
         profilePic.anchor(top: commandView.topAnchor, left: commandView.leftAnchor,
                           paddingTop: 8, paddingLeft: 8, width: 50, height: 50)
         profilePic.layer.cornerRadius = 25
+        profilePic.contentMode = .scaleAspectFill
+        profilePic.clipsToBounds = true
         
         commandView.addSubview(name)
         name.anchor(top: commandView.topAnchor, left: profilePic.rightAnchor, paddingTop: 8, paddingLeft: 8)
+        name.font =  UIFont(name: "Chalkboard SE", size: 18)
         
         commandView.addSubview(command)
         command.anchor(top: name.bottomAnchor, left: profilePic.rightAnchor,
                        bottom: commandView.bottomAnchor,
-                       right: commandView.rightAnchor, paddingTop: 8,
+                       right: commandView.rightAnchor, paddingTop: 0,
                        paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         command.numberOfLines = 0
+        command.font =  UIFont(name: "Chalkboard SE", size: 16)
+
     }
     
 }

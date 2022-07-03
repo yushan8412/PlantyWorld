@@ -21,6 +21,7 @@ struct PublishModel: Comparable, Codable {
     var commands: Command
     var plantID: String
     var time: String
+    var userID: String
     
 }
 

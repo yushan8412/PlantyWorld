@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Vector-3.png",
+      "filename" : "32e3a86d9a8999f0632a696f3500c675.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -17,8 +17,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

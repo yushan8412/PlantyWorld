@@ -27,6 +27,11 @@
 		809F97E42859EAAA00E84DD7 /* PublishModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E32859EAAA00E84DD7 /* PublishModel.swift */; };
 		809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */; };
 		809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */; };
+		80AA70CE2870796C00271F61 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA70CD2870796C00271F61 /* EditVC.swift */; };
+		80AA70D1287080DB00271F61 /* SunAndWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA70CF287080DB00271F61 /* SunAndWaterCell.swift */; };
+		80AA70D2287080DB00271F61 /* SunAndWaterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */; };
+		80AA70D52871951700271F61 /* 51686-a-botanical-wreath-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 80AA70D42871951700271F61 /* 51686-a-botanical-wreath-loading.json */; };
+		80AA70D72871A98800271F61 /* ExtensionLottie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA70D62871A98800271F61 /* ExtensionLottie.swift */; };
 		80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA695285AE18D00BB515C /* PlantDetailVC.swift */; };
 		80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA699285AE4F200BB515C /* PlantDetailCell.swift */; };
 		80ABA69C285AE4F200BB515C /* PlantDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */; };
@@ -88,6 +93,11 @@
 		809F97E32859EAAA00E84DD7 /* PublishModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishModel.swift; sourceTree = "<group>"; };
 		809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsModel.swift; sourceTree = "<group>"; };
+		80AA70CD2870796C00271F61 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
+		80AA70CF287080DB00271F61 /* SunAndWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAndWaterCell.swift; sourceTree = "<group>"; };
+		80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SunAndWaterCell.xib; sourceTree = "<group>"; };
+		80AA70D42871951700271F61 /* 51686-a-botanical-wreath-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "51686-a-botanical-wreath-loading.json"; sourceTree = "<group>"; };
+		80AA70D62871A98800271F61 /* ExtensionLottie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionLottie.swift; sourceTree = "<group>"; };
 		80ABA695285AE18D00BB515C /* PlantDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailVC.swift; sourceTree = "<group>"; };
 		80ABA699285AE4F200BB515C /* PlantDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailCell.swift; sourceTree = "<group>"; };
 		80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlantDetailCell.xib; sourceTree = "<group>"; };
@@ -159,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				80BDB82028697B4A00FDB525 /* PlantyWorld.entitlements */,
+				80AA70D32871950000271F61 /* Lottie */,
 				809F97E52859ECBB00E84DD7 /* Manager */,
 				809F97DC285983D000E84DD7 /* Extension */,
 				809F97D9285982FA00E84DD7 /* Model */,
@@ -198,7 +209,6 @@
 				80ABA6D42862A2BA00BB515C /* Command */,
 				80ABA6D32862A29800BB515C /* Lobby */,
 				80BDB81E2869761600FDB525 /* LoginVC.swift */,
-				809276D9286C26E500C21701 /* EditProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				809F97DA285983CB00E84DD7 /* Extensions.Anchor.swift */,
+				80AA70D62871A98800271F61 /* ExtensionLottie.swift */,
 				809F97DD285991C700E84DD7 /* UIView Extension.swift */,
 				80BDB818286563BC00FDB525 /* Extension Color.swift */,
 				80BDB82128697E3400FDB525 /* Extension VC.swift */,
@@ -235,6 +246,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		80AA70D32871950000271F61 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				80AA70D42871951700271F61 /* 51686-a-botanical-wreath-loading.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		80ABA6A1285AF9D900BB515C /* PlantDetailPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +265,8 @@
 				80ABA69E285AF90400BB515C /* PlantDetailImageCell.xib */,
 				80ABA6A6285B90F300BB515C /* DetailWaterCell.swift */,
 				80ABA6A7285B90F300BB515C /* DetailWaterCell.xib */,
+				80AA70CF287080DB00271F61 /* SunAndWaterCell.swift */,
+				80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */,
 			);
 			path = PlantDetailPage;
 			sourceTree = "<group>";
@@ -305,6 +326,7 @@
 				80ABA695285AE18D00BB515C /* PlantDetailVC.swift */,
 				80ABA6C1285F521300BB515C /* ARMeasureVC.swift */,
 				80ABA6B8285C973D00BB515C /* CalendarVC.swift */,
+				80AA70CD2870796C00271F61 /* EditVC.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -332,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				80ABA6C32860616200BB515C /* ProfilVC.swift */,
+				809276D9286C26E500C21701 /* EditProfileVC.swift */,
 				8021B0E52864906100DA508A /* AddFriendVC.swift */,
 			);
 			path = Profile;
@@ -430,6 +453,8 @@
 				80ABA6BE285EDE1300BB515C /* NoteCell.xib in Resources */,
 				80ABA6CF2861B94D00BB515C /* CommandsCell.xib in Resources */,
 				809F97C4285879F500E84DD7 /* LaunchScreen.storyboard in Resources */,
+				80AA70D2287080DB00271F61 /* SunAndWaterCell.xib in Resources */,
+				80AA70D52871951700271F61 /* 51686-a-botanical-wreath-loading.json in Resources */,
 				809F97D6285982B700E84DD7 /* PlantsCollectionViewCell.xib in Resources */,
 				80ABA6A5285B8D7A00BB515C /* DetailSunCell.xib in Resources */,
 				80ABA6A0285AF90400BB515C /* PlantDetailImageCell.xib in Resources */,
@@ -514,6 +539,7 @@
 				809F97DB285983CB00E84DD7 /* Extensions.Anchor.swift in Sources */,
 				80ABA6B1285C4A0500BB515C /* CommandVC.swift in Sources */,
 				809276DA286C26E500C21701 /* EditProfileVC.swift in Sources */,
+				80AA70CE2870796C00271F61 /* EditVC.swift in Sources */,
 				80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */,
 				8021B0E62864906100DA508A /* AddFriendVC.swift in Sources */,
 				80ABA6CE2861B94D00BB515C /* CommandsCell.swift in Sources */,
@@ -521,6 +547,7 @@
 				80ABA6C42860616200BB515C /* ProfilVC.swift in Sources */,
 				80ABA6C6286097D400BB515C /* AddCommandVC.swift in Sources */,
 				809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */,
+				80AA70D72871A98800271F61 /* ExtensionLottie.swift in Sources */,
 				80ABA6A4285B8D7A00BB515C /* DetailSunCell.swift in Sources */,
 				809F97DE285991C700E84DD7 /* UIView Extension.swift in Sources */,
 				809F97B9285879F300E84DD7 /* LobbyViewController.swift in Sources */,
@@ -540,6 +567,7 @@
 				80ABA6AE285C375800BB515C /* TextFieldCell.swift in Sources */,
 				80BDB81F2869761600FDB525 /* LoginVC.swift in Sources */,
 				80BDB81C2869702600FDB525 /* TextViewCell.swift in Sources */,
+				80AA70D1287080DB00271F61 /* SunAndWaterCell.swift in Sources */,
 				80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */,
 				809F97B7285879F300E84DD7 /* SceneDelegate.swift in Sources */,
 				80ABA69F285AF90400BB515C /* PlantDetailImageCell.swift in Sources */,

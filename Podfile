@@ -16,6 +16,6 @@ pod 'Firebase/Storage'
 pod 'FSCalendar'
 pod 'Kingfisher'
 pod 'FirebaseFirestoreSwift'
-
+pod 'lottie-ios'
 
 end

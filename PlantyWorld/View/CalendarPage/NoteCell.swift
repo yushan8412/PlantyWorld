@@ -17,6 +17,7 @@ class NoteCell: UITableViewCell {
         setup()
         noteLB.textColor = .black
         noteContent.textColor = .black
+    
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,15 +31,17 @@ class NoteCell: UITableViewCell {
         bgView.addSubview(noteContent)
         bgView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                       bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
-                      paddingTop: 4, paddingLeft: 4, paddingBottom: 4, paddingRight: 4)
+                      paddingTop: 4, paddingLeft: 16, paddingBottom: 4, paddingRight: 16)
         noteLB.anchor(top: bgView.topAnchor, left: bgView.leftAnchor,
                       right: bgView.rightAnchor, paddingTop: 8,
                       paddingLeft: 16, paddingRight: 16)
         noteLB.numberOfLines = 0
+        noteLB.font =  UIFont(name: "Chalkboard SE", size: 20)
         noteContent.anchor(top: noteLB.bottomAnchor, left: bgView.leftAnchor,
                            bottom: bgView.bottomAnchor, right: bgView.rightAnchor,
                            paddingTop: 8, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
         noteContent.numberOfLines = 0
+        noteContent.font =  UIFont(name: "Chalkboard SE", size: 16)
         
     }
     

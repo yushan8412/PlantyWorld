@@ -12,6 +12,10 @@ import SwiftUI
 
 class PlantDetailVC: UIViewController {
     
+    @IBOutlet weak var editBtn: UIBarButtonItem!
+    @IBAction func editBtn(_ sender: UIBarButtonItem) {
+        goEditVC()
+    }
     var tableView = UITableView()
     var calenderBtn = UIButton()
     var measureBtn = UIButton()
@@ -24,10 +28,13 @@ class PlantDetailVC: UIViewController {
 
         view.addSubview(tableView)
         view.addSubview(btnStackView)
-        view.backgroundColor = .lightYellow
-        
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "32e3a86d9a8999f0632a696f3500c675")!)
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.separatorStyle = .none
+
         tableView.delegate = self
         tableView.dataSource = self
+        
         self.tableView.register(PlantDetailImageCell.self, forCellReuseIdentifier: PlantDetailImageCell.reuseidentify)
         self.tableView.register(UINib(nibName: "PlantDetailCell", bundle: nil),
                                 forCellReuseIdentifier: "PlantDetailCell")
@@ -37,6 +44,8 @@ class PlantDetailVC: UIViewController {
                                 forCellReuseIdentifier: "DetailWaterCell")
         self.tableView.register(UINib(nibName: "NoteCell", bundle: nil),
                                 forCellReuseIdentifier: "NoteCell")
+        self.tableView.register(UINib(nibName: "SunAndWaterCell", bundle: nil),
+                                forCellReuseIdentifier: "SunAndWaterCell")
         setup()
         setupStackView()
     
@@ -49,6 +58,12 @@ class PlantDetailVC: UIViewController {
     override func viewDidLayoutSubviews() {
         tableView.layoutIfNeeded()
     
+    }
+    
+    func goEditVC() {
+        let editVC = EditVC()
+        editVC.plant = self.plant
+        navigationController?.pushViewController(editVC, animated: true)
     }
     
     func setupStackView() {
@@ -64,27 +79,30 @@ class PlantDetailVC: UIViewController {
     
     func setup() {
         
-        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
+        tableView.anchor(top: view.topAnchor, left: view.leftAnchor,
                          bottom: btnStackView.topAnchor, right: view.rightAnchor,
                          paddingTop: 0, paddingLeft: 0,
                          paddingBottom: 0, paddingRight: 0)
-        tableView.backgroundColor = .lightYellow
+        tableView.backgroundColor = .clear
         
         btnStackView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                             right: view.rightAnchor, paddingLeft: 24,
                             paddingBottom: 32, paddingRight: 24)
-        btnStackView.backgroundColor = .lightYellow
+        btnStackView.backgroundColor = .clear
         
-        deleteBtn.setImage(UIImage(named: "fa6-regular_trash-can-3"), for: .normal)
+        deleteBtn.setImage(UIImage(named: "fa6-regular_trash-can-4"), for: .normal)
+        deleteBtn.tintColor = .black
         deleteBtn.layer.cornerRadius = 5
         deleteBtn.anchor(width: 50, height: 38)
         
         calenderBtn.setImage(UIImage(named: "Vector-3"), for: .normal)
+        calenderBtn.tintColor = .black
         calenderBtn.layer.cornerRadius = 5
         calenderBtn.anchor(width: 50, height: 38)
 
         measureBtn.anchor(width: 50, height: 38)
-        measureBtn.setImage(UIImage(named: "Group-3"), for: .normal)
+        measureBtn.setImage(UIImage(named: "Group-4"), for: .normal)
+        measureBtn.tintColor = .black
         measureBtn.layer.cornerRadius = 5
              
         calenderBtn.addTarget(self, action: #selector(toCalenderVC), for: .touchUpInside)
@@ -129,7 +147,7 @@ class PlantDetailVC: UIViewController {
  // MARK: TableView
 extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,41 +173,46 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "NoteCell") as? NoteCell
         else { return UITableViewCell() }
         
-        titleCell.nameLB.text = plant?.name ?? ""
-        titleCell.dateLB.text = plant?.date ?? ""
+        guard let swCell = tableView.dequeueReusableCell(
+            withIdentifier: SunAndWaterCell.reuseidentify,
+            for: indexPath) as? SunAndWaterCell
+        else { return UITableViewCell() }
+        
+        titleCell.nameLB.text = "Name : \(plant?.name ?? "")"
+        titleCell.dateLB.text = "Purchase Date : \(plant?.date ?? "")"
         sunCell.sunLB.text = "Sun🌼"
         waterCell.waterLB.text = "Water🌧"
-        noteCell.noteLB.text = "Note"
-        noteCell.noteContent.text = plant?.note[0] ?? "Don't have any note yet"
+        noteCell.noteLB.text = "Note : "
+        noteCell.noteContent.text = plant?.note ?? "Don't have any note yet"
         imageCell.image.kf.setImage(with: URL(string: plant?.image ?? ""))
                 
         if indexPath.row == 0 {
             
-            imageCell.backgroundColor = .lightYellow
+            imageCell.backgroundColor = .clear
             imageCell.isUserInteractionEnabled = false
             return imageCell
             
         } else if indexPath.row == 1 {
             
-            titleCell.backgroundColor = .lightYellow
+            titleCell.backgroundColor = .clear
             titleCell.isUserInteractionEnabled = false
+            titleCell.bgView.backgroundColor = .pyellow
+            titleCell.bgView.layer.cornerRadius = 25
             return titleCell
             
         } else if indexPath.row == 2 {
-            sunCell.backgroundColor = .lightYellow
-            sunCell.isUserInteractionEnabled = false
-            sunCell.sunColor(sunLevel: plant?.sun ?? 0)
-            return sunCell
-            
-        } else if indexPath.row == 3 {
-            
-            waterCell.backgroundColor = .lightYellow
-            waterCell.isUserInteractionEnabled = false
-            waterCell.waterColor(waterLevel: plant?.water ?? 0)
-            return waterCell
+            swCell.backgroundColor = .clear
+            swCell.sunLb.text = "\(plant?.sun ?? 0) / 5 "
+            swCell.waterLb.text = "\(plant?.water ?? 0) / 5 "
+            return swCell
                 
-        } else if indexPath.row == 4 {
-            noteCell.backgroundColor = .lightYellow
+        } else if indexPath.row == 3 {
+            noteCell.backgroundColor = .clear
+            noteCell.isUserInteractionEnabled = false
+            noteCell.noteContent.text = plant?.note
+            noteCell.bgView.backgroundColor = .pyellow
+            noteCell.bgView.layer.cornerRadius = 25
+
             return noteCell
         }
         
