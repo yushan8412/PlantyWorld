@@ -31,13 +31,16 @@ class CommandVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Planty Wall"
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .pyellow
+        
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "32e3a86d9a8999f0632a696f3500c675")!)
         
         self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
                                 forCellReuseIdentifier: "CommandCell")
+        tableView.backgroundColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +88,9 @@ class CommandVC: UIViewController {
                 for plant in plants {
                     print(plant)
                     self.allPost.append(plant)
+                    self.allPost.sort {
+                        $0.createdTime < $1.createdTime
+                    }
                     self.tableView.reloadData()
                 }
             }

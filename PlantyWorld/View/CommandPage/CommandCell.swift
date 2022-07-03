@@ -25,8 +25,6 @@ class CommandCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        contentView.layer.cornerRadius = 30
-//        contentView.backgroundColor = .lightGreen
         setup()
     }
 
@@ -36,7 +34,7 @@ class CommandCell: UITableViewCell {
     }
     
     func setup() {
-        contentView.backgroundColor = .pyellow
+        backgroundColor = .clear
         basicView.anchor(top: contentView.topAnchor,
                          left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor,
@@ -56,10 +54,14 @@ class CommandCell: UITableViewCell {
         titleLB.anchor(top: mainImage.bottomAnchor, left: basicView.leftAnchor,
                        right: basicView.rightAnchor, paddingTop: 8,
                        paddingLeft: 8, paddingRight: 8)
+        titleLB.font =  UIFont(name: "Chalkboard SE", size: 20)
+
         commandLB.anchor(top: titleLB.bottomAnchor, left: basicView.leftAnchor,
                          bottom: basicView.bottomAnchor, right: basicView.rightAnchor,
                          paddingTop: 8, paddingLeft: 8,
                          paddingBottom: 8, paddingRight: 8)
+        commandLB.font =  UIFont(name: "Chalkboard SE", size: 14)
+
         commandBtn.anchor(bottom: basicView.bottomAnchor, right: basicView.rightAnchor,
                           paddingBottom: 8, paddingRight: 8)
         commandBtn.setImage(UIImage(named: "conversation 1"), for: .normal)

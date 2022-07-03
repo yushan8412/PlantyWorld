@@ -101,12 +101,13 @@ class CalendarVC: UIViewController {
         calendar.backgroundColor = .lightYellow
         calendar.appearance.weekdayTextColor = .black
         calendar.appearance.headerTitleColor = .black
+        calendar.layer.cornerRadius = 20
         
     }
     
     func fetchData(date: String) {
         FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "", date: date) { events in self.dayEvent = events ?? []
-            print(self.dayEvent.count)
+            print(self.dayEvent)
             
         }
         

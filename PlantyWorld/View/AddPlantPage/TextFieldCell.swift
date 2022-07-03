@@ -24,9 +24,6 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
         reloadInputViews()
     }
     
-//    override func prepareForReuse() {
-//        textField.text = ""
-//    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -37,12 +34,14 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
                        left: contentView.leftAnchor,
                        right: contentView.rightAnchor,
                        paddingTop: 8, paddingLeft: 16, paddingRight: 8)
+        titleLB.font =  UIFont(name: "Chalkboard SE", size: 20)
         textField.anchor(top: titleLB.bottomAnchor,
                          left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor,
                          right: contentView.rightAnchor,
                          paddingTop: 8, paddingLeft: 8,
                          paddingBottom: 8, paddingRight: 8)
+        textField.font =  UIFont(name: "Chalkboard SE", size: 14)
        
     }
     

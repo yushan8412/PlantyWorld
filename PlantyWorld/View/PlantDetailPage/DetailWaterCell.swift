@@ -77,6 +77,8 @@ class DetailWaterCell: UITableViewCell {
         setup()
         setupStackView()
         waterLB.textColor = .black
+        waterLB.font =  UIFont(name: "Chalkboard SE", size: 20)
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

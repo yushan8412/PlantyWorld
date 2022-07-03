@@ -28,6 +28,8 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
                        right: contentView.rightAnchor,
                        paddingTop: 8, paddingLeft: 16, paddingRight: 8)
         title.textColor = .black
+        title.font =  UIFont(name: "Chalkboard SE", size: 20)
+
         textView.anchor(top: title.bottomAnchor,
                          left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor,
@@ -38,6 +40,8 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
         textView.layer.cornerRadius = 10
         textView.backgroundColor = .white
         textView.textColor = .black
+        textView.font =  UIFont(name: "Chalkboard SE", size: 16)
+
     }
     
 }

@@ -28,18 +28,9 @@ class LobbyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .peach
-        
-        let barAppearance = UINavigationBarAppearance()
-        barAppearance.configureWithTransparentBackground()
-        UINavigationBar.appearance().standardAppearance = barAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = barAppearance
-
-        
-        self.navigationController?.navigationBar.alpha = 0
-        UINavigationBar.appearance().backgroundColor = .clear
-        tabBarController?.tabBar.backgroundColor = .clear
-        plantsCollectionView.backgroundColor = .pyellow
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "32e3a86d9a8999f0632a696f3500c675")!)
+                
+        plantsCollectionView.backgroundColor = .clear
         plantsCollectionView.delegate = self
         plantsCollectionView.dataSource = self
         
@@ -52,6 +43,8 @@ class LobbyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
         self.plantList.removeAll()
+//        FirebaseManager.shared.fetchUserPlantsData(uid: "SvPOVniW2hVeiT1kbmXXZGx45Fr2", completion: { plantList in self.plantList = plantList ?? [] })
+        // MARK: 正式模式
         FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
         self.plantsCollectionView.reloadData()
         print(plantList.count)
@@ -60,9 +53,8 @@ class LobbyViewController: UIViewController {
             let loginVC = LoginVC()
             loginVC.modalPresentationStyle = .overFullScreen
             navigationController?.present(loginVC, animated: true, completion: nil)
-            self.plantsCollectionView.numberOfItems(inSection: 0) == 0
+            self.plantsCollectionView.numberOfItems(inSection: 0)
         } else {
-//            self.plantsCollectionView.isHidden = false
             return
         }
     }
@@ -91,7 +83,6 @@ class LobbyViewController: UIViewController {
 extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return plantList.count
-//        print("@@@@@@in TB view  \(plantList.count)")
     }
     
     func collectionView(_ collectionView: UICollectionView,

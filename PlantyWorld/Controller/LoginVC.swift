@@ -11,10 +11,12 @@ class LoginVC: UIViewController {
     var appleUserID: String?
     var bgView = UIView()
     var closeBtn = UIButton(type: .close)
+    var loginLb = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(bgView)
+        view.addSubview(loginLb)
 
         self.tabBarController?.tabBar.isHidden = false
         self.setSignInWithAppleBtn()
@@ -51,6 +53,11 @@ class LoginVC: UIViewController {
         closeBtn.anchor(top: bgView.topAnchor, right: bgView.rightAnchor,
                         paddingTop: 35, paddingRight: 35)
         closeBtn.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
+        
+        loginLb.anchor(top: bgView.topAnchor, paddingTop: 120)
+        loginLb.centerX(inView: bgView)
+        loginLb.text = " Login to Record Your Plants? "
+        loginLb.font = UIFont(name: "Marker Felt", size: 28)
     
     }
     

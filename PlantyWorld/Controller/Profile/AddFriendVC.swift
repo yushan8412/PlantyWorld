@@ -21,7 +21,7 @@ class AddFriendVC: UIViewController {
     var friendData: User?
     
     override func viewDidLoad() {
-        view.backgroundColor = .lightOrange
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "1b9beeb0bfdab5dfba24167cc6e87579")!)
         self.tabBarController?.tabBar.isHidden = true
         view.addSubview(titleLB)
         view.addSubview(searchBtn)
@@ -36,17 +36,21 @@ class AddFriendVC: UIViewController {
         titleLB.centerX(inView: view)
         titleLB.text = " Enter Your Frends Email "
         titleLB.textColor = .darkGray
+        titleLB.font = UIFont(name: "Chalkboard SE", size: 24)
         
-        searchTXF.center(inView: view, yConstant: -100)
+        searchTXF.center(inView: view, yConstant: 0)
         searchTXF.anchor(width: 300, height: 40)
         searchTXF.backgroundColor = .white
         searchTXF.textColor = .black
         searchTXF.placeholder = " Friend's Email "
+        searchTXF.layer.borderWidth = 0.5
         
         searchBtn.anchor(top: searchTXF.bottomAnchor, paddingTop: 16)
         searchBtn.centerX(inView: view)
         searchBtn.setTitle(" Search ", for: .normal)
-        searchBtn.backgroundColor = .dPeach
+        searchBtn.backgroundColor = .pgreen
+        searchBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        searchBtn.layer.cornerRadius = 20
         
         searchBtn.addTarget(self, action: #selector(searchFriend), for: .touchUpInside)
 

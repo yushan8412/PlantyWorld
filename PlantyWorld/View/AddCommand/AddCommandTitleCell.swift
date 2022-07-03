@@ -33,11 +33,13 @@ class AddCommandTitleCell: UITableViewCell {
                      right: contentView.rightAnchor, paddingTop: 12,
                      paddingLeft: 8, paddingBottom: 8)
         title.textColor = .darkGray
+        title.font = UIFont(name: "Chalkboard SE", size: 20)
         
         date.anchor(top: title.bottomAnchor, left: plantImage.rightAnchor,
                     right: contentView.rightAnchor, paddingTop: 8,
                     paddingLeft: 8, paddingRight: 8)
         date.textColor = .darkGray
+        date.font = UIFont(name: "Chalkboard SE", size: 14)
     }
     
 }

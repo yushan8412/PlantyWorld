@@ -72,6 +72,7 @@ class DetailSunCell: UITableViewCell {
         super.awakeFromNib()
         setup()
         sunLB.textColor = .black
+        sunLB.font =  UIFont(name: "Chalkboard SE", size: 20)
         
     }
     

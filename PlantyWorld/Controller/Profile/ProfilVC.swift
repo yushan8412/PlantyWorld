@@ -68,12 +68,6 @@ class ProfileVC: UIViewController {
         getUserData()
         levelColor()
         
-//        if userData?.userImage == "" {
-//            self.userImage.image = UIImage(named: "About us")
-//        } else {
-//            userImage.kf.setImage(with: URL(string: userData?.userImage ?? ""))
-//        }
-        
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()
             loginVC.modalPresentationStyle = .overFullScreen
@@ -113,9 +107,11 @@ class ProfileVC: UIViewController {
         
         logoutBtn.anchor(width: 250, height: 50)
         logoutBtn.setTitle(" LOG OUT ", for: .normal)
+        logoutBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         
         deleteUserBtn.anchor(width: 250, height: 50)
-        deleteUserBtn.setTitle(" DELETE ", for: .normal)
+        deleteUserBtn.setTitle(" DELETE ACCOUNT", for: .normal)
+        deleteUserBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         
         userPlantsBG.addSubview(plantsImage)
         plantsImage.anchor(top: userPlantsBG.topAnchor, left: userPlantsBG.leftAnchor,
@@ -126,6 +122,7 @@ class ProfileVC: UIViewController {
                           bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
                           paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         userPlants.textColor = .white
+        userPlants.font = UIFont(name: "Chalkboard SE", size: 24)
     }
     
     func setup() {
@@ -144,6 +141,7 @@ class ProfileVC: UIViewController {
         userName.anchor(top: userBackground.bottomAnchor, paddingTop: 8, height: 30)
         userName.centerX(inView: view)
         userName.textColor = .darkGray
+        userName.font = UIFont(name: "Chalkboard SE", size: 24)
         userName.setContentHuggingPriority(UILayoutPriority(255), for: .vertical)
         
     }
@@ -182,6 +180,7 @@ class ProfileVC: UIViewController {
         
         addFriendBtn.setTitle(" + ADD FRIEND", for: .normal)
         addFriendBtn.tintColor = .black
+        addFriendBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
         
         logoutBtn.addTarget(self, action: #selector(tapToLogout), for: .touchUpInside)
@@ -248,7 +247,9 @@ class ProfileVC: UIViewController {
     }
     
     func getData() {
-        FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? []
+            self.levelColor()
+        })
     }
     
     func getUserData() {
@@ -298,21 +299,17 @@ class ProfileVC: UIViewController {
         let addFriendVC = AddFriendVC()
         navigationController?.pushViewController(addFriendVC, animated: true)
         
-//        let loginVC = LoginVC()
-//        loginVC.modalPresentationStyle = .overFullScreen
-//        navigationController?.present(loginVC, animated: true, completion: nil)
-        
     }
     
     func levelColor() {
         if plantList.count < 5 {
             userBackground.backgroundColor = .gray
         } else if plantList.count >= 5 {
-            userBackground.backgroundColor = .blue
+            userBackground.backgroundColor = .pyellow
         } else if plantList.count >= 10 {
-            userBackground.backgroundColor = .red
+            userBackground.backgroundColor = .peach
         } else if plantList.count >= 15 {
-            userBackground.backgroundColor = .systemYellow
+            userBackground.backgroundColor = .lightYellow
         }
     }
 }

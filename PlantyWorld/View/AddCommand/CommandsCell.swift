@@ -42,13 +42,16 @@ class CommandsCell: UITableViewCell {
         
         commandView.addSubview(name)
         name.anchor(top: commandView.topAnchor, left: profilePic.rightAnchor, paddingTop: 8, paddingLeft: 8)
+        name.font =  UIFont(name: "Chalkboard SE", size: 18)
         
         commandView.addSubview(command)
         command.anchor(top: name.bottomAnchor, left: profilePic.rightAnchor,
                        bottom: commandView.bottomAnchor,
-                       right: commandView.rightAnchor, paddingTop: 8,
+                       right: commandView.rightAnchor, paddingTop: 0,
                        paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         command.numberOfLines = 0
+        command.font =  UIFont(name: "Chalkboard SE", size: 16)
+
     }
     
 }

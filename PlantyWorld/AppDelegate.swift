@@ -23,6 +23,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let db = Firestore.firestore()
         IQKeyboardManager.shared.enable = true
         locationManager.requestWhenInUseAuthorization()
+        
+        let barApprance = UINavigationBarAppearance()
+        barApprance.configureWithTransparentBackground()
+        barApprance.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 10)
+        barApprance.titleTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont(name: "Marker Felt", size: 33)
+         ]
+        UINavigationBar.appearance().standardAppearance = barApprance
+        UINavigationBar.appearance().scrollEdgeAppearance = barApprance
+        
+        let tabApprance = UITabBarAppearance()
+        tabApprance.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = tabApprance
+        UITabBar.appearance().scrollEdgeAppearance = tabApprance
+        
+        
 
         return true
     }

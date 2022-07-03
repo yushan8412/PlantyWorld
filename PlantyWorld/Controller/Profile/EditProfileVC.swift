@@ -31,8 +31,11 @@ class EditProfileVC: UIViewController {
         setBtnUp()
         userTF.layer.cornerRadius = 10
         email.layer.cornerRadius = 10
-        print("123123123123 \(userData)")
-
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        showPic()
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,7 +55,6 @@ class EditProfileVC: UIViewController {
         
         userImage.centerX(inView: view)
         userImage.anchor(top: view.topAnchor, paddingTop: 180, width: 250, height: 250)
-        userImage.image = UIImage(named: "About us")
         userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
         userImage.layer.cornerRadius = 30
@@ -61,11 +63,13 @@ class EditProfileVC: UIViewController {
         nameLB.centerX(inView: view)
         nameLB.textColor = .black
         nameLB.text = " Your Name "
+        nameLB.font = UIFont(name: "Chalkboard SE", size: 24)
         
         userTF.anchor(top: nameLB.bottomAnchor, paddingTop: 16, width: 200, height: 40)
         userTF.centerX(inView: view)
         userTF.backgroundColor = .white
         userTF.textColor = .black
+        userTF.text = " \(userData?.name ?? "" ) "
         userTF.placeholder = "Name"
         userTF.layer.borderWidth = 0.5
 
@@ -73,6 +77,7 @@ class EditProfileVC: UIViewController {
         emailLB.centerX(inView: view)
         emailLB.text = "Email"
         emailLB.textColor = .black
+        emailLB.font = UIFont(name: "Chalkboard SE", size: 24)
 
         email.anchor(top: emailLB.bottomAnchor, paddingTop: 16, width: 300, height: 40)
         email.centerX(inView: view)
@@ -83,10 +88,12 @@ class EditProfileVC: UIViewController {
         
         backBtn.anchor(top: view.topAnchor, right: view.rightAnchor, paddingTop: 48, paddingRight: 24)
         backBtn.backgroundColor = .black
+        backBtn.layer.cornerRadius = 15
         
         comfirmBtn.anchor(bottom: view.bottomAnchor, paddingBottom: 24)
         comfirmBtn.centerX(inView: view)
         comfirmBtn.setTitle("Comfirm", for: .normal)
+        comfirmBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         comfirmBtn.backgroundColor = .dPeach
         
         addPicBtn.anchor(bottom: userImage.bottomAnchor, right:
@@ -101,6 +108,12 @@ class EditProfileVC: UIViewController {
         backBtn.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         addPicBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
         comfirmBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
+    }
+    
+    func lottie() {
+        let animationView = loadAnimation(name: "51686-a-botanical-wreath-loading", loopMode: .loop)
+        animationView.play()
+
     }
     
     @objc func dismissVC() {
@@ -139,6 +152,14 @@ class EditProfileVC: UIViewController {
         present(photoController, animated: true, completion: nil)
     }
     
+    func showPic() {
+        if userData?.userImage != "no image yet" {
+            self.userImage.kf.setImage(with: URL(string: userData?.userImage ?? ""))
+        } else {
+            self.userImage.image = UIImage(named: "About us")
+        }
+    }
+    
     @objc func tapToUpdate() {
         
         let imageData = self.userImage.image!.jpegData(compressionQuality: 0.3)
@@ -175,6 +196,7 @@ class EditProfileVC: UIViewController {
             
         }
         self.comfirmBtn.isEnabled = false
+        self.lottie()
     }
     
     func lodingPic() {
@@ -182,7 +204,6 @@ class EditProfileVC: UIViewController {
     }
     
 }
-
 
 
 extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

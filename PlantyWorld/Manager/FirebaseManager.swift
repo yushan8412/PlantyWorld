@@ -23,7 +23,7 @@ class FirebaseManager {
     //        plant.date
     //    }
     
-    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: [String], completion: @escaping (Result<Void, Error>) -> Void) {
+    func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let plants = dataBase.collection("plants")
         let document = plants.document()
         let timeInterval = Date()
@@ -52,6 +52,18 @@ class FirebaseManager {
             }
         }
     }
+    
+    func updatePlantInfo(plantID: String, image: String, name: String, water: Int, sun: Int, note: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let docRef = dataBase.collection("plants").document(plantID).updateData([
+            "name": name,
+            "image": image,
+            "water": water,
+            "sun": sun,
+            "note": note
+        ])
+        completion(.success(()))
+    }
+
     
     func addEvent(content: String, plantID: String, date: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let events = dataBase.collection("events")
@@ -115,10 +127,10 @@ class FirebaseManager {
                 let plantDate = plantObject["date"] as? String ?? ""
                 let plantSun = plantObject["sun"] as? Int ?? 0
                 let plantWater = plantObject["water"] as? Int ?? 0
-                let plantNote = plantObject["note"] as? [String] ?? [""]
+                let plantNote = plantObject["note"] as? String ?? ""
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
-                let createdTime = plantObject["createdTime"] as? Int ?? 0
+                let createdTime = plantObject["createdTime"] as? Date ?? Date()
                 guard let author = plantObject["author"] as? [String: Any] else { return }
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
                 
@@ -150,10 +162,10 @@ class FirebaseManager {
                 let plantDate = plantObject["date"] as? String ?? ""
                 let plantSun = plantObject["sun"] as? Int ?? 0
                 let plantWater = plantObject["water"] as? Int ?? 0
-                let plantNote = plantObject["note"] as? [String] ?? [""]
+                let plantNote = plantObject["note"] as? String ?? ""
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
-                let createdTime = plantObject["createdTime"] as? Int ?? 0
+                let createdTime = plantObject["createdTime"] as? Date ?? Date()
                 guard let author = plantObject["author"] as? [String: Any] else { return }
                 let authorr = Author(name: author["name"] as? String ?? "", id: author["id"] as? String ?? "")
                 

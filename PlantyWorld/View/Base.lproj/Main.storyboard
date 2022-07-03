@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Plants-->
+        <!--MY PLANTS-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="LobbyViewController" id="BYZ-38-t0r" customClass="LobbyViewController" customModule="PlantyWorld" customModuleProvider="target" sceneMemberID="viewController">
@@ -47,7 +47,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8k7-M4-m8d" secondAttribute="trailing" id="ydz-Jo-FRO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Plants" id="uW5-g0-9jL">
+                    <navigationItem key="navigationItem" title="MY PLANTS" leftItemsSupplementBackButton="YES" id="uW5-g0-9jL">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="VP5-U5-w7v">
                             <color key="tintColor" red="1" green="0.33297625689999999" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -77,9 +77,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKZ-yL-BOR">
-                                <rect key="frame" x="312.5" y="762" width="81.5" height="31"/>
+                                <rect key="frame" x="291" y="762" width="103" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="我的位置"/>
+                                <buttonConfiguration key="configuration" style="plain" title="My Location"/>
                                 <connections>
                                     <action selector="showLocation:" destination="dr7-X2-9Vd" eventType="touchUpInside" id="GbU-3L-wCd"/>
                                 </connections>
@@ -164,6 +164,12 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="32"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="textShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <offsetWrapper key="textShadowOffset" horizontal="-100" vertical="0.0"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -264,7 +270,16 @@
                         <viewLayoutGuide key="safeArea" id="9sf-wK-iGc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2EM-lS-rGp"/>
+                    <navigationItem key="navigationItem" id="2EM-lS-rGp">
+                        <barButtonItem key="rightBarButtonItem" image="edit-image" style="plain" id="h65-IE-rkd">
+                            <connections>
+                                <action selector="editBtn:" destination="zHc-p7-in6" id="tn5-99-RaX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editBtn" destination="h65-IE-rkd" id="YO8-r2-dSL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GqF-au-Srw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -274,6 +289,7 @@
     <resources>
         <image name="Natural Food" width="32" height="32"/>
         <image name="ant-design_home-outlined" width="32" height="32"/>
+        <image name="edit-image" width="32" height="32"/>
         <image name="locations 1-2" width="35" height="35"/>
         <image name="united 1" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
