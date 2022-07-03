@@ -7,14 +7,40 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
+import FirebaseFirestore
+import Firebase
+import IQKeyboardManagerSwift
+import CoreLocation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
+    let locationManager = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FirebaseApp.configure()
+        let db = Firestore.firestore()
+        IQKeyboardManager.shared.enable = true
+        locationManager.requestWhenInUseAuthorization()
+        
+        let barApprance = UINavigationBarAppearance()
+        barApprance.configureWithTransparentBackground()
+        barApprance.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 10)
+        barApprance.titleTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont(name: "Marker Felt", size: 33)
+         ]
+        UINavigationBar.appearance().standardAppearance = barApprance
+        UINavigationBar.appearance().scrollEdgeAppearance = barApprance
+        
+        let tabApprance = UITabBarAppearance()
+        tabApprance.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = tabApprance
+        UITabBar.appearance().scrollEdgeAppearance = tabApprance
+        
+        
+
         return true
     }
 
@@ -78,4 +104,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
