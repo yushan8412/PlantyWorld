@@ -44,6 +44,8 @@ class ProfileVC: UIViewController {
         }
     }
     
+    
+    
     override func viewDidLoad() {
         view.addSubview(backView)
         view.backgroundColor = UIColor(patternImage: UIImage(named: "Soft")!)
@@ -297,6 +299,7 @@ class ProfileVC: UIViewController {
     
     @objc func goAddFriendVC() {
         let addFriendVC = AddFriendVC()
+        addFriendVC.userDate = self.userData
         navigationController?.pushViewController(addFriendVC, animated: true)
         
     }

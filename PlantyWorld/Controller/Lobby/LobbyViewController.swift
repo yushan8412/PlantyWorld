@@ -74,7 +74,7 @@ class LobbyViewController: UIViewController {
     }
     
     func toAddVC () {
-        navigationController?.pushViewController(addPlantVC, animated: true)
+        navigationController?.pushViewController(AddPlantVC(), animated: true)
     }
 
 }
@@ -95,6 +95,7 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
         cell.title.text = plantList[indexPath.item].name
         cell.contentView.layer.cornerRadius = 10
         cell.mainPic.kf.setImage(with: URL(string: plantList[indexPath.row].image))
+        cell.waterDrop.isHidden = true
                 
         return cell
     }
@@ -108,6 +109,7 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
             if let indexPath = plantsCollectionView.indexPathsForSelectedItems?.first {
                 guard let nextVC = segue.destination as? PlantDetailVC else { return }
                         nextVC.plant = plantList[indexPath.item]
+//                nextVC.plantID = plantList[indexPath.item].id
             }
         }
     }

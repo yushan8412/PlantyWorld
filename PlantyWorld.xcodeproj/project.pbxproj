@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		801B188D2872E33100C6A548 /* QRcodeScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B188C2872E33100C6A548 /* QRcodeScanVC.swift */; };
 		8021B0E62864906100DA508A /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021B0E52864906100DA508A /* AddFriendVC.swift */; };
 		809276D8286AA43400C21701 /* Extension.Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809276D7286AA43400C21701 /* Extension.Alert.swift */; };
 		809276DA286C26E500C21701 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809276D9286C26E500C21701 /* EditProfileVC.swift */; };
@@ -71,6 +72,7 @@
 /* Begin PBXFileReference section */
 		028CD96F77904254EB42D3C5 /* Pods-PlantyWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.release.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.release.xcconfig"; sourceTree = "<group>"; };
 		7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlantyWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		801B188C2872E33100C6A548 /* QRcodeScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRcodeScanVC.swift; sourceTree = "<group>"; };
 		8021B0E52864906100DA508A /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		809276D7286AA43400C21701 /* Extension.Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.Alert.swift; sourceTree = "<group>"; };
 		809276D9286C26E500C21701 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				80ABA6C1285F521300BB515C /* ARMeasureVC.swift */,
 				80ABA6B8285C973D00BB515C /* CalendarVC.swift */,
 				80AA70CD2870796C00271F61 /* EditVC.swift */,
+				801B188C2872E33100C6A548 /* QRcodeScanVC.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				80ABA6A4285B8D7A00BB515C /* DetailSunCell.swift in Sources */,
 				809F97DE285991C700E84DD7 /* UIView Extension.swift in Sources */,
 				809F97B9285879F300E84DD7 /* LobbyViewController.swift in Sources */,
+				801B188D2872E33100C6A548 /* QRcodeScanVC.swift in Sources */,
 				80ABA6A8285B90F300BB515C /* DetailWaterCell.swift in Sources */,
 				809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */,
 				80ABA6B9285C973E00BB515C /* CalendarVC.swift in Sources */,
@@ -720,7 +724,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PlantyWorld/PlantyWorld.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
@@ -737,7 +741,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -754,7 +758,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PlantyWorld/PlantyWorld.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
@@ -771,7 +775,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

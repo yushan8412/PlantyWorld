@@ -56,7 +56,6 @@ class CommandVC: UIViewController {
         } else {
             return
         }
-        
     }
     
     func getUserFriendList() {

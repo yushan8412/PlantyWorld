@@ -38,7 +38,7 @@ class PlantsCollectionViewCell: UICollectionViewCell {
         
         title.anchor(top: self.contentView.topAnchor,
                      left: self.contentView.leftAnchor,
-                     paddingTop: 16, paddingLeft: 14)
+                     paddingTop: 8, paddingLeft: 14)
         title.font =  UIFont(name: "Chalkboard SE", size: 20)
         
         mainPic.anchor(top: title.bottomAnchor,
@@ -55,7 +55,6 @@ class PlantsCollectionViewCell: UICollectionViewCell {
         waterDrop.image = UIImage(named: "Vector-5")
         // water reminder? UIButtom timer
         
-
     }
 
 }

@@ -69,7 +69,7 @@ class EditProfileVC: UIViewController {
         userTF.centerX(inView: view)
         userTF.backgroundColor = .white
         userTF.textColor = .black
-        userTF.text = " \(userData?.name ?? "" ) "
+        userTF.text = "\(userData?.name ?? "")"
         userTF.placeholder = "Name"
         userTF.layer.borderWidth = 0.5
 
@@ -81,7 +81,7 @@ class EditProfileVC: UIViewController {
 
         email.anchor(top: emailLB.bottomAnchor, paddingTop: 16, width: 300, height: 40)
         email.centerX(inView: view)
-        email.text = " \(userData?.useremail ?? "" )"
+        email.text = "\(userData?.useremail ?? "")"
         email.textColor = .darkGray
         email.backgroundColor = .white
         email.layer.borderWidth = 0.5
@@ -197,6 +197,8 @@ class EditProfileVC: UIViewController {
         }
         self.comfirmBtn.isEnabled = false
         self.lottie()
+//        presentingViewController?.viewWillAppear(true)
+        PlantDetailVC().viewWillAppear(true)
     }
     
     func lodingPic() {
