@@ -33,6 +33,11 @@
 		80AA70D2287080DB00271F61 /* SunAndWaterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */; };
 		80AA70D52871951700271F61 /* 51686-a-botanical-wreath-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 80AA70D42871951700271F61 /* 51686-a-botanical-wreath-loading.json */; };
 		80AA70D72871A98800271F61 /* ExtensionLottie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA70D62871A98800271F61 /* ExtensionLottie.swift */; };
+		80AB6FBD2873D82E0024D226 /* AccountManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB6FBC2873D82E0024D226 /* AccountManagerVC.swift */; };
+		80AB6FBF2873D8440024D226 /* FriendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB6FBE2873D8440024D226 /* FriendListVC.swift */; };
+		80AB6FC12873E6D10024D226 /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB6FC02873E6D10024D226 /* WebViewVC.swift */; };
+		80AB6FC5287406410024D226 /* FriendListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AB6FC3287406410024D226 /* FriendListCell.swift */; };
+		80AB6FC6287406410024D226 /* FriendListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AB6FC4287406410024D226 /* FriendListCell.xib */; };
 		80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA695285AE18D00BB515C /* PlantDetailVC.swift */; };
 		80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA699285AE4F200BB515C /* PlantDetailCell.swift */; };
 		80ABA69C285AE4F200BB515C /* PlantDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */; };
@@ -100,6 +105,11 @@
 		80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SunAndWaterCell.xib; sourceTree = "<group>"; };
 		80AA70D42871951700271F61 /* 51686-a-botanical-wreath-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "51686-a-botanical-wreath-loading.json"; sourceTree = "<group>"; };
 		80AA70D62871A98800271F61 /* ExtensionLottie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionLottie.swift; sourceTree = "<group>"; };
+		80AB6FBC2873D82E0024D226 /* AccountManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManagerVC.swift; sourceTree = "<group>"; };
+		80AB6FBE2873D8440024D226 /* FriendListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListVC.swift; sourceTree = "<group>"; };
+		80AB6FC02873E6D10024D226 /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = "<group>"; };
+		80AB6FC3287406410024D226 /* FriendListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCell.swift; sourceTree = "<group>"; };
+		80AB6FC4287406410024D226 /* FriendListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendListCell.xib; sourceTree = "<group>"; };
 		80ABA695285AE18D00BB515C /* PlantDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailVC.swift; sourceTree = "<group>"; };
 		80ABA699285AE4F200BB515C /* PlantDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailCell.swift; sourceTree = "<group>"; };
 		80ABA69A285AE4F200BB515C /* PlantDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlantDetailCell.xib; sourceTree = "<group>"; };
@@ -190,6 +200,7 @@
 		809F97D7285982C000E84DD7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				80AB6FC2287406270024D226 /* FriendList */,
 				80ABA6C72861AA6700BB515C /* AddCommand */,
 				80ABA6BA285EDDF400BB515C /* CalendarPage */,
 				80ABA6B7285C4C6C00BB515C /* LobbyPage */,
@@ -254,6 +265,15 @@
 				80AA70D42871951700271F61 /* 51686-a-botanical-wreath-loading.json */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		80AB6FC2287406270024D226 /* FriendList */ = {
+			isa = PBXGroup;
+			children = (
+				80AB6FC3287406410024D226 /* FriendListCell.swift */,
+				80AB6FC4287406410024D226 /* FriendListCell.xib */,
+			);
+			path = FriendList;
 			sourceTree = "<group>";
 		};
 		80ABA6A1285AF9D900BB515C /* PlantDetailPage */ = {
@@ -359,6 +379,9 @@
 				80ABA6C32860616200BB515C /* ProfilVC.swift */,
 				809276D9286C26E500C21701 /* EditProfileVC.swift */,
 				8021B0E52864906100DA508A /* AddFriendVC.swift */,
+				80AB6FBC2873D82E0024D226 /* AccountManagerVC.swift */,
+				80AB6FBE2873D8440024D226 /* FriendListVC.swift */,
+				80AB6FC02873E6D10024D226 /* WebViewVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -466,6 +489,7 @@
 				80ABA69C285AE4F200BB515C /* PlantDetailCell.xib in Resources */,
 				809F97BC285879F300E84DD7 /* Main.storyboard in Resources */,
 				80ABA6CB2861AAD400BB515C /* AddCommandTitleCell.xib in Resources */,
+				80AB6FC6287406410024D226 /* FriendListCell.xib in Resources */,
 				80ABA6B6285C4C6100BB515C /* CommandCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,9 +570,11 @@
 				80ABA6C2285F521300BB515C /* ARMeasureVC.swift in Sources */,
 				8021B0E62864906100DA508A /* AddFriendVC.swift in Sources */,
 				80ABA6CE2861B94D00BB515C /* CommandsCell.swift in Sources */,
+				80AB6FC12873E6D10024D226 /* WebViewVC.swift in Sources */,
 				80BDB824286995CB00FDB525 /* UserModel.swift in Sources */,
 				80ABA6C42860616200BB515C /* ProfilVC.swift in Sources */,
 				80ABA6C6286097D400BB515C /* AddCommandVC.swift in Sources */,
+				80AB6FBF2873D8440024D226 /* FriendListVC.swift in Sources */,
 				809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */,
 				80AA70D72871A98800271F61 /* ExtensionLottie.swift in Sources */,
 				80ABA6A4285B8D7A00BB515C /* DetailSunCell.swift in Sources */,
@@ -558,6 +584,7 @@
 				80ABA6A8285B90F300BB515C /* DetailWaterCell.swift in Sources */,
 				809F97B5285879F300E84DD7 /* AppDelegate.swift in Sources */,
 				80ABA6B9285C973E00BB515C /* CalendarVC.swift in Sources */,
+				80AB6FBD2873D82E0024D226 /* AccountManagerVC.swift in Sources */,
 				809F97D5285982B700E84DD7 /* PlantsCollectionViewCell.swift in Sources */,
 				80ABA6D12861CC8400BB515C /* MapVC.swift in Sources */,
 				80ABA6BD285EDE1300BB515C /* NoteCell.swift in Sources */,
@@ -570,6 +597,7 @@
 				80ABA6CA2861AAD400BB515C /* AddCommandTitleCell.swift in Sources */,
 				80ABA6AE285C375800BB515C /* TextFieldCell.swift in Sources */,
 				80BDB81F2869761600FDB525 /* LoginVC.swift in Sources */,
+				80AB6FC5287406410024D226 /* FriendListCell.swift in Sources */,
 				80BDB81C2869702600FDB525 /* TextViewCell.swift in Sources */,
 				80AA70D1287080DB00271F61 /* SunAndWaterCell.swift in Sources */,
 				80ABA696285AE18D00BB515C /* PlantDetailVC.swift in Sources */,

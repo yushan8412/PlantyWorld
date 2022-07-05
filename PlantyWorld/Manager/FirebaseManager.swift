@@ -66,8 +66,9 @@ class FirebaseManager {
         }
     }
     
-    func updatePlantInfo(plantID: String, image: String, name: String, water: Int, sun: Int, note: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let docRef = dataBase.collection("plants").document(plantID).updateData([
+    func updatePlantInfo(plantID: String, image: String, name: String, water: Int,
+                         sun: Int, note: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        dataBase.collection("plants").document(plantID).updateData([
             "image": image,
             "water": water,
             "sun": sun,
@@ -193,7 +194,6 @@ class FirebaseManager {
                 self.plant = plant
             }
             completion(self.plant)
-            
         }
     }
     

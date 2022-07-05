@@ -13,27 +13,20 @@ import Kingfisher
 class ProfileVC: UIViewController {
     
     var userId: String = ""
-    
     var backView = UIView()
-    
     var userImage = UIImageView()
     var userBackground = UIView()
     var userName = UILabel()
-    
     var userPlants = UILabel()
     var userPlantsBG = UIView()
     var plantsImage = UIImageView()
-    
     var addFBG = UIView()
     var addFriendBtn = UIButton()
-    
     var logoutBtn = UIButton()
     var editBtn = UIButton()
     let addPic = UIImage(named: "edit-image")
-    
     var deleteUserBtn = UIButton()
     var btnStackView = UIStackView()
-    
     var userData: User?
     
     var plantList: [PlantsModel] = [] {
@@ -43,8 +36,6 @@ class ProfileVC: UIViewController {
             }
         }
     }
-    
-    
     
     override func viewDidLoad() {
         view.addSubview(backView)
@@ -108,12 +99,12 @@ class ProfileVC: UIViewController {
         addFBG.anchor(width: 250, height: 50)
         
         logoutBtn.anchor(width: 250, height: 50)
-        logoutBtn.setTitle(" LOG OUT ", for: .normal)
+        logoutBtn.setTitle("FRIENDS LIST", for: .normal)
         logoutBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         
         deleteUserBtn.anchor(width: 250, height: 50)
-        deleteUserBtn.setTitle(" DELETE ACCOUNT", for: .normal)
-        deleteUserBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        deleteUserBtn.setTitle("ACCOUNT MANAGER", for: .normal)
+        deleteUserBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 22)
         
         userPlantsBG.addSubview(plantsImage)
         plantsImage.anchor(top: userPlantsBG.topAnchor, left: userPlantsBG.leftAnchor,
@@ -185,8 +176,8 @@ class ProfileVC: UIViewController {
         addFriendBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
         
-        logoutBtn.addTarget(self, action: #selector(tapToLogout), for: .touchUpInside)
-        deleteUserBtn.addTarget(self, action: #selector(deleteuser), for: .touchUpInside)
+        logoutBtn.addTarget(self, action: #selector(goFLiistVC), for: .touchUpInside)
+        deleteUserBtn.addTarget(self, action: #selector(goManagerVC), for: .touchUpInside)
 
     }
     
@@ -210,6 +201,24 @@ class ProfileVC: UIViewController {
         
         plantsImage.image = UIImage(named: "plant-pot")
     }
+    
+    @objc func goManagerVC() {
+        let nextVC = AccountManagerVC()
+        nextVC.userData = self.userData
+        nextVC.modalPresentationStyle = .overFullScreen
+        navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+    
+    @objc func goFLiistVC() {
+        let nextVC = FriendsListVC()
+        nextVC.userData = self.userData
+        nextVC.modalPresentationStyle = .overFullScreen
+        navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+    
+    
     
     @objc func goEditVC() {
         let editVC = EditProfileVC()

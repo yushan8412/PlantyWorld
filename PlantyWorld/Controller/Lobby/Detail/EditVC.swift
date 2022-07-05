@@ -65,7 +65,6 @@ class EditVC: UIViewController {
         self.tableView.reloadData()
     }
 
-    
     func setAddPlantBtn() {
         picBackground.addSubview(addImageBtn)
         addImageBtn.anchor(bottom: picBackground.bottomAnchor,
@@ -126,7 +125,8 @@ class EditVC: UIViewController {
     
     func toLobbyVC() {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-          guard let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LobbyViewController") as? LobbyViewController else { return }
+          guard let loginVC = mainStoryboard.instantiateViewController(
+            withIdentifier: "LobbyViewController") as? LobbyViewController else { return }
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
@@ -144,7 +144,9 @@ class EditVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.updatePlantInfo(plantID: plant?.id ?? "", image: "\(url)", name: plantName, water: water, sun: sun, note: plantNote) { result in
+                            PlantyWorld.FirebaseManager.shared.updatePlantInfo(plantID:
+                                                                                plant?.id ?? "", image: "\(url)", name: plantName,
+                                                                               water: water, sun: sun, note: plantNote) { result in
                                 switch result {
                                 case .success:
                                     print("123")
@@ -194,7 +196,6 @@ class EditVC: UIViewController {
 
     }
 
-    
     func setupDetilArea() {
         
         tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,

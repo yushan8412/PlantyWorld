@@ -79,17 +79,20 @@ class UserManager {
                 let userID = userdata["id"] as? String ?? ""
                 let userImage = userdata["image"] as? String ?? ""
                 let followList = userdata["followList"] as? [String] ?? [""]
+                let blockList = userdata["blockList"] as? [String] ?? [""]
 
-                let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail, followList: followList)
+                let user = User(userID: userID, name: userName, userImage: userImage,
+                                useremail: userEmail, followList: followList, blockList: blockList)
                 self.userData = user
             }
-            completion(.success(self.userData ?? User(userID: "", name: "", userImage: "", useremail: "", followList: [""])))
+            completion(.success(self.userData ?? User(userID: "", name: "", userImage: "",
+                                                      useremail: "", followList: [""], blockList: [""])))
             
         }
     }
     
     func updateUserInfo(uid: String, image: String, name: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let docRef = dataBase.collection("user").document(uid).updateData([
+        dataBase.collection("user").document(uid).updateData([
             "name": name,
             "image": image
         ])
@@ -105,5 +108,14 @@ class UserManager {
             // Account deleted.
           }
         }
+    }
+    
+    func deleteFriend(ownerID: String, userID: String) {
+        let documentRef = dataBase.collection("user").document(ownerID)
+        documentRef.updateData([
+            "followList": FieldValue.arrayRemove(["\(userID)"])
+        ])
+            print("deleted doc!!")
+
     }
 }

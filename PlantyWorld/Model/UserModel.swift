@@ -13,5 +13,5 @@ struct User: Codable, Equatable {
     var userImage: String
     var useremail: String
     var followList: [String]
-//    var blockedUserID: [String]
+    var blockList: [String]
 }

@@ -11,11 +11,6 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseAuth
 import Firebase
-import SwiftUI
-
-//protocol SendFriendDateDelegate: AnyObject {
-//    func getEmail()
-//}
 
 class AddFriendVC: UIViewController {
     
@@ -27,9 +22,7 @@ class AddFriendVC: UIViewController {
     var userDate: User?
     var qrImage = UIImageView()
     var scanBtn = UIButton()
-    
-//    var delegate: SendFriendDateDelegate?
-
+    var isBlock = false
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor(patternImage: UIImage(named: "1b9beeb0bfdab5dfba24167cc6e87579")!)
@@ -112,14 +105,15 @@ class AddFriendVC: UIViewController {
     }
     
     func checkEmail(email: String) {
-        let db = Firestore.firestore()
+//        var isBlock = userDate?.blockList.contains { (useremail)}
+        let dataBase = Firestore.firestore()
         
         // 在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
-        db.collection("user").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
+        dataBase.collection("user").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, _ ) in
             
             if let querySnapshot = querySnapshot {
                 if let document = querySnapshot.documents.first {
-                    self.confirm()
+//                    self.confirm()
                     
                     for data in querySnapshot.documents {
                         let userdata = data.data(with: ServerTimestampBehavior.none)
@@ -128,17 +122,47 @@ class AddFriendVC: UIViewController {
                         let userID = userdata["id"] as? String ?? ""
                         let userImage = userdata["image"] as? String ?? ""
                         let followList = userdata["followList"] as? [String] ?? [""]
-                        
-                        let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail, followList: followList)
-                        self.friendData = user
+                        let blockList = userdata["blockList"] as? [String] ?? [""]
 
+                        let user = User(userID:userID, name: userName, userImage: userImage,
+                                        useremail: userEmail, followList: followList, blockList: blockList)
+                        self.friendData = user
+                        let blocklist = user.blockList
+                        self.isBlock = blocklist.contains { (blockId) -> Bool in
+                            blockId == self.friendData?.userID
+                        }
                     }
                     print(document.data())
-                    print("your friend is exist")
+                    print("user is exist")
+                    let blocklist = self.userDate?.blockList ?? []
+                    self.isBlock = blocklist.contains { (blockId) -> Bool in
+                        blockId == self.friendData?.userID
+                    }
+                    
+                    if self.isBlock == true {
+                        let alertController = UIAlertController(
+                            title: "Can not found this user",
+                            message: "要不要確認一下好友 Email?",
+                            preferredStyle: .alert)
+                        let cancelAction = UIAlertAction(
+                            title: "確認",
+                            style: .cancel,
+                            handler: nil)
+                        alertController.addAction(cancelAction)
+
+                        self.present(
+                            alertController,
+                            animated: true,
+                            completion: nil)
+                    } else if self.isBlock == false {
+                        
+                        self.confirm()
+                    }
                         
                 } else {
+                   
                     let alertController = UIAlertController(
-                        title: "找不到這個好友",
+                        title: "Can not found this user",
                         message: "要不要確認一下好友 Email?",
                         preferredStyle: .alert)
                     let cancelAction = UIAlertAction(
@@ -178,7 +202,7 @@ class AddFriendVC: UIViewController {
     
     func confirm() {
         // 建立一個提示框
-        let db = Firestore.firestore()
+        let dataBase = Firestore.firestore()
 
         let alertController = UIAlertController(
             title: "追蹤好友植物",
@@ -197,7 +221,7 @@ class AddFriendVC: UIViewController {
             title: "送出",
             style: .default,
             handler: { _ in
-                db.collection("user").document(Auth.auth().currentUser?.uid ?? "").updateData([
+                dataBase.collection("user").document(Auth.auth().currentUser?.uid ?? "").updateData([
                     "followList": FieldValue.arrayUnion([ "\(self.friendData?.userID ?? "")"])
                     // document.update -> don't have this member in document, so need to connect it with .reference
                     // arrayUnion -> same data can't be appent twice

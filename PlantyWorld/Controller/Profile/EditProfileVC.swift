@@ -197,7 +197,6 @@ class EditProfileVC: UIViewController {
         }
         self.comfirmBtn.isEnabled = false
         self.lottie()
-//        presentingViewController?.viewWillAppear(true)
         PlantDetailVC().viewWillAppear(true)
     }
     

@@ -23,8 +23,8 @@ class AddPlantVC: UIViewController {
     let path = "image/\(UUID().uuidString).jpg"
     
     var plant: PlantsModel?
-    var plantName: String = "name"
-    var plantDate: String = "date"
+    var plantName: String = ""
+    var plantDate: String = ""
     var plantNote: String = ""
     var water: Int = 0
     var sun: Int = 0
@@ -143,10 +143,9 @@ class AddPlantVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.addPlant(name:plantName,
-                                                                        date: plantDate,
-                                                                        sun: sun,
-                                                                        water: water,image: "\(url)", note: plantNote) { result in
+                            PlantyWorld.FirebaseManager.shared.addPlant(
+                                name: plantName, date: plantDate,
+                                sun: sun, water: water, image: "\(url)", note: plantNote) { result in
                                 switch result {
                                 case .success:
                                     print("123")
@@ -250,6 +249,7 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             NSAttributedString(string: "Name",
                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
             cell.textField.textColor = .black
+            cell.textField.text = self.plantName
             cell.textField.delegate = self
 
             return cell
@@ -260,6 +260,7 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
             cell.titleLB.text = "Date"
             cell.textField.textColor = .black
+            cell.textField.text = self.plantDate
             cell.textField.delegate = self
 
             return cell

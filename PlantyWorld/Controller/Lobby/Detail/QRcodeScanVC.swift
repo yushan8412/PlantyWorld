@@ -128,7 +128,6 @@ class ScanVC: UIViewController {
         
     }
     
-    
     func style() {
         
         label.text = "hi"
@@ -151,7 +150,9 @@ class ScanVC: UIViewController {
 
 extension ScanVC: AVCaptureMetadataOutputObjectsDelegate {
     
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+    func metadataOutput(_ output: AVCaptureMetadataOutput,
+                        didOutput metadataObjects: [AVMetadataObject],
+                        from connection: AVCaptureConnection) {
         // Check if the metadataObjects array is not nil and it contains at least one object
         if metadataObjects.count == 0 {
             qrCodeFrameView?.frame = CGRect.zero
@@ -170,7 +171,6 @@ extension ScanVC: AVCaptureMetadataOutputObjectsDelegate {
                 stringValue = metadataObj.stringValue ?? "can not find"
                 print("0000000\(stringValue)")
                 
-                print(delegate)
                 self.delegate?.getEmailValue(useremail: stringValue)
 
                 if captureSession.isRunning == true {

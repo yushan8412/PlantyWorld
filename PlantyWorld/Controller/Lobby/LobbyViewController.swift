@@ -45,7 +45,10 @@ class LobbyViewController: UIViewController {
         self.plantList.removeAll()
 //        FirebaseManager.shared.fetchUserPlantsData(uid: "SvPOVniW2hVeiT1kbmXXZGx45Fr2", completion: { plantList in self.plantList = plantList ?? [] })
         // MARK: 正式模式
-        FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchUserPlantsData(
+            uid: Auth.auth().currentUser?.uid ?? "",
+            completion: { plantList in self.plantList = plantList })
+        
         self.plantsCollectionView.reloadData()
         print(plantList.count)
         
