@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Natural Food.png",
+      "filename" : "ph_user-circle-light.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Natural Food@2x.png",
+      "filename" : "ph_user-circle-light@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Natural Food@3x.png",
+      "filename" : "ph_user-circle-light@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

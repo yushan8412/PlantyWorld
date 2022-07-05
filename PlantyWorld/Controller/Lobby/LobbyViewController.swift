@@ -45,7 +45,10 @@ class LobbyViewController: UIViewController {
         self.plantList.removeAll()
 //        FirebaseManager.shared.fetchUserPlantsData(uid: "SvPOVniW2hVeiT1kbmXXZGx45Fr2", completion: { plantList in self.plantList = plantList ?? [] })
         // MARK: 正式模式
-        FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchUserPlantsData(
+            uid: Auth.auth().currentUser?.uid ?? "",
+            completion: { plantList in self.plantList = plantList })
+        
         self.plantsCollectionView.reloadData()
         print(plantList.count)
         
@@ -74,7 +77,7 @@ class LobbyViewController: UIViewController {
     }
     
     func toAddVC () {
-        navigationController?.pushViewController(addPlantVC, animated: true)
+        navigationController?.pushViewController(AddPlantVC(), animated: true)
     }
 
 }
@@ -95,6 +98,7 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
         cell.title.text = plantList[indexPath.item].name
         cell.contentView.layer.cornerRadius = 10
         cell.mainPic.kf.setImage(with: URL(string: plantList[indexPath.row].image))
+        cell.waterDrop.isHidden = true
                 
         return cell
     }
@@ -108,6 +112,7 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
             if let indexPath = plantsCollectionView.indexPathsForSelectedItems?.first {
                 guard let nextVC = segue.destination as? PlantDetailVC else { return }
                         nextVC.plant = plantList[indexPath.item]
+//                nextVC.plantID = plantList[indexPath.item].id
             }
         }
     }

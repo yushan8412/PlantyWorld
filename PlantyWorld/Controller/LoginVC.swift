@@ -22,21 +22,20 @@ class LoginVC: UIViewController {
         self.setSignInWithAppleBtn()
         
         // Do any additional setup after loading the view.
-            Auth.auth().addStateDidChangeListener { (auth, user) in
+            Auth.auth().addStateDidChangeListener { (_, user) in
                 if user != nil {
-                    guard let vc = self.storyboard?.instantiateViewController(
+                    guard let targetVC = self.storyboard?.instantiateViewController(
                         withIdentifier: "ProfileVC") as? ProfileVC
                     else {
                         return
 //                        fatalError("can't find AccountViewController")
                     }
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.pushViewController(targetVC, animated: true)
                 } else {
                     return
                 }
             }
             
-
         self.observeAppleIDState()
         self.checkAppleIDCredentialState(userID: appleUserID ?? "")
         setupBG()
@@ -69,12 +68,14 @@ class LoginVC: UIViewController {
     // MARK: - 監聽目前的 Apple ID 的登入狀況
     // 主動監聽
     func checkAppleIDCredentialState(userID: String) {
-        ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID) { credentialState, error in
+        ASAuthorizationAppleIDProvider().getCredentialState(forUserID: userID) { credentialState, _ in
             switch credentialState {
             case .authorized:
                 CustomFunc.customAlert(title: "使用者已授權！", message: "", vc: self, actionHandler: nil)
             case .revoked:
-                CustomFunc.customAlert(title: "使用者憑證已被註銷！", message: "請到\n「設定 → Apple ID → 密碼與安全性 → 使用 Apple ID 的 App」\n將此 App 停止使用 Apple ID\n並再次使用 Apple ID 登入本 App！", vc: self, actionHandler: nil)
+                CustomFunc.customAlert(title: "使用者憑證已被註銷！",
+                                       message: "請到\n「設定 → Apple ID → 密碼與安全性 → 使用 Apple ID 的 App」\n將此 App 停止使用 Apple ID\n並再次使用 Apple ID 登入本 App！",
+                                       vc: self, actionHandler: nil)
 //            case .notFound:
 //                CustomFunc.customAlert(title: "", message: "使用者尚未使用過 Apple ID 登入！", vc: self, actionHandler: nil)
             case .transferred:
@@ -88,7 +89,7 @@ class LoginVC: UIViewController {
     // 被動監聽 (使用 Apple ID 登入或登出都會觸發)
     func observeAppleIDState() {
         NotificationCenter.default.addObserver(forName: ASAuthorizationAppleIDProvider.credentialRevokedNotification,
-                                               object: nil, queue: nil) { (notification: Notification) in
+                                               object: nil, queue: nil) { (_: Notification) in
             CustomFunc.customAlert(title: "使用者登入或登出", message: "", vc: self, actionHandler: nil)
         }
     }
@@ -135,22 +136,22 @@ class LoginVC: UIViewController {
         var result = ""
         var remainingLength = length
         
-        while(remainingLength > 0) {
+        while remainingLength > 0 {
             let randoms: [UInt8] = (0 ..< 16).map { _ in
                 var random: UInt8 = 0
                 let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-                if (errorCode != errSecSuccess) {
+                if errorCode != errSecSuccess {
                     fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
                 }
                 return random
             }
             
             randoms.forEach { random in
-                if (remainingLength == 0) {
+                if remainingLength == 0 {
                     return
                 }
                 
-                if (random < charset.count) {
+                if random < charset.count {
                     result.append(charset[Int(random)])
                     remainingLength -= 1
                 }
@@ -172,9 +173,11 @@ class LoginVC: UIViewController {
 extension LoginVC {
     // MARK: - 透過 Credential 與 Firebase Auth 串接
     func firebaseSignInWithApple(credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { authResult, error in
+        Auth.auth().signIn(with: credential) { _, error in
             guard error == nil else {
-                CustomFunc.customAlert(title: "", message: "\(String(describing: error!.localizedDescription))", vc: self, actionHandler: nil)
+                CustomFunc.customAlert(title: "",
+                                       message: "\(String(describing: error!.localizedDescription))",
+                                       vc: self, actionHandler: nil)
                 return
             }
             CustomFunc.customAlert(title: "登入成功！", message: "", vc: self, actionHandler: self.getFirebaseUserInfo)
@@ -201,10 +204,10 @@ extension LoginVC {
     }
     
     func checkEmail(uid: String) {
-        let db = Firestore.firestore()
+        let dataBase = Firestore.firestore()
         
         // 在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
-        db.collection("user").whereField("id", isEqualTo: uid).getDocuments { (querySnapshot, error) in
+        dataBase.collection("user").whereField("id", isEqualTo: uid).getDocuments { (querySnapshot, _) in
             
             if let querySnapshot = querySnapshot {
                 if let document = querySnapshot.documents.first {
@@ -215,14 +218,20 @@ extension LoginVC {
                         let userID = userdata["id"] as? String ?? ""
                         let userImage = userdata["image"] as? String ?? ""
                         let followList = userdata["followList"] as? [String] ?? [""]
+                        let blockList = userdata["blockList"] as? [String] ?? [""]
 
-                        let user = User(userID: userID, name: userName, userImage: userImage, useremail: userEmail, followList: followList)
+                        _ = User(userID: userID, name: userName, userImage: userImage,
+                                 useremail: userEmail, followList: followList, blockList: blockList)
                     }
+                    
                     print("User already exist")
                         
                 } else {
                     
-                    UserManager.shared.addUser(name: "no name yet", uid: Auth.auth().currentUser?.uid ?? "", email: Auth.auth().currentUser?.email ?? "", image: "no image yet")
+                    UserManager.shared.addUser(name: "no name yet",
+                                               uid: Auth.auth().currentUser?.uid ?? "",
+                                               email: Auth.auth().currentUser?.email ?? "",
+                                               image: "no image yet")
                 }
             }
         }
@@ -265,19 +274,19 @@ extension LoginVC: ASAuthorizationControllerDelegate {
         switch error {
         case ASAuthorizationError.canceled:
             CustomFunc.customAlert(title: "使用者取消登入", message: "", vc: self, actionHandler: nil)
-            break
+//            break
         case ASAuthorizationError.failed:
             CustomFunc.customAlert(title: "授權請求失敗", message: "", vc: self, actionHandler: nil)
-            break
+//            break
         case ASAuthorizationError.invalidResponse:
             CustomFunc.customAlert(title: "授權請求無回應", message: "", vc: self, actionHandler: nil)
-            break
+//            break
         case ASAuthorizationError.notHandled:
             CustomFunc.customAlert(title: "授權請求未處理", message: "", vc: self, actionHandler: nil)
-            break
+//            break
         case ASAuthorizationError.unknown:
             CustomFunc.customAlert(title: "授權失敗，原因不知", message: "", vc: self, actionHandler: nil)
-            break
+//            break
         default:
             break
         }

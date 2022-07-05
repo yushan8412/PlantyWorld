@@ -21,7 +21,7 @@ class CustomFunc {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let closeAction = UIAlertAction(title: "關閉",
-                                            style: .default) { action in
+                                            style: .default) { _ in
                 actionHandler?()
             }
             alertController.addAction(closeAction)

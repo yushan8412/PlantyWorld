@@ -23,6 +23,7 @@ class PlantDetailVC: UIViewController {
     var btnStackView = UIStackView()
     
     var plant: PlantsModel?
+    var plantID = ""
     
     override func viewDidLoad() {
 
@@ -54,7 +55,12 @@ class PlantDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         
-    }
+//        FirebaseManager.shared.fetchOnePlantData(plantID: self.plantID,
+//                                                 completion: { plant in self.plant = plant ?? PlantsModel(name: "", date: "", sun: 0, water: 0, note: "", image: "", id: "", createdTime: Date())})
+//        print("1231231\(self.plantID)")
+//        print("00000\(self.plant)")
+        }
+        
     override func viewDidLayoutSubviews() {
         tableView.layoutIfNeeded()
     

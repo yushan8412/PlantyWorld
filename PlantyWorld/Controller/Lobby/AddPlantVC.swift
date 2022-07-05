@@ -23,8 +23,8 @@ class AddPlantVC: UIViewController {
     let path = "image/\(UUID().uuidString).jpg"
     
     var plant: PlantsModel?
-    var plantName: String = "name"
-    var plantDate: String = "date"
+    var plantName: String = ""
+    var plantDate: String = ""
     var plantNote: String = ""
     var water: Int = 0
     var sun: Int = 0
@@ -56,7 +56,7 @@ class AddPlantVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
-        imageArea.image = UIImage(named: "Group")
+        imageArea.image = UIImage(named: "plantBG")
         addBtn.isEnabled = true
     }
     
@@ -143,10 +143,9 @@ class AddPlantVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.addPlant(name:plantName,
-                                                                        date: plantDate,
-                                                                        sun: sun,
-                                                                        water: water,image: "\(url)", note: plantNote) { result in
+                            PlantyWorld.FirebaseManager.shared.addPlant(
+                                name: plantName, date: plantDate,
+                                sun: sun, water: water, image: "\(url)", note: plantNote) { result in
                                 switch result {
                                 case .success:
                                     print("123")
@@ -175,14 +174,15 @@ class AddPlantVC: UIViewController {
         picBackground.addSubview(imageArea)
         picBackground.anchor(top: view.topAnchor, left: view.leftAnchor,
                              right: view.rightAnchor, paddingTop: 100,
-                             paddingLeft: 64, paddingRight: 64, height: 300)
+                             paddingLeft: 56, paddingRight: 56, height: 250)
         picBackground.backgroundColor = .lightGreen
         picBackground.layer.cornerRadius = 20
         
         imageArea.anchor(top: picBackground.topAnchor, left: picBackground.leftAnchor,
-                         right: picBackground.rightAnchor, paddingTop: 24,
-                         paddingLeft: 24, paddingRight: 24, height: 250)
-        imageArea.contentMode = .scaleToFill
+                         bottom: picBackground.bottomAnchor, right: picBackground.rightAnchor,
+                         paddingTop: 16, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
+        imageArea.contentMode = .scaleAspectFill
+        imageArea.clipsToBounds = true
     }
     
     func setupDetilArea() {
@@ -245,17 +245,22 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
 
             cell.titleLB.text = "Plant Name"
-            cell.textField.placeholder = "Name"
+            cell.textField.attributedPlaceholder =
+            NSAttributedString(string: "Name",
+                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
             cell.textField.textColor = .black
+            cell.textField.text = self.plantName
             cell.textField.delegate = self
 
             return cell
             
         } else if indexPath.row == 1 {
-
-            cell.textField.placeholder = "yyyy.mm.dd"
+            cell.textField.attributedPlaceholder =
+            NSAttributedString(string: "yyyy.mm.dd",
+                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
             cell.titleLB.text = "Date"
             cell.textField.textColor = .black
+            cell.textField.text = self.plantDate
             cell.textField.delegate = self
 
             return cell
@@ -295,7 +300,6 @@ extension AddPlantVC: UITextFieldDelegate {
         }
     }
 }
-
 
 extension AddPlantVC: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {

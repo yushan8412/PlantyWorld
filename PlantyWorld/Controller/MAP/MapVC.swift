@@ -65,7 +65,6 @@ class MapVC: UIViewController {
         pin6.title = "大台北花園"
         myMap.addAnnotation(pin6)
 
-        
     }
     
     func setupUI() {
@@ -73,7 +72,6 @@ class MapVC: UIViewController {
         location.backgroundColor = .pgreen
         location.layer.cornerRadius = 10
         location.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
-//        location.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
     }
 
 }
