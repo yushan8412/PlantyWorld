@@ -165,6 +165,7 @@ extension FriendsListVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "FriendListCell") as? FriendListCell
         else { return UITableViewCell() }
+        cell.unfollowBtn.isHidden = true
         cell.backgroundColor = .clear
         cell.friendImage.kf.setImage(with: URL(string: friendList[indexPath.row].userImage))
         cell.nameLb.text = friendList[indexPath.row].name

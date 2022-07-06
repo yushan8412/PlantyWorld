@@ -16,8 +16,7 @@ class AccountManagerVC: UIViewController {
     var deleteAccountBtn = UIButton()
     var privacyBtn = UIButton()
     var userData: User?
-
-//    var blockUser = UIButton()
+    var blockUser = UIButton()
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -34,6 +33,7 @@ class AccountManagerVC: UIViewController {
     func setupStackView() {
         view.addSubview(stackView)
         stackView.addArrangedSubview(logoutBtn)
+        stackView.addArrangedSubview(blockUser)
         stackView.addArrangedSubview(privacyBtn)
         stackView.addArrangedSubview(deleteAccountBtn)
         
@@ -62,12 +62,19 @@ class AccountManagerVC: UIViewController {
         privacyBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         privacyBtn.backgroundColor = .lightPeach
         privacyBtn.layer.cornerRadius = 20
+        
+        blockUser.anchor(width: 200, height: 50)
+        blockUser.setTitle("BLOCK LIST", for: .normal)
+        blockUser.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        blockUser.backgroundColor = .lightPeach
+        blockUser.layer.cornerRadius = 20
     }
     
     func btnFunc() {
         logoutBtn.addTarget(self, action: #selector(tapToLogout), for: .touchUpInside)
         deleteAccountBtn.addTarget(self, action: #selector(deleteuser), for: .touchUpInside)
         privacyBtn.addTarget(self, action: #selector(goWebVC), for: .touchUpInside)
+        blockUser.addTarget(self, action: #selector(goBlockVC), for: .touchUpInside)
     }
     
     @objc func goWebView() {
@@ -77,6 +84,14 @@ class AccountManagerVC: UIViewController {
 //            let safariController = SFSafariViewController(url: url)
 //            present(safariController, animated: true, completion: nil)
         }
+    }
+    
+    @objc func goBlockVC() {
+        let nextVC = BlockUserVC()
+        nextVC.userData = self.userData
+        nextVC.modalPresentationStyle = .overFullScreen
+        navigationController?.pushViewController(nextVC, animated: true)
+        
     }
     
     @objc func goWebVC() {

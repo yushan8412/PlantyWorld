@@ -76,6 +76,27 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3yK-zj-RxF">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                             </mapView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1uq-bF-Nlx">
+                                <rect key="frame" x="0.0" y="668" width="414" height="145"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qq2-wZ-8Fl">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Zej-hf-unQ">
+                                        <rect key="frame" x="0.0" y="8.5" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Pr1-K8-N4f">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKZ-yL-BOR">
                                 <rect key="frame" x="291" y="762" width="103" height="31"/>
                                 <state key="normal" title="Button"/>
@@ -99,13 +120,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="MdO-Cg-Dtq"/>
                     <connections>
+                        <outlet property="collectionView" destination="1uq-bF-Nlx" id="oU6-0L-xDe"/>
                         <outlet property="location" destination="hKZ-yL-BOR" id="Tnq-cU-bEm"/>
                         <outlet property="myMap" destination="3yK-zj-RxF" id="ySe-PO-HSq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ypN-IC-UfO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="106" y="1556"/>
+            <point key="canvasLocation" x="105.79710144927537" y="1555.5803571428571"/>
         </scene>
         <!--CommandVC-->
         <scene sceneID="Jjy-1I-oIc">
@@ -288,7 +310,7 @@
     </scenes>
     <resources>
         <image name="Natural Food" width="32" height="32"/>
-        <image name="ant-design_home-outlined" width="32" height="32"/>
+        <image name="ant-design_home-outlined" width="31" height="30"/>
         <image name="edit-image" width="32" height="32"/>
         <image name="locations 1-2" width="35" height="35"/>
         <image name="united 1" width="32" height="32"/>
