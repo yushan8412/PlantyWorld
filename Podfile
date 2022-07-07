@@ -17,5 +17,6 @@ pod 'FSCalendar'
 pod 'Kingfisher'
 pod 'FirebaseFirestoreSwift'
 pod 'lottie-ios'
+pod 'CHTCollectionViewWaterfallLayout'
 
 end

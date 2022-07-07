@@ -76,7 +76,7 @@ class AddCommandVC: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = UIColor.init(white: 0.1, alpha: 0.3)
+        view.backgroundColor = UIColor.init(white: 0.1, alpha: 0.1)
         view.addSubview(commandView)
         commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
@@ -129,7 +129,9 @@ class AddCommandVC: UIViewController {
     func setTextfield() {
         commandField.borderStyle = .roundedRect
         commandField.layer.borderWidth = 0.5
-        commandField.placeholder = "Leave Some Command"
+        commandField.attributedPlaceholder =
+        NSAttributedString(string: "Leave some not",
+                           attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         commandField.textColor = .darkGray
         commandField.backgroundColor = .white
         commandField.layer.cornerRadius = 10

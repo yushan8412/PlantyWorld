@@ -20,7 +20,7 @@ class EditProfileVC: UIViewController {
     var userTF = UITextField()
     var addPicBtn = UIButton()
     var comfirmBtn = UIButton()
-    var backBtn = UIButton(type: .close)
+//    var backBtn = UIButton(type: .close)
     let addPic = UIImage(named: "add-photo")
     var userData: User?
 
@@ -36,6 +36,7 @@ class EditProfileVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         showPic()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,7 +48,7 @@ class EditProfileVC: UIViewController {
         view.addSubview(userImage)
         view.addSubview(nameLB)
         view.addSubview(userTF)
-        view.addSubview(backBtn)
+//        view.addSubview(backBtn)
         view.addSubview(comfirmBtn)
         view.addSubview(addPicBtn)
         view.addSubview(emailLB)
@@ -86,15 +87,16 @@ class EditProfileVC: UIViewController {
         email.backgroundColor = .white
         email.layer.borderWidth = 0.5
         
-        backBtn.anchor(top: view.topAnchor, right: view.rightAnchor, paddingTop: 48, paddingRight: 24)
-        backBtn.backgroundColor = .black
-        backBtn.layer.cornerRadius = 15
+//        backBtn.anchor(top: view.topAnchor, right: view.rightAnchor, paddingTop: 48, paddingRight: 24)
+//        backBtn.backgroundColor = .black
+//        backBtn.layer.cornerRadius = 15
         
-        comfirmBtn.anchor(bottom: view.bottomAnchor, paddingBottom: 24)
+        comfirmBtn.anchor(bottom: view.bottomAnchor, paddingBottom: 32)
         comfirmBtn.centerX(inView: view)
-        comfirmBtn.setTitle("Comfirm", for: .normal)
+        comfirmBtn.setTitle(" Comfirm ", for: .normal)
         comfirmBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         comfirmBtn.backgroundColor = .dPeach
+        comfirmBtn.layer.cornerRadius = 20
         
         addPicBtn.anchor(bottom: userImage.bottomAnchor, right:
                             userImage.rightAnchor, paddingBottom: 8, paddingRight: 8)
@@ -105,7 +107,7 @@ class EditProfileVC: UIViewController {
     
     func setBtnUp() {
         
-        backBtn.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+//        backBtn.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         addPicBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
         comfirmBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
     }

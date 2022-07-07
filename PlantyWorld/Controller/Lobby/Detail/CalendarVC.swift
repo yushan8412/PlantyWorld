@@ -81,7 +81,9 @@ class CalendarVC: UIViewController {
         sticker.setContentHuggingPriority(UILayoutPriority(255), for: .horizontal)
         addField.anchor(left: sticker.rightAnchor, bottom: view.bottomAnchor,
                         right: addEventBtn.leftAnchor, paddingLeft: 8, paddingBottom: 24, paddingRight: 8)
-        addField.placeholder = "Leave some note "
+        addField.attributedPlaceholder =
+        NSAttributedString(string: "Leave some not",
+                           attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         addField.borderStyle = .roundedRect
         addField.backgroundColor = .white
         addField.textColor = .black
@@ -114,7 +116,8 @@ class CalendarVC: UIViewController {
     }
     
     @objc func addData() {
-        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "", date: pickedDate) { [self] result in
+        FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "",
+                                        date: pickedDate) { [self] result in
             switch result {
             case .success:
                 FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "", date: pickedDate) { events in
@@ -130,8 +133,8 @@ class CalendarVC: UIViewController {
         self.addField.text = ""
         
         FirebaseManager.shared.fetchEvent(plantID: plant?.id ?? "",
-
-                                          completion: { eventList in self.eventList = eventList ?? []; self.tableView.reloadData()
+                                          completion: { eventList in self.eventList = eventList ?? []
+            self.tableView.reloadData()
         })
         self.tableView.reloadData()
     }

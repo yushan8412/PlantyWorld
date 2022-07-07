@@ -143,15 +143,16 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
 }
 
+
 extension MapVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = collectionView.frame.size
         return CGSize(width: size.width - 2 * 16.0, height: size.height - 2 * 6.0)
-    
+
     }
-    
+
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt _: Int) -> CGFloat {
         return 8
@@ -167,10 +168,10 @@ extension MapVC: UICollectionViewDelegateFlowLayout {
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 6.0, left: 16.0, bottom: 6.0, right: 16.0)
     }
-    
+
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity _: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
+
         let itemSize = CGSize(width: collectionView.frame.size.width - 2 * 16,
                               height: collectionView.frame.size.height - 2 * 6)
         let xCenterOffset = targetContentOffset.pointee.x + (itemSize.width / 2.0)
@@ -181,7 +182,7 @@ extension MapVC: UICollectionViewDelegateFlowLayout {
         selectedIndex = indexPath.row
         setRegionToAnnotation()
     }
-    
+
 }
 
 extension MapVC: MKMapViewDelegate {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct PlantsModel: Comparable {
     static func < (lhs: PlantsModel, rhs: PlantsModel) -> Bool {
@@ -25,5 +26,5 @@ struct PlantsModel: Comparable {
     var note: String
     var image: String
     var id: String
-    var createdTime: Date
+    var createdTime: Timestamp
 }

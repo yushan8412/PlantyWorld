@@ -183,19 +183,19 @@ class ProfileVC: UIViewController {
     
     func setUI() {
 
-        userPlantsBG.backgroundColor = .pgreen
+        userPlantsBG.backgroundColor = .trygreen
         userPlantsBG.layer.cornerRadius = 20
         userPlantsBG.layer.borderWidth = 0.5
         
-        addFBG.backgroundColor = .pgreen
+        addFBG.backgroundColor = .trygreen
         addFBG.layer.cornerRadius = 20
         addFBG.layer.borderWidth = 0.5
         
-        logoutBtn.backgroundColor = .pgreen
+        logoutBtn.backgroundColor = .trygreen
         logoutBtn.layer.cornerRadius = 20
         logoutBtn.layer.borderWidth = 0.5
         
-        deleteUserBtn.backgroundColor = .pgreen
+        deleteUserBtn.backgroundColor = .trygreen
         deleteUserBtn.layer.cornerRadius = 20
         deleteUserBtn.layer.borderWidth = 0.5
         
@@ -218,13 +218,11 @@ class ProfileVC: UIViewController {
         
     }
     
-    
-    
     @objc func goEditVC() {
         let editVC = EditProfileVC()
         editVC.userData = self.userData
         editVC.modalPresentationStyle = .overFullScreen
-        navigationController?.present(editVC, animated: true, completion: nil)
+        navigationController?.pushViewController(editVC, animated: true)
         
     }
     

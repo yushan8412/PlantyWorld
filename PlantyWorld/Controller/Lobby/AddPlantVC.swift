@@ -117,9 +117,9 @@ class AddPlantVC: UIViewController {
         addBtn.anchor(left: view.leftAnchor,
                       bottom: view.bottomAnchor,
                       right: view.rightAnchor,
-                      paddingLeft: 24, paddingBottom: 32, paddingRight: 24)
+                      paddingLeft: 24, paddingBottom: 32, paddingRight: 24, height: 45)
         addBtn.backgroundColor = .dPeach
-        addBtn.setTitle("ADD", for: .normal)
+        addBtn.setTitle("ADD NEW PLANT", for: .normal)
         addBtn.setTitleColor(.black, for: .normal)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
         addBtn.layer.cornerRadius = 10

@@ -54,11 +54,9 @@ class EditVC: UIViewController {
         setupDetilArea()
         setAddPlantBtn()
         tabBarController?.tabBar.isHidden = true
-//        print(plant)
     }
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
-//        imageArea.kf.setImage(with: URL(string: plant?.image ?? ""))
         addBtn.isEnabled = true
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -295,19 +293,6 @@ extension EditVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
-//extension EditVC: UITextFieldDelegate {
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        switch textField.placeholder {
-//        case "\(plant?.name ?? "")":
-//            plantName = textField.text ?? "no value"
-//        case "\(plant?.date ?? "")":
-//            plantDate = textField.text ?? "no date"
-//        default:
-//            textField.text = "123"
-//        }
-//    }
-//}
 
 extension EditVC: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {

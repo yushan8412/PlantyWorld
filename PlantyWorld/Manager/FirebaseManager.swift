@@ -141,7 +141,8 @@ class FirebaseManager {
                 let plantNote = plantObject["note"] as? String ?? ""
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
-                let createdTime = plantObject["createdTime"] as? Date ?? Date()
+                guard let createdTime = plantObject["createdTime"] as? Timestamp else { return }
+//                        ?? Date()
                 let userName = plantObject["userName"] as? String ?? ""
                 let userImage = plantObject["userImage"] as? String ?? ""
                 
@@ -176,7 +177,7 @@ class FirebaseManager {
                 let plantNote = plantObject["note"] as? String ?? ""
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
-                let createdTime = plantObject["createdTime"] as? Date ?? Date()
+                let createdTime = plantObject["createdTime"] as? Timestamp ?? Timestamp(date: Date())
                 let userName = plantObject["userName"] as? String ?? ""
                 let userImage = plantObject["userImage"] as? String ?? ""
                 
@@ -211,7 +212,7 @@ class FirebaseManager {
                 let plantNote = plantObject["note"] as? String ?? ""
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
-                let createdTime = plantObject["createdTime"] as? Date ?? Date()
+                let createdTime = plantObject["createdTime"] as? Timestamp ?? Timestamp(date: Date())
                 let userName = plantObject["userName"] as? String ?? ""
                 let userImage = plantObject["userImage"] as? String ?? ""
                 

@@ -34,8 +34,10 @@ class MapDetailCell: UICollectionViewCell {
         
         storeName.anchor(top: bgView.topAnchor, left: bgView.leftAnchor, paddingTop: 8, paddingLeft: 8)
         storeName.centerX(inView: bgView)
+        
         storeAddress.anchor(top: storeName.bottomAnchor, left: bgView.leftAnchor,
                             right: bgView.rightAnchor, paddingTop: 4, paddingLeft: 8, paddingRight: 8)
+        
         storeImage.anchor(top: storeAddress.bottomAnchor, bottom: bgView.bottomAnchor, paddingTop: 8,
                           paddingBottom: 8, width: 200)
         storeImage.centerX(inView: bgView)
@@ -46,10 +48,10 @@ class MapDetailCell: UICollectionViewCell {
         storeName.textColor = .black
         storeName.font = UIFont(name: "Chalkboard SE", size: 20)
         storeName.textAlignment = .center
+        
         storeAddress.textColor = .black
         storeAddress.textAlignment = .center
         storeAddress.font = UIFont(name: "Chalkboard SE", size: 14)
-        
         
     }
 

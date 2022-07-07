@@ -48,8 +48,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MY PLANTS" leftItemsSupplementBackButton="YES" id="uW5-g0-9jL">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="VP5-U5-w7v">
-                            <color key="tintColor" red="1" green="0.33297625689999999" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="VP5-U5-w7v">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addPlant:" destination="BYZ-38-t0r" id="fxB-jo-bB3"/>
                             </connections>
@@ -87,7 +87,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Zej-hf-unQ">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapDetailCell" id="Zej-hf-unQ">
                                         <rect key="frame" x="0.0" y="8.5" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Pr1-K8-N4f">
@@ -98,7 +98,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKZ-yL-BOR">
-                                <rect key="frame" x="291" y="762" width="103" height="31"/>
+                                <rect key="frame" x="291" y="770" width="103" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="My Location"/>
                                 <connections>
@@ -114,8 +114,7 @@
                             <constraint firstItem="3yK-zj-RxF" firstAttribute="top" secondItem="oYn-K1-UsE" secondAttribute="top" id="S2a-bz-554"/>
                             <constraint firstItem="cak-bY-Nrs" firstAttribute="trailing" secondItem="hKZ-yL-BOR" secondAttribute="trailing" constant="20" id="UiF-wb-SoC"/>
                             <constraint firstItem="cak-bY-Nrs" firstAttribute="trailing" secondItem="3yK-zj-RxF" secondAttribute="trailing" id="c0e-IC-ENh"/>
-                            <constraint firstItem="hKZ-yL-BOR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cak-bY-Nrs" secondAttribute="leading" symbolic="YES" id="qFW-Di-WR9"/>
-                            <constraint firstItem="cak-bY-Nrs" firstAttribute="bottom" secondItem="hKZ-yL-BOR" secondAttribute="bottom" constant="20" id="rT1-ai-yUe"/>
+                            <constraint firstItem="cak-bY-Nrs" firstAttribute="bottom" secondItem="hKZ-yL-BOR" secondAttribute="bottom" constant="12" id="rT1-ai-yUe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MdO-Cg-Dtq"/>
@@ -137,7 +136,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lgf-Td-gR8">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lgf-Td-gR8">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -187,7 +186,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="32"/>
+                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="31"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <color key="textShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <offsetWrapper key="textShadowOffset" horizontal="-100" vertical="0.0"/>
@@ -267,7 +266,7 @@
         <scene sceneID="3c6-aR-dae">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xPS-ba-7rr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ant-design_home-outlined" selectedImage="ant-design_home-outlined" id="rpM-3E-tSm"/>
+                    <tabBarItem key="tabBarItem" title="" image="Home" selectedImage="Home" id="rpM-3E-tSm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xf5-MA-mWd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -293,7 +292,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="2EM-lS-rGp">
-                        <barButtonItem key="rightBarButtonItem" image="edit-image" style="plain" id="h65-IE-rkd">
+                        <barButtonItem key="rightBarButtonItem" image="edit-image" id="h65-IE-rkd">
                             <connections>
                                 <action selector="editBtn:" destination="zHc-p7-in6" id="tn5-99-RaX"/>
                             </connections>
@@ -309,8 +308,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Home" width="31" height="30"/>
         <image name="Natural Food" width="32" height="32"/>
-        <image name="ant-design_home-outlined" width="31" height="30"/>
         <image name="edit-image" width="32" height="32"/>
         <image name="locations 1-2" width="35" height="35"/>
         <image name="united 1" width="32" height="32"/>

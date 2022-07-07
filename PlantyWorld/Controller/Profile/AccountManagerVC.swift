@@ -17,6 +17,7 @@ class AccountManagerVC: UIViewController {
     var privacyBtn = UIButton()
     var userData: User?
     var blockUser = UIButton()
+//    var 
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -64,7 +65,7 @@ class AccountManagerVC: UIViewController {
         privacyBtn.layer.cornerRadius = 20
         
         blockUser.anchor(width: 200, height: 50)
-        blockUser.setTitle("BLOCK LIST", for: .normal)
+        blockUser.setTitle("BLACK LIST", for: .normal)
         blockUser.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         blockUser.backgroundColor = .lightPeach
         blockUser.layer.cornerRadius = 20
@@ -77,14 +78,14 @@ class AccountManagerVC: UIViewController {
         blockUser.addTarget(self, action: #selector(goBlockVC), for: .touchUpInside)
     }
     
-    @objc func goWebView() {
-        let privacyPolicyLink = "https://www.privacypolicies.com/live/25920b7a-f6fc-42f1-a6d9-e2a709e1a5fe"
-        
-        if let url = URL(string: privacyPolicyLink) {
-//            let safariController = SFSafariViewController(url: url)
-//            present(safariController, animated: true, completion: nil)
-        }
-    }
+//    @objc func goWebView() {
+//        let privacyPolicyLink = "https://www.privacypolicies.com/live/25920b7a-f6fc-42f1-a6d9-e2a709e1a5fe"
+//
+//        if let url = URL(string: privacyPolicyLink) {
+////            let safariController = SFSafariViewController(url: url)
+////            present(safariController, animated: true, completion: nil)
+//        }
+//    }
     
     @objc func goBlockVC() {
         let nextVC = BlockUserVC()
