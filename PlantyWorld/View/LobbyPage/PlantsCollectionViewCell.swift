@@ -20,7 +20,7 @@ class PlantsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(title)
         contentView.addSubview(mainPic)
         contentView.addSubview(waterDrop)
-        contentView.backgroundColor = .pgreen
+        contentView.backgroundColor = .trygreen
         setup()
     }
 
@@ -30,30 +30,48 @@ class PlantsCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        layoutIfNeeded()
         setup()
         
     }
     
     func setup() {
         
-        title.anchor(top: self.contentView.topAnchor,
-                     left: self.contentView.leftAnchor,
-                     paddingTop: 8, paddingLeft: 14)
-        title.font =  UIFont(name: "Chalkboard SE", size: 20)
+//        title.anchor(top: self.contentView.topAnchor,
+//                     left: self.contentView.leftAnchor,
+//                     paddingTop: 8, paddingLeft: 14)
+//        title.font =  UIFont(name: "Chalkboard SE", size: 20)
+//        title.textColor = .white
         
-        mainPic.anchor(top: title.bottomAnchor,
+//        mainPic.anchor(top: title.bottomAnchor,
+//                       left: contentView.leftAnchor,
+//                       bottom: contentView.bottomAnchor,
+//                       right: contentView.rightAnchor,
+//                       paddingTop: 8, paddingLeft: 8,
+//                       paddingBottom: 8, paddingRight: 8)
+        
+        mainPic.anchor(top: contentView.topAnchor,
                        left: contentView.leftAnchor,
-                       bottom: contentView.bottomAnchor,
+                       bottom: title.topAnchor,
                        right: contentView.rightAnchor,
-                       paddingTop: 8, paddingLeft: 12,
-                       paddingBottom: 12, paddingRight: 12)
+                       paddingTop: 0, paddingLeft: 0,
+                       paddingBottom: 8, paddingRight: 0)
+        mainPic.layer.cornerRadius = 10
+        mainPic.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        title.anchor(top: mainPic.bottomAnchor,
+                     left: self.contentView.leftAnchor,
+                     bottom: contentView.bottomAnchor,
+                     paddingTop: 8, paddingLeft: 12, paddingBottom: 8)
+        title.font = UIFont(name: "Apple SD Gothic Neo Medium", size: 20)
+        title.textColor = .white
+        
         mainPic.contentMode = .scaleAspectFill
         mainPic.clipsToBounds = true
         
-        waterDrop.anchor(top: contentView.topAnchor, right: contentView.rightAnchor,
-                         paddingTop: 8, paddingRight: 8, width: 25, height: 30)
-        waterDrop.image = UIImage(named: "Vector-5")
-        // water reminder? UIButtom timer
+//        waterDrop.anchor(top: contentView.topAnchor, right: contentView.rightAnchor,
+//                         paddingTop: 8, paddingRight: 8, width: 25, height: 30)
+//        waterDrop.image = UIImage(named: "Vector-5")
         
     }
 

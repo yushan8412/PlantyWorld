@@ -20,5 +20,6 @@ extension UIColor {
     static let lightOrange = UIColor(red: 255/255, green: 191/255, blue: 134/255, alpha: 1)
     
     static let waterBlue = UIColor(red: 66/255, green: 194/255, blue: 255/255, alpha: 1)
- 
+    static let trygreen = UIColor(red: 130/255, green: 162/255, blue: 132/255, alpha: 1)
+
 }

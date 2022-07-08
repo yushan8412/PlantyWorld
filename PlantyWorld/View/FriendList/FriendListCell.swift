@@ -39,7 +39,7 @@ class FriendListCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        layoutIfNeeded()
         contentView.backgroundColor = .clear
 
         setupUI()
@@ -54,23 +54,27 @@ class FriendListCell: UITableViewCell {
         
         friendImage.anchor(top: backView.topAnchor, left: backView.leftAnchor,
                            bottom: backView.bottomAnchor, paddingTop: 8, paddingLeft: 8,
-                           paddingBottom: 8, width: 80, height: 80)
+                           paddingBottom: 8, width: 100, height: 80)
         friendImage.image = UIImage(named: "山烏龜")
-        friendImage.layer.cornerRadius = 40
+        friendImage.layer.cornerRadius = 30
         friendImage.contentMode = .scaleAspectFill
         friendImage.clipsToBounds = true
         
         nameLb.anchor(left: friendImage.rightAnchor, paddingLeft: 8)
         nameLb.centerY(inView: contentView)
-        nameLb.font = UIFont(name: "Chalkboard SE", size: 22)
+        nameLb.font = UIFont(name: "Chalkboard SE", size: 30)
         nameLb.text = "123123"
         
         unfollowBtn.anchor(top: backView.topAnchor, right: backView.rightAnchor, paddingTop: 8, paddingRight: 8)
-        unfollowBtn.setTitle("UNFOLLOW", for: .normal)
-        
-        blockBtn.anchor(bottom: backView.bottomAnchor ,right: backView.rightAnchor,
-                        paddingBottom: 8, paddingRight: 8)
+        unfollowBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 16)
+        unfollowBtn.titleLabel?.text = "UNFOLLOW"
+
+        blockBtn.anchor(bottom: backView.bottomAnchor, right: backView.rightAnchor,
+                        paddingBottom: 4, paddingRight: 8)
         blockBtn.setImage(UIImage(named: "blockUser"), for: .normal)
+        blockBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 20)
+//        blockBtn.setTitle("123", for: .normal)
+//        blockBtn.titleLabel?.text = "BLOCK"
         blockBtn.setTitle("BLOCK", for: .normal)
                 
     }

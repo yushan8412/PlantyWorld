@@ -28,7 +28,7 @@ class WebVC: UIViewController {
         let url = URL(string: urlString)
         if let url = url {
             let request = URLRequest(url: url)
-            mWebView = WKWebView(frame: CGRect(x: 0, y: 100, width: UIScreen.width, height: UIScreen.height))
+            mWebView = WKWebView(frame: CGRect(x: 0, y: 60, width: UIScreen.width, height: UIScreen.height))
 
             if let mWebView = mWebView {
                 mWebView.navigationDelegate = self

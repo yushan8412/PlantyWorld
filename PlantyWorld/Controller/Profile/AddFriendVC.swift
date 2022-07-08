@@ -134,6 +134,7 @@ class AddFriendVC: UIViewController {
                     }
                     print(document.data())
                     print("user is exist")
+                    
                     let blocklist = self.userDate?.blockList ?? []
                     self.isBlock = blocklist.contains { (blockId) -> Bool in
                         blockId == self.friendData?.userID

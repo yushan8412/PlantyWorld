@@ -26,7 +26,8 @@ class FriendsListVC: UIViewController {
     override func viewDidLoad() {
         view.addSubview(titleLB)
         view.addSubview(tableView)
-        view.backgroundColor = .peach
+//        view.backgroundColor = .peach
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "286765a6ce7d6835bcf31047ca916f1d")!)
         tableView.delegate = self
         tableView.dataSource = self
         setupUI()
@@ -45,7 +46,8 @@ class FriendsListVC: UIViewController {
         titleLB.anchor(top: view.topAnchor, paddingTop: 100)
         titleLB.centerX(inView: view)
         titleLB.text = "FOLLOWING USER"
-        titleLB.font = UIFont(name: "Marker Felt", size: 32)
+        titleLB.font = UIFont(name: "Marker Felt", size: 34)
+        titleLB.textColor = .black
         
         tableView.backgroundColor = .clear
         tableView.anchor(top: titleLB.bottomAnchor, left: view.leftAnchor,
@@ -165,6 +167,7 @@ extension FriendsListVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "FriendListCell") as? FriendListCell
         else { return UITableViewCell() }
+        cell.unfollowBtn.isHidden = true
         cell.backgroundColor = .clear
         cell.friendImage.kf.setImage(with: URL(string: friendList[indexPath.row].userImage))
         cell.nameLb.text = friendList[indexPath.row].name

@@ -20,8 +20,8 @@ class EditProfileVC: UIViewController {
     var userTF = UITextField()
     var addPicBtn = UIButton()
     var comfirmBtn = UIButton()
-    var backBtn = UIButton(type: .close)
     let addPic = UIImage(named: "add-photo")
+    let cameraPic = UIImage(systemName: "camera.on.rectangle.fill")
     var userData: User?
 
     override func viewDidLoad() {
@@ -36,6 +36,7 @@ class EditProfileVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         showPic()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,14 +48,13 @@ class EditProfileVC: UIViewController {
         view.addSubview(userImage)
         view.addSubview(nameLB)
         view.addSubview(userTF)
-        view.addSubview(backBtn)
         view.addSubview(comfirmBtn)
         view.addSubview(addPicBtn)
         view.addSubview(emailLB)
         view.addSubview(email)
         
         userImage.centerX(inView: view)
-        userImage.anchor(top: view.topAnchor, paddingTop: 180, width: 250, height: 250)
+        userImage.anchor(top: view.topAnchor, paddingTop: 170, width: 250, height: 250)
         userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
         userImage.layer.cornerRadius = 30
@@ -72,6 +72,7 @@ class EditProfileVC: UIViewController {
         userTF.text = "\(userData?.name ?? "")"
         userTF.placeholder = "Name"
         userTF.layer.borderWidth = 0.5
+        userTF.setLeftPaddingPoints(8)
 
         emailLB.anchor(top: userTF.bottomAnchor, paddingTop: 16)
         emailLB.centerX(inView: view)
@@ -81,31 +82,29 @@ class EditProfileVC: UIViewController {
 
         email.anchor(top: emailLB.bottomAnchor, paddingTop: 16, width: 300, height: 40)
         email.centerX(inView: view)
-        email.text = "\(userData?.useremail ?? "")"
+        email.text = "  \(userData?.useremail ?? "")"
         email.textColor = .darkGray
         email.backgroundColor = .white
         email.layer.borderWidth = 0.5
         
-        backBtn.anchor(top: view.topAnchor, right: view.rightAnchor, paddingTop: 48, paddingRight: 24)
-        backBtn.backgroundColor = .black
-        backBtn.layer.cornerRadius = 15
-        
-        comfirmBtn.anchor(bottom: view.bottomAnchor, paddingBottom: 24)
+        comfirmBtn.anchor(bottom: view.bottomAnchor, paddingBottom: 32, height: 40)
         comfirmBtn.centerX(inView: view)
-        comfirmBtn.setTitle("Comfirm", for: .normal)
-        comfirmBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        comfirmBtn.setTitle(" Comfirm ", for: .normal)
+        comfirmBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 26)
         comfirmBtn.backgroundColor = .dPeach
+        comfirmBtn.layer.cornerRadius = 10
         
         addPicBtn.anchor(bottom: userImage.bottomAnchor, right:
-                            userImage.rightAnchor, paddingBottom: 8, paddingRight: 8)
-        addPicBtn.setImage(addPic, for: .normal)
+                            userImage.rightAnchor, paddingBottom: 8, paddingRight: 8, width: 30, height: 30)
+        addPicBtn.setImage(cameraPic, for: .normal)
         addPicBtn.tintColor = .black
+        addPicBtn.backgroundColor = .lightGray
+        addPicBtn.layer.cornerRadius = 15
         
     }
     
     func setBtnUp() {
         
-        backBtn.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         addPicBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
         comfirmBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
     }
@@ -205,7 +204,6 @@ class EditProfileVC: UIViewController {
     }
     
 }
-
 
 extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

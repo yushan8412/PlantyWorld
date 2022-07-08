@@ -21,7 +21,7 @@ class EditVC: UIViewController {
     var picBackground = UIView()
     var imageArea = UIImageView()
     var addImageBtn = UIButton()
-    let addPic = UIImage(systemName: "photo.on.rectangle.angled")
+    let cameraPic = UIImage(systemName: "camera.on.rectangle.fill")
     var tableView = UITableView()
     let path = "image/\(UUID().uuidString).jpg"
     
@@ -54,11 +54,9 @@ class EditVC: UIViewController {
         setupDetilArea()
         setAddPlantBtn()
         tabBarController?.tabBar.isHidden = true
-//        print(plant)
     }
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
-//        imageArea.kf.setImage(with: URL(string: plant?.image ?? ""))
         addBtn.isEnabled = true
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -69,9 +67,10 @@ class EditVC: UIViewController {
         picBackground.addSubview(addImageBtn)
         addImageBtn.anchor(bottom: picBackground.bottomAnchor,
                            right: picBackground.rightAnchor,
-                           paddingBottom: 16, paddingRight: 16)
-        addImageBtn.setImage(addPic, for: .normal)
-        addImageBtn.tintColor = .pgreen
+                           paddingBottom: 8, paddingRight: 8, width: 30, height: 30)
+        addImageBtn.setImage(cameraPic, for: .normal)
+        addImageBtn.backgroundColor = .lightGray
+        addImageBtn.layer.cornerRadius = 15
         addImageBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
     }
     
@@ -295,19 +294,6 @@ extension EditVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
-//extension EditVC: UITextFieldDelegate {
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        switch textField.placeholder {
-//        case "\(plant?.name ?? "")":
-//            plantName = textField.text ?? "no value"
-//        case "\(plant?.date ?? "")":
-//            plantDate = textField.text ?? "no date"
-//        default:
-//            textField.text = "123"
-//        }
-//    }
-//}
 
 extension EditVC: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {

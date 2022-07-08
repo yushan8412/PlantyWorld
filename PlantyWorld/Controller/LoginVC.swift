@@ -3,6 +3,7 @@ import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 import AuthenticationServices // Sign in with Apple 的主體框架
 import CryptoKit // 用來產生隨機字串 (Nonce) 的
 import FirebaseFirestore
+import SwiftUI
 
 var userUid: String = ""
 
@@ -12,11 +13,15 @@ class LoginVC: UIViewController {
     var bgView = UIView()
     var closeBtn = UIButton(type: .close)
     var loginLb = UILabel()
+    var goEulaBtn = UIButton()
+    var goPPage = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(bgView)
         view.addSubview(loginLb)
+        view.addSubview(goEulaBtn)
+        view.addSubview(goPPage)
 
         self.tabBarController?.tabBar.isHidden = false
         self.setSignInWithAppleBtn()
@@ -53,10 +58,11 @@ class LoginVC: UIViewController {
                         paddingTop: 35, paddingRight: 35)
         closeBtn.addTarget(self, action: #selector(dissmiss), for: .touchUpInside)
         
-        loginLb.anchor(top: bgView.topAnchor, paddingTop: 120)
+        loginLb.anchor(top: bgView.topAnchor, paddingTop: 100)
         loginLb.centerX(inView: bgView)
         loginLb.text = " Login to Record Your Plants? "
         loginLb.font = UIFont(name: "Marker Felt", size: 28)
+        loginLb.textColor = .white
     
     }
     
@@ -96,6 +102,7 @@ class LoginVC: UIViewController {
     
     // MARK: - 在畫面上產生 Sign in with Apple 按鈕
     func setSignInWithAppleBtn() {
+        
         let signInWithAppleBtn = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn,
                                                               authorizationButtonStyle: chooseAppleButtonStyle())
         view.addSubview(signInWithAppleBtn)
@@ -105,9 +112,31 @@ class LoginVC: UIViewController {
         signInWithAppleBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         signInWithAppleBtn.widthAnchor.constraint(equalToConstant: 280).isActive = true
         signInWithAppleBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signInWithAppleBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+        signInWithAppleBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -130).isActive = true
+        
+        goEulaBtn.anchor(top: signInWithAppleBtn.bottomAnchor, paddingTop: 8)
+        goEulaBtn.centerX(inView: view)
+        goEulaBtn.setTitle("Read EULA", for: .normal)
+        goEulaBtn.titleLabel?.font = UIFont(name: "Arial", size: 14)
+        goEulaBtn.addTarget(self, action: #selector(goEulaVC), for: .touchUpInside)
+        
+        goPPage.anchor(top: goEulaBtn.bottomAnchor, paddingTop: 0)
+        goPPage.centerX(inView: view)
+        goPPage.setTitle("Read Privacy Policies", for: .normal)
+        goPPage.titleLabel?.font = UIFont(name: "Arial", size: 14)
+        goPPage.addTarget(self, action: #selector(goWebVC), for: .touchUpInside)
     }
     
+    @objc func goWebVC() {
+        let nextVC = WebVC()
+        present(nextVC, animated: true)
+    }
+    
+    @objc func goEulaVC() {
+        let nextVC = EulaVC()
+        present(nextVC, animated: true)
+    }
+
     func chooseAppleButtonStyle() -> ASAuthorizationAppleIDButton.Style {
         return (UITraitCollection.current.userInterfaceStyle == .light) ? .white : .white
         // 淺色模式就顯示黑色的按鈕，深色模式就顯示白色的按鈕 這裡我都想要白色
