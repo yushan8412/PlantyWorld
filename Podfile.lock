@@ -607,6 +607,9 @@ PODS:
   - CHTCollectionViewWaterfallLayout/Swift (0.9.10)
   - Firebase/CoreOnly (9.0.0):
     - FirebaseCore (= 9.0.0)
+  - Firebase/Crashlytics (9.0.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 9.0.0)
   - Firebase/Firestore (9.0.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 9.0.0)
@@ -652,6 +655,13 @@ PODS:
     - FirebaseCore (~> 9.0)
   - FirebaseCoreInternal (9.0.0):
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
+  - FirebaseCrashlytics (9.0.0):
+    - FirebaseCore (~> 9.0)
+    - FirebaseInstallations (~> 9.0)
+    - GoogleDataTransport (~> 9.1)
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (~> 2.30908.0)
+    - PromisesObjC (~> 2.1)
   - FirebaseFirestore (9.0.0):
     - abseil/algorithm (~> 1.20211102.0)
     - abseil/base (~> 1.20211102.0)
@@ -797,6 +807,7 @@ PODS:
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout
+  - Firebase/Crashlytics
   - Firebase/Firestore
   - Firebase/Storage
   - FirebaseAnalytics
@@ -823,6 +834,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreExtension
     - FirebaseCoreInternal
+    - FirebaseCrashlytics
     - FirebaseFirestore
     - FirebaseFirestoreSwift
     - FirebaseInstallations
@@ -857,6 +869,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 54410e5d156bf406a764c2722d9f77d682723b4c
   FirebaseCoreExtension: c2efdc29b8ffeaa0be3e1bd1fc59758de9b3fe6d
   FirebaseCoreInternal: 5b8f4f2e2970a4cb9bd1cf7ada16c8ba69a29530
+  FirebaseCrashlytics: 08561398868790fc9694b85efb4c080940926fcc
   FirebaseFirestore: 3ff0784d61f9a0faa3d67c5a8b1e4fb0b828c6b1
   FirebaseFirestoreSwift: 5d57539cec470bf3c9a752db009ff7e9d1a77d09
   FirebaseInstallations: e693c0dfe404af44afbd553de42498b2ca1ca189
@@ -878,6 +891,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: 1d26bf063709f9981a0453115550a6f0d4f07e69
+PODFILE CHECKSUM: 071eaa3cfa25214447fee0e34cafc366c924107d
 
 COCOAPODS: 1.11.3

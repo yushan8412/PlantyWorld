@@ -63,7 +63,7 @@ class PlantsCollectionViewCell: UICollectionViewCell {
                      left: self.contentView.leftAnchor,
                      bottom: contentView.bottomAnchor,
                      paddingTop: 8, paddingLeft: 12, paddingBottom: 8)
-        title.font =  UIFont(name: "Chalkboard SE", size: 20)
+        title.font = UIFont(name: "Apple SD Gothic Neo Medium", size: 20)
         title.textColor = .white
         
         mainPic.contentMode = .scaleAspectFill

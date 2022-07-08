@@ -43,13 +43,13 @@ class CommandCell: UITableViewCell {
                          bottom: contentView.bottomAnchor,
                          right: contentView.rightAnchor,
                          paddingTop: 12, paddingLeft: 24,
-                         paddingBottom: 12, paddingRight: 24, height: 265)
+                         paddingBottom: 12, paddingRight: 24, height: 285)
         basicView.backgroundColor = .trygreen
         basicView.layer.cornerRadius = 20
         
         mainImage.anchor(top: basicView.topAnchor, left: basicView.leftAnchor,
                          right: basicView.rightAnchor, paddingTop: 0,
-                         paddingLeft: 0, paddingRight: 0, height: 180)
+                         paddingLeft: 0, paddingRight: 0, height: 200)
         mainImage.layer.cornerRadius = 20
         mainImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         mainImage.contentMode = .scaleAspectFill

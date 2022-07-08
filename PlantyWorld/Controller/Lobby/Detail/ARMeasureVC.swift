@@ -29,6 +29,8 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         setup()
+        usageAlert()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +72,23 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         saveBtn.layer.cornerRadius = 10
         saveBtn.addTarget(self, action: #selector(tapToSave), for: .touchUpInside)
         
+    }
+    
+    func usageAlert() {
+        let alertController = UIAlertController(
+            title: "Usage",
+            message: "紅點越小，測量結果越精準\n 若黃點消失\n 請稍微移開鏡頭再對準測量物",
+            preferredStyle: .alert)
+        let cancelAction = UIAlertAction(
+            title: "OK",
+            style: .cancel,
+            handler: nil)
+        alertController.addAction(cancelAction)
+
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil)
     }
     
     @objc func tapToSave() {

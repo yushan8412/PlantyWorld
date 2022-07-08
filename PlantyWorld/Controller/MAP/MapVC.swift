@@ -20,10 +20,7 @@ class MapVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func showLocation(_ sender: UIButton) {
-        let location = myMap.userLocation
-        let region = MKCoordinateRegion(center: location.coordinate,
-                                        latitudinalMeters: 1000, longitudinalMeters: 1000)
-        myMap.setRegion(region, animated: true)
+        showLocation()
     }
     let layout = UICollectionViewFlowLayout()
     
@@ -52,10 +49,11 @@ class MapVC: UIViewController {
         setCollectionView()
         location.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         print(storeList)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
         getStoreData()
         dropPin()
     }
@@ -63,7 +61,6 @@ class MapVC: UIViewController {
     func getStoreData() {
         StoreManager.shared.fetchAllPlants { stores in
             self.storeList = stores ?? []
-            print("00000\(self.storeList)")
             self.collectionView.reloadData()
             self.dropPin()
         }
@@ -94,12 +91,30 @@ class MapVC: UIViewController {
                               paddingRight: 0, height: 220)
     }
 
+    
+//    func setNBtn() {
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+//                    image: UIImage(named: "Group")?
+//                        .withTintColor(UIColor.black)
+//                        .withRenderingMode(.alwaysOriginal),
+//                    style: .plain,
+//                    target: self,
+//                    action: #selector(showLocation))
+//    }
+    
+    func showLocation() {
+        let location = myMap.userLocation
+        let region = MKCoordinateRegion(center: location.coordinate,
+                                        latitudinalMeters: 1000, longitudinalMeters: 1000)
+        myMap.setRegion(region, animated: true)
+    }
     func setupUI() {
+        
         location.tintColor = .black
         location.backgroundColor = .pgreen
         location.layer.cornerRadius = 10
         location.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
-        location.setTitle("Me", for: .normal)
+        location.setTitle("My Locoation", for: .normal)
     }
     
     private func setRegionToAnnotation() {

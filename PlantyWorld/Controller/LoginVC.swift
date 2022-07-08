@@ -62,6 +62,7 @@ class LoginVC: UIViewController {
         loginLb.centerX(inView: bgView)
         loginLb.text = " Login to Record Your Plants? "
         loginLb.font = UIFont(name: "Marker Felt", size: 28)
+        loginLb.textColor = .white
     
     }
     

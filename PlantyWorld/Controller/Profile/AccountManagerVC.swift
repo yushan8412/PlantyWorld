@@ -17,10 +17,9 @@ class AccountManagerVC: UIViewController {
     var privacyBtn = UIButton()
     var userData: User?
     var blockUser = UIButton()
-//    var 
     
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "286765a6ce7d6835bcf31047ca916f1d")!)
         setupStackView()
         setBtnUI()
         btnFunc()
@@ -40,35 +39,40 @@ class AccountManagerVC: UIViewController {
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.anchor(width: 300, height: 250)
+        stackView.anchor(width: 300, height: 300)
         stackView.centerY(inView: view)
         stackView.centerX(inView: view)
     }
     
     func setBtnUI() {
-        logoutBtn.anchor(width: 200, height: 50)
+        logoutBtn.anchor(width: 200, height: 55)
         logoutBtn.setTitle("LOGOUT", for: .normal)
         logoutBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         logoutBtn.backgroundColor = .lightPeach
         logoutBtn.layer.cornerRadius = 20
+        logoutBtn.setTitleColor(.trygreen, for: .normal)
         
-        deleteAccountBtn.anchor(width: 200, height: 50)
+        deleteAccountBtn.anchor(width: 200, height: 55)
         deleteAccountBtn.setTitle("DELETE ACCOUNT", for: .normal)
         deleteAccountBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         deleteAccountBtn.backgroundColor = .lightPeach
         deleteAccountBtn.layer.cornerRadius = 20
-        
-        privacyBtn.anchor(width: 200, height: 50)
+        deleteAccountBtn.setTitleColor(.systemRed, for: .normal)
+
+        privacyBtn.anchor(width: 200, height: 55)
         privacyBtn.setTitle("PRIVACY POLICY", for: .normal)
         privacyBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         privacyBtn.backgroundColor = .lightPeach
         privacyBtn.layer.cornerRadius = 20
-        
-        blockUser.anchor(width: 200, height: 50)
-        blockUser.setTitle("BLACK LIST", for: .normal)
+        privacyBtn.setTitleColor(.trygreen, for: .normal)
+
+        blockUser.anchor(width: 200, height: 55)
+        blockUser.setTitle("BLOCKED USERS", for: .normal)
         blockUser.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         blockUser.backgroundColor = .lightPeach
         blockUser.layer.cornerRadius = 20
+        blockUser.setTitleColor(.trygreen, for: .normal)
+
     }
     
     func btnFunc() {
@@ -76,16 +80,13 @@ class AccountManagerVC: UIViewController {
         deleteAccountBtn.addTarget(self, action: #selector(deleteuser), for: .touchUpInside)
         privacyBtn.addTarget(self, action: #selector(goWebVC), for: .touchUpInside)
         blockUser.addTarget(self, action: #selector(goBlockVC), for: .touchUpInside)
+//        blockUser.addTarget(self, action: #selector(crash), for: .touchUpInside)
     }
     
-//    @objc func goWebView() {
-//        let privacyPolicyLink = "https://www.privacypolicies.com/live/25920b7a-f6fc-42f1-a6d9-e2a709e1a5fe"
-//
-//        if let url = URL(string: privacyPolicyLink) {
-////            let safariController = SFSafariViewController(url: url)
-////            present(safariController, animated: true, completion: nil)
-//        }
-//    }
+    
+    @objc func crash() {
+        fatalError()
+    }
     
     @objc func goBlockVC() {
         let nextVC = BlockUserVC()

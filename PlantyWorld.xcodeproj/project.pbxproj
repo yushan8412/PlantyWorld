@@ -65,6 +65,7 @@
 		80ABA6CF2861B94D00BB515C /* CommandsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ABA6CD2861B94D00BB515C /* CommandsCell.xib */; };
 		80ABA6D12861CC8400BB515C /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D02861CC8300BB515C /* MapVC.swift */; };
 		80ABA6D828643E2B00BB515C /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ABA6D728643E2B00BB515C /* CalendarModel.swift */; };
+		80ADD12128782348008B8D9F /* Extension UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ADD12028782348008B8D9F /* Extension UITextField.swift */; };
 		80BDB819286563BC00FDB525 /* Extension Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDB818286563BC00FDB525 /* Extension Color.swift */; };
 		80BDB81C2869702600FDB525 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDB81A2869702600FDB525 /* TextViewCell.swift */; };
 		80BDB81D2869702600FDB525 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80BDB81B2869702600FDB525 /* TextViewCell.xib */; };
@@ -143,6 +144,7 @@
 		80ABA6CD2861B94D00BB515C /* CommandsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandsCell.xib; sourceTree = "<group>"; };
 		80ABA6D02861CC8300BB515C /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		80ABA6D728643E2B00BB515C /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
+		80ADD12028782348008B8D9F /* Extension UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITextField.swift"; sourceTree = "<group>"; };
 		80BDB818286563BC00FDB525 /* Extension Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension Color.swift"; sourceTree = "<group>"; };
 		80BDB81A2869702600FDB525 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		80BDB81B2869702600FDB525 /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				809F97DA285983CB00E84DD7 /* Extensions.Anchor.swift */,
+				80ADD12028782348008B8D9F /* Extension UITextField.swift */,
 				80AA70D62871A98800271F61 /* ExtensionLottie.swift */,
 				809F97DD285991C700E84DD7 /* UIView Extension.swift */,
 				80BDB818286563BC00FDB525 /* Extension Color.swift */,
@@ -450,6 +453,7 @@
 				809F97AF285879F300E84DD7 /* Resources */,
 				D3348C6156804A8DD85FE0FC /* [CP] Embed Pods Frameworks */,
 				809F97CB2858905600E84DD7 /* ShellScript */,
+				80ADD122287855BF008B8D9F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -541,6 +545,25 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
+		80ADD122287855BF008B8D9F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		B8E7F3B33DEAA3C1F4342549 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -625,6 +648,7 @@
 				80ABA6D828643E2B00BB515C /* CalendarModel.swift in Sources */,
 				80ABA6CA2861AAD400BB515C /* AddCommandTitleCell.swift in Sources */,
 				80ABA6AE285C375800BB515C /* TextFieldCell.swift in Sources */,
+				80ADD12128782348008B8D9F /* Extension UITextField.swift in Sources */,
 				80BDB81F2869761600FDB525 /* LoginVC.swift in Sources */,
 				80AB6FC5287406410024D226 /* FriendListCell.swift in Sources */,
 				80BDB81C2869702600FDB525 /* TextViewCell.swift in Sources */,
@@ -785,6 +809,7 @@
 				CODE_SIGN_ENTITLEMENTS = PlantyWorld/PlantyWorld.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;

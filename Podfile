@@ -18,5 +18,7 @@ pod 'Kingfisher'
 pod 'FirebaseFirestoreSwift'
 pod 'lottie-ios'
 pod 'CHTCollectionViewWaterfallLayout'
+pod 'Firebase/Crashlytics'
+
 
 end

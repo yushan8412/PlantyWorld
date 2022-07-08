@@ -104,7 +104,14 @@ class LobbyViewController: UIViewController {
     }
     
     func toAddVC () {
-        navigationController?.pushViewController(AddPlantVC(), animated: true)
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+            self.plantsCollectionView.numberOfItems(inSection: 0)
+        } else {
+            navigationController?.pushViewController(AddPlantVC(), animated: true)
+        }
     }
 
 }
@@ -120,8 +127,8 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: PlantsCollectionViewCell.reuseIdentifier,
             for: indexPath) as? PlantsCollectionViewCell
-
         else { return UICollectionViewCell() }
+        
         cell.title.text = plantList[indexPath.item].name
         cell.contentView.layer.cornerRadius = 10
         cell.mainPic.kf.setImage(with: URL(string: plantList[indexPath.row].image))

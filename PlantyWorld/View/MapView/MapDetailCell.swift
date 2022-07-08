@@ -39,7 +39,7 @@ class MapDetailCell: UICollectionViewCell {
                             right: bgView.rightAnchor, paddingTop: 4, paddingLeft: 8, paddingRight: 8)
         
         storeImage.anchor(top: storeAddress.bottomAnchor, bottom: bgView.bottomAnchor, paddingTop: 8,
-                          paddingBottom: 8, width: 200)
+                          paddingBottom: 8, width: 250)
         storeImage.centerX(inView: bgView)
         storeImage.contentMode = .scaleAspectFill
         storeImage.clipsToBounds = true

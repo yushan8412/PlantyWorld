@@ -163,7 +163,7 @@ extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .lightPeach
         cell.noteLB.text = "Event \(indexPath.row + 1)"
         cell.noteContent.text = dayEvent[indexPath.row].content
-        cell.bgView.backgroundColor = .lightGreen
+        cell.bgView.backgroundColor = .trygreen
         cell.bgView.layer.cornerRadius = 20
         
         return cell

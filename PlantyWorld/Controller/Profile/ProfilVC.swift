@@ -46,9 +46,10 @@ class ProfileVC: UIViewController {
         getData()
         setBtn()
         setUserImage()
-        setEditBtn()
+//        setEditBtn()
         setupStackView()
         levelColor()
+        setNEditBtn()
         
     }
     
@@ -89,8 +90,8 @@ class ProfileVC: UIViewController {
         btnStackView.axis = .vertical
         btnStackView.distribution = .equalSpacing
         
-        btnStackView.anchor(top: userName.bottomAnchor, bottom: view.bottomAnchor,
-                            paddingTop: 8, paddingBottom: 100)
+        btnStackView.anchor(top: userName.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                            paddingTop: 16, paddingBottom: 8)
         btnStackView.centerX(inView: view)
               
         userPlantsBG.anchor(width: 250, height: 50)
@@ -108,8 +109,8 @@ class ProfileVC: UIViewController {
         
         userPlantsBG.addSubview(plantsImage)
         plantsImage.anchor(top: userPlantsBG.topAnchor, left: userPlantsBG.leftAnchor,
-                           bottom: userPlantsBG.bottomAnchor, paddingTop: 2,
-                           paddingLeft: 8, paddingBottom: 2, width: 50)
+                           bottom: userPlantsBG.bottomAnchor, paddingTop: 8,
+                           paddingLeft: 8, paddingBottom: 8, width: 40)
         userPlantsBG.addSubview(userPlants)
         userPlants.anchor(top: userPlantsBG.topAnchor, left: plantsImage.rightAnchor,
                           bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
@@ -131,7 +132,7 @@ class ProfileVC: UIViewController {
         backView.backgroundColor = .lightYellow
         backView.layer.cornerRadius = 40
         
-        userName.anchor(top: userBackground.bottomAnchor, paddingTop: 8, height: 30)
+        userName.anchor(top: userBackground.bottomAnchor, paddingTop: 4, height: 30)
         userName.centerX(inView: view)
         userName.textColor = .darkGray
         userName.font = UIFont(name: "Chalkboard SE", size: 24)
@@ -157,10 +158,23 @@ class ProfileVC: UIViewController {
         
     }
     
+    func setNEditBtn() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    image: UIImage(named: "Group")?
+                        .withTintColor(UIColor.black)
+                        .withRenderingMode(.alwaysOriginal),
+                    style: .plain,
+                    target: self,
+                    action: #selector(goEditVC))
+    }
+    
     func setEditBtn() {
         view.addSubview(editBtn)
-        editBtn.anchor(bottom: userBackground.bottomAnchor, right: userBackground.rightAnchor,
-                       paddingBottom: 8, paddingRight: 32)
+        editBtn.anchor(top: view.topAnchor, right: view.rightAnchor,
+                       paddingTop: 65, paddingRight: 16)
+        
+//        editBtn.anchor(bottom: userBackground.bottomAnchor,
+//                       right:userBackground.rightAnchor, paddingBottom: 8, paddingRight: 32)
         editBtn.setImage(addPic, for: .normal)
         editBtn.addTarget(self, action: #selector(goEditVC), for: .touchUpInside)
     }
