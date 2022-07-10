@@ -46,7 +46,6 @@ class ProfileVC: UIViewController {
         getData()
         setBtn()
         setUserImage()
-//        setEditBtn()
         setupStackView()
         levelColor()
         setNEditBtn()
@@ -166,17 +165,6 @@ class ProfileVC: UIViewController {
                     style: .plain,
                     target: self,
                     action: #selector(goEditVC))
-    }
-    
-    func setEditBtn() {
-        view.addSubview(editBtn)
-        editBtn.anchor(top: view.topAnchor, right: view.rightAnchor,
-                       paddingTop: 65, paddingRight: 16)
-        
-//        editBtn.anchor(bottom: userBackground.bottomAnchor,
-//                       right:userBackground.rightAnchor, paddingBottom: 8, paddingRight: 32)
-        editBtn.setImage(addPic, for: .normal)
-        editBtn.addTarget(self, action: #selector(goEditVC), for: .touchUpInside)
     }
     
     func setBtn() {

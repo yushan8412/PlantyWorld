@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "fa6-regular_trash-can-4.png",
+      "filename" : "fa6-regular_trash-can.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "fa6-regular_trash-can@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "fa6-regular_trash-can@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

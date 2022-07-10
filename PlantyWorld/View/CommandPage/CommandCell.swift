@@ -25,10 +25,13 @@ class CommandCell: UITableViewCell {
     @IBAction func tapToCommand(_ sender: UIButton) {
         delegate?.didTapped(sender: commandBtn)
     }
+    let blureview = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
+        setcommentBtn()
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,50 +41,61 @@ class CommandCell: UITableViewCell {
     
     func setup() {
         backgroundColor = .clear
+        mainImage.addSubview(blureview)
+
         basicView.anchor(top: contentView.topAnchor,
                          left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor,
                          right: contentView.rightAnchor,
-                         paddingTop: 12, paddingLeft: 24,
-                         paddingBottom: 12, paddingRight: 24, height: 285)
+                         paddingTop: 8, paddingLeft: 24,
+                         paddingBottom: 8, paddingRight: 24, height: 285)
         basicView.backgroundColor = .trygreen
         basicView.layer.cornerRadius = 20
         
         mainImage.anchor(top: basicView.topAnchor, left: basicView.leftAnchor,
-                         right: basicView.rightAnchor, paddingTop: 0,
-                         paddingLeft: 0, paddingRight: 0, height: 200)
+                         bottom: basicView.bottomAnchor, right: basicView.rightAnchor,
+                         paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: 200)
         mainImage.layer.cornerRadius = 20
-        mainImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         mainImage.contentMode = .scaleAspectFill
-        mainImage.image = UIImage(named: "山烏龜")
-        
-        userImage.anchor(top: mainImage.bottomAnchor, left: basicView.leftAnchor,
-                         paddingTop: 8, paddingLeft: 12, width: 40, height: 40)
+
+        blureview.anchor(left: mainImage.leftAnchor, bottom: mainImage.bottomAnchor,
+                          right: mainImage.rightAnchor, paddingLeft: 0, paddingBottom: 0,
+                          paddingRight: 0, height: 80)
+        blureview.layer.cornerRadius = 20
+
+        mainImage.addSubview(blureview)
+
+        userImage.anchor(top: blureview.topAnchor, left: blureview.leftAnchor,
+                         paddingTop: 8, paddingLeft: 12, width: 34, height: 34)
         userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
-        userImage.layer.cornerRadius = 20
+        userImage.layer.cornerRadius = 17
         
-        titleLB.anchor(top: mainImage.bottomAnchor, left: userImage.rightAnchor,
-                       right: basicView.rightAnchor, paddingTop: 13,
+        titleLB.anchor(top: blureview.topAnchor, left: userImage.rightAnchor,
+                       right: blureview.rightAnchor, paddingTop: 13,
                        paddingLeft: 8, paddingRight: 8)
         titleLB.font =  UIFont(name: "Chalkboard SE", size: 20)
 
-        commandLB.anchor(top: userImage.bottomAnchor, left: basicView.leftAnchor,
-                         bottom: basicView.bottomAnchor, right: basicView.rightAnchor,
+        commandLB.anchor(top: userImage.bottomAnchor, left: blureview.leftAnchor,
+                         bottom: blureview.bottomAnchor, right: blureview.rightAnchor,
                          paddingTop: 4, paddingLeft: 12,
                          paddingBottom: 8, paddingRight: 8)
         commandLB.font =  UIFont(name: "Chalkboard SE", size: 20)
-
-        commandBtn.anchor(bottom: basicView.bottomAnchor, right: basicView.rightAnchor,
-                          paddingBottom: 8, paddingRight: 8)
-        commandBtn.setImage(UIImage(named: "conversation 1"), for: .normal)
-        commandBtn.backgroundColor = .peach
-        commandBtn.layer.cornerRadius = 22
-        commandBtn.setTitle("", for: .normal)
         
         titleLB.textColor = .white
         commandLB.textColor = .white
 
+    }
+    
+    func setcommentBtn() {
+        
+        commandBtn.anchor(bottom: blureview.bottomAnchor, right: blureview.rightAnchor,
+                          paddingBottom: 8, paddingRight: 8)
+        commandBtn.setImage(UIImage(named: "conversation 1"), for: .normal)
+        commandBtn.layer.cornerRadius = 22
+        commandBtn.setTitle("", for: .normal)
+        commandBtn.tintColor = .white
+        
     }
     
 }

@@ -64,18 +64,17 @@ class FriendListCell: UITableViewCell {
         nameLb.centerY(inView: contentView)
         nameLb.font = UIFont(name: "Chalkboard SE", size: 30)
         nameLb.text = "123123"
+        nameLb.textColor = .black
         
         unfollowBtn.anchor(top: backView.topAnchor, right: backView.rightAnchor, paddingTop: 8, paddingRight: 8)
         unfollowBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 16)
         unfollowBtn.titleLabel?.text = "UNFOLLOW"
 
-        blockBtn.anchor(bottom: backView.bottomAnchor, right: backView.rightAnchor,
-                        paddingBottom: 4, paddingRight: 8)
+        blockBtn.anchor(right: backView.rightAnchor, paddingRight: 8, width: 40, height: 40)
+        blockBtn.centerY(inView: backView)
         blockBtn.setImage(UIImage(named: "blockUser"), for: .normal)
         blockBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 20)
-//        blockBtn.setTitle("123", for: .normal)
-//        blockBtn.titleLabel?.text = "BLOCK"
-        blockBtn.setTitle("BLOCK", for: .normal)
+        blockBtn.setTitle("", for: .normal)
                 
     }
     

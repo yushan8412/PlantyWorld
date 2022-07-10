@@ -14,13 +14,18 @@ class PlantsCollectionViewCell: UICollectionViewCell {
     var title = UILabel()
     var mainPic = UIImageView()
     var waterDrop = UIImageView()
+    
+    let blureview = UIVisualEffectView(effect: UIBlurEffect(style: .light))
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(title)
         contentView.addSubview(mainPic)
         contentView.addSubview(waterDrop)
+        contentView.addSubview(blureview)
+        contentView.addSubview(title)
         contentView.backgroundColor = .trygreen
+        blureview.layer.cornerRadius = 10
+        blureview.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         setup()
     }
 
@@ -31,41 +36,32 @@ class PlantsCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         layoutIfNeeded()
+        layoutSubviews()
         setup()
         
     }
     
     func setup() {
-        
-//        title.anchor(top: self.contentView.topAnchor,
-//                     left: self.contentView.leftAnchor,
-//                     paddingTop: 8, paddingLeft: 14)
-//        title.font =  UIFont(name: "Chalkboard SE", size: 20)
-//        title.textColor = .white
-        
-//        mainPic.anchor(top: title.bottomAnchor,
-//                       left: contentView.leftAnchor,
-//                       bottom: contentView.bottomAnchor,
-//                       right: contentView.rightAnchor,
-//                       paddingTop: 8, paddingLeft: 8,
-//                       paddingBottom: 8, paddingRight: 8)
-        
+
         mainPic.anchor(top: contentView.topAnchor,
                        left: contentView.leftAnchor,
-                       bottom: title.topAnchor,
+                       bottom: contentView.bottomAnchor,
                        right: contentView.rightAnchor,
                        paddingTop: 0, paddingLeft: 0,
-                       paddingBottom: 8, paddingRight: 0)
+                       paddingBottom: 0, paddingRight: 0)
         mainPic.layer.cornerRadius = 10
-        mainPic.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        title.anchor(top: mainPic.bottomAnchor,
-                     left: self.contentView.leftAnchor,
-                     bottom: contentView.bottomAnchor,
+        blureview.anchor(left: contentView.leftAnchor, bottom: contentView.bottomAnchor,
+                          right: contentView.rightAnchor, paddingLeft: 0, paddingBottom: 0,
+                          paddingRight: 0, height: 35)
+
+        title.anchor(top: blureview.topAnchor,
+                     left: blureview.leftAnchor,
+                     bottom: blureview.bottomAnchor,
                      paddingTop: 8, paddingLeft: 12, paddingBottom: 8)
         title.font = UIFont(name: "Apple SD Gothic Neo Medium", size: 20)
         title.textColor = .white
-        
+
         mainPic.contentMode = .scaleAspectFill
         mainPic.clipsToBounds = true
         

@@ -15,7 +15,6 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-        contentView.backgroundColor = .pyellow
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,7 +33,7 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
                          left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor,
                          right: contentView.rightAnchor,
-                         paddingTop: 8, paddingLeft: 8,
+                         paddingTop: 12, paddingLeft: 8,
                          paddingBottom: 8, paddingRight: 8, height: 100)
         textView.layer.borderWidth = 0.5
         textView.layer.cornerRadius = 10

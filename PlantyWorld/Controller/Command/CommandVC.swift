@@ -112,7 +112,7 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.userImage.kf.setImage(with: URL(string: allPost[indexPath.row].userImage))
         cell.titleLB.text = allPost[indexPath.row].userName
-        cell.commandLB.text = allPost[indexPath.row].name
+        cell.commandLB.text = (allPost[indexPath.row].name)
         cell.mainImage.kf.setImage(with: URL(string: allPost[indexPath.row].image))
         
         self.plant = allPost[indexPath.row]

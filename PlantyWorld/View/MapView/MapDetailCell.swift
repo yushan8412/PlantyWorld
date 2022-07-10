@@ -29,7 +29,9 @@ class MapDetailCell: UICollectionViewCell {
         bgView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                       bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
                       paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        bgView.backgroundColor = .lightYellow
+//        bgView.backgroundColor = .lightYellow
+        bgView.backgroundColor = UIColor(patternImage: UIImage(named: "mapbg")!)
+
         bgView.layer.cornerRadius = 20
         
         storeName.anchor(top: bgView.topAnchor, left: bgView.leftAnchor, paddingTop: 8, paddingLeft: 8)
