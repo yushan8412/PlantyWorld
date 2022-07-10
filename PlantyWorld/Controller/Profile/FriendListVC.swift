@@ -105,7 +105,7 @@ class FriendsListVC: UIViewController {
         let dataBase = Firestore.firestore()
 
         let alertController = UIAlertController(
-            title: "Block User",
+            title: "BlockUser",
             message: "Are you sure you want to block this user？",
             preferredStyle: .alert)
         

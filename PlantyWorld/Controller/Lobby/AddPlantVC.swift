@@ -33,7 +33,7 @@ class AddPlantVC: UIViewController {
     
     override func viewDidLoad() {
 
-        view.backgroundColor = .pyellow
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "addplantsbg")!)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -73,7 +73,7 @@ class AddPlantVC: UIViewController {
     }
     
     func setAddPlantBtn() {
-        picBackground.addSubview(addImageBtn)
+        view.addSubview(addImageBtn)
         addImageBtn.anchor(bottom: picBackground.bottomAnchor,
                            right: picBackground.rightAnchor,
                            paddingBottom: 8, paddingRight: 8, width: 30, height: 30)
@@ -122,6 +122,7 @@ class AddPlantVC: UIViewController {
                       right: view.rightAnchor,
                       paddingLeft: 24, paddingBottom: 32, paddingRight: 24, height: 45)
         addBtn.backgroundColor = .dPeach
+        addBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         addBtn.setTitle("ADD NEW PLANT", for: .normal)
         addBtn.setTitleColor(.black, for: .normal)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
@@ -174,11 +175,13 @@ class AddPlantVC: UIViewController {
     
     func setupImageArea() {
         view.addSubview(picBackground)
-        picBackground.addSubview(imageArea)
+        view.addSubview(imageArea)
+//        picBackground.addSubview(imageArea)
         picBackground.anchor(top: view.topAnchor, left: view.leftAnchor,
                              right: view.rightAnchor, paddingTop: 100,
                              paddingLeft: 56, paddingRight: 56, height: 250)
         picBackground.backgroundColor = .lightGreen
+        picBackground.alpha = 0.7
         picBackground.layer.cornerRadius = 20
         
         imageArea.anchor(top: picBackground.topAnchor, left: picBackground.leftAnchor,
@@ -186,6 +189,7 @@ class AddPlantVC: UIViewController {
                          paddingTop: 16, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
         imageArea.contentMode = .scaleAspectFill
         imageArea.clipsToBounds = true
+        imageArea.alpha = 1
     }
     
     func setupDetilArea() {
@@ -193,7 +197,7 @@ class AddPlantVC: UIViewController {
         tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
                          bottom: addBtn.topAnchor, right: view.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 4, paddingRight: 8)
-        tableView.backgroundColor = .pyellow
+        tableView.backgroundColor = .clear
         
     }
     
@@ -239,9 +243,10 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "TextViewCell") as? TextViewCell
         else { return UITableViewCell() }
         
-        sunCell.backgroundColor = .pyellow
-        waterCell.backgroundColor = .pyellow
-        cell.backgroundColor = .pyellow
+        sunCell.backgroundColor = .clear
+        waterCell.backgroundColor = .clear
+        cell.backgroundColor = .clear
+        textViewCell.backgroundColor = .clear
         
         cell.textField.text = ""
         

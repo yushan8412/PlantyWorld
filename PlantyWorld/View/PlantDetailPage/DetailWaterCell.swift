@@ -94,7 +94,7 @@ class DetailWaterCell: UITableViewCell {
     func setupStackView() {
         waterView.anchor(top: waterLB.bottomAnchor, left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
-                         paddingTop: 4, paddingLeft: 24, paddingBottom: 4, paddingRight: 54)
+                         paddingTop: 8, paddingLeft: 24, paddingBottom: 4, paddingRight: 54)
         waterView.distribution = .fillEqually
     }
     

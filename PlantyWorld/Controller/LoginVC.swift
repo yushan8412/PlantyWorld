@@ -33,7 +33,6 @@ class LoginVC: UIViewController {
                         withIdentifier: "ProfileVC") as? ProfileVC
                     else {
                         return
-//                        fatalError("can't find AccountViewController")
                     }
                     self.navigationController?.pushViewController(targetVC, animated: true)
                 } else {

@@ -13,6 +13,8 @@ import CHTCollectionViewWaterfallLayout
 
 class LobbyViewController: UIViewController {
 
+//    @IBOutlet weak var searchBar: UISearchBar!
+    
     @IBOutlet weak var plantsCollectionView: UICollectionView!
     
     @IBOutlet weak var addPlantBtn: UIBarButtonItem!
@@ -32,25 +34,36 @@ class LobbyViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "32e3a86d9a8999f0632a696f3500c675")!)
                 
-        plantsCollectionView.backgroundColor = .clear
         plantsCollectionView.delegate = self
         plantsCollectionView.dataSource = self
-        
         plantsCollectionView.register(PlantsCollectionViewCell.self,
                                               forCellWithReuseIdentifier: PlantsCollectionViewCell.reuseIdentifier)
         setupItem()
         setupBtn()
+        plantsCollectionView.backgroundColor = .clear
+
+//        searchBarSearchButtonClicked(searchB: self.searchBar)
+//        searchBar.delegate = self
+
     }
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.searchBar.endEditing(true)
+//        searchBarSearchButtonClicked(searchB: self.searchBar)
+//    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
+        plantsCollectionView.backgroundColor = .clear
+
         self.plantList.removeAll()
 //        FirebaseManager.shared.fetchUserPlantsData(uid: "SvPOVniW2hVeiT1kbmXXZGx45Fr2", completion: { plantList in self.plantList = plantList ?? [] })
         // MARK: 正式模式
         FirebaseManager.shared.fetchUserPlantsData(
             uid: Auth.auth().currentUser?.uid ?? "",
             completion: { plantList in self.plantList = plantList
-                print(plantList)
+//                print(plantList)
             })
         
         self.plantsCollectionView.reloadData()
@@ -68,32 +81,20 @@ class LobbyViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        plantsCollectionView.layoutIfNeeded()
+        
     }
     
+//    func searchBarSearchButtonClicked(searchB: UISearchBar) {
+//            searchBar.resignFirstResponder()
+//        }
+
     func setupItem() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.sectionInset = UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
-        
-//        let flowLayout = UICollectionViewFlowLayout()
-        
-//        let cellWidth = (view.frame.width / 2 - 15)
-//
-//        let cellHeight = cellWidth * 1.3
-//        flowLayout.itemSize = CGSize(width: cellWidth, height: CGFloat.random(in: 150...250))
-//        flowLayout.estimatedItemSize = .zero
-//        flowLayout.minimumInteritemSpacing = 1
-//        flowLayout.scrollDirection = .vertical
-//        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-//        plantsCollectionView.collectionViewLayout = flowLayout
-        
-        
         layout.scrollDirection = .vertical
         plantsCollectionView.collectionViewLayout = layout
-        
-//        let layout = CHTCollectionViewWaterfallLayout()
-//        layout.itemRenderDirection = .leftToRight
-//        layout.columnCount = 2
         plantsCollectionView.register(PlantsCollectionViewCell.self,
                                       forCellWithReuseIdentifier: PlantsCollectionViewCell.reuseIdentifier)
     }
@@ -129,6 +130,8 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
             for: indexPath) as? PlantsCollectionViewCell
         else { return UICollectionViewCell() }
         
+        cell.blureview.layoutIfNeeded()
+        cell.blureview.clipsToBounds = true
         cell.title.text = plantList[indexPath.item].name
         cell.contentView.layer.cornerRadius = 10
         cell.mainPic.kf.setImage(with: URL(string: plantList[indexPath.row].image))
@@ -159,11 +162,6 @@ extension LobbyViewController: UICollectionViewDelegateFlowLayout {
         
         let cellWidth = (collectionView.bounds.width - 32 - 15)/2
         let cellHeight = cellWidth * 1.3
-//        if indexPath.item.isMultiple(of: 2) {
-//            return CGSize(width: cellWidth, height: cellHeight)
-//        } else {
-//            return CGSize(width: cellWidth, height: 150)
-//        }
         return CGSize(width: cellWidth, height: cellHeight)
 
     }
@@ -172,43 +170,8 @@ extension LobbyViewController: UICollectionViewDelegateFlowLayout {
         UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
 
     }
-
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        let cellWidth = (collectionView.bounds.width - 32 - 15)/2
-//        let cellHeight = cellWidth * 1.3
-//        if indexPath.item % 3 == 1 {
-//            return CGSize(width: cellWidth, height: cellHeight)
-//        } else if indexPath.item % 3 == 2 {
-//            return CGSize(width: cellWidth, height: cellHeight)
-//        } else {
-//            return CGSize(width: cellWidth, height: 150)
-//        }
-//         if indexPath.item.isMultiple(of: 2) {
-//             return CGSize(width: cellWidth, height: cellHeight)
-//         } else {
-//             return CGSize(width: cellWidth, height: 200)
-//         }
-//     }
+    
 }
-//
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        insetForSectionAt section: Int) -> UIEdgeInsets {
-//        UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-////        UIEdgeInsets(top: 24.0, left: 16.0, bottom: 24.0, right: 16.0)
-//
-//    }
-//
-//}
 
-
-//extension LobbyViewController: CHTCollectionViewDelegateWaterfallLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        let cellWidth = (collectionView.bounds.width - 32 - 15)/2
-//        let cellHeight = cellWidth * 1.3
-//        return CGSize(width: cellWidth, height: CGFloat.random(in: 200...350))
-//    }
-//}
+extension LobbyViewController: UISearchBarDelegate {
+}

@@ -33,7 +33,7 @@ class EditVC: UIViewController {
     var plantImage: String = "111"
     
     override func viewDidLoad() {
-        view.backgroundColor = .pyellow
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "addplantsbg")!)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -176,13 +176,13 @@ class EditVC: UIViewController {
         picBackground.addSubview(imageArea)
         picBackground.anchor(top: view.topAnchor, left: view.leftAnchor,
                              right: view.rightAnchor, paddingTop: 100,
-                             paddingLeft: 64, paddingRight: 64, height: 300)
+                             paddingLeft: 48, paddingRight: 48, height: 300)
         picBackground.backgroundColor = .lightGreen
         picBackground.layer.cornerRadius = 20
         
         imageArea.anchor(top: picBackground.topAnchor, left: picBackground.leftAnchor,
-                         right: picBackground.rightAnchor, paddingTop: 24,
-                         paddingLeft: 24, paddingRight: 24, height: 250)
+                         bottom: picBackground.bottomAnchor, right: picBackground.rightAnchor,
+                         paddingTop: 16, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
         imageArea.contentMode = .scaleAspectFill
         imageArea.clipsToBounds = true
         imageArea.kf.setImage(with: URL(string: plant?.image ?? ""))
@@ -200,7 +200,7 @@ class EditVC: UIViewController {
         tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
                          bottom: addBtn.topAnchor, right: view.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 4, paddingRight: 8)
-        tableView.backgroundColor = .pyellow
+        tableView.backgroundColor = .clear
         
     }
     
@@ -249,9 +249,11 @@ extension EditVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "PlantDetailCell") as? PlantDetailCell
         else { return UITableViewCell() }
         
-        sunCell.backgroundColor = .pyellow
-        waterCell.backgroundColor = .pyellow
-        cell.backgroundColor = .pyellow
+        sunCell.backgroundColor = .clear
+        waterCell.backgroundColor = .clear
+        cell.backgroundColor = .clear
+        textViewCell.backgroundColor = .clear
+        detailCell.backgroundColor = .clear
         
         cell.textField.text = ""
         
@@ -259,7 +261,6 @@ extension EditVC: UITableViewDelegate, UITableViewDataSource {
 
             detailCell.bgView.backgroundColor = .lightPeach
             detailCell.bgView.layer.cornerRadius = 20
-            detailCell.backgroundColor = .pyellow
             detailCell.nameLB.textAlignment = .center
             detailCell.dateLB.textAlignment = .center
             detailCell.nameLB.text = "Name: \(plant?.name ?? "")"
