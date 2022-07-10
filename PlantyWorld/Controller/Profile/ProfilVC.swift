@@ -13,27 +13,20 @@ import Kingfisher
 class ProfileVC: UIViewController {
     
     var userId: String = ""
-    
     var backView = UIView()
-    
     var userImage = UIImageView()
     var userBackground = UIView()
     var userName = UILabel()
-    
     var userPlants = UILabel()
     var userPlantsBG = UIView()
     var plantsImage = UIImageView()
-    
     var addFBG = UIView()
     var addFriendBtn = UIButton()
-    
     var logoutBtn = UIButton()
     var editBtn = UIButton()
     let addPic = UIImage(named: "edit-image")
-    
     var deleteUserBtn = UIButton()
     var btnStackView = UIStackView()
-    
     var userData: User?
     
     var plantList: [PlantsModel] = [] {
@@ -53,9 +46,9 @@ class ProfileVC: UIViewController {
         getData()
         setBtn()
         setUserImage()
-        setEditBtn()
         setupStackView()
         levelColor()
+        setNEditBtn()
         
     }
     
@@ -96,8 +89,8 @@ class ProfileVC: UIViewController {
         btnStackView.axis = .vertical
         btnStackView.distribution = .equalSpacing
         
-        btnStackView.anchor(top: userName.bottomAnchor, bottom: view.bottomAnchor,
-                            paddingTop: 8, paddingBottom: 100)
+        btnStackView.anchor(top: userName.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                            paddingTop: 16, paddingBottom: 8)
         btnStackView.centerX(inView: view)
               
         userPlantsBG.anchor(width: 250, height: 50)
@@ -106,17 +99,17 @@ class ProfileVC: UIViewController {
         addFBG.anchor(width: 250, height: 50)
         
         logoutBtn.anchor(width: 250, height: 50)
-        logoutBtn.setTitle(" LOG OUT ", for: .normal)
+        logoutBtn.setTitle("FRIENDS LIST", for: .normal)
         logoutBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         
         deleteUserBtn.anchor(width: 250, height: 50)
-        deleteUserBtn.setTitle(" DELETE ACCOUNT", for: .normal)
-        deleteUserBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        deleteUserBtn.setTitle("ACCOUNT MANAGER", for: .normal)
+        deleteUserBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 22)
         
         userPlantsBG.addSubview(plantsImage)
         plantsImage.anchor(top: userPlantsBG.topAnchor, left: userPlantsBG.leftAnchor,
-                           bottom: userPlantsBG.bottomAnchor, paddingTop: 2,
-                           paddingLeft: 8, paddingBottom: 2, width: 50)
+                           bottom: userPlantsBG.bottomAnchor, paddingTop: 8,
+                           paddingLeft: 8, paddingBottom: 8, width: 40)
         userPlantsBG.addSubview(userPlants)
         userPlants.anchor(top: userPlantsBG.topAnchor, left: plantsImage.rightAnchor,
                           bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
@@ -138,7 +131,7 @@ class ProfileVC: UIViewController {
         backView.backgroundColor = .lightYellow
         backView.layer.cornerRadius = 40
         
-        userName.anchor(top: userBackground.bottomAnchor, paddingTop: 8, height: 30)
+        userName.anchor(top: userBackground.bottomAnchor, paddingTop: 4, height: 30)
         userName.centerX(inView: view)
         userName.textColor = .darkGray
         userName.font = UIFont(name: "Chalkboard SE", size: 24)
@@ -164,12 +157,14 @@ class ProfileVC: UIViewController {
         
     }
     
-    func setEditBtn() {
-        view.addSubview(editBtn)
-        editBtn.anchor(bottom: userBackground.bottomAnchor, right: userBackground.rightAnchor,
-                       paddingBottom: 8, paddingRight: 32)
-        editBtn.setImage(addPic, for: .normal)
-        editBtn.addTarget(self, action: #selector(goEditVC), for: .touchUpInside)
+    func setNEditBtn() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    image: UIImage(named: "Group")?
+                        .withTintColor(UIColor.black)
+                        .withRenderingMode(.alwaysOriginal),
+                    style: .plain,
+                    target: self,
+                    action: #selector(goEditVC))
     }
     
     func setBtn() {
@@ -183,37 +178,53 @@ class ProfileVC: UIViewController {
         addFriendBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
         
-        logoutBtn.addTarget(self, action: #selector(tapToLogout), for: .touchUpInside)
-        deleteUserBtn.addTarget(self, action: #selector(deleteuser), for: .touchUpInside)
+        logoutBtn.addTarget(self, action: #selector(goFLiistVC), for: .touchUpInside)
+        deleteUserBtn.addTarget(self, action: #selector(goManagerVC), for: .touchUpInside)
 
     }
     
     func setUI() {
 
-        userPlantsBG.backgroundColor = .pgreen
+        userPlantsBG.backgroundColor = .trygreen
         userPlantsBG.layer.cornerRadius = 20
         userPlantsBG.layer.borderWidth = 0.5
         
-        addFBG.backgroundColor = .pgreen
+        addFBG.backgroundColor = .trygreen
         addFBG.layer.cornerRadius = 20
         addFBG.layer.borderWidth = 0.5
         
-        logoutBtn.backgroundColor = .pgreen
+        logoutBtn.backgroundColor = .trygreen
         logoutBtn.layer.cornerRadius = 20
         logoutBtn.layer.borderWidth = 0.5
         
-        deleteUserBtn.backgroundColor = .pgreen
+        deleteUserBtn.backgroundColor = .trygreen
         deleteUserBtn.layer.cornerRadius = 20
         deleteUserBtn.layer.borderWidth = 0.5
         
         plantsImage.image = UIImage(named: "plant-pot")
     }
     
+    @objc func goManagerVC() {
+        let nextVC = AccountManagerVC()
+        nextVC.userData = self.userData
+        nextVC.modalPresentationStyle = .overFullScreen
+        navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+    
+    @objc func goFLiistVC() {
+        let nextVC = FriendsListVC()
+        nextVC.userData = self.userData
+        nextVC.modalPresentationStyle = .overFullScreen
+        navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+    
     @objc func goEditVC() {
         let editVC = EditProfileVC()
         editVC.userData = self.userData
         editVC.modalPresentationStyle = .overFullScreen
-        navigationController?.present(editVC, animated: true, completion: nil)
+        navigationController?.pushViewController(editVC, animated: true)
         
     }
     
@@ -297,6 +308,7 @@ class ProfileVC: UIViewController {
     
     @objc func goAddFriendVC() {
         let addFriendVC = AddFriendVC()
+        addFriendVC.userDate = self.userData
         navigationController?.pushViewController(addFriendVC, animated: true)
         
     }

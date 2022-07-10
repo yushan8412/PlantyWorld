@@ -15,12 +15,13 @@ import Lottie
 
 class EditVC: UIViewController {
     
+    var detailVC = PlantDetailVC()
     var plant: PlantsModel?
     var addBtn = UIButton()
     var picBackground = UIView()
     var imageArea = UIImageView()
     var addImageBtn = UIButton()
-    let addPic = UIImage(systemName: "photo.on.rectangle.angled")
+    let cameraPic = UIImage(systemName: "camera.on.rectangle.fill")
     var tableView = UITableView()
     let path = "image/\(UUID().uuidString).jpg"
     
@@ -32,7 +33,7 @@ class EditVC: UIViewController {
     var plantImage: String = "111"
     
     override func viewDidLoad() {
-        view.backgroundColor = .pyellow
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "addplantsbg")!)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,31 +46,31 @@ class EditVC: UIViewController {
                                 forCellReuseIdentifier: "TextFieldCell")
         self.tableView.register(UINib(nibName: "TextViewCell", bundle: nil),
                                 forCellReuseIdentifier: "TextViewCell")
+        self.tableView.register(UINib(nibName: "PlantDetailCell", bundle: nil),
+                                forCellReuseIdentifier: "PlantDetailCell")
        
         setupAddBtn()
         setupImageArea()
         setupDetilArea()
         setAddPlantBtn()
         tabBarController?.tabBar.isHidden = true
-        print(plant)
     }
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
-//        imageArea.kf.setImage(with: URL(string: plant?.image ?? ""))
         addBtn.isEnabled = true
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
 
-    
     func setAddPlantBtn() {
         picBackground.addSubview(addImageBtn)
         addImageBtn.anchor(bottom: picBackground.bottomAnchor,
                            right: picBackground.rightAnchor,
-                           paddingBottom: 16, paddingRight: 16)
-        addImageBtn.setImage(addPic, for: .normal)
-        addImageBtn.tintColor = .pgreen
+                           paddingBottom: 8, paddingRight: 8, width: 30, height: 30)
+        addImageBtn.setImage(cameraPic, for: .normal)
+        addImageBtn.backgroundColor = .lightGray
+        addImageBtn.layer.cornerRadius = 15
         addImageBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
     }
     
@@ -121,6 +122,13 @@ class EditVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    func toLobbyVC() {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+          guard let loginVC = mainStoryboard.instantiateViewController(
+            withIdentifier: "LobbyViewController") as? LobbyViewController else { return }
+        self.navigationController?.pushViewController(loginVC, animated: true)
+    }
+    
     @objc func tapToUpdate() {
         
         let imageData = self.imageArea.image!.jpegData(compressionQuality: 0.5)
@@ -135,11 +143,13 @@ class EditVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.updatePlantInfo(plantID: plant?.id ?? "", image: "\(url)", name: plantName, water: water, sun: sun, note: plantNote) { result in
+                            PlantyWorld.FirebaseManager.shared.updatePlantInfo(plantID:
+                                                                                plant?.id ?? "", image: "\(url)", name: plantName,
+                                                                               water: water, sun: sun, note: plantNote) { result in
                                 switch result {
                                 case .success:
                                     print("123")
-                                    self.tapDismiss()
+                                    self.toLobbyVC()
                                 case .failure:
                                     print("error")
                                 }
@@ -156,6 +166,9 @@ class EditVC: UIViewController {
             
         }
         self.addBtn.isEnabled = false
+        detailVC.viewWillAppear(true)
+        self.lottie()
+        
     }
     
     func setupImageArea() {
@@ -163,24 +176,31 @@ class EditVC: UIViewController {
         picBackground.addSubview(imageArea)
         picBackground.anchor(top: view.topAnchor, left: view.leftAnchor,
                              right: view.rightAnchor, paddingTop: 100,
-                             paddingLeft: 64, paddingRight: 64, height: 300)
+                             paddingLeft: 48, paddingRight: 48, height: 300)
         picBackground.backgroundColor = .lightGreen
         picBackground.layer.cornerRadius = 20
         
         imageArea.anchor(top: picBackground.topAnchor, left: picBackground.leftAnchor,
-                         right: picBackground.rightAnchor, paddingTop: 24,
-                         paddingLeft: 24, paddingRight: 24, height: 250)
+                         bottom: picBackground.bottomAnchor, right: picBackground.rightAnchor,
+                         paddingTop: 16, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
         imageArea.contentMode = .scaleAspectFill
         imageArea.clipsToBounds = true
         imageArea.kf.setImage(with: URL(string: plant?.image ?? ""))
     }
     
+    func lottie() {
+        let animationView = loadAnimation(name: "51686-a-botanical-wreath-loading", loopMode: .loop)
+        
+        animationView.play()
+
+    }
+
     func setupDetilArea() {
         
         tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
                          bottom: addBtn.topAnchor, right: view.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 4, paddingRight: 8)
-        tableView.backgroundColor = .pyellow
+        tableView.backgroundColor = .clear
         
     }
     
@@ -204,7 +224,7 @@ extension EditVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
 
 extension EditVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -225,63 +245,54 @@ extension EditVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "TextViewCell") as? TextViewCell
         else { return UITableViewCell() }
         
-        sunCell.backgroundColor = .pyellow
-        waterCell.backgroundColor = .pyellow
-        cell.backgroundColor = .pyellow
+        guard let detailCell = tableView.dequeueReusableCell(
+            withIdentifier: "PlantDetailCell") as? PlantDetailCell
+        else { return UITableViewCell() }
+        
+        sunCell.backgroundColor = .clear
+        waterCell.backgroundColor = .clear
+        cell.backgroundColor = .clear
+        textViewCell.backgroundColor = .clear
+        detailCell.backgroundColor = .clear
         
         cell.textField.text = ""
         
         if indexPath.row == 0 {
 
-            cell.titleLB.text = "Plant Name"
-            cell.textField.text = plant?.name
-            cell.textField.textColor = .black
-            cell.textField.delegate = self
-
-            return cell
+            detailCell.bgView.backgroundColor = .lightPeach
+            detailCell.bgView.layer.cornerRadius = 20
+            detailCell.nameLB.textAlignment = .center
+            detailCell.dateLB.textAlignment = .center
+            detailCell.nameLB.text = "Name: \(plant?.name ?? "")"
+            detailCell.dateLB.text = "Purchase Date: \(plant?.date ?? "")"
+            
+            return detailCell
             
         } else if indexPath.row == 1 {
-
-            cell.textField.text = plant?.date
-            cell.titleLB.text = "Date"
-            cell.textField.textColor = .black
-            cell.textField.delegate = self
-
-            return cell
-            
-        } else if indexPath.row == 2 {
             
             sunCell.sunLB.text = "Sun🌻"
+            sunCell.sunColor(sunLevel: plant?.sun ?? 0)
+            self.sun = plant?.sun ?? 0
             sunCell.delegate = self
             return sunCell
             
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 2 {
             
             waterCell.waterLB.text = "Water🌧"
+            waterCell.waterColor(waterLevel: plant?.water ?? 0)
+            self.water = plant?.water ?? 0
             waterCell.delegate = self
             return waterCell
             
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 3 {
             
             textViewCell.title.text = "Note📝"
             textViewCell.textView.text = plant?.note
+            self.plantNote = plant?.note ?? "something wrong"
             textViewCell.textView.delegate = self
             return textViewCell
         }
         return cell
-    }
-}
-
-extension EditVC: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        switch textField.placeholder {
-        case "\(plant?.name ?? "")":
-            plantName = textField.text ?? "no value"
-        case "\(plant?.date ?? "")":
-            plantDate = textField.text ?? "no date"
-        default:
-            textField.text = "123"
-        }
     }
 }
 
@@ -300,4 +311,3 @@ extension EditVC: WaterLevelDelegate {
         self.water = waterLevel
     }
 }
-

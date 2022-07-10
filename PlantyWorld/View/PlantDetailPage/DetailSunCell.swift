@@ -124,7 +124,7 @@ class DetailSunCell: UITableViewCell {
                      paddingLeft: 16, paddingRight: 8)
         sunView.anchor(top: sunLB.bottomAnchor, left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
-                         paddingTop: 4, paddingLeft: 24, paddingBottom: 4, paddingRight: 54)
+                         paddingTop: 8, paddingLeft: 24, paddingBottom: 4, paddingRight: 54)
         sunView.distribution = .fillEqually
         sunView.alignment = .center
     }

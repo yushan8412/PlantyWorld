@@ -37,7 +37,6 @@ class CommandVC: UIViewController {
         tableView.dataSource = self
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "32e3a86d9a8999f0632a696f3500c675")!)
-        
         self.tableView.register(UINib(nibName: "CommandCell", bundle: nil),
                                 forCellReuseIdentifier: "CommandCell")
         tableView.backgroundColor = .clear
@@ -56,7 +55,6 @@ class CommandVC: UIViewController {
         } else {
             return
         }
-        
     }
     
     func getUserFriendList() {
@@ -70,7 +68,6 @@ class CommandVC: UIViewController {
                     self.user = user
                     self.followList = self.user?.followList
                     self.followList?.append(Auth.auth().currentUser?.uid ?? "no user")
-                    print(self.followList)
                     self.getAllPost()
                 }
             }
@@ -89,13 +86,13 @@ class CommandVC: UIViewController {
                     print(plant)
                     self.allPost.append(plant)
                     self.allPost.sort {
-                        $0.createdTime < $1.createdTime
+                        $0.createdTime.seconds > $1.createdTime.seconds
                     }
                     self.tableView.reloadData()
+                    print(self.allPost)
                 }
             }
         }
-
     }
     
 }
@@ -113,8 +110,9 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "CommandCell") as? CommandCell
         else { return UITableViewCell() }
         
-        cell.titleLB.text = allPost[indexPath.row].name
-        cell.commandLB.text = allPost[indexPath.row].date
+        cell.userImage.kf.setImage(with: URL(string: allPost[indexPath.row].userImage))
+        cell.titleLB.text = allPost[indexPath.row].userName
+        cell.commandLB.text = (allPost[indexPath.row].name)
         cell.mainImage.kf.setImage(with: URL(string: allPost[indexPath.row].image))
         
         self.plant = allPost[indexPath.row]

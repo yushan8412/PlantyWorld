@@ -19,12 +19,13 @@ class AddPlantVC: UIViewController {
     var imageArea = UIImageView()
     var addImageBtn = UIButton()
     let addPic = UIImage(systemName: "photo.on.rectangle.angled")
+    let cameraPic = UIImage(systemName: "camera.on.rectangle.fill")
     var tableView = UITableView()
     let path = "image/\(UUID().uuidString).jpg"
     
     var plant: PlantsModel?
-    var plantName: String = "name"
-    var plantDate: String = "date"
+    var plantName: String = ""
+    var plantDate: String = ""
     var plantNote: String = ""
     var water: Int = 0
     var sun: Int = 0
@@ -32,7 +33,7 @@ class AddPlantVC: UIViewController {
     
     override func viewDidLoad() {
 
-        view.backgroundColor = .pyellow
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "addplantsbg")!)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -56,7 +57,7 @@ class AddPlantVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
-        imageArea.image = UIImage(named: "Group")
+        imageArea.image = UIImage(named: "plantBG")
         addBtn.isEnabled = true
     }
     
@@ -72,12 +73,14 @@ class AddPlantVC: UIViewController {
     }
     
     func setAddPlantBtn() {
-        picBackground.addSubview(addImageBtn)
+        view.addSubview(addImageBtn)
         addImageBtn.anchor(bottom: picBackground.bottomAnchor,
                            right: picBackground.rightAnchor,
-                           paddingBottom: 16, paddingRight: 16)
-        addImageBtn.setImage(addPic, for: .normal)
-        addImageBtn.tintColor = .pgreen
+                           paddingBottom: 8, paddingRight: 8, width: 30, height: 30)
+        addImageBtn.setImage(cameraPic, for: .normal)
+        addImageBtn.backgroundColor = .lightGray
+        addImageBtn.layer.cornerRadius = 15
+        addImageBtn.tintColor = .black
         addImageBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
     }
     
@@ -117,9 +120,10 @@ class AddPlantVC: UIViewController {
         addBtn.anchor(left: view.leftAnchor,
                       bottom: view.bottomAnchor,
                       right: view.rightAnchor,
-                      paddingLeft: 24, paddingBottom: 32, paddingRight: 24)
+                      paddingLeft: 24, paddingBottom: 32, paddingRight: 24, height: 45)
         addBtn.backgroundColor = .dPeach
-        addBtn.setTitle("ADD", for: .normal)
+        addBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        addBtn.setTitle("ADD NEW PLANT", for: .normal)
         addBtn.setTitleColor(.black, for: .normal)
         addBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
         addBtn.layer.cornerRadius = 10
@@ -143,10 +147,9 @@ class AddPlantVC: UIViewController {
                     fileReference.downloadURL { [self] result in
                         switch result {
                         case .success(let url):
-                            PlantyWorld.FirebaseManager.shared.addPlant(name:plantName,
-                                                                        date: plantDate,
-                                                                        sun: sun,
-                                                                        water: water,image: "\(url)", note: plantNote) { result in
+                            PlantyWorld.FirebaseManager.shared.addPlant(
+                                name: plantName, date: plantDate,
+                                sun: sun, water: water, image: "\(url)", note: plantNote) { result in
                                 switch result {
                                 case .success:
                                     print("123")
@@ -172,17 +175,21 @@ class AddPlantVC: UIViewController {
     
     func setupImageArea() {
         view.addSubview(picBackground)
-        picBackground.addSubview(imageArea)
+        view.addSubview(imageArea)
+//        picBackground.addSubview(imageArea)
         picBackground.anchor(top: view.topAnchor, left: view.leftAnchor,
                              right: view.rightAnchor, paddingTop: 100,
-                             paddingLeft: 64, paddingRight: 64, height: 300)
+                             paddingLeft: 56, paddingRight: 56, height: 250)
         picBackground.backgroundColor = .lightGreen
+        picBackground.alpha = 0.7
         picBackground.layer.cornerRadius = 20
         
         imageArea.anchor(top: picBackground.topAnchor, left: picBackground.leftAnchor,
-                         right: picBackground.rightAnchor, paddingTop: 24,
-                         paddingLeft: 24, paddingRight: 24, height: 250)
-        imageArea.contentMode = .scaleToFill
+                         bottom: picBackground.bottomAnchor, right: picBackground.rightAnchor,
+                         paddingTop: 16, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
+        imageArea.contentMode = .scaleAspectFill
+        imageArea.clipsToBounds = true
+        imageArea.alpha = 1
     }
     
     func setupDetilArea() {
@@ -190,7 +197,7 @@ class AddPlantVC: UIViewController {
         tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
                          bottom: addBtn.topAnchor, right: view.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 4, paddingRight: 8)
-        tableView.backgroundColor = .pyellow
+        tableView.backgroundColor = .clear
         
     }
     
@@ -236,26 +243,32 @@ extension AddPlantVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "TextViewCell") as? TextViewCell
         else { return UITableViewCell() }
         
-        sunCell.backgroundColor = .pyellow
-        waterCell.backgroundColor = .pyellow
-        cell.backgroundColor = .pyellow
+        sunCell.backgroundColor = .clear
+        waterCell.backgroundColor = .clear
+        cell.backgroundColor = .clear
+        textViewCell.backgroundColor = .clear
         
         cell.textField.text = ""
         
         if indexPath.row == 0 {
 
             cell.titleLB.text = "Plant Name"
-            cell.textField.placeholder = "Name"
+            cell.textField.attributedPlaceholder =
+            NSAttributedString(string: "Name",
+                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
             cell.textField.textColor = .black
+            cell.textField.text = self.plantName
             cell.textField.delegate = self
 
             return cell
             
         } else if indexPath.row == 1 {
-
-            cell.textField.placeholder = "yyyy.mm.dd"
+            cell.textField.attributedPlaceholder =
+            NSAttributedString(string: "yyyy.mm.dd",
+                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
             cell.titleLB.text = "Date"
             cell.textField.textColor = .black
+            cell.textField.text = self.plantDate
             cell.textField.delegate = self
 
             return cell
@@ -295,7 +308,6 @@ extension AddPlantVC: UITextFieldDelegate {
         }
     }
 }
-
 
 extension AddPlantVC: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
