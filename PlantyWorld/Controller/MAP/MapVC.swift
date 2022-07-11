@@ -114,7 +114,7 @@ class MapVC: UIViewController {
         location.backgroundColor = .pgreen
         location.layer.cornerRadius = 10
         location.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
-        location.setTitle("My Locoation", for: .normal)
+        location.setTitle("My Location", for: .normal)
     }
     
     private func setRegionToAnnotation() {

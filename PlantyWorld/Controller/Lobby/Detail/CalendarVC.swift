@@ -82,14 +82,14 @@ class CalendarVC: UIViewController {
         addField.anchor(left: sticker.rightAnchor, bottom: view.bottomAnchor,
                         right: addEventBtn.leftAnchor, paddingLeft: 8, paddingBottom: 24, paddingRight: 8)
         addField.attributedPlaceholder =
-        NSAttributedString(string: "Leave some not",
+        NSAttributedString(string: "Add Event",
                            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         addField.borderStyle = .roundedRect
         addField.backgroundColor = .white
         addField.textColor = .black
         
         addEventBtn.anchor(bottom: view.bottomAnchor, right: view.rightAnchor, paddingBottom: 24, paddingRight: 24)
-        addEventBtn.setTitle(" add ", for: .normal)
+        addEventBtn.setTitle(" Add ", for: .normal)
         addEventBtn.backgroundColor = .pgreen
         addEventBtn.layer.cornerRadius = 10
         addEventBtn.setContentHuggingPriority(UILayoutPriority(254), for: .horizontal)
@@ -108,9 +108,7 @@ class CalendarVC: UIViewController {
     }
     
     func fetchData(date: String) {
-        FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "", date: date) { events in self.dayEvent = events ?? []
-            print(self.dayEvent)
-            
+        FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "", date: date) { events in self.dayEvent = events ?? []            
         }
         
     }

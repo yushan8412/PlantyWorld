@@ -51,7 +51,6 @@ class LobbyViewController: UIViewController {
 //        self.searchBar.endEditing(true)
 //        searchBarSearchButtonClicked(searchB: self.searchBar)
 //    }
-
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
@@ -63,7 +62,6 @@ class LobbyViewController: UIViewController {
         FirebaseManager.shared.fetchUserPlantsData(
             uid: Auth.auth().currentUser?.uid ?? "",
             completion: { plantList in self.plantList = plantList
-//                print(plantList)
             })
         
         self.plantsCollectionView.reloadData()
@@ -166,7 +164,9 @@ extension LobbyViewController: UICollectionViewDelegateFlowLayout {
 
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
 
     }

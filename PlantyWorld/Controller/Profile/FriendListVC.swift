@@ -26,7 +26,6 @@ class FriendsListVC: UIViewController {
     override func viewDidLoad() {
         view.addSubview(titleLB)
         view.addSubview(tableView)
-//        view.backgroundColor = .peach
         view.backgroundColor = UIColor(patternImage: UIImage(named: "286765a6ce7d6835bcf31047ca916f1d")!)
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,7 +44,7 @@ class FriendsListVC: UIViewController {
     func setupUI() {
         titleLB.anchor(top: view.topAnchor, paddingTop: 100)
         titleLB.centerX(inView: view)
-        titleLB.text = "FOLLOWING USER"
+        titleLB.text = "Following User"
         titleLB.font = UIFont(name: "Marker Felt", size: 34)
         titleLB.textColor = .black
         

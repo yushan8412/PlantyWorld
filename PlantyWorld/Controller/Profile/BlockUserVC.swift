@@ -40,7 +40,7 @@ class BlockUserVC: UIViewController {
         view.addSubview(titleLb)
         titleLb.anchor(top: view.topAnchor, paddingTop: 100)
         titleLb.centerX(inView: view)
-        titleLb.text = "BLACKLIST"
+        titleLb.text = "Blacklist"
         titleLb.font = UIFont(name: "Marker Felt", size: 32)
         
         tableView.backgroundColor = .clear

@@ -223,9 +223,7 @@ extension LoginVC {
         self.checkEmail(uid: Auth.auth().currentUser?.uid ?? "" )
 
         userUid = currentUser?.uid ?? ""
-                
-        print("@@@@ \(userUid)")
-        
+                        
         self.dismiss(animated: true)
         presentingViewController?.viewWillAppear(true)
         

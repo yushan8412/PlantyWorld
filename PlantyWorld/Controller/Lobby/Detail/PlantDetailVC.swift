@@ -39,10 +39,6 @@ class PlantDetailVC: UIViewController {
         self.tableView.register(PlantDetailImageCell.self, forCellReuseIdentifier: PlantDetailImageCell.reuseidentify)
         self.tableView.register(UINib(nibName: "PlantDetailCell", bundle: nil),
                                 forCellReuseIdentifier: "PlantDetailCell")
-        self.tableView.register(UINib(nibName: "DetailSunCell", bundle: nil),
-                                forCellReuseIdentifier: "DetailSunCell")
-        self.tableView.register(UINib(nibName: "DetailWaterCell", bundle: nil),
-                                forCellReuseIdentifier: "DetailWaterCell")
         self.tableView.register(UINib(nibName: "NoteCell", bundle: nil),
                                 forCellReuseIdentifier: "NoteCell")
         self.tableView.register(UINib(nibName: "SunAndWaterCell", bundle: nil),
@@ -54,11 +50,6 @@ class PlantDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        
-//        FirebaseManager.shared.fetchOnePlantData(plantID: self.plantID,
-//                                                 completion: { plant in self.plant = plant ?? PlantsModel(name: "", date: "", sun: 0, water: 0, note: "", image: "", id: "", createdTime: Date())})
-//        print("1231231\(self.plantID)")
-//        print("00000\(self.plant)")
         }
         
     override func viewDidLayoutSubviews() {
@@ -167,14 +158,6 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: "PlantDetailCell") as? PlantDetailCell
         else { return UITableViewCell() }
         
-        guard let sunCell = tableView.dequeueReusableCell(
-            withIdentifier: "DetailSunCell") as? DetailSunCell
-        else { return UITableViewCell() }
-        
-        guard let waterCell = tableView.dequeueReusableCell(
-            withIdentifier: "DetailWaterCell") as? DetailWaterCell
-        else { return UITableViewCell() }
-        
         guard let noteCell = tableView.dequeueReusableCell(
             withIdentifier: "NoteCell") as? NoteCell
         else { return UITableViewCell() }
@@ -186,8 +169,6 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
         
         titleCell.nameLB.text = "Name : \(plant?.name ?? "")"
         titleCell.dateLB.text = "Purchase Date : \(plant?.date ?? "")"
-        sunCell.sunLB.text = "Sun🌼"
-        waterCell.waterLB.text = "Water🌧"
         noteCell.noteLB.text = "Note : "
         noteCell.noteContent.text = plant?.note ?? "Don't have any note yet"
         imageCell.image.kf.setImage(with: URL(string: plant?.image ?? ""))
@@ -218,6 +199,8 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
             noteCell.noteContent.text = plant?.note
             noteCell.bgView.backgroundColor = .pyellow
             noteCell.bgView.layer.cornerRadius = 25
+            noteCell.noteLB.textColor = .black
+            noteCell.noteContent.textColor = .black
 
             return noteCell
         }

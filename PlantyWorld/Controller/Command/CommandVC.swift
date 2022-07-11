@@ -83,13 +83,11 @@ class CommandVC: UIViewController {
         for aID in followList ?? [] {
             FirebaseManager.shared.fetchUserPlantsData(uid: aID) { plants in
                 for plant in plants {
-                    print(plant)
                     self.allPost.append(plant)
                     self.allPost.sort {
                         $0.createdTime.seconds > $1.createdTime.seconds
                     }
                     self.tableView.reloadData()
-                    print(self.allPost)
                 }
             }
         }
