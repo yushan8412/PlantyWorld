@@ -69,6 +69,7 @@ class CommandVC: UIViewController {
                     self.followList = self.user?.followList
                     self.followList?.append(Auth.auth().currentUser?.uid ?? "no user")
                     self.getAllPost()
+                    self.tableView.reloadData()
                 }
             }
         } else {

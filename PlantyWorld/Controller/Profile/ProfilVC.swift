@@ -93,23 +93,23 @@ class ProfileVC: UIViewController {
                             paddingTop: 16, paddingBottom: 8)
         btnStackView.centerX(inView: view)
               
-        userPlantsBG.anchor(width: 250, height: 50)
+        userPlantsBG.anchor(width: 250, height: 45)
         userPlantsBG.centerX(inView: view)
        
-        addFBG.anchor(width: 250, height: 50)
+        addFBG.anchor(width: 250, height: 45)
         
-        logoutBtn.anchor(width: 250, height: 50)
-        logoutBtn.setTitle("FRIENDS LIST", for: .normal)
+        logoutBtn.anchor(width: 250, height: 45)
+        logoutBtn.setTitle("FOLLOW LIST", for: .normal)
         logoutBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         
-        deleteUserBtn.anchor(width: 250, height: 50)
+        deleteUserBtn.anchor(width: 250, height: 45)
         deleteUserBtn.setTitle("ACCOUNT MANAGER", for: .normal)
         deleteUserBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 22)
         
         userPlantsBG.addSubview(plantsImage)
         plantsImage.anchor(top: userPlantsBG.topAnchor, left: userPlantsBG.leftAnchor,
                            bottom: userPlantsBG.bottomAnchor, paddingTop: 8,
-                           paddingLeft: 8, paddingBottom: 8, width: 40)
+                           paddingLeft: 8, paddingBottom: 8, width: 35)
         userPlantsBG.addSubview(userPlants)
         userPlants.anchor(top: userPlantsBG.topAnchor, left: plantsImage.rightAnchor,
                           bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
@@ -173,7 +173,7 @@ class ProfileVC: UIViewController {
                             bottom: addFBG.bottomAnchor, right: addFBG.rightAnchor,
                             paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         
-        addFriendBtn.setTitle(" + ADD FRIEND", for: .normal)
+        addFriendBtn.setTitle(" + FOLLOW ", for: .normal)
         addFriendBtn.tintColor = .black
         addFriendBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
@@ -205,27 +205,43 @@ class ProfileVC: UIViewController {
     }
     
     @objc func goManagerVC() {
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
         let nextVC = AccountManagerVC()
         nextVC.userData = self.userData
         nextVC.modalPresentationStyle = .overFullScreen
         navigationController?.pushViewController(nextVC, animated: true)
-        
+        }
     }
     
     @objc func goFLiistVC() {
-        let nextVC = FriendsListVC()
-        nextVC.userData = self.userData
-        nextVC.modalPresentationStyle = .overFullScreen
-        navigationController?.pushViewController(nextVC, animated: true)
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
+            let nextVC = FriendsListVC()
+            nextVC.userID = self.userData?.userID ?? ""
+            nextVC.modalPresentationStyle = .overFullScreen
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
         
     }
     
     @objc func goEditVC() {
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
         let editVC = EditProfileVC()
         editVC.userData = self.userData
         editVC.modalPresentationStyle = .overFullScreen
         navigationController?.pushViewController(editVC, animated: true)
-        
+        }
     }
     
     @objc func tapToLogout() {
@@ -307,10 +323,15 @@ class ProfileVC: UIViewController {
     }
     
     @objc func goAddFriendVC() {
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
         let addFriendVC = AddFriendVC()
         addFriendVC.userDate = self.userData
         navigationController?.pushViewController(addFriendVC, animated: true)
-        
+        }
     }
     
     func levelColor() {

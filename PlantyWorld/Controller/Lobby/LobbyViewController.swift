@@ -65,7 +65,6 @@ class LobbyViewController: UIViewController {
             })
         
         self.plantsCollectionView.reloadData()
-        print(plantList.count)
         
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()

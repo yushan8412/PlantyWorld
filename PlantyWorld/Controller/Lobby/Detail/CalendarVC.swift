@@ -15,6 +15,7 @@ class CalendarVC: UIViewController {
     var calendar: FSCalendar!
     var plant: PlantsModel?
     var addField = UITextField()
+    var tryCalendar = FSCalendar()
     
     var addEventBtn = UIButton()
     var sticker = UILabel()
@@ -40,9 +41,6 @@ class CalendarVC: UIViewController {
         
         view.backgroundColor = .lightPeach
         setup()
-        let tryCalendar = FSCalendar(frame: CGRect(x: 10, y: 100,
-                                                   width: UIScreen.width - 20,
-                                                   height: UIScreen.height/2 ))
         tryCalendar.dataSource = self
         tryCalendar.delegate = self
         view.addSubview(tryCalendar)
@@ -52,7 +50,6 @@ class CalendarVC: UIViewController {
         self.tableView.register(UINib(nibName: "NoteCell", bundle: nil),
                                 forCellReuseIdentifier: "NoteCell")
         
-                
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,9 +67,11 @@ class CalendarVC: UIViewController {
         view.addSubview(addEventBtn)
         view.addSubview(addField)
         view.addSubview(sticker)
-        tableView.anchor(top: view.topAnchor, left: view.leftAnchor,
+        view.addSubview(tryCalendar)
+
+        tableView.anchor(top: tryCalendar.bottomAnchor, left: view.leftAnchor,
                          bottom: addField.topAnchor, right: view.rightAnchor,
-                         paddingTop: UIScreen.height/2 + 110, paddingLeft: 0,
+                         paddingTop: 8, paddingLeft: 0,
                          paddingBottom: 0, paddingRight: 0)
         tableView.backgroundColor = .lightPeach
         sticker.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, paddingLeft: 24, paddingBottom: 24)
@@ -98,6 +97,9 @@ class CalendarVC: UIViewController {
     }
     
     func calendarUI() {
+        tryCalendar.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 0,
+                           width: UIScreen.width - 20, height: UIScreen.height/2)
+        tryCalendar.centerX(inView: view)
         self.calendar.appearance.selectionColor = .dPeach
         calendar.appearance.todayColor = .pgreen
         calendar.backgroundColor = .lightYellow
@@ -108,7 +110,8 @@ class CalendarVC: UIViewController {
     }
     
     func fetchData(date: String) {
-        FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "", date: date) { events in self.dayEvent = events ?? []            
+        FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "",
+                                                date: date) { events in self.dayEvent = events ?? []
         }
         
     }

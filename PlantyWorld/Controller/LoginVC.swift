@@ -51,6 +51,7 @@ class LoginVC: UIViewController {
                       right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0,
                       paddingRight: 0, height: 350)
         bgView.backgroundColor = UIColor(patternImage: UIImage(named: "viewww")!)
+        bgView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         bgView.layer.cornerRadius = 30
         
         closeBtn.anchor(top: bgView.topAnchor, right: bgView.rightAnchor,
@@ -300,19 +301,14 @@ extension LoginVC: ASAuthorizationControllerDelegate {
         switch error {
         case ASAuthorizationError.canceled:
             CustomFunc.customAlert(title: "使用者取消登入", message: "", vc: self, actionHandler: nil)
-//            break
         case ASAuthorizationError.failed:
             CustomFunc.customAlert(title: "授權請求失敗", message: "", vc: self, actionHandler: nil)
-//            break
         case ASAuthorizationError.invalidResponse:
             CustomFunc.customAlert(title: "授權請求無回應", message: "", vc: self, actionHandler: nil)
-//            break
         case ASAuthorizationError.notHandled:
             CustomFunc.customAlert(title: "授權請求未處理", message: "", vc: self, actionHandler: nil)
-//            break
         case ASAuthorizationError.unknown:
             CustomFunc.customAlert(title: "授權失敗，原因不知", message: "", vc: self, actionHandler: nil)
-//            break
         default:
             break
         }

@@ -46,6 +46,7 @@ class MapVC: UIViewController {
       
         myMap.showsUserLocation = true
         setupUI()
+        secretPin()
         setCollectionView()
         location.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         print(storeList)
@@ -76,6 +77,13 @@ class MapVC: UIViewController {
         
     }
     
+    func secretPin() {
+        var pin = MKPointAnnotation()
+        pin.coordinate = CLLocationCoordinate2D(latitude: 50.102878, longitude: 8.628588)
+        pin.title = "法比"
+        myMap.addAnnotation(pin)
+    }
+    
     func setCollectionView() {
         view.addSubview(collectionView)
         view.addSubview(location)
@@ -91,7 +99,6 @@ class MapVC: UIViewController {
                               paddingRight: 0, height: 220)
     }
 
-    
 //    func setNBtn() {
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
 //                    image: UIImage(named: "Group")?
@@ -157,7 +164,6 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
 }
-
 
 extension MapVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,

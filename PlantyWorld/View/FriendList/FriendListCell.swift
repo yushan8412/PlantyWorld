@@ -48,7 +48,7 @@ class FriendListCell: UITableViewCell {
     func setupUI() {
         backView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                         bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
-                        paddingTop: 16, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
+                        paddingTop: 8, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
         backView.layer.cornerRadius = 30
         backView.backgroundColor = .lightPeach
         

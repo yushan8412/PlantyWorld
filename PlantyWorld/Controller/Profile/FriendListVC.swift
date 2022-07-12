@@ -16,7 +16,8 @@ class FriendsListVC: UIViewController {
     var tableView = UITableView()
     var titleLB = UILabel()
     var userData: User?
-    var user: User?
+//    var user: User?
+    var userID: String = ""
     var friendList: [User] = [] {
         didSet {
             tableView.reloadData()
@@ -30,7 +31,6 @@ class FriendsListVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         setupUI()
-        print(userData?.followList.count as Any)
         
         self.tableView.register(UINib(nibName: "FriendListCell", bundle: nil),
                                 forCellReuseIdentifier: "FriendListCell")
@@ -56,6 +56,18 @@ class FriendsListVC: UIViewController {
     
     func getFriendList() {
         self.friendList.removeAll()
+        UserManager.shared.fetchUserData(userID: self.userID) { result in
+            switch result {
+            case .success(let user):
+                self.userData = user
+                self.getFlist()
+            case.failure:
+                print("Error")
+            }
+        }
+    }
+    
+    func getFlist() {
         for userId in userData?.followList ?? [] {
             UserManager.shared.fetchUserData(userID: userId) { result in
                 switch result {
@@ -65,39 +77,41 @@ class FriendsListVC: UIViewController {
                     print("Error")
                 }
             }
+            self.tableView.reloadData()
         }
     }
     
-    func confirmUnfollow(userid: String) {
-        // 建立一個提示框
-        let alertController = UIAlertController(
-            title: "Unfollow Friend?",
-            message: "Are you sure you want to unfollow this user？",
-            preferredStyle: .alert)
-        
-        // 建立[取消]按鈕
-        let cancelAction = UIAlertAction(
-            title: "Cancel",
-            style: .cancel,
-            handler: nil)
-        alertController.addAction(cancelAction)
-        
-        // 建立[送出]按鈕
-        let okAction = UIAlertAction(
-            title: "YES",
-            style: .default,
-            handler: { _ in
-                UserManager.shared.deleteFriend(ownerID: Auth.auth().currentUser?.uid ?? "", userID: userid)
-                self.successAlert()
-            })
-        alertController.addAction(okAction)
-        
-        // 顯示提示框
-        self.present(
-            alertController,
-            animated: true,
-            completion: nil)
-    }
+//    func confirmUnfollow(userid: String) {
+//        // 建立一個提示框
+//        let alertController = UIAlertController(
+//            title: "Unfollow Friend?",
+//            message: "Are you sure you want to unfollow this user？",
+//            preferredStyle: .alert)
+//
+//        // 建立[取消]按鈕
+//        let cancelAction = UIAlertAction(
+//            title: "Cancel",
+//            style: .cancel,
+//            handler: nil)
+//        alertController.addAction(cancelAction)
+//
+//        // 建立[送出]按鈕
+//        let okAction = UIAlertAction(
+//            title: "YES",
+//            style: .default,
+//            handler: { _ in
+//                UserManager.shared.deleteFriend(ownerID: Auth.auth().currentUser?.uid ?? "", userID: userid)
+//                self.successAlert()
+//                self.viewWillAppear(true)
+//            })
+//        alertController.addAction(okAction)
+//
+//        // 顯示提示框
+//        self.present(
+//            alertController,
+//            animated: true,
+//            completion: nil)
+//    }
     
     func confirm(userid: String) {
         // 建立一個提示框
@@ -126,7 +140,7 @@ class FriendsListVC: UIViewController {
                 self.successAlert()
                 UserManager.shared.deleteFriend(ownerID: Auth.auth().currentUser?.uid ?? "", userID: userid)
                 UserManager.shared.deleteFriend(ownerID: userid, userID: Auth.auth().currentUser?.uid ?? "")
-            
+                self.getFriendList()
             })
         alertController.addAction(okAction)
         
@@ -145,7 +159,10 @@ class FriendsListVC: UIViewController {
         let cancelAction = UIAlertAction(
             title: "OK",
             style: .cancel,
-            handler: nil)
+            handler: { _ in
+                self.getFriendList()
+                self.tableView.reloadData()
+            })
         alertController.addAction(cancelAction)
 
         self.present(
@@ -187,10 +204,10 @@ extension FriendsListVC: BlockUserDelegate {
     }
 }
 
-extension FriendsListVC: UnfollowDelegate {
-    func tapToUnfollow(cell: UITableViewCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        self.confirmUnfollow(userid: friendList[indexPath.row].userID)
-    }
-    
-}
+//extension FriendsListVC: UnfollowDelegate {
+//    func tapToUnfollow(cell: UITableViewCell) {
+//        guard let indexPath = tableView.indexPath(for: cell) else { return }
+//        self.confirmUnfollow(userid: friendList[indexPath.row].userID)
+//    }
+//
+//}
