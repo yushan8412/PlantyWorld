@@ -130,7 +130,7 @@ class AddCommandVC: UIViewController {
         commandField.borderStyle = .roundedRect
         commandField.layer.borderWidth = 0.5
         commandField.attributedPlaceholder =
-        NSAttributedString(string: "Leave some not",
+        NSAttributedString(string: "Add comment",
                            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         commandField.textColor = .darkGray
         commandField.backgroundColor = .white
@@ -218,6 +218,7 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
             commandCell.command.text = user[indexPath.row].comment.commands.command
             commandCell.profilePic.kf.setImage(with: URL(string: user[indexPath.row].user.userImage))
             commandCell.name.text = user[indexPath.row].user.name
+
             
             return commandCell
             

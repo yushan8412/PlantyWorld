@@ -43,9 +43,6 @@ class CommandVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-        self.followList?.removeAll()
-        
         getUserFriendList()
         
         if Auth.auth().currentUser == nil {
@@ -83,13 +80,11 @@ class CommandVC: UIViewController {
         for aID in followList ?? [] {
             FirebaseManager.shared.fetchUserPlantsData(uid: aID) { plants in
                 for plant in plants {
-                    print(plant)
                     self.allPost.append(plant)
                     self.allPost.sort {
                         $0.createdTime.seconds > $1.createdTime.seconds
                     }
                     self.tableView.reloadData()
-                    print(self.allPost)
                 }
             }
         }

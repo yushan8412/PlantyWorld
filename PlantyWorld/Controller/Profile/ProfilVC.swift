@@ -32,7 +32,7 @@ class ProfileVC: UIViewController {
     var plantList: [PlantsModel] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.userPlants.text = " 我有\(self.plantList.count)顆植物 "
+                self.userPlants.text = " GOT \(self.plantList.count) PLANTS "
             }
         }
     }
@@ -93,27 +93,27 @@ class ProfileVC: UIViewController {
                             paddingTop: 16, paddingBottom: 8)
         btnStackView.centerX(inView: view)
               
-        userPlantsBG.anchor(width: 250, height: 50)
+        userPlantsBG.anchor(width: 250, height: 45)
         userPlantsBG.centerX(inView: view)
        
-        addFBG.anchor(width: 250, height: 50)
+        addFBG.anchor(width: 250, height: 45)
         
-        logoutBtn.anchor(width: 250, height: 50)
-        logoutBtn.setTitle("FRIENDS LIST", for: .normal)
+        logoutBtn.anchor(width: 250, height: 45)
+        logoutBtn.setTitle("FOLLOW LIST", for: .normal)
         logoutBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         
-        deleteUserBtn.anchor(width: 250, height: 50)
+        deleteUserBtn.anchor(width: 250, height: 45)
         deleteUserBtn.setTitle("ACCOUNT MANAGER", for: .normal)
         deleteUserBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 22)
         
         userPlantsBG.addSubview(plantsImage)
         plantsImage.anchor(top: userPlantsBG.topAnchor, left: userPlantsBG.leftAnchor,
                            bottom: userPlantsBG.bottomAnchor, paddingTop: 8,
-                           paddingLeft: 8, paddingBottom: 8, width: 40)
+                           paddingLeft: 8, paddingBottom: 8, width: 35)
         userPlantsBG.addSubview(userPlants)
         userPlants.anchor(top: userPlantsBG.topAnchor, left: plantsImage.rightAnchor,
                           bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
-                          paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
+                          paddingTop: 8, paddingLeft: 0, paddingBottom: 8, paddingRight: 8)
         userPlants.textColor = .white
         userPlants.font = UIFont(name: "Chalkboard SE", size: 24)
     }
@@ -151,7 +151,7 @@ class ProfileVC: UIViewController {
         userImage.anchor(top: userBackground.topAnchor, left: userBackground.leftAnchor,
                          bottom: userBackground.bottomAnchor, right: userBackground.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
-        userImage.image = UIImage(named: "山烏龜")
+//        userImage.image = UIImage(named: "山烏龜")
         userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
         
@@ -173,7 +173,7 @@ class ProfileVC: UIViewController {
                             bottom: addFBG.bottomAnchor, right: addFBG.rightAnchor,
                             paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
         
-        addFriendBtn.setTitle(" + ADD FRIEND", for: .normal)
+        addFriendBtn.setTitle(" + FOLLOW ", for: .normal)
         addFriendBtn.tintColor = .black
         addFriendBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
@@ -205,33 +205,51 @@ class ProfileVC: UIViewController {
     }
     
     @objc func goManagerVC() {
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+//            loginVC.delegate = self
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
         let nextVC = AccountManagerVC()
         nextVC.userData = self.userData
         nextVC.modalPresentationStyle = .overFullScreen
         navigationController?.pushViewController(nextVC, animated: true)
-        
+        }
     }
     
     @objc func goFLiistVC() {
-        let nextVC = FriendsListVC()
-        nextVC.userData = self.userData
-        nextVC.modalPresentationStyle = .overFullScreen
-        navigationController?.pushViewController(nextVC, animated: true)
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+//            navigationController?.pushViewController(loginVC, animated: true)
+        } else {
+            let nextVC = FriendsListVC()
+            nextVC.userID = self.userData?.userID ?? ""
+            nextVC.modalPresentationStyle = .overFullScreen
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
         
     }
     
     @objc func goEditVC() {
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
         let editVC = EditProfileVC()
         editVC.userData = self.userData
         editVC.modalPresentationStyle = .overFullScreen
         navigationController?.pushViewController(editVC, animated: true)
-        
+        }
     }
     
     @objc func tapToLogout() {
-            let controller = UIAlertController(title: "登出提醒", message: "確定要登出嗎?", preferredStyle: .alert)
+            let controller = UIAlertController(title: "LOGOUT", message: "Are you sure you want to logout?", preferredStyle: .alert)
 
-            let okAction = UIAlertAction(title: "確定", style: .default) { _ in
+            let okAction = UIAlertAction(title: "YES", style: .default) { _ in
 
                 do {
 
@@ -248,7 +266,7 @@ class ProfileVC: UIViewController {
                 self.viewWillAppear(true)
             }
 
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
             controller.addAction(okAction)
 
@@ -258,7 +276,7 @@ class ProfileVC: UIViewController {
     }
     
     func getData() {
-        FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList ?? []
+        FirebaseManager.shared.fetchUserPlantsData(uid: Auth.auth().currentUser?.uid ?? "", completion: { plantList in self.plantList = plantList
             self.levelColor()
         })
     }
@@ -272,7 +290,11 @@ class ProfileVC: UIViewController {
                 case let .success(user):
                     print("get data")
                     self.userData = user
+                    if self.userData?.userImage != "" {
                     self.userImage.kf.setImage(with: URL(string: self.userData?.userImage ?? ""))
+                    } else {
+                        self.userImage.image = UIImage(named: "About us")
+                    }
                     self.userName.text = self.userData?.name ?? "something went wrong"
                 case .failure:
                     print("failure")
@@ -307,10 +329,15 @@ class ProfileVC: UIViewController {
     }
     
     @objc func goAddFriendVC() {
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+        } else {
         let addFriendVC = AddFriendVC()
         addFriendVC.userDate = self.userData
         navigationController?.pushViewController(addFriendVC, animated: true)
-        
+        }
     }
     
     func levelColor() {
@@ -325,3 +352,13 @@ class ProfileVC: UIViewController {
         }
     }
 }
+
+//extension ProfileVC: OpenEditVCDelegate {
+//    func askVCopen() {
+//        let nextVC = EditProfileVC()
+//        nextVC.email.text = Auth.auth().currentUser?.email
+//        print(Auth.auth().currentUser?.email)
+//        nextVC.userImage.image = UIImage(named: "About us")
+//        self.navigationController?.present(nextVC, animated: true)
+//    }
+//}

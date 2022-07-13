@@ -15,6 +15,7 @@ class BlockUserVC: UIViewController {
     var tableView = UITableView()
     var titleLb = UILabel()
     var userData: User?
+    var userID = ""
     var blockList: [User] = [] {
         didSet {
             tableView.reloadData()
@@ -22,7 +23,7 @@ class BlockUserVC: UIViewController {
     }
 
     override func viewDidLoad() {
-        getBlockList()
+        getuserData()
         setupUI()
         view.backgroundColor = .peach
         tableView.delegate = self
@@ -40,7 +41,7 @@ class BlockUserVC: UIViewController {
         view.addSubview(titleLb)
         titleLb.anchor(top: view.topAnchor, paddingTop: 100)
         titleLb.centerX(inView: view)
-        titleLb.text = "BLACKLIST"
+        titleLb.text = "Blacklist"
         titleLb.font = UIFont(name: "Marker Felt", size: 32)
         
         tableView.backgroundColor = .clear
@@ -49,8 +50,20 @@ class BlockUserVC: UIViewController {
                          paddingTop: 16, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
     }
     
-    func getBlockList() {
+    func getuserData() {
         self.blockList.removeAll()
+        UserManager.shared.fetchUserData(userID: self.userID) { result in
+            switch result {
+            case .success(let user):
+                self.userData = user
+                self.getBlockList()
+            case.failure:
+                print("Error")
+            }
+        }
+    }
+    
+    func getBlockList() {
         for userId in userData?.blockList ?? [] {
             UserManager.shared.fetchUserData(userID: userId) { result in
                 switch result {
@@ -109,7 +122,10 @@ class BlockUserVC: UIViewController {
         let cancelAction = UIAlertAction(
             title: "OK",
             style: .cancel,
-            handler: nil)
+            handler: { _ in
+                self.getuserData()
+                self.tableView.reloadData()
+            })
         alertController.addAction(cancelAction)
 
         self.present(
@@ -128,21 +144,22 @@ extension BlockUserVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "FriendListCell") as? FriendListCell
         else { return UITableViewCell() }
-        cell.unfollowBtn.isHidden = true
-        cell.blockBtn.setTitle("UNBLOCK", for: .normal)
+//        cell.unfollowBtn.isHidden = true
+//        cell.blockBtn.setTitle("", for: .normal)
+        cell.blockBtn.isHidden = true
+        cell.unfollowBtn.setTitle("Unblock", for: .normal)
         cell.backgroundColor = .clear
         cell.friendImage.kf.setImage(with: URL(string: blockList[indexPath.row].userImage))
         cell.nameLb.text = blockList[indexPath.row].name
-        cell.delegate = self
+        cell.unfollowDelegate = self
         return cell
     }
     
 }
 
-extension BlockUserVC: BlockUserDelegate {
-    func tapToBlock(cell: UITableViewCell) {
+extension BlockUserVC: UnfollowDelegate {
+    func tapToUnfollow(cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         self.confirm(userid: blockList[indexPath.row].userID)
-
     }
 }

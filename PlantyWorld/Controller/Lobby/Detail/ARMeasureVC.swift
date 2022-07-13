@@ -73,11 +73,11 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         saveBtn.addTarget(self, action: #selector(tapToSave), for: .touchUpInside)
         
     }
-    
+//    紅點越小，測量結果越精準\n 若黃點消失\n 請稍微移開鏡頭再對準測量物
     func usageAlert() {
         let alertController = UIAlertController(
             title: "Usage",
-            message: "紅點越小，測量結果越精準\n 若黃點消失\n 請稍微移開鏡頭再對準測量物",
+            message: "The smaller red dot is, the measurement would be more precise. If yellow dot disappear,\n please recalibrate camera.",
             preferredStyle: .alert)
         let cancelAction = UIAlertAction(
             title: "OK",
@@ -110,7 +110,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
         let todays = formatter.string(from: Date())
-        FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") 身高 \(finalMeasurement ?? "")cm",
+        FirebaseManager.shared.addEvent(content: "\(plant?.name ?? "noID") tall: \(finalMeasurement ?? "") cm",
                                         plantID: plant?.id ?? "noID", date: todays) { result in
             switch result {
             case .success:

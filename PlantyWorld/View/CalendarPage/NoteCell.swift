@@ -15,8 +15,8 @@ class NoteCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-        noteLB.textColor = .black
-        noteContent.textColor = .black
+        noteLB.textColor = .white
+        noteContent.textColor = .white
     
     }
 
@@ -36,12 +36,12 @@ class NoteCell: UITableViewCell {
                       right: bgView.rightAnchor, paddingTop: 8,
                       paddingLeft: 16, paddingRight: 16)
         noteLB.numberOfLines = 0
-        noteLB.font =  UIFont(name: "Chalkboard SE", size: 20)
+        noteLB.font =  UIFont(name: "Chalkboard SE", size: 16)
         noteContent.anchor(top: noteLB.bottomAnchor, left: bgView.leftAnchor,
                            bottom: bgView.bottomAnchor, right: bgView.rightAnchor,
-                           paddingTop: 8, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
+                           paddingTop: 4, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
         noteContent.numberOfLines = 0
-        noteContent.font =  UIFont(name: "Chalkboard SE", size: 16)
+        noteContent.font =  UIFont(name: "Chalkboard SE", size: 20)
         
     }
     

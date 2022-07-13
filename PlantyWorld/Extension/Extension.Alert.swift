@@ -20,12 +20,13 @@ class CustomFunc {
                            actionHandler: (() -> Void)?) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let closeAction = UIAlertAction(title: "關閉",
+            let closeAction = UIAlertAction(title: "Close",
                                             style: .default) { _ in
                 actionHandler?()
             }
             alertController.addAction(closeAction)
             vc.present(alertController, animated: true)
+            vc.viewWillAppear(true)
         }
     }
 

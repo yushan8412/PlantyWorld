@@ -126,7 +126,6 @@ class FirebaseManager {
         }
     }
     
-    // .order(by: "createdTime", descending: true)
     func fetchUserPlantsData(uid: String, completion: @escaping ([PlantsModel]) -> Void) {
         dataBase.collection("plants").whereField("userID", isEqualTo: uid).order(by: "createdTime", descending: true).getDocuments { (querySnapshot, _) in
             guard let querySnapshot = querySnapshot else {
@@ -142,7 +141,6 @@ class FirebaseManager {
                 let plantImage = plantObject["image"] as? String ?? ""
                 let plantID = plantObject["plantID"] as? String ?? ""
                 guard let createdTime = plantObject["createdTime"] as? Timestamp else { return }
-//                        ?? Date()
                 let userName = plantObject["userName"] as? String ?? ""
                 let userImage = plantObject["userImage"] as? String ?? ""
                 
