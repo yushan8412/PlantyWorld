@@ -43,9 +43,6 @@ class CommandVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-        self.followList?.removeAll()
-        
         getUserFriendList()
         
         if Auth.auth().currentUser == nil {
@@ -69,7 +66,6 @@ class CommandVC: UIViewController {
                     self.followList = self.user?.followList
                     self.followList?.append(Auth.auth().currentUser?.uid ?? "no user")
                     self.getAllPost()
-                    self.tableView.reloadData()
                 }
             }
         } else {

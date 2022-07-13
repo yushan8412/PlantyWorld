@@ -32,7 +32,7 @@ class ProfileVC: UIViewController {
     var plantList: [PlantsModel] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.userPlants.text = " 我有\(self.plantList.count)顆植物 "
+                self.userPlants.text = " GOT \(self.plantList.count) PLANTS "
             }
         }
     }
@@ -113,7 +113,7 @@ class ProfileVC: UIViewController {
         userPlantsBG.addSubview(userPlants)
         userPlants.anchor(top: userPlantsBG.topAnchor, left: plantsImage.rightAnchor,
                           bottom: userPlantsBG.bottomAnchor, right: userPlantsBG.rightAnchor,
-                          paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
+                          paddingTop: 8, paddingLeft: 0, paddingBottom: 8, paddingRight: 8)
         userPlants.textColor = .white
         userPlants.font = UIFont(name: "Chalkboard SE", size: 24)
     }
@@ -151,7 +151,7 @@ class ProfileVC: UIViewController {
         userImage.anchor(top: userBackground.topAnchor, left: userBackground.leftAnchor,
                          bottom: userBackground.bottomAnchor, right: userBackground.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
-        userImage.image = UIImage(named: "山烏龜")
+//        userImage.image = UIImage(named: "山烏龜")
         userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
         
@@ -207,6 +207,7 @@ class ProfileVC: UIViewController {
     @objc func goManagerVC() {
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()
+//            loginVC.delegate = self
             loginVC.modalPresentationStyle = .overFullScreen
             navigationController?.present(loginVC, animated: true, completion: nil)
         } else {
@@ -222,6 +223,7 @@ class ProfileVC: UIViewController {
             let loginVC = LoginVC()
             loginVC.modalPresentationStyle = .overFullScreen
             navigationController?.present(loginVC, animated: true, completion: nil)
+//            navigationController?.pushViewController(loginVC, animated: true)
         } else {
             let nextVC = FriendsListVC()
             nextVC.userID = self.userData?.userID ?? ""
@@ -245,9 +247,9 @@ class ProfileVC: UIViewController {
     }
     
     @objc func tapToLogout() {
-            let controller = UIAlertController(title: "登出提醒", message: "確定要登出嗎?", preferredStyle: .alert)
+            let controller = UIAlertController(title: "LOGOUT", message: "Are you sure you want to logout?", preferredStyle: .alert)
 
-            let okAction = UIAlertAction(title: "確定", style: .default) { _ in
+            let okAction = UIAlertAction(title: "YES", style: .default) { _ in
 
                 do {
 
@@ -264,7 +266,7 @@ class ProfileVC: UIViewController {
                 self.viewWillAppear(true)
             }
 
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
             controller.addAction(okAction)
 
@@ -288,7 +290,11 @@ class ProfileVC: UIViewController {
                 case let .success(user):
                     print("get data")
                     self.userData = user
+                    if self.userData?.userImage != "" {
                     self.userImage.kf.setImage(with: URL(string: self.userData?.userImage ?? ""))
+                    } else {
+                        self.userImage.image = UIImage(named: "About us")
+                    }
                     self.userName.text = self.userData?.name ?? "something went wrong"
                 case .failure:
                     print("failure")
@@ -346,3 +352,13 @@ class ProfileVC: UIViewController {
         }
     }
 }
+
+//extension ProfileVC: OpenEditVCDelegate {
+//    func askVCopen() {
+//        let nextVC = EditProfileVC()
+//        nextVC.email.text = Auth.auth().currentUser?.email
+//        print(Auth.auth().currentUser?.email)
+//        nextVC.userImage.image = UIImage(named: "About us")
+//        self.navigationController?.present(nextVC, animated: true)
+//    }
+//}

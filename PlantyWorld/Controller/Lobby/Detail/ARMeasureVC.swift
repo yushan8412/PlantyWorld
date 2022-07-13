@@ -73,11 +73,11 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         saveBtn.addTarget(self, action: #selector(tapToSave), for: .touchUpInside)
         
     }
-    
+//    紅點越小，測量結果越精準\n 若黃點消失\n 請稍微移開鏡頭再對準測量物
     func usageAlert() {
         let alertController = UIAlertController(
             title: "Usage",
-            message: "紅點越小，測量結果越精準\n 若黃點消失\n 請稍微移開鏡頭再對準測量物",
+            message: "The smaller red dot is, the measurement would be more precise. If yellow dot disappear,\n please recalibrate camera.",
             preferredStyle: .alert)
         let cancelAction = UIAlertAction(
             title: "OK",

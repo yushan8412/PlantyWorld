@@ -813,9 +813,9 @@
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App想取用您的位置";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow camera access to use photo picker with camera to upload plants and user photo";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Planty World wants to get your location information for map fearure";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow Photot Library access to use photo picker to upload plants and user photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -847,9 +847,9 @@
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App想取用您的位置";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow camera access to use photo picker with camera to upload plants and user photo";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Planty World wants to get your location information for map fearure";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow Photot Library access to use photo picker to upload plants and user photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

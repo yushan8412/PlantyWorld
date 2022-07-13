@@ -103,9 +103,9 @@ class AccountManagerVC: UIViewController {
     }
     
     @objc func tapToLogout() {
-            let controller = UIAlertController(title: "登出提醒", message: "確定要登出嗎?", preferredStyle: .alert)
+            let controller = UIAlertController(title: "LOGOUT", message: "Are you sure you want to logout?", preferredStyle: .alert)
 
-            let okAction = UIAlertAction(title: "確定", style: .default) { _ in
+            let okAction = UIAlertAction(title: "YES", style: .default) { _ in
 
                 do {
 
@@ -122,7 +122,7 @@ class AccountManagerVC: UIViewController {
                 self.viewWillAppear(true)
             }
 
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
             controller.addAction(okAction)
 
@@ -160,6 +160,8 @@ class AccountManagerVC: UIViewController {
             self.deleteAccount()
             self.deletePlantsDate(uid: self.userData?.userID ?? "")
             self.deleteDate(uid: self.userData?.userID ?? "")
+            self.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.viewWillAppear(true)
         }
         let noAction = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(noAction)
@@ -170,9 +172,7 @@ class AccountManagerVC: UIViewController {
     
     func deleteAccount() {
         UserManager.shared.deleteUser()
-        let loginVC = LoginVC()
-        loginVC.modalPresentationStyle = .overFullScreen
-        navigationController?.present(loginVC, animated: true, completion: nil)
+
     }
     
 }
