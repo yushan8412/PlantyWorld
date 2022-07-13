@@ -86,13 +86,13 @@ class AddPlantVC: UIViewController {
     
     @objc func uploadFrom() {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "開啟相機拍照", style: .default) { (_) in
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
             self.camera()
         }
-        let libraryAction = UIAlertAction(title: "從相簿中選擇", style: .default) { (_) in
+        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { (_) in
             self.photopicker()
         }
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         controller.addAction(cameraAction)
         controller.addAction(libraryAction)
         controller.addAction(cancelAction)

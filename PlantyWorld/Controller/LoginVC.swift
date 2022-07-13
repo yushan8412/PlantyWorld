@@ -7,6 +7,10 @@ import SwiftUI
 
 var userUid: String = ""
 
+protocol OpenEditVCDelegate {
+    func askVCopen()
+}
+
 class LoginVC: UIViewController {
     
     var appleUserID: String?
@@ -15,6 +19,7 @@ class LoginVC: UIViewController {
     var loginLb = UILabel()
     var goEulaBtn = UIButton()
     var goPPage = UIButton()
+    var delegate: OpenEditVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +56,7 @@ class LoginVC: UIViewController {
                       right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0,
                       paddingRight: 0, height: 350)
         bgView.backgroundColor = UIColor(patternImage: UIImage(named: "viewww")!)
+        bgView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         bgView.layer.cornerRadius = 30
         
         closeBtn.anchor(top: bgView.topAnchor, right: bgView.rightAnchor,
@@ -95,7 +101,7 @@ class LoginVC: UIViewController {
     func observeAppleIDState() {
         NotificationCenter.default.addObserver(forName: ASAuthorizationAppleIDProvider.credentialRevokedNotification,
                                                object: nil, queue: nil) { (_: Notification) in
-            CustomFunc.customAlert(title: "使用者登入或登出", message: "", vc: self, actionHandler: nil)
+            CustomFunc.customAlert(title: "User Login or Logout", message: "", vc: self, actionHandler: nil)
         }
     }
     
@@ -208,7 +214,7 @@ extension LoginVC {
                                        vc: self, actionHandler: nil)
                 return
             }
-            CustomFunc.customAlert(title: "登入成功！", message: "", vc: self, actionHandler: self.getFirebaseUserInfo)
+            CustomFunc.customAlert(title: "Success", message: "", vc: self, actionHandler: self.getFirebaseUserInfo)
         }
     }
 
@@ -216,18 +222,16 @@ extension LoginVC {
     func getFirebaseUserInfo() {
         let currentUser = Auth.auth().currentUser
         guard let user = currentUser else {
-            CustomFunc.customAlert(title: "無法取得使用者資料！", message: "", vc: self, actionHandler: nil)
+            CustomFunc.customAlert(title: "Can not get user data！", message: "", vc: self, actionHandler: nil)
             return
         }
        
         self.checkEmail(uid: Auth.auth().currentUser?.uid ?? "" )
 
         userUid = currentUser?.uid ?? ""
-                
-        print("@@@@ \(userUid)")
-        
+                        
         self.dismiss(animated: true)
-        presentingViewController?.viewWillAppear(true)
+        self.presentingViewController?.viewWillAppear(true)
         
     }
     
@@ -255,11 +259,20 @@ extension LoginVC {
                     print("User already exist")
                         
                 } else {
-                    
-                    UserManager.shared.addUser(name: "no name yet",
+                    UserManager.shared.addUser(name: "user name",
                                                uid: Auth.auth().currentUser?.uid ?? "",
                                                email: Auth.auth().currentUser?.email ?? "",
-                                               image: "no image yet")
+                                               image: "") { error in
+                        if error != nil {
+                            print("error")
+                        } else {
+                            self.delegate?.askVCopen()
+//                            let nextVC = EditProfileVC()
+//                            print(self.navigationController)
+//                            self.navigationController?.pushViewController(nextVC, animated: true)
+//                            self.present(nextVC, animated: true)
+                        }
+                    }
                 }
             }
         }
@@ -301,20 +314,15 @@ extension LoginVC: ASAuthorizationControllerDelegate {
         // 登入失敗，處理 Error
         switch error {
         case ASAuthorizationError.canceled:
-            CustomFunc.customAlert(title: "使用者取消登入", message: "", vc: self, actionHandler: nil)
-//            break
+            CustomFunc.customAlert(title: "Cancel Login", message: "", vc: self, actionHandler: nil)
         case ASAuthorizationError.failed:
             CustomFunc.customAlert(title: "授權請求失敗", message: "", vc: self, actionHandler: nil)
-//            break
         case ASAuthorizationError.invalidResponse:
             CustomFunc.customAlert(title: "授權請求無回應", message: "", vc: self, actionHandler: nil)
-//            break
         case ASAuthorizationError.notHandled:
             CustomFunc.customAlert(title: "授權請求未處理", message: "", vc: self, actionHandler: nil)
-//            break
         case ASAuthorizationError.unknown:
             CustomFunc.customAlert(title: "授權失敗，原因不知", message: "", vc: self, actionHandler: nil)
-//            break
         default:
             break
         }

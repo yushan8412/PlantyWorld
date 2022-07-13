@@ -23,9 +23,10 @@ class AddFriendVC: UIViewController {
     var qrImage = UIImageView()
     var scanBtn = UIButton()
     var isBlock = false
+    var bigTitle = UILabel()
     
     override func viewDidLoad() {
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "1b9beeb0bfdab5dfba24167cc6e87579")!)
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "32e3a86d9a8999f0632a696f3500c675-1")!)
         self.tabBarController?.tabBar.isHidden = true
         view.addSubview(titleLB)
         view.addSubview(searchBtn)
@@ -33,6 +34,7 @@ class AddFriendVC: UIViewController {
         view.addSubview(tableView)
         view.addSubview(qrImage)
         view.addSubview(scanBtn)
+        view.addSubview(bigTitle)
         setup()
     }
     
@@ -52,12 +54,17 @@ class AddFriendVC: UIViewController {
     }
     
     func setup() {
+        bigTitle.anchor(bottom: qrImage.topAnchor, paddingBottom: 24)
+        bigTitle.centerX(inView: view)
+        bigTitle.text = "Follow Friends Plants"
+        bigTitle.font = UIFont(name: "Chalkboard SE", size: 28)
+        bigTitle.textColor = .black
         
         qrImage.anchor(bottom: titleLB.topAnchor, paddingBottom: 16, width: 200, height: 200)
         qrImage.centerX(inView: view)
         qrImage.image = generateQRCode(from: userDate?.useremail ?? "")
         
-        scanBtn.anchor(bottom: view.bottomAnchor, paddingBottom: 40, width: 60, height: 60)
+        scanBtn.anchor(bottom: view.bottomAnchor, paddingBottom: 60, width: 60, height: 60)
         scanBtn.centerX(inView: view)
         scanBtn.setImage(UIImage(named: "scan"), for: .normal)
         scanBtn.addTarget(self, action: #selector(goScan), for: .touchUpInside)
@@ -105,7 +112,6 @@ class AddFriendVC: UIViewController {
     }
     
     func checkEmail(email: String) {
-//        var isBlock = userDate?.blockList.contains { (useremail)}
         let dataBase = Firestore.firestore()
         
         // 在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
@@ -143,7 +149,7 @@ class AddFriendVC: UIViewController {
                     if self.isBlock == true {
                         let alertController = UIAlertController(
                             title: "Can not found this user",
-                            message: "要不要確認一下好友 Email?",
+                            message: "Check email again?",
                             preferredStyle: .alert)
                         let cancelAction = UIAlertAction(
                             title: "確認",
@@ -164,10 +170,10 @@ class AddFriendVC: UIViewController {
                    
                     let alertController = UIAlertController(
                         title: "Can not found this user",
-                        message: "要不要確認一下好友 Email?",
+                        message: "Check email again?",
                         preferredStyle: .alert)
                     let cancelAction = UIAlertAction(
-                        title: "確認",
+                        title: "OK",
                         style: .cancel,
                         handler: nil)
                     alertController.addAction(cancelAction)
@@ -206,20 +212,20 @@ class AddFriendVC: UIViewController {
         let dataBase = Firestore.firestore()
 
         let alertController = UIAlertController(
-            title: "追蹤好友植物",
-            message: "確認要加入追蹤清單了嗎？",
+            title: "Follow Friend's Plants",
+            message: "Add this user to your follow list？",
             preferredStyle: .alert)
         
         // 建立[取消]按鈕
         let cancelAction = UIAlertAction(
-            title: "取消",
+            title: "Cancel",
             style: .cancel,
             handler: nil)
         alertController.addAction(cancelAction)
         
         // 建立[送出]按鈕
         let okAction = UIAlertAction(
-            title: "送出",
+            title: "YES",
             style: .default,
             handler: { _ in
                 dataBase.collection("user").document(Auth.auth().currentUser?.uid ?? "").updateData([

@@ -27,14 +27,16 @@ class EditProfileVC: UIViewController {
     override func viewDidLoad() {
         view.layoutIfNeeded()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "bg4")!)
-        setup()
         setBtnUp()
         userTF.layer.cornerRadius = 10
         email.layer.cornerRadius = 10
+        userImage.image = UIImage(named: "About us")
+
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setup()
         showPic()
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -58,6 +60,7 @@ class EditProfileVC: UIViewController {
         userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
         userImage.layer.cornerRadius = 30
+        userImage.image = UIImage(named: "About us")
         
         nameLB.anchor(top: userImage.bottomAnchor, paddingTop: 16)
         nameLB.centerX(inView: view)
@@ -82,7 +85,7 @@ class EditProfileVC: UIViewController {
 
         email.anchor(top: emailLB.bottomAnchor, paddingTop: 16, width: 300, height: 40)
         email.centerX(inView: view)
-        email.text = "  \(userData?.useremail ?? "")"
+        email.text = Auth.auth().currentUser?.email
         email.textColor = .darkGray
         email.backgroundColor = .white
         email.layer.borderWidth = 0.5
@@ -122,13 +125,13 @@ class EditProfileVC: UIViewController {
     
     @objc func uploadFrom() {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "開啟相機拍照", style: .default) { (_) in
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
             self.camera()
         }
-        let libraryAction = UIAlertAction(title: "從相簿中選擇", style: .default) { (_) in
+        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { (_) in
             self.photopicker()
         }
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         controller.addAction(cameraAction)
         controller.addAction(libraryAction)
         controller.addAction(cancelAction)
@@ -152,7 +155,7 @@ class EditProfileVC: UIViewController {
     }
     
     func showPic() {
-        if userData?.userImage != "no image yet" {
+        if userData?.userImage != "" {
             self.userImage.kf.setImage(with: URL(string: userData?.userImage ?? ""))
         } else {
             self.userImage.image = UIImage(named: "About us")
@@ -177,6 +180,7 @@ class EditProfileVC: UIViewController {
                                 switch result {
                                 case .success:
                                     self.dismissVC()
+                                    navigationController?.viewWillAppear(true)
                                     print("update user info")
                                 case .failure:
                                     print("ERRRRRROR")
@@ -215,7 +219,7 @@ extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationController
                 self.userImage.image = image
             }
         } else {
-            print("沒有選到相片")
+            print("No Image")
         }
         dismiss(animated: true, completion: nil)
     }

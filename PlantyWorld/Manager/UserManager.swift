@@ -21,7 +21,7 @@ class UserManager {
     
     var userData: User?
     
-    func addUser(name: String, uid: String, email: String, image: String) {
+    func addUser(name: String, uid: String, email: String, image: String, completion: @escaping((Error?) -> Void)) {
 
         let user = dataBase.collection("user")
         let document = user.document(uid)
@@ -41,6 +41,7 @@ class UserManager {
                 print("Error\(error)")
             } else {
                 print("User Document update!!")
+                completion(nil)
             }
         }
     }
@@ -102,7 +103,7 @@ class UserManager {
     func deleteUser() {
         let user = Auth.auth().currentUser
         user?.delete { error in
-          if let error = error {
+            if error != nil {
             // An error happened.
           } else {
             // Account deleted.

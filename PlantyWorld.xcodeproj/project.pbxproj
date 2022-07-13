@@ -808,14 +808,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PlantyWorld/PlantyWorld.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App想取用您的位置";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow camera access to use photo picker with camera to upload plants and user photo";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Planty World wants to get your location information for map fearure";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow Photot Library access to use photo picker to upload plants and user photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -826,12 +826,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -843,13 +843,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PlantyWorld/PlantyWorld.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SN648B7298;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantyWorld/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "APP想取用相機權限";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App想取用您的位置";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP想取用相簿權限";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow camera access to use photo picker with camera to upload plants and user photo";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Planty World wants to get your location information for map fearure";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow Photot Library access to use photo picker to upload plants and user photo";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -860,12 +860,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
