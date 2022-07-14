@@ -127,8 +127,9 @@ extension CommandVC: AddCommandBtnDelegate {
         
         let addCommandVC = AddCommandVC()
     
-        addCommandVC.modalPresentationStyle = .overFullScreen
+        addCommandVC.modalPresentationStyle = .overCurrentContext
         navigationController?.present(addCommandVC, animated: true, completion: nil)
+        self.tabBarController?.tabBar.isHidden = true
         
         addCommandVC.plant = allPost[indexPath.row]
     }
