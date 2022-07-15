@@ -22,7 +22,7 @@ class ProfileVC: UIViewController {
     var plantsImage = UIImageView()
     var addFBG = UIView()
     var addFriendBtn = UIButton()
-    var logoutBtn = UIButton()
+    var waterBtn = UIButton()
     var editBtn = UIButton()
     let addPic = UIImage(named: "edit-image")
     var deleteUserBtn = UIButton()
@@ -83,26 +83,29 @@ class ProfileVC: UIViewController {
         backView.addSubview(btnStackView)
         btnStackView.addArrangedSubview(userPlantsBG)
         btnStackView.addArrangedSubview(addFBG)
-        btnStackView.addArrangedSubview(logoutBtn)
+        btnStackView.addArrangedSubview(waterBtn)
         btnStackView.addArrangedSubview(deleteUserBtn)
         
         btnStackView.axis = .vertical
         btnStackView.distribution = .equalSpacing
         
+//        btnStackView.anchor(top: userName.bottomAnchor, bottom: view.bottomAnchor,
+//                            paddingTop: 16, paddingBottom: view.safeAreaInsets.bottom)
+//        print(view.safeAreaInsets.bottom)
         btnStackView.anchor(top: userName.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                            paddingTop: 16, paddingBottom: 8)
+                            paddingTop: 16, paddingBottom: 16)
         btnStackView.centerX(inView: view)
               
-        userPlantsBG.anchor(width: 250, height: 45)
+        userPlantsBG.anchor(width: 260, height: UIScreen.height/17)
         userPlantsBG.centerX(inView: view)
        
-        addFBG.anchor(width: 250, height: 45)
+        addFBG.anchor(width: 260, height: UIScreen.height/17)
         
-        logoutBtn.anchor(width: 250, height: 45)
-        logoutBtn.setTitle("FOLLOW LIST", for: .normal)
-        logoutBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        waterBtn.anchor(width: 260, height: UIScreen.height/17)
+        waterBtn.setTitle("WATERING REMINDER", for: .normal)
+        waterBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 22)
         
-        deleteUserBtn.anchor(width: 250, height: 45)
+        deleteUserBtn.anchor(width: 260, height: UIScreen.height/17)
         deleteUserBtn.setTitle("ACCOUNT MANAGER", for: .normal)
         deleteUserBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 22)
         
@@ -151,7 +154,6 @@ class ProfileVC: UIViewController {
         userImage.anchor(top: userBackground.topAnchor, left: userBackground.leftAnchor,
                          bottom: userBackground.bottomAnchor, right: userBackground.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 8)
-//        userImage.image = UIImage(named: "山烏龜")
         userImage.contentMode = .scaleAspectFill
         userImage.clipsToBounds = true
         
@@ -178,7 +180,7 @@ class ProfileVC: UIViewController {
         addFriendBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         addFriendBtn.addTarget(self, action: #selector(goAddFriendVC), for: .touchUpInside)
         
-        logoutBtn.addTarget(self, action: #selector(goFLiistVC), for: .touchUpInside)
+        waterBtn.addTarget(self, action: #selector(goDatePickerVC), for: .touchUpInside)
         deleteUserBtn.addTarget(self, action: #selector(goManagerVC), for: .touchUpInside)
 
     }
@@ -193,15 +195,22 @@ class ProfileVC: UIViewController {
         addFBG.layer.cornerRadius = 20
         addFBG.layer.borderWidth = 0.5
         
-        logoutBtn.backgroundColor = .trygreen
-        logoutBtn.layer.cornerRadius = 20
-        logoutBtn.layer.borderWidth = 0.5
+        waterBtn.backgroundColor = .trygreen
+        waterBtn.layer.cornerRadius = 20
+        waterBtn.layer.borderWidth = 0.5
         
         deleteUserBtn.backgroundColor = .trygreen
         deleteUserBtn.layer.cornerRadius = 20
         deleteUserBtn.layer.borderWidth = 0.5
         
         plantsImage.image = UIImage(named: "plant-pot")
+    }
+    
+    @objc func goDatePickerVC() {
+        let nextVC = WaterReminderVC()
+    
+        nextVC.modalPresentationStyle = .overFullScreen
+        navigationController?.present(nextVC, animated: true, completion: nil)
     }
     
     @objc func goManagerVC() {
@@ -217,22 +226,7 @@ class ProfileVC: UIViewController {
         navigationController?.pushViewController(nextVC, animated: true)
         }
     }
-    
-    @objc func goFLiistVC() {
-        if Auth.auth().currentUser == nil {
-            let loginVC = LoginVC()
-            loginVC.modalPresentationStyle = .overFullScreen
-            navigationController?.present(loginVC, animated: true, completion: nil)
-//            navigationController?.pushViewController(loginVC, animated: true)
-        } else {
-            let nextVC = FriendsListVC()
-            nextVC.userID = self.userData?.userID ?? ""
-            nextVC.modalPresentationStyle = .overFullScreen
-            navigationController?.pushViewController(nextVC, animated: true)
-        }
         
-    }
-    
     @objc func goEditVC() {
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()
@@ -353,7 +347,7 @@ class ProfileVC: UIViewController {
     }
 }
 
-//extension ProfileVC: OpenEditVCDelegate {
+// extension ProfileVC: OpenEditVCDelegate {
 //    func askVCopen() {
 //        let nextVC = EditProfileVC()
 //        nextVC.email.text = Auth.auth().currentUser?.email
@@ -361,4 +355,4 @@ class ProfileVC: UIViewController {
 //        nextVC.userImage.image = UIImage(named: "About us")
 //        self.navigationController?.present(nextVC, animated: true)
 //    }
-//}
+// }

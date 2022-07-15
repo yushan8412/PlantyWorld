@@ -218,8 +218,7 @@ class ProfileVC: UIViewController {
         
     }
     
-    
-    
+        
     @objc func goEditVC() {
         let editVC = EditProfileVC()
         editVC.userData = self.userData

@@ -29,6 +29,7 @@
 		809F97E42859EAAA00E84DD7 /* PublishModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E32859EAAA00E84DD7 /* PublishModel.swift */; };
 		809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */; };
 		809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */; };
+		80AA03A9288133B80066EC45 /* WaterReminderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA03A8288133B80066EC45 /* WaterReminderVC.swift */; };
 		80AA70CE2870796C00271F61 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA70CD2870796C00271F61 /* EditVC.swift */; };
 		80AA70D1287080DB00271F61 /* SunAndWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA70CF287080DB00271F61 /* SunAndWaterCell.swift */; };
 		80AA70D2287080DB00271F61 /* SunAndWaterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */; };
@@ -108,6 +109,7 @@
 		809F97E32859EAAA00E84DD7 /* PublishModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishModel.swift; sourceTree = "<group>"; };
 		809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsModel.swift; sourceTree = "<group>"; };
+		80AA03A8288133B80066EC45 /* WaterReminderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterReminderVC.swift; sourceTree = "<group>"; };
 		80AA70CD2870796C00271F61 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		80AA70CF287080DB00271F61 /* SunAndWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAndWaterCell.swift; sourceTree = "<group>"; };
 		80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SunAndWaterCell.xib; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				80AB6FC02873E6D10024D226 /* WebViewVC.swift */,
 				806DF8582876AE8800DD632B /* EulaVC.swift */,
 				80D0077A287524B4003A20D0 /* BlockUserVC.swift */,
+				80AA03A8288133B80066EC45 /* WaterReminderVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */,
 				80BDB826286995F300FDB525 /* UserManager.swift in Sources */,
 				80ABA69B285AE4F200BB515C /* PlantDetailCell.swift in Sources */,
+				80AA03A9288133B80066EC45 /* WaterReminderVC.swift in Sources */,
 				809F97E02859AA7500E84DD7 /* AddPlantVC.swift in Sources */,
 				80ABA6D828643E2B00BB515C /* CalendarModel.swift in Sources */,
 				80ABA6CA2861AAD400BB515C /* AddCommandTitleCell.swift in Sources */,
@@ -822,6 +826,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -856,6 +861,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

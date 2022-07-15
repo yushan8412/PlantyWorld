@@ -32,9 +32,7 @@ class StoreManager {
                 self.storeList.append(store)
             }
             print("get store data")
-            print(self.storeList)
             completion(self.storeList)
-//            print(store)
         }
     }
     

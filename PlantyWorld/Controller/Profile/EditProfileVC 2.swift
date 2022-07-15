@@ -206,7 +206,6 @@ class EditProfileVC: UIViewController {
     
 }
 
-
 extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,

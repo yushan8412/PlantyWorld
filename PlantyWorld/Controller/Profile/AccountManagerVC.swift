@@ -16,6 +16,7 @@ class AccountManagerVC: UIViewController {
     var logoutBtn = UIButton()
     var deleteAccountBtn = UIButton()
     var privacyBtn = UIButton()
+    var friendList = UIButton()
     var userData: User?
     var blockUser = UIButton()
     let dataBase = Firestore.firestore()
@@ -34,14 +35,15 @@ class AccountManagerVC: UIViewController {
     
     func setupStackView() {
         view.addSubview(stackView)
-        stackView.addArrangedSubview(logoutBtn)
+        stackView.addArrangedSubview(friendList)
         stackView.addArrangedSubview(blockUser)
+        stackView.addArrangedSubview(logoutBtn)
         stackView.addArrangedSubview(privacyBtn)
         stackView.addArrangedSubview(deleteAccountBtn)
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.anchor(width: 300, height: 300)
+        stackView.anchor(width: 300, height: 400)
         stackView.centerY(inView: view)
         stackView.centerX(inView: view)
     }
@@ -53,6 +55,13 @@ class AccountManagerVC: UIViewController {
         logoutBtn.backgroundColor = .lightPeach
         logoutBtn.layer.cornerRadius = 20
         logoutBtn.setTitleColor(.trygreen, for: .normal)
+        
+        friendList.anchor(width: 200, height: 55)
+        friendList.setTitle("FOLLOW LIST", for: .normal)
+        friendList.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
+        friendList.backgroundColor = .lightPeach
+        friendList.layer.cornerRadius = 20
+        friendList.setTitleColor(.trygreen, for: .normal)
         
         deleteAccountBtn.anchor(width: 200, height: 55)
         deleteAccountBtn.setTitle("DELETE ACCOUNT", for: .normal)
@@ -82,11 +91,27 @@ class AccountManagerVC: UIViewController {
         deleteAccountBtn.addTarget(self, action: #selector(deleteuser), for: .touchUpInside)
         privacyBtn.addTarget(self, action: #selector(goWebVC), for: .touchUpInside)
         blockUser.addTarget(self, action: #selector(goBlockVC), for: .touchUpInside)
+        friendList.addTarget(self, action: #selector(goFLiistVC), for: .touchUpInside)
 //        blockUser.addTarget(self, action: #selector(crash), for: .touchUpInside)
     }
     
     @objc func crash() {
         fatalError()
+    }
+    
+    @objc func goFLiistVC() {
+        if Auth.auth().currentUser == nil {
+            let loginVC = LoginVC()
+            loginVC.modalPresentationStyle = .overFullScreen
+            navigationController?.present(loginVC, animated: true, completion: nil)
+//            navigationController?.pushViewController(loginVC, animated: true)
+        } else {
+            let nextVC = FriendsListVC()
+            nextVC.userID = self.userData?.userID ?? ""
+            nextVC.modalPresentationStyle = .overFullScreen
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
+        
     }
     
     @objc func goBlockVC() {
