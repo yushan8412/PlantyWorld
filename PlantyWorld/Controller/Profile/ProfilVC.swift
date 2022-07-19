@@ -48,8 +48,7 @@ class ProfileVC: UIViewController {
         setUserImage()
         setupStackView()
         levelColor()
-        setNEditBtn()
-        
+        setNEditBtn()        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -345,6 +344,7 @@ class ProfileVC: UIViewController {
             userBackground.backgroundColor = .lightYellow
         }
     }
+    
 }
 
 // extension ProfileVC: OpenEditVCDelegate {

@@ -27,7 +27,6 @@ class StoreManager {
                 let image = storeObject["image"] as? String ?? ""
                 let point = storeObject["point"] as? GeoPoint ?? GeoPoint(latitude: 0, longitude: 0)
               
-
                 let store = Store(address: address, name: name, image: image, point: point)
                 self.storeList.append(store)
             }

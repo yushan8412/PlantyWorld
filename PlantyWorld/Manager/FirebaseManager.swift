@@ -341,7 +341,7 @@ class FirebaseManager {
         }
     }
     
-    func deleteDate(plantID: String ) {
+    func deleteDate(plantID: String) {
         let documentRef = dataBase.collection("plants").document("\(plantID)")
         documentRef.delete()
         print("deleted doc!!")

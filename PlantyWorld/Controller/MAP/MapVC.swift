@@ -78,7 +78,7 @@ class MapVC: UIViewController {
     }
     
     func secretPin() {
-        var pin = MKPointAnnotation()
+        let pin = MKPointAnnotation()
         pin.coordinate = CLLocationCoordinate2D(latitude: 50.102878, longitude: 8.628588)
         pin.title = "法比"
         myMap.addAnnotation(pin)

@@ -16,12 +16,12 @@ class WaterReminderVC: UIViewController {
     var time = Date()
     var saveBtn = UIButton()
     var closeBtn = UIButton(type: .close)
+    var switchStatus = true
+    let uuidString = UUID().uuidString              // 建立UNNotificationRequest所需要的ID
     
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.timeZone = TimeZone.current
-        //            datePicker.addTarget(self, action: #selector(didChangedDate(_:)), for: .valueChanged)
-//        datePicker.setValue(UIColor.darkGray, forKeyPath: "textColor")
         datePicker.backgroundColor = .lightGray
         datePicker.tintColor = .black
         datePicker.preferredDatePickerStyle = .wheels
@@ -30,8 +30,8 @@ class WaterReminderVC: UIViewController {
     }()
     
     override func viewDidLoad() {
+        isNotificationOn()
         view.backgroundColor = .clear
-        self.datePicker.isEnabled = false
     }
      
     override func viewWillAppear(_ animated: Bool) {
@@ -81,8 +81,12 @@ class WaterReminderVC: UIViewController {
     }
     
     @objc func tapToSave() {
-        self.time = datePicker.date.addingTimeInterval(28800)
+        self.time = datePicker.date
+        self.setNotification(time: self.time)
+        self.switchStatus = true
+        
         print(time)
+        print("!!!!\(Calendar.current.dateComponents([.hour, .minute], from: Date()))")
     }
     
     @objc func tappedToDismiss() {
@@ -108,10 +112,55 @@ class WaterReminderVC: UIViewController {
     
     @objc func stateSwitch(_ sender: UISwitch) {
         if sender.isOn {
+            switchStatus = true
             datePicker.isEnabled = true
+//            setNotification()
         } else {
+            switchStatus = false
             datePicker.isEnabled = false
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [uuidString])
+            
         }
+    }
+    
+    func isNotificationOn() {
+        if switchStatus == true {
+            self.swich.isOn = true
+            self.datePicker.isEnabled = true
+        } else {
+            self.swich.isOn = false
+            self.datePicker.isEnabled = false
+        }
+    }
+    
+    func setNotification(time: Date) {
+        let content = UNMutableNotificationContent()
+        // 建立內容透過指派content來取得UNMutableNotificationContent功能
+        content.title = "Planty World"                 // 推播標題
+        content.subtitle = "Watering Reminder"            // 推播副標題
+        content.body = "Don't forget to water your plants today🌱"        // 推播內文
+        content.sound = UNNotificationSound.defaultCritical     // 推播的聲音
+        content.badge = 0
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        let component = calendar.dateComponents([.hour, .minute], from: time)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: true)
+        
+//        let component = Calendar.current.dateComponents([.hour, .minute], from: time)
+        // notification 的時間
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: false)
+        // 設定透過時間來完成推播，另有日期地點跟遠端推播
+        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+                    if error != nil {
+                        print("add notification failed, \(error)")
+//                        self.presentAlert(title: "Error", message: "Notification Error: \(error). Please try again later.")
+                    }
+                }
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        // 向UNUserNotificationCenter新增註冊這一則推播
+        
     }
 
 }

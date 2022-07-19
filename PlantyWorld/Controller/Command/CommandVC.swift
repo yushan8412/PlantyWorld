@@ -104,7 +104,7 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "CommandCell") as? CommandCell
         else { return UITableViewCell() }
-        
+        // 這邊會閃退！
         if allPost[indexPath.row].userName == "no name yet" {
             cell.titleLB.text = "New User"
         } else {
