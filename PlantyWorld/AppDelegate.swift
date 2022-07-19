@@ -24,6 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         locationManager.requestWhenInUseAuthorization()
         
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge,.carPlay,.sound]) { (granted, error) in
+                   if granted {
+                       print("允許開啟")
+                   } else {
+                       print("拒絕接受開啟")
+                   }
+               }
+        
         let barApprance = UINavigationBarAppearance()
         barApprance.configureWithTransparentBackground()
         barApprance.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 10)

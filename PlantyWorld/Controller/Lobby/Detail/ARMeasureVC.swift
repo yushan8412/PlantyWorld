@@ -114,12 +114,30 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
                                         plantID: plant?.id ?? "noID", date: todays) { result in
             switch result {
             case .success:
-                print("update")
+                self.successAlert()                
             case .failure:
                 print("failure")
             }
         }
     }
+    
+    private func successAlert() {
+        let alertController = UIAlertController(
+            title: "Success",
+            message: "",
+            preferredStyle: .alert)
+        let cancelAction = UIAlertAction(
+            title: "OK",
+            style: .cancel,
+            handler: nil)
+        alertController.addAction(cancelAction)
+
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil)
+    }
+
     
     func addDot(at hitResult: ARHitTestResult) {
         let dotGeometry = SCNSphere(radius: 0.005)

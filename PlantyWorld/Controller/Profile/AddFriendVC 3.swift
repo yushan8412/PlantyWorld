@@ -105,7 +105,6 @@ class AddFriendVC: UIViewController {
     }
     
     func checkEmail(email: String) {
-//        var isBlock = userDate?.blockList.contains { (useremail)}
         let dataBase = Firestore.firestore()
         
         // 在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
@@ -113,7 +112,6 @@ class AddFriendVC: UIViewController {
             
             if let querySnapshot = querySnapshot {
                 if let document = querySnapshot.documents.first {
-//                    self.confirm()
                     
                     for data in querySnapshot.documents {
                         let userdata = data.data(with: ServerTimestampBehavior.none)
@@ -132,7 +130,6 @@ class AddFriendVC: UIViewController {
                             blockId == self.friendData?.userID
                         }
                     }
-                    print(document.data())
                     print("user is exist")
                     let blocklist = self.userDate?.blockList ?? []
                     self.isBlock = blocklist.contains { (blockId) -> Bool in

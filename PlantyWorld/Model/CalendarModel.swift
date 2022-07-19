@@ -20,8 +20,8 @@ struct CalendarModel: Comparable, Codable {
     
 //    var eventDate: Date = .init(timeIntervalSinceReferenceDate: 0)
     var eventDate: String
-
     var content: String
     var plantID: String
     var dateString: String
+    var eventID: String
 }

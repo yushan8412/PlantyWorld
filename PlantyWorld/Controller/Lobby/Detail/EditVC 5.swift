@@ -62,7 +62,6 @@ class EditVC: UIViewController {
         self.tableView.reloadData()
     }
 
-    
     func setAddPlantBtn() {
         picBackground.addSubview(addImageBtn)
         addImageBtn.anchor(bottom: picBackground.bottomAnchor,
@@ -300,4 +299,3 @@ extension EditVC: WaterLevelDelegate {
         self.water = waterLevel
     }
 }
-

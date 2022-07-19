@@ -85,7 +85,8 @@ class FirebaseManager {
             "authorID": "123" ,
             "date": date,
             "content": content,
-            "plantID": plantID
+            "plantID": plantID,
+            "eventID": document.documentID
         ]
         document.setData(data) { error in
             if let error = error {
@@ -274,14 +275,16 @@ class FirebaseManager {
                
                     let eventContent = eventObject["content"] as? String ?? ""
                     let eventDate = eventObject["date"] as? String ?? "nono"
-                    let eventID = eventObject["plantID"] as? String ?? ""
+                    let plantID = eventObject["plantID"] as? String ?? ""
+                    let eventID = eventObject["eventID"] as? String ?? ""
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
 
                     let plant = CalendarModel(eventDate: eventDate,
                                               content: eventContent,
-                                              plantID: eventID,
-                                              dateString: eventDate
+                                              plantID: plantID,
+                                              dateString: eventDate,
+                                              eventID: eventID
                     )
                     self.eventList.append(plant)
                 }
@@ -301,14 +304,16 @@ class FirebaseManager {
                
                     let eventContent = eventObject["content"] as? String ?? ""
                     let eventDate = eventObject["date"] as? String ?? "nono"
-                    let eventID = eventObject["plantID"] as? String ?? ""
+                    let palntID = eventObject["plantID"] as? String ?? ""
+                    let eventID = eventObject["eventID"] as? String ?? ""
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
 
                     let plant = CalendarModel(eventDate: eventDate,
                                               content: eventContent,
-                                              plantID: eventID,
-                                              dateString: eventDate
+                                              plantID: palntID,
+                                              dateString: eventDate,
+                                              eventID: eventID
                     )
                     self.eventList.append(plant)
                 }
@@ -336,9 +341,22 @@ class FirebaseManager {
         }
     }
     
-    func deleteDate(plantID: String ) {
+    func deleteDate(plantID: String) {
         let documentRef = dataBase.collection("plants").document("\(plantID)")
         documentRef.delete()
         print("deleted doc!!")
     }
+    
+    func deleteEvent(eventID: String) {
+        let documentRef = dataBase.collection("events").document("\(eventID)")
+        documentRef.delete()
+        print("deleted event!!")
+    }
+    
+    func deleteComment(commentID: String) {
+        let documentRef = dataBase.collection("commands").document("\(commentID)")
+        documentRef.delete()
+        print("deleted comment!!")
+    }
+
 }
