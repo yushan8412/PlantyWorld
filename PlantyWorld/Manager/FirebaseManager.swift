@@ -7,8 +7,10 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 import FirebaseAuth
 import Firebase
+import UIKit
 
 class FirebaseManager {
     static let shared = FirebaseManager()
@@ -25,6 +27,80 @@ class FirebaseManager {
     //        plant.date
     //    }
     
+    func tryUploadPhoto(plant: PlantsModel, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            return
+        }
+        guard imageData != nil else {
+            return
+        }
+        
+        let fileReference = Storage.storage().reference().child(UUID().uuidString + ".jpg")
+        fileReference.putData(imageData, metadata: nil) { result in
+            switch result {
+            case .success:
+                fileReference.downloadURL { result in
+                    switch result {
+                    case .failure:
+                        print("Error")
+                    case .success(let url):
+                        var newPlant = plant
+                        newPlant.image = "\(url)"
+                        self.test(plant: newPlant) { result in
+                            switch result {
+                            case .success:
+                                print("success")
+                                completion(.success(Void()))
+                            case .failure:
+                                print("error")
+                            }
+                        }
+                        print("success")
+                    }
+                }
+            case .failure:
+                print("Error")
+            }
+        }
+    }
+        
+    func test(plant: PlantsModel, completion: @escaping (Result<Void, Error>) -> Void) {
+        var theUser: User?
+        UserManager.shared.fetchUserData(userID: Auth.auth().currentUser?.uid ?? "") { result in
+            switch result {
+            case .failure:
+                print("Error")
+            case .success(let user):
+                theUser = user
+            }
+            let plants = self.dataBase.collection("plants")
+            let document = plants.document()
+            let timeInterval = Date()
+            let plantid = document.documentID
+            let data: [String: Any] = [
+                "userID": Auth.auth().currentUser?.uid,
+                "userName": theUser?.name,
+                "userImage": theUser?.userImage,
+                "plantID": "\(plantid)",
+                "name": plant.name,
+                "date": plant.date,
+                "sun": plant.sun,
+                "water": plant.water,
+                "note": plant.note,
+                "image": plant.image,
+                "createdTime": timeInterval
+            ]
+            document.setData(data) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                    print("tset function success")
+                }
+            }
+        }
+    }
+    
     func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: String, completion: @escaping (Result<Void, Error>) -> Void) {
         var theuser: User?
         UserManager.shared.fetchUserData(userID: Auth.auth().currentUser?.uid ?? "") { result in
@@ -39,10 +115,6 @@ class FirebaseManager {
             let timeInterval = Date()
             let plantid = document.documentID
             let data: [String: Any] = [
-                "author": [
-                    "email": "ws123123@gmail.com",
-                    "name": Auth.auth().currentUser?.displayName,
-                    "id": "123123"],
                 "userID": Auth.auth().currentUser?.uid,
                 "userName": theuser?.name,
                 "userImage": theuser?.userImage,
@@ -54,7 +126,6 @@ class FirebaseManager {
                 "note": note,
                 "image": image,
                 "createdTime": timeInterval
-                
             ]
             document.setData(data) { error in
                 if let error = error {

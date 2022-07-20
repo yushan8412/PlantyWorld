@@ -302,12 +302,12 @@ extension EditVC: UITextViewDelegate {
     }
 }
 extension EditVC: SunLevelDelegate {
-    func passSunLV(_ sunLevel: Int) {
+    func passSunLevel(_ sunLevel: Int) {
         self.sun = sunLevel
     }
 }
 extension EditVC: WaterLevelDelegate {
-    func passWaterLV(_ waterLevel: Int) {
+    func passWaterLevel(_ waterLevel: Int) {
         self.water = waterLevel
     }
 }

@@ -16,9 +16,12 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        backgroundColor = .clear
         textField.delegate = self
         textField.backgroundColor = .white
         textField.tintColor = .black
+        textField.textColor = .black
         titleLB.textColor = .black
         setup()
         reloadInputViews()

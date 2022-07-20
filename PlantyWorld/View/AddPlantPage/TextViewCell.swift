@@ -14,6 +14,7 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .clear
         setup()
     }
 
@@ -28,6 +29,7 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
                        paddingTop: 8, paddingLeft: 16, paddingRight: 8)
         title.textColor = .black
         title.font =  UIFont(name: "Chalkboard SE", size: 20)
+        title.text = "Note📝"
 
         textView.anchor(top: title.bottomAnchor,
                          left: contentView.leftAnchor,

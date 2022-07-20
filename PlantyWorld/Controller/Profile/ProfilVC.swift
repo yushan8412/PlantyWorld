@@ -87,10 +87,7 @@ class ProfileVC: UIViewController {
         
         btnStackView.axis = .vertical
         btnStackView.distribution = .equalSpacing
-        
-//        btnStackView.anchor(top: userName.bottomAnchor, bottom: view.bottomAnchor,
-//                            paddingTop: 16, paddingBottom: view.safeAreaInsets.bottom)
-//        print(view.safeAreaInsets.bottom)
+
         btnStackView.anchor(top: userName.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,
                             paddingTop: 16, paddingBottom: 16)
         btnStackView.centerX(inView: view)
@@ -240,7 +237,9 @@ class ProfileVC: UIViewController {
     }
     
     @objc func tapToLogout() {
-            let controller = UIAlertController(title: "LOGOUT", message: "Are you sure you want to logout?", preferredStyle: .alert)
+            let controller = UIAlertController(title: "LOGOUT",
+                                               message: "Are you sure you want to logout?",
+                                               preferredStyle: .alert)
 
             let okAction = UIAlertAction(title: "YES", style: .default) { _ in
 

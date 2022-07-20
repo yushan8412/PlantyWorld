@@ -146,7 +146,6 @@ extension LobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
             if let indexPath = plantsCollectionView.indexPathsForSelectedItems?.first {
                 guard let nextVC = segue.destination as? PlantDetailVC else { return }
                         nextVC.plant = plantList[indexPath.item]
-//                nextVC.plantID = plantList[indexPath.item].id
             }
         }
     }
@@ -167,7 +166,6 @@ extension LobbyViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
-
     }
     
 }
