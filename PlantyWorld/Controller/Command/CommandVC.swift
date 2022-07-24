@@ -104,10 +104,23 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "CommandCell") as? CommandCell
         else { return UITableViewCell() }
-        
-        cell.userImage.kf.setImage(with: URL(string: allPost[indexPath.row].userImage))
+        // 這邊會閃退！
+        if allPost[indexPath.row].userName == "no name yet" {
+            cell.titleLB.text = "New User"
+        } else {
         cell.titleLB.text = allPost[indexPath.row].userName
+        }
+        
         cell.commandLB.text = (allPost[indexPath.row].name)
+        
+        if allPost[indexPath.row].userImage == "no image yet" {
+            cell.userImage.image = UIImage(named: "About us")
+        } else if allPost[indexPath.row].userImage == "" {
+            cell.userImage.image = UIImage(named: "About us")
+        } else {
+            cell.userImage.kf.setImage(with: URL(string: allPost[indexPath.row].userImage))
+        }
+        
         cell.mainImage.kf.setImage(with: URL(string: allPost[indexPath.row].image))
         
         self.plant = allPost[indexPath.row]
@@ -127,8 +140,9 @@ extension CommandVC: AddCommandBtnDelegate {
         
         let addCommandVC = AddCommandVC()
     
-        addCommandVC.modalPresentationStyle = .overFullScreen
+        addCommandVC.modalPresentationStyle = .overCurrentContext
         navigationController?.present(addCommandVC, animated: true, completion: nil)
+        self.tabBarController?.tabBar.isHidden = true
         
         addCommandVC.plant = allPost[indexPath.row]
     }

@@ -1,9 +1,5 @@
 //
 //  Extensions.swift
-//  Twitter Tutorial
-//
-//  Created by 黃昱崴 on 2022/5/15.
-//
 
 import UIKit
 

@@ -16,15 +16,17 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        backgroundColor = .clear
         textField.delegate = self
         textField.backgroundColor = .white
         textField.tintColor = .black
+        textField.textColor = .black
         titleLB.textColor = .black
         setup()
         reloadInputViews()
     }
     
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

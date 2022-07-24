@@ -7,8 +7,10 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 import FirebaseAuth
 import Firebase
+import UIKit
 
 class FirebaseManager {
     static let shared = FirebaseManager()
@@ -20,10 +22,79 @@ class FirebaseManager {
     var plant: PlantsModel!
     var user: User?
 
-    //    func addplant(plant: PlantsModel) {
-    //        plant.name
-    //        plant.date
-    //    }
+    func uploadPhoto(plant: PlantsModel, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            return
+        }
+        guard imageData != nil else {
+            return
+        }
+        
+        let fileReference = Storage.storage().reference().child(UUID().uuidString + ".jpg")
+        fileReference.putData(imageData, metadata: nil) { result in
+            switch result {
+            case .success:
+                fileReference.downloadURL { result in
+                    switch result {
+                    case .failure:
+                        print("Error")
+                    case .success(let url):
+                        var newPlant = plant
+                        newPlant.image = "\(url)"
+                        self.test(plant: newPlant) { result in
+                            switch result {
+                            case .success:
+                                print("success")
+                                completion(.success(Void())) // 需要呼叫completion
+                            case .failure:
+                                print("error")
+                            }
+                        }
+                        print("success")
+                    }
+                }
+            case .failure:
+                print("Error")
+            }
+        }
+    }
+        
+    func test(plant: PlantsModel, completion: @escaping (Result<Void, Error>) -> Void) {
+        var theUser: User?
+        UserManager.shared.fetchUserData(userID: Auth.auth().currentUser?.uid ?? "") { result in
+            switch result {
+            case .failure:
+                print("Error")
+            case .success(let user):
+                theUser = user
+            }
+            let plants = self.dataBase.collection("plants")
+            let document = plants.document()
+            let timeInterval = Date()
+            let plantid = document.documentID
+            let data: [String: Any] = [
+                "userID": Auth.auth().currentUser?.uid ?? "",
+                "userName": theUser?.name ?? "",
+                "userImage": theUser?.userImage ?? "",
+                "plantID": "\(plantid)",
+                "name": plant.name,
+                "date": plant.date ,
+                "sun": plant.sun ,
+                "water": plant.water ,
+                "note": plant.note,
+                "image": plant.image,
+                "createdTime": timeInterval
+            ]
+            document.setData(data) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                    print("tset function success")
+                }
+            }
+        }
+    }
     
     func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: String, completion: @escaping (Result<Void, Error>) -> Void) {
         var theuser: User?
@@ -39,13 +110,9 @@ class FirebaseManager {
             let timeInterval = Date()
             let plantid = document.documentID
             let data: [String: Any] = [
-                "author": [
-                    "email": "ws123123@gmail.com",
-                    "name": Auth.auth().currentUser?.displayName,
-                    "id": "123123"],
-                "userID": Auth.auth().currentUser?.uid,
-                "userName": theuser?.name,
-                "userImage": theuser?.userImage,
+                "userID": Auth.auth().currentUser?.uid ?? "",
+                "userName": theuser?.name ?? "",
+                "userImage": theuser?.userImage ?? "",
                 "plantID": "\(plantid)",
                 "name": name,
                 "date": date,
@@ -54,7 +121,6 @@ class FirebaseManager {
                 "note": note,
                 "image": image,
                 "createdTime": timeInterval
-                
             ]
             document.setData(data) { error in
                 if let error = error {
@@ -85,7 +151,8 @@ class FirebaseManager {
             "authorID": "123" ,
             "date": date,
             "content": content,
-            "plantID": plantID
+            "plantID": plantID,
+            "eventID": document.documentID
         ]
         document.setData(data) { error in
             if let error = error {
@@ -115,7 +182,7 @@ class FirebaseManager {
                 "commandID": document.documentID,
                 "command": "\(newcommand)"],
             "time": dates,
-            "UserId": Auth.auth().currentUser?.uid
+            "UserId": Auth.auth().currentUser?.uid ?? ""
         ]
         document.setData(data) { error in
             if let error = error {
@@ -274,14 +341,16 @@ class FirebaseManager {
                
                     let eventContent = eventObject["content"] as? String ?? ""
                     let eventDate = eventObject["date"] as? String ?? "nono"
-                    let eventID = eventObject["plantID"] as? String ?? ""
+                    let plantID = eventObject["plantID"] as? String ?? ""
+                    let eventID = eventObject["eventID"] as? String ?? ""
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
 
                     let plant = CalendarModel(eventDate: eventDate,
                                               content: eventContent,
-                                              plantID: eventID,
-                                              dateString: eventDate
+                                              plantID: plantID,
+                                              dateString: eventDate,
+                                              eventID: eventID
                     )
                     self.eventList.append(plant)
                 }
@@ -301,14 +370,16 @@ class FirebaseManager {
                
                     let eventContent = eventObject["content"] as? String ?? ""
                     let eventDate = eventObject["date"] as? String ?? "nono"
-                    let eventID = eventObject["plantID"] as? String ?? ""
+                    let palntID = eventObject["plantID"] as? String ?? ""
+                    let eventID = eventObject["eventID"] as? String ?? ""
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
 
                     let plant = CalendarModel(eventDate: eventDate,
                                               content: eventContent,
-                                              plantID: eventID,
-                                              dateString: eventDate
+                                              plantID: palntID,
+                                              dateString: eventDate,
+                                              eventID: eventID
                     )
                     self.eventList.append(plant)
                 }
@@ -336,9 +407,22 @@ class FirebaseManager {
         }
     }
     
-    func deleteDate(plantID: String ) {
+    func deleteDate(plantID: String) {
         let documentRef = dataBase.collection("plants").document("\(plantID)")
         documentRef.delete()
         print("deleted doc!!")
     }
+    
+    func deleteEvent(eventID: String) {
+        let documentRef = dataBase.collection("events").document("\(eventID)")
+        documentRef.delete()
+        print("deleted event!!")
+    }
+    
+    func deleteComment(commentID: String) {
+        let documentRef = dataBase.collection("commands").document("\(commentID)")
+        documentRef.delete()
+        print("deleted comment!!")
+    }
+
 }

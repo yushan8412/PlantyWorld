@@ -34,7 +34,6 @@ class CalendarVC: UIViewController {
     
     var pickedDate = String()
 
-
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -57,7 +56,7 @@ class CalendarVC: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
         let todays = formatter.string(from: Date())
-        
+        self.pickedDate = todays
         fetchData(date: todays)
         self.tableView.reloadData()
     }
@@ -168,6 +167,17 @@ extension CalendarVC: UITableViewDelegate, UITableViewDataSource {
         cell.bgView.layer.cornerRadius = 20
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            FirebaseManager.shared.deleteEvent(eventID: dayEvent[indexPath.row].eventID)
+            self.dayEvent.remove(at: indexPath.row)
+            self.fetchData(date: self.pickedDate)
+            self.tableView.reloadData()
+        }
     }
     
 }

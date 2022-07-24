@@ -32,7 +32,6 @@ class EditProfileVC: UIViewController {
         email.layer.cornerRadius = 10
         userImage.image = UIImage(named: "About us")
 
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -185,9 +184,7 @@ class EditProfileVC: UIViewController {
                                 case .failure:
                                     print("ERRRRRROR")
                                 }
-                                
                             }
-                            
                         case .failure:
                             break
                         }

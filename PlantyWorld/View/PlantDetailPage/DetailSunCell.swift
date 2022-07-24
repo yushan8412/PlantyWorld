@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SunLevelDelegate: AnyObject {
-    func passSunLV(_ sunLevel: Int)
+    func passSunLevel(_ sunLevel: Int)
 }
 
 class DetailSunCell: UITableViewCell {
@@ -65,11 +65,12 @@ class DetailSunCell: UITableViewCell {
         default:
             sunLevel = 0
         }
-        delegate?.passSunLV(sunLevel)
+        delegate?.passSunLevel(sunLevel)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .clear
         setup()
         sunLB.textColor = .black
         sunLB.font =  UIFont(name: "Chalkboard SE", size: 20)
@@ -122,6 +123,7 @@ class DetailSunCell: UITableViewCell {
         sunLB.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                      right: contentView.rightAnchor, paddingTop: 8,
                      paddingLeft: 16, paddingRight: 8)
+        sunLB.text = "Sun🌻"
         sunView.anchor(top: sunLB.bottomAnchor, left: contentView.leftAnchor,
                          bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
                          paddingTop: 8, paddingLeft: 24, paddingBottom: 4, paddingRight: 54)

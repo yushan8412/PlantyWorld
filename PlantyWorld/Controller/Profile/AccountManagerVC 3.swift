@@ -82,8 +82,7 @@ class AccountManagerVC: UIViewController {
         blockUser.addTarget(self, action: #selector(goBlockVC), for: .touchUpInside)
 //        blockUser.addTarget(self, action: #selector(crash), for: .touchUpInside)
     }
-    
-    
+        
     @objc func crash() {
         fatalError()
     }

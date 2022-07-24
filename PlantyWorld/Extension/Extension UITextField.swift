@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+// custom textfield padding
 
 extension UITextField {
     func setLeftPaddingPoints(_ amount:CGFloat) {

@@ -87,8 +87,6 @@ class LoginVC: UIViewController {
                 CustomFunc.customAlert(title: "使用者憑證已被註銷！",
                                        message: "請到\n「設定 → Apple ID → 密碼與安全性 → 使用 Apple ID 的 App」\n將此 App 停止使用 Apple ID\n並再次使用 Apple ID 登入本 App！",
                                        vc: self, actionHandler: nil)
-//            case .notFound:
-//                CustomFunc.customAlert(title: "", message: "使用者尚未使用過 Apple ID 登入！", vc: self, actionHandler: nil)
             case .transferred:
                 CustomFunc.customAlert(title: "請與開發者團隊進行聯繫，以利進行使用者遷移！", message: "", vc: self, actionHandler: nil)
             default:

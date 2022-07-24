@@ -33,6 +33,7 @@ class AddCommandVC: UIViewController {
     var commandField = UITextField()
     var sendCommandBtn = UIButton()
     var tableView = UITableView()
+    var blackView = UIView(frame: UIScreen.main.bounds)
     
     var plant: PlantsModel?
     var newCommand = "no"
@@ -61,6 +62,7 @@ class AddCommandVC: UIViewController {
         
         tabBarController?.tabBar.isHidden = true
         self.tableView.reloadData()
+        blackViewDynamic()
         
     }
     
@@ -75,8 +77,19 @@ class AddCommandVC: UIViewController {
         
     }
     
+    func blackViewDynamic() {
+           
+           blackView.backgroundColor = .black
+           blackView.alpha = 0
+           blackView.isUserInteractionEnabled = true
+           presentingViewController?.view.addSubview(blackView)
+           UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0) {
+               self.blackView.alpha = 0.3
+           }
+    }
+    
     func setupUI() {
-        view.backgroundColor = UIColor.init(white: 0.1, alpha: 0.1)
+        view.backgroundColor = .clear
         view.addSubview(commandView)
         commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
@@ -138,7 +151,11 @@ class AddCommandVC: UIViewController {
     }
     
     @objc func tappedToDismiss() {
+        blackView.removeFromSuperview()
+
         navigationController?.popViewController(animated: true)
+        let presentVC = self.presentingViewController
+        presentVC?.tabBarController?.tabBar.isHidden = false
         dismiss(animated: true, completion: nil)
     }
     
@@ -218,7 +235,6 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
             commandCell.command.text = user[indexPath.row].comment.commands.command
             commandCell.profilePic.kf.setImage(with: URL(string: user[indexPath.row].user.userImage))
             commandCell.name.text = user[indexPath.row].user.name
-
             
             return commandCell
             
@@ -226,4 +242,15 @@ extension AddCommandVC: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            FirebaseManager.shared.deleteComment(commentID: user[indexPath.row].comment.commands.commandID)
+            self.user.remove(at: indexPath.row)
+            self.getComment()
+            self.tableView.reloadData()
+        }
+    }
+
 }

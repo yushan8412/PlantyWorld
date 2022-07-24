@@ -19,11 +19,6 @@ class FirebaseManager {
     var dayEvent: CalendarModel?
     var plant: PlantsModel!
     var user: User?
-
-    //    func addplant(plant: PlantsModel) {
-    //        plant.name
-    //        plant.date
-    //    }
     
     func addPlant(name: String, date: String, sun: Int, water: Int, image: String, note: String, completion: @escaping (Result<Void, Error>) -> Void) {
         var theuser: User?
