@@ -137,7 +137,6 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
             animated: true,
             completion: nil)
     }
-
     
     func addDot(at hitResult: ARHitTestResult) {
         let dotGeometry = SCNSphere(radius: 0.005)

@@ -28,11 +28,13 @@ class ProfileVC: UIViewController {
     var deleteUserBtn = UIButton()
     var btnStackView = UIStackView()
     var userData: User?
-    
+    var plantsCount = 0
+//    var plantList: [PlantsModel] = []
     var plantList: [PlantsModel] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.userPlants.text = " GOT \(self.plantList.count) PLANTS "
+                self.plantsCount = self.plantList.count
+                self.userPlants.text = " GOT \(self.plantsCount) PLANTS "
             }
         }
     }
@@ -48,7 +50,7 @@ class ProfileVC: UIViewController {
         setUserImage()
         setupStackView()
         levelColor()
-        setNEditBtn()        
+        setNEditBtn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +79,7 @@ class ProfileVC: UIViewController {
         userImage.layer.cornerRadius = 117
         userImage.layer.masksToBounds = true
     }
-    
+        
     func setupStackView() {
         backView.addSubview(btnStackView)
         btnStackView.addArrangedSubview(userPlantsBG)
@@ -87,10 +89,7 @@ class ProfileVC: UIViewController {
         
         btnStackView.axis = .vertical
         btnStackView.distribution = .equalSpacing
-        
-//        btnStackView.anchor(top: userName.bottomAnchor, bottom: view.bottomAnchor,
-//                            paddingTop: 16, paddingBottom: view.safeAreaInsets.bottom)
-//        print(view.safeAreaInsets.bottom)
+
         btnStackView.anchor(top: userName.bottomAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,
                             paddingTop: 16, paddingBottom: 16)
         btnStackView.centerX(inView: view)
@@ -240,7 +239,9 @@ class ProfileVC: UIViewController {
     }
     
     @objc func tapToLogout() {
-            let controller = UIAlertController(title: "LOGOUT", message: "Are you sure you want to logout?", preferredStyle: .alert)
+            let controller = UIAlertController(title: "LOGOUT",
+                                               message: "Are you sure you want to logout?",
+                                               preferredStyle: .alert)
 
             let okAction = UIAlertAction(title: "YES", style: .default) { _ in
 

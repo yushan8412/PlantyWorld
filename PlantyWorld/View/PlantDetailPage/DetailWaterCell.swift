@@ -7,7 +7,7 @@
 
 import UIKit
 protocol WaterLevelDelegate: AnyObject {
-    func passWaterLV(_ waterLevel: Int)
+    func passWaterLevel(_ waterLevel: Int)
 }
 
 class DetailWaterCell: UITableViewCell {
@@ -68,7 +68,7 @@ class DetailWaterCell: UITableViewCell {
         default:
             waterLevel = 0
         }
-        delegate?.passWaterLV(waterLevel)
+        delegate?.passWaterLevel(waterLevel)
         
     }
     
@@ -76,6 +76,7 @@ class DetailWaterCell: UITableViewCell {
         super.awakeFromNib()
         setup()
         setupStackView()
+        backgroundColor = .clear
         waterLB.textColor = .black
         waterLB.font =  UIFont(name: "Chalkboard SE", size: 20)
 
@@ -89,6 +90,7 @@ class DetailWaterCell: UITableViewCell {
         waterLB.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                      right: contentView.rightAnchor, paddingTop: 8,
                      paddingLeft: 16, paddingRight: 8)
+        waterLB.text = "Water🌧"
     }
     
     func setupStackView() {

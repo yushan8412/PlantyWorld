@@ -184,9 +184,7 @@ class EditProfileVC: UIViewController {
                                 case .failure:
                                     print("ERRRRRROR")
                                 }
-                                
                             }
-                            
                         case .failure:
                             break
                         }
