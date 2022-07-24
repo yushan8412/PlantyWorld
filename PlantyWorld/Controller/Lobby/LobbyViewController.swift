@@ -9,7 +9,6 @@ import UIKit
 import IQKeyboardManagerSwift
 import Kingfisher
 import FirebaseAuth
-import CHTCollectionViewWaterfallLayout
 
 class LobbyViewController: UIViewController {
 

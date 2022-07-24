@@ -28,11 +28,13 @@ class ProfileVC: UIViewController {
     var deleteUserBtn = UIButton()
     var btnStackView = UIStackView()
     var userData: User?
-    
+    var plantsCount = 0
+//    var plantList: [PlantsModel] = []
     var plantList: [PlantsModel] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.userPlants.text = " GOT \(self.plantList.count) PLANTS "
+                self.plantsCount = self.plantList.count
+                self.userPlants.text = " GOT \(self.plantsCount) PLANTS "
             }
         }
     }
@@ -48,7 +50,7 @@ class ProfileVC: UIViewController {
         setUserImage()
         setupStackView()
         levelColor()
-        setNEditBtn()        
+        setNEditBtn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +79,7 @@ class ProfileVC: UIViewController {
         userImage.layer.cornerRadius = 117
         userImage.layer.masksToBounds = true
     }
-    
+        
     func setupStackView() {
         backView.addSubview(btnStackView)
         btnStackView.addArrangedSubview(userPlantsBG)

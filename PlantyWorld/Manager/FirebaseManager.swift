@@ -22,12 +22,7 @@ class FirebaseManager {
     var plant: PlantsModel!
     var user: User?
 
-    //    func addplant(plant: PlantsModel) {
-    //        plant.name
-    //        plant.date
-    //    }
-    
-    func tryUploadPhoto(plant: PlantsModel, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
+    func uploadPhoto(plant: PlantsModel, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             return
         }
@@ -50,7 +45,7 @@ class FirebaseManager {
                             switch result {
                             case .success:
                                 print("success")
-                                completion(.success(Void()))
+                                completion(.success(Void())) // 需要呼叫completion
                             case .failure:
                                 print("error")
                             }
@@ -78,14 +73,14 @@ class FirebaseManager {
             let timeInterval = Date()
             let plantid = document.documentID
             let data: [String: Any] = [
-                "userID": Auth.auth().currentUser?.uid,
-                "userName": theUser?.name,
-                "userImage": theUser?.userImage,
+                "userID": Auth.auth().currentUser?.uid ?? "",
+                "userName": theUser?.name ?? "",
+                "userImage": theUser?.userImage ?? "",
                 "plantID": "\(plantid)",
                 "name": plant.name,
-                "date": plant.date,
-                "sun": plant.sun,
-                "water": plant.water,
+                "date": plant.date ,
+                "sun": plant.sun ,
+                "water": plant.water ,
                 "note": plant.note,
                 "image": plant.image,
                 "createdTime": timeInterval
@@ -115,9 +110,9 @@ class FirebaseManager {
             let timeInterval = Date()
             let plantid = document.documentID
             let data: [String: Any] = [
-                "userID": Auth.auth().currentUser?.uid,
-                "userName": theuser?.name,
-                "userImage": theuser?.userImage,
+                "userID": Auth.auth().currentUser?.uid ?? "",
+                "userName": theuser?.name ?? "",
+                "userImage": theuser?.userImage ?? "",
                 "plantID": "\(plantid)",
                 "name": name,
                 "date": date,
@@ -187,7 +182,7 @@ class FirebaseManager {
                 "commandID": document.documentID,
                 "command": "\(newcommand)"],
             "time": dates,
-            "UserId": Auth.auth().currentUser?.uid
+            "UserId": Auth.auth().currentUser?.uid ?? ""
         ]
         document.setData(data) { error in
             if let error = error {

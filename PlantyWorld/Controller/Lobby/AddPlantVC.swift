@@ -137,7 +137,7 @@ class AddPlantVC: UIViewController {
     }
     
     @objc func uploadNewPlant() {
-        FirebaseManager.shared.tryUploadPhoto(plant: plant, image: plantImage.image ?? UIImage()) { result in
+        FirebaseManager.shared.uploadPhoto(plant: plant, image: plantImage.image ?? UIImage()) { result in
             switch result {
             case .success:
                 self.dismissVC()

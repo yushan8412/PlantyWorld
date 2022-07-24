@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800AD2092888F2B5008FDEF5 /* PlantyWorldTests2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800AD2082888F2B5008FDEF5 /* PlantyWorldTests2.swift */; };
 		801B188D2872E33100C6A548 /* QRcodeScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801B188C2872E33100C6A548 /* QRcodeScanVC.swift */; };
 		8021B0E62864906100DA508A /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021B0E52864906100DA508A /* AddFriendVC.swift */; };
 		806DF8592876AE8800DD632B /* EulaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DF8582876AE8800DD632B /* EulaVC.swift */; };
@@ -30,6 +31,7 @@
 		809F97E72859ECDB00E84DD7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */; };
 		809F97E9285A0A2D00E84DD7 /* PlantsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */; };
 		80AA03A9288133B80066EC45 /* WaterReminderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA03A8288133B80066EC45 /* WaterReminderVC.swift */; };
+		80AA03CB28881A270066EC45 /* PlantyWorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA03CA28881A270066EC45 /* PlantyWorldTests.swift */; };
 		80AA70CE2870796C00271F61 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA70CD2870796C00271F61 /* EditVC.swift */; };
 		80AA70D1287080DB00271F61 /* SunAndWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA70CF287080DB00271F61 /* SunAndWaterCell.swift */; };
 		80AA70D2287080DB00271F61 /* SunAndWaterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */; };
@@ -82,9 +84,28 @@
 		E4DC6F92CC852616CE60A5E4 /* Pods_PlantyWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		800AD20A2888F2B5008FDEF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 809F97A9285879F300E84DD7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 809F97B0285879F300E84DD7;
+			remoteInfo = PlantyWorld;
+		};
+		80AA03CC28881A270066EC45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 809F97A9285879F300E84DD7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 809F97B0285879F300E84DD7;
+			remoteInfo = PlantyWorld;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		028CD96F77904254EB42D3C5 /* Pods-PlantyWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantyWorld.release.xcconfig"; path = "Target Support Files/Pods-PlantyWorld/Pods-PlantyWorld.release.xcconfig"; sourceTree = "<group>"; };
 		7324FEF4128BCE1F6CB2B913 /* Pods_PlantyWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlantyWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		800AD2062888F2B5008FDEF5 /* PlantyWorldTests2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlantyWorldTests2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		800AD2082888F2B5008FDEF5 /* PlantyWorldTests2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantyWorldTests2.swift; sourceTree = "<group>"; };
 		801B188C2872E33100C6A548 /* QRcodeScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRcodeScanVC.swift; sourceTree = "<group>"; };
 		8021B0E52864906100DA508A /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		806DF8582876AE8800DD632B /* EulaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EulaVC.swift; sourceTree = "<group>"; };
@@ -110,6 +131,8 @@
 		809F97E62859ECDB00E84DD7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		809F97E8285A0A2D00E84DD7 /* PlantsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsModel.swift; sourceTree = "<group>"; };
 		80AA03A8288133B80066EC45 /* WaterReminderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterReminderVC.swift; sourceTree = "<group>"; };
+		80AA03C828881A270066EC45 /* PlantyWorldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlantyWorldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		80AA03CA28881A270066EC45 /* PlantyWorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantyWorldTests.swift; sourceTree = "<group>"; };
 		80AA70CD2870796C00271F61 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		80AA70CF287080DB00271F61 /* SunAndWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAndWaterCell.swift; sourceTree = "<group>"; };
 		80AA70D0287080DB00271F61 /* SunAndWaterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SunAndWaterCell.xib; sourceTree = "<group>"; };
@@ -164,6 +187,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		800AD2032888F2B5008FDEF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		809F97AE285879F300E84DD7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -172,13 +202,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80AA03C528881A270066EC45 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		800AD2072888F2B5008FDEF5 /* PlantyWorldTests2 */ = {
+			isa = PBXGroup;
+			children = (
+				800AD2082888F2B5008FDEF5 /* PlantyWorldTests2.swift */,
+			);
+			path = PlantyWorldTests2;
+			sourceTree = "<group>";
+		};
 		809F97A8285879F300E84DD7 = {
 			isa = PBXGroup;
 			children = (
 				809F97B3285879F300E84DD7 /* PlantyWorld */,
+				80AA03C928881A270066EC45 /* PlantyWorldTests */,
+				800AD2072888F2B5008FDEF5 /* PlantyWorldTests2 */,
 				809F97B2285879F300E84DD7 /* Products */,
 				AF3B68E8EA64C6DF1856546C /* Pods */,
 				ED819AFAE352ADD581617578 /* Frameworks */,
@@ -189,6 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				809F97B1285879F300E84DD7 /* PlantyWorld.app */,
+				80AA03C828881A270066EC45 /* PlantyWorldTests.xctest */,
+				800AD2062888F2B5008FDEF5 /* PlantyWorldTests2.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -277,6 +326,14 @@
 				80D007832875514B003A20D0 /* FlowerStoreManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		80AA03C928881A270066EC45 /* PlantyWorldTests */ = {
+			isa = PBXGroup;
+			children = (
+				80AA03CA28881A270066EC45 /* PlantyWorldTests.swift */,
+			);
+			path = PlantyWorldTests;
 			sourceTree = "<group>";
 		};
 		80AA70D32871950000271F61 /* Lottie */ = {
@@ -446,6 +503,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		800AD2052888F2B5008FDEF5 /* PlantyWorldTests2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 800AD20E2888F2B5008FDEF5 /* Build configuration list for PBXNativeTarget "PlantyWorldTests2" */;
+			buildPhases = (
+				800AD2022888F2B5008FDEF5 /* Sources */,
+				800AD2032888F2B5008FDEF5 /* Frameworks */,
+				800AD2042888F2B5008FDEF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				800AD20B2888F2B5008FDEF5 /* PBXTargetDependency */,
+			);
+			name = PlantyWorldTests2;
+			productName = PlantyWorldTests2;
+			productReference = 800AD2062888F2B5008FDEF5 /* PlantyWorldTests2.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		809F97B0285879F300E84DD7 /* PlantyWorld */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 809F97C8285879F500E84DD7 /* Build configuration list for PBXNativeTarget "PlantyWorld" */;
@@ -467,6 +542,24 @@
 			productReference = 809F97B1285879F300E84DD7 /* PlantyWorld.app */;
 			productType = "com.apple.product-type.application";
 		};
+		80AA03C728881A270066EC45 /* PlantyWorldTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80AA03D028881A270066EC45 /* Build configuration list for PBXNativeTarget "PlantyWorldTests" */;
+			buildPhases = (
+				80AA03C428881A270066EC45 /* Sources */,
+				80AA03C528881A270066EC45 /* Frameworks */,
+				80AA03C628881A270066EC45 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				80AA03CD28881A270066EC45 /* PBXTargetDependency */,
+			);
+			name = PlantyWorldTests;
+			productName = PlantyWorldTests;
+			productReference = 80AA03C828881A270066EC45 /* PlantyWorldTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -477,8 +570,16 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					800AD2052888F2B5008FDEF5 = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 809F97B0285879F300E84DD7;
+					};
 					809F97B0285879F300E84DD7 = {
 						CreatedOnToolsVersion = 13.4;
+					};
+					80AA03C728881A270066EC45 = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 809F97B0285879F300E84DD7;
 					};
 				};
 			};
@@ -496,11 +597,20 @@
 			projectRoot = "";
 			targets = (
 				809F97B0285879F300E84DD7 /* PlantyWorld */,
+				80AA03C728881A270066EC45 /* PlantyWorldTests */,
+				800AD2052888F2B5008FDEF5 /* PlantyWorldTests2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		800AD2042888F2B5008FDEF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		809F97AF285879F300E84DD7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -525,6 +635,13 @@
 				80ABA6CB2861AAD400BB515C /* AddCommandTitleCell.xib in Resources */,
 				80AB6FC6287406410024D226 /* FriendListCell.xib in Resources */,
 				80ABA6B6285C4C6100BB515C /* CommandCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80AA03C628881A270066EC45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +726,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		800AD2022888F2B5008FDEF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				800AD2092888F2B5008FDEF5 /* PlantyWorldTests2.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		809F97AD285879F300E84DD7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -668,7 +793,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80AA03C428881A270066EC45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80AA03CB28881A270066EC45 /* PlantyWorldTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		800AD20B2888F2B5008FDEF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 809F97B0285879F300E84DD7 /* PlantyWorld */;
+			targetProxy = 800AD20A2888F2B5008FDEF5 /* PBXContainerItemProxy */;
+		};
+		80AA03CD28881A270066EC45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 809F97B0285879F300E84DD7 /* PlantyWorld */;
+			targetProxy = 80AA03CC28881A270066EC45 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		809F97BA285879F300E84DD7 /* Main.storyboard */ = {
@@ -690,6 +836,54 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		800AD20C2888F2B5008FDEF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SN648B7298;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					HEADER_SEARCH_PATHS,
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld.PlantyWorldTests2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlantyWorld.app/PlantyWorld";
+			};
+			name = Debug;
+		};
+		800AD20D2888F2B5008FDEF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SN648B7298;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					HEADER_SEARCH_PATHS,
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld.PlantyWorldTests2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlantyWorld.app/PlantyWorld";
+			};
+			name = Release;
+		};
 		809F97C6285879F500E84DD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -875,9 +1069,66 @@
 			};
 			name = Release;
 		};
+		80AA03CE28881A270066EC45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SN648B7298;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					HEADER_SEARCH_PATHS,
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld.PlantyWorldTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlantyWorld.app/PlantyWorld";
+			};
+			name = Debug;
+		};
+		80AA03CF28881A270066EC45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SN648B7298;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					HEADER_SEARCH_PATHS,
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yang.PlantyWorld.PlantyWorldTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlantyWorld.app/PlantyWorld";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		800AD20E2888F2B5008FDEF5 /* Build configuration list for PBXNativeTarget "PlantyWorldTests2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				800AD20C2888F2B5008FDEF5 /* Debug */,
+				800AD20D2888F2B5008FDEF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		809F97AC285879F300E84DD7 /* Build configuration list for PBXProject "PlantyWorld" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -892,6 +1143,15 @@
 			buildConfigurations = (
 				809F97C9285879F500E84DD7 /* Debug */,
 				809F97CA285879F500E84DD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80AA03D028881A270066EC45 /* Build configuration list for PBXNativeTarget "PlantyWorldTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80AA03CE28881A270066EC45 /* Debug */,
+				80AA03CF28881A270066EC45 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
