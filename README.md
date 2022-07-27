@@ -51,6 +51,52 @@
 
 </p>
 
+## Techniques
+
+<p>
+
+ + Followd **MVC** architecture and **OOP** design pattern to organized code which could be maintained easily.
+ + Bulid user interfaces **Programmatically** and **Xib** to reuse customized UI components.
+ + Created measurement camera feature by implementing **ARKit**.
+ + User **Firebase** to completed CRUD function.
+ + Imported **Lottie** as loding animation to optimize user experience.
+ + Used **AVFoundation** to implement the QRCode scanning feature for follow other user's plants.
+ + Implemented User Authorization with Apple Sign in.
+ 
+</p>
+
+## Library 
+
+<p>
+
++ Firebase/Auth
++ Firebase/Firestore
++ Firebase/Storge
++ Firebase/Crashlytics
++ SwiftLint
++ IQKeyboardManager
++ Lottie
++ Kingfisher
++ FSCalendar
+
+</p>
+
+## Requirement
+
+<p>
+
++ Swift 5.0
++ Xcode 13.0
++ iOS 15.0 or higher
+
+</p>
+
+
+## Contact
+<p>
+
+YuShan Yang yyshan0102@gmail.com
+</p>
 
 
 
