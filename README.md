@@ -58,7 +58,7 @@
  + Followd **MVC** architecture and **OOP** design pattern to organized code which could be maintained easily.
  + Bulid user interfaces **Programmatically** and **Xib** to reuse customized UI components.
  + Created measurement camera feature by implementing **ARKit**.
- + User **Firebase** to completed CRUD function.
+ + Used **Firebase** to completed CRUD function.
  + Imported **Lottie** as loding animation to optimize user experience.
  + Used **AVFoundation** to implement the QRCode scanning feature for follow other user's plants.
  + Implemented User Authorization with Apple Sign in.
