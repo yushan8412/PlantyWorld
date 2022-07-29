@@ -22,7 +22,7 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
         super.setSelected(selected, animated: animated)
     }
     
-    func setup() {
+    private func setup() {
         title.anchor(top: contentView.topAnchor,
                        left: contentView.leftAnchor,
                        right: contentView.rightAnchor,

@@ -18,7 +18,6 @@ struct CalendarModel: Comparable, Codable {
         return lhs.eventDate < rhs.eventDate
     }
     
-//    var eventDate: Date = .init(timeIntervalSinceReferenceDate: 0)
     var eventDate: String
     var content: String
     var plantID: String

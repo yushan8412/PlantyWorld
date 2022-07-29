@@ -29,7 +29,6 @@ class ProfileVC: UIViewController {
     var btnStackView = UIStackView()
     var userData: User?
     var plantsCount = 0
-//    var plantList: [PlantsModel] = []
     var plantList: [PlantsModel] = [] {
         didSet {
             DispatchQueue.main.async {

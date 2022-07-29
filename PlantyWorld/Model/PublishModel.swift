@@ -31,7 +31,6 @@ struct Command: Codable {
 }
 
 struct Author: Codable {
-//    var email: String
     var name: String?
     var id: String
 }

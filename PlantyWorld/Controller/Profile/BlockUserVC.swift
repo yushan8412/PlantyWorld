@@ -36,7 +36,7 @@ class BlockUserVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    func setupUI() {
+    private func setupUI() {
         view.addSubview(tableView)
         view.addSubview(titleLb)
         titleLb.anchor(top: view.topAnchor, paddingTop: 100)
@@ -50,7 +50,7 @@ class BlockUserVC: UIViewController {
                          paddingTop: 16, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
     }
     
-    func getuserData() {
+    private func getuserData() {
         self.blockList.removeAll()
         UserManager.shared.fetchUserData(userID: self.userID) { result in
             switch result {
@@ -63,7 +63,7 @@ class BlockUserVC: UIViewController {
         }
     }
     
-    func getBlockList() {
+    private func getBlockList() {
         for userId in userData?.blockList ?? [] {
             UserManager.shared.fetchUserData(userID: userId) { result in
                 switch result {
@@ -76,7 +76,7 @@ class BlockUserVC: UIViewController {
         }
     }
     
-    func confirm(userid: String) {
+    private func confirm(userid: String) {
         // 建立一個提示框
         let dataBase = Firestore.firestore()
 
@@ -114,7 +114,7 @@ class BlockUserVC: UIViewController {
             completion: nil)
     }
     
-    func successAlert() {
+    private func successAlert() {
         let alertController = UIAlertController(
             title: "Success",
             message: "",
