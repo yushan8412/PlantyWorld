@@ -33,7 +33,7 @@ class AccountManagerVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    func setupStackView() {
+    private func setupStackView() {
         view.addSubview(stackView)
         stackView.addArrangedSubview(friendList)
         stackView.addArrangedSubview(blockUser)
@@ -48,7 +48,7 @@ class AccountManagerVC: UIViewController {
         stackView.centerX(inView: view)
     }
     
-    func setBtnUI() {
+    private func setBtnUI() {
         logoutBtn.anchor(width: 200, height: 55)
         logoutBtn.setTitle("LOGOUT", for: .normal)
         logoutBtn.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
@@ -86,25 +86,19 @@ class AccountManagerVC: UIViewController {
 
     }
     
-    func btnFunc() {
+    private func btnFunc() {
         logoutBtn.addTarget(self, action: #selector(tapToLogout), for: .touchUpInside)
         deleteAccountBtn.addTarget(self, action: #selector(deleteuser), for: .touchUpInside)
         privacyBtn.addTarget(self, action: #selector(goWebVC), for: .touchUpInside)
         blockUser.addTarget(self, action: #selector(goBlockVC), for: .touchUpInside)
         friendList.addTarget(self, action: #selector(goFLiistVC), for: .touchUpInside)
-//        blockUser.addTarget(self, action: #selector(crash), for: .touchUpInside)
     }
     
-    @objc func crash() {
-        fatalError()
-    }
-    
-    @objc func goFLiistVC() {
+    @objc private func goFLiistVC() {
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()
             loginVC.modalPresentationStyle = .overFullScreen
             navigationController?.present(loginVC, animated: true, completion: nil)
-//            navigationController?.pushViewController(loginVC, animated: true)
         } else {
             let nextVC = FriendsListVC()
             nextVC.userID = self.userData?.userID ?? ""
@@ -114,7 +108,7 @@ class AccountManagerVC: UIViewController {
         
     }
     
-    @objc func goBlockVC() {
+    @objc private func goBlockVC() {
         let nextVC = BlockUserVC()
         nextVC.userID = self.userData?.userID ?? ""
         nextVC.modalPresentationStyle = .overFullScreen
@@ -122,12 +116,12 @@ class AccountManagerVC: UIViewController {
         
     }
     
-    @objc func goWebVC() {
+    @objc private func goWebVC() {
         let nextVC = WebVC()
         present(nextVC, animated: true)
     }
     
-    @objc func tapToLogout() {
+    @objc private func tapToLogout() {
             let controller = UIAlertController(title: "LOGOUT", message: "Are you sure you want to logout?", preferredStyle: .alert)
 
             let okAction = UIAlertAction(title: "YES", style: .default) { _ in
@@ -156,13 +150,13 @@ class AccountManagerVC: UIViewController {
             present(controller, animated: true, completion: nil)
     }
     
-    func deleteDate(uid: String ) {
+    private func deleteDate(uid: String ) {
         let documentRef = dataBase.collection("user").document(uid)
         documentRef.delete()
         print("deleted user!!")
     }
     
-    func deletePlantsDate(uid: String) {
+    private func deletePlantsDate(uid: String) {
         let documentRef = dataBase.collection("plants").whereField("userID", isEqualTo: uid).getDocuments { querySnapshot, error in
             if error != nil {
                 print("Error")

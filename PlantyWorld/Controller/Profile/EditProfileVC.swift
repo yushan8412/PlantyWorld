@@ -27,6 +27,7 @@ class EditProfileVC: UIViewController {
     override func viewDidLoad() {
         view.layoutIfNeeded()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "bg4")!)
+        addView()
         setBtnUp()
         userTF.layer.cornerRadius = 10
         email.layer.cornerRadius = 10
@@ -45,7 +46,7 @@ class EditProfileVC: UIViewController {
         
     }
     
-    func setup() {
+    private func addView() {
         view.addSubview(userImage)
         view.addSubview(nameLB)
         view.addSubview(userTF)
@@ -53,7 +54,9 @@ class EditProfileVC: UIViewController {
         view.addSubview(addPicBtn)
         view.addSubview(emailLB)
         view.addSubview(email)
-        
+    }
+    
+    private func setup() {
         userImage.centerX(inView: view)
         userImage.anchor(top: view.topAnchor, paddingTop: 170, width: 250, height: 250)
         userImage.contentMode = .scaleAspectFill
@@ -89,6 +92,9 @@ class EditProfileVC: UIViewController {
         email.backgroundColor = .white
         email.layer.borderWidth = 0.5
         
+    }
+    
+    private func setBtnUp() {
         comfirmBtn.anchor(bottom: view.bottomAnchor, paddingBottom: 32, height: 40)
         comfirmBtn.centerX(inView: view)
         comfirmBtn.setTitle(" Comfirm ", for: .normal)
@@ -103,26 +109,22 @@ class EditProfileVC: UIViewController {
         addPicBtn.backgroundColor = .lightGray
         addPicBtn.layer.cornerRadius = 15
         
-    }
-    
-    func setBtnUp() {
-        
         addPicBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
         comfirmBtn.addTarget(self, action: #selector(tapToUpdate), for: .touchUpInside)
     }
     
-    func lottie() {
+    private func lottie() {
         let animationView = loadAnimation(name: "51686-a-botanical-wreath-loading", loopMode: .loop)
         animationView.play()
 
     }
     
-    @objc func dismissVC() {
+    @objc private func dismissVC() {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func uploadFrom() {
+    @objc private func uploadFrom() {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
             self.camera()
@@ -137,7 +139,7 @@ class EditProfileVC: UIViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    func camera() {
+    private func camera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = .camera
@@ -146,14 +148,14 @@ class EditProfileVC: UIViewController {
         }
     }
     
-    func photopicker() {
+    private func photopicker() {
         let photoController = UIImagePickerController()
         photoController.delegate = self
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
     
-    func showPic() {
+    private func showPic() {
         if userData?.userImage != "" {
             self.userImage.kf.setImage(with: URL(string: userData?.userImage ?? ""))
         } else {
@@ -161,7 +163,7 @@ class EditProfileVC: UIViewController {
         }
     }
     
-    @objc func tapToUpdate() {
+    @objc private func tapToUpdate() {
         
         let imageData = self.userImage.image!.jpegData(compressionQuality: 0.3)
         guard imageData != nil else {
@@ -198,10 +200,6 @@ class EditProfileVC: UIViewController {
         self.comfirmBtn.isEnabled = false
         self.lottie()
         PlantDetailVC().viewWillAppear(true)
-    }
-    
-    func lodingPic() {
-        
     }
     
 }

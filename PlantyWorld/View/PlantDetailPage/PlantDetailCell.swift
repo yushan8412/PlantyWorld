@@ -23,6 +23,7 @@ class PlantDetailCell: UITableViewCell {
         setupLayout()
         nameLB.textColor = .black
         dateLB.textColor = .black
+        backgroundColor = .clear
         
     }
 
@@ -45,6 +46,8 @@ class PlantDetailCell: UITableViewCell {
         bgView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                       bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
                       paddingTop: 4, paddingLeft: 20, paddingBottom: 4, paddingRight: 20)
+        bgView.backgroundColor = .lightPeach
+        bgView.layer.cornerRadius = 20
         
         nameLB.anchor(top: bgView.topAnchor, left: bgView.leftAnchor,
                       right: bgView.rightAnchor, paddingTop: 8,

@@ -16,7 +16,6 @@ class FriendsListVC: UIViewController {
     var tableView = UITableView()
     var titleLB = UILabel()
     var userData: User?
-//    var user: User?
     var userID: String = ""
     var friendList: [User] = [] {
         didSet {
@@ -41,7 +40,7 @@ class FriendsListVC: UIViewController {
         getFriendList()
     }
     
-    func setupUI() {
+    private func setupUI() {
         titleLB.anchor(top: view.topAnchor, paddingTop: 100)
         titleLB.centerX(inView: view)
         titleLB.text = "Following User"
@@ -54,7 +53,7 @@ class FriendsListVC: UIViewController {
                          paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
     }
     
-    func getFriendList() {
+    private func getFriendList() {
         self.friendList.removeAll()
         UserManager.shared.fetchUserData(userID: self.userID) { result in
             switch result {
@@ -67,7 +66,7 @@ class FriendsListVC: UIViewController {
         }
     }
     
-    func getFlist() {
+    private func getFlist() {
         for userId in userData?.followList ?? [] {
             UserManager.shared.fetchUserData(userID: userId) { result in
                 switch result {
@@ -81,39 +80,7 @@ class FriendsListVC: UIViewController {
         }
     }
     
-//    func confirmUnfollow(userid: String) {
-//        // 建立一個提示框
-//        let alertController = UIAlertController(
-//            title: "Unfollow Friend?",
-//            message: "Are you sure you want to unfollow this user？",
-//            preferredStyle: .alert)
-//
-//        // 建立[取消]按鈕
-//        let cancelAction = UIAlertAction(
-//            title: "Cancel",
-//            style: .cancel,
-//            handler: nil)
-//        alertController.addAction(cancelAction)
-//
-//        // 建立[送出]按鈕
-//        let okAction = UIAlertAction(
-//            title: "YES",
-//            style: .default,
-//            handler: { _ in
-//                UserManager.shared.deleteFriend(ownerID: Auth.auth().currentUser?.uid ?? "", userID: userid)
-//                self.successAlert()
-//                self.viewWillAppear(true)
-//            })
-//        alertController.addAction(okAction)
-//
-//        // 顯示提示框
-//        self.present(
-//            alertController,
-//            animated: true,
-//            completion: nil)
-//    }
-    
-    func confirm(userid: String) {
+    private func confirm(userid: String) {
         // 建立一個提示框
         let dataBase = Firestore.firestore()
 
@@ -151,7 +118,7 @@ class FriendsListVC: UIViewController {
             completion: nil)
     }
     
-    func successAlert() {
+    private func successAlert() {
         let alertController = UIAlertController(
             title: "Success",
             message: "",

@@ -61,7 +61,7 @@ class CalendarVC: UIViewController {
         self.tableView.reloadData()
     }
     
-    func setup() {
+    private func setup() {
         view.addSubview(tableView)
         view.addSubview(addEventBtn)
         view.addSubview(addField)
@@ -95,7 +95,7 @@ class CalendarVC: UIViewController {
         
     }
     
-    func calendarUI() {
+    private func calendarUI() {
         tryCalendar.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 0,
                            width: UIScreen.width - 20, height: UIScreen.height/2)
         tryCalendar.centerX(inView: view)
@@ -108,14 +108,14 @@ class CalendarVC: UIViewController {
         
     }
     
-    func fetchData(date: String) {
+    private func fetchData(date: String) {
         FirebaseManager.shared.fetchOneDayEvent(plantID: plant?.id ?? "",
                                                 date: date) { events in self.dayEvent = events ?? []
         }
         
     }
     
-    @objc func addData() {
+    @objc private func addData() {
         FirebaseManager.shared.addEvent(content: addField.text ?? "", plantID: plant?.id ?? "",
                                         date: pickedDate) { [self] result in
             switch result {
@@ -139,7 +139,7 @@ class CalendarVC: UIViewController {
         self.tableView.reloadData()
     }
     
-    func getOneDayDate(date: String) {
+    private func getOneDayDate(date: String) {
         self.dayEvent.removeAll()
  
         for event in eventList {

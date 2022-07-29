@@ -17,7 +17,7 @@ class CommandCell: UITableViewCell {
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var titleLB: UILabel!
-    @IBOutlet weak var commandLB: UILabel!
+    @IBOutlet weak var nameLB: UILabel!
     
     @IBOutlet weak var commandBtn: UIButton!
     var delegate: AddCommandBtnDelegate?
@@ -76,14 +76,14 @@ class CommandCell: UITableViewCell {
                        paddingLeft: 8, paddingRight: 8)
         titleLB.font =  UIFont(name: "Chalkboard SE", size: 20)
 
-        commandLB.anchor(top: userImage.bottomAnchor, left: blureview.leftAnchor,
+        nameLB.anchor(top: userImage.bottomAnchor, left: blureview.leftAnchor,
                          bottom: blureview.bottomAnchor, right: blureview.rightAnchor,
                          paddingTop: 4, paddingLeft: 12,
                          paddingBottom: 8, paddingRight: 8)
-        commandLB.font =  UIFont(name: "Chalkboard SE", size: 20)
+        nameLB.font =  UIFont(name: "Chalkboard SE", size: 20)
         
         titleLB.textColor = .white
-        commandLB.textColor = .white
+        nameLB.textColor = .white
 
     }
     
