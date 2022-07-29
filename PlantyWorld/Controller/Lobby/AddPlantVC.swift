@@ -52,7 +52,7 @@ class AddPlantVC: UIViewController {
         addPlantBtn.isEnabled = true
     }
     
-    func registerCell() {
+    private func registerCell() {
         self.tableView.register(UINib(nibName: "DetailSunCell", bundle: nil),
                                 forCellReuseIdentifier: "DetailSunCell")
         self.tableView.register(UINib(nibName: "DetailWaterCell", bundle: nil),
@@ -63,7 +63,7 @@ class AddPlantVC: UIViewController {
                                 forCellReuseIdentifier: "TextViewCell")
     }
     
-    func addSubView() {
+    private func addSubView() {
         view.addSubview(tableView)
         view.addSubview(addPlantBtn)
         view.addSubview(picBackground)
@@ -71,12 +71,12 @@ class AddPlantVC: UIViewController {
         view.addSubview(addImageBtn)
     }
     
-    func setLottie() {
+    private func setLottie() {
         let animationView = loadAnimation(name: lottieAnimation, loopMode: .loop)
         animationView.play()
     }
     
-    func setAddPlantBtn() {
+    private func setAddPlantBtn() {
         addImageBtn.anchor(bottom: picBackground.bottomAnchor,
                            right: picBackground.rightAnchor,
                            paddingBottom: 8, paddingRight: 8, width: 30, height: 30)
@@ -87,7 +87,7 @@ class AddPlantVC: UIViewController {
         addImageBtn.addTarget(self, action: #selector(uploadFrom), for: .touchUpInside)
     }
     
-    @objc func uploadFrom() {
+    @objc private func uploadFrom() {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
             self.camera()
@@ -103,7 +103,7 @@ class AddPlantVC: UIViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    func camera() {
+    private func camera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = .camera
@@ -112,14 +112,14 @@ class AddPlantVC: UIViewController {
         }
     }
     
-    func photopicker() {
+    private func photopicker() {
         let photoController = UIImagePickerController()
         photoController.delegate = self
         photoController.sourceType = .photoLibrary
         present(photoController, animated: true, completion: nil)
     }
 
-    func setupAddBtn() {
+    private func setupAddBtn() {
         addPlantBtn.anchor(left: view.leftAnchor,
                       bottom: view.bottomAnchor,
                       right: view.rightAnchor,
@@ -132,11 +132,11 @@ class AddPlantVC: UIViewController {
         addPlantBtn.layer.cornerRadius = 10
     }
     
-    func dismissVC() {
+    private func dismissVC() {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func uploadNewPlant() {
+    @objc private func uploadNewPlant() {
         FirebaseManager.shared.uploadPhoto(plant: plant, image: plantImage.image ?? UIImage()) { result in
             switch result {
             case .success:
@@ -149,7 +149,7 @@ class AddPlantVC: UIViewController {
         self.setLottie()
     }
     
-    func setupImageArea() {
+    private func setupImageArea() {
         picBackground.anchor(top: view.topAnchor, left: view.leftAnchor,
                              right: view.rightAnchor, paddingTop: 100,
                              paddingLeft: 56, paddingRight: 56, height: 250)
@@ -165,7 +165,7 @@ class AddPlantVC: UIViewController {
         plantImage.alpha = 1
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView.anchor(top: picBackground.bottomAnchor, left: view.leftAnchor,
                          bottom: addPlantBtn.topAnchor, right: view.rightAnchor,
                          paddingTop: 8, paddingLeft: 8, paddingBottom: 4, paddingRight: 8)

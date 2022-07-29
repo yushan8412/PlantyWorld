@@ -14,20 +14,19 @@ class CommandVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var plantList: [PlantsModel] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
     var user: User?
     
     var plant: PlantsModel?
     
     var followList: [String]?
     
-    var allPost = [PlantsModel]()
+    var allPost: [PlantsModel] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +51,10 @@ class CommandVC: UIViewController {
         } else {
             return
         }
+        self.tableView.reloadData()
     }
     
-    func getUserFriendList() {
+    private func getUserFriendList() {
         if Auth.auth().currentUser != nil {
             self.followList?.removeAll()
             UserManager.shared.fetchUserData(userID: Auth.auth().currentUser?.uid ?? "") { result in
@@ -74,7 +74,7 @@ class CommandVC: UIViewController {
         }
     }
 
-    func getAllPost() {
+    private func getAllPost() {
         self.allPost.removeAll()
         
         for aID in followList ?? [] {
@@ -104,15 +104,15 @@ extension CommandVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "CommandCell") as? CommandCell
         else { return UITableViewCell() }
-        // 這邊會閃退！
+        
+        cell.nameLB.text = (allPost[indexPath.row].name)
+        
         if allPost[indexPath.row].userName == "no name yet" {
             cell.titleLB.text = "New User"
         } else {
         cell.titleLB.text = allPost[indexPath.row].userName
         }
-        
-        cell.commandLB.text = (allPost[indexPath.row].name)
-        
+            
         if allPost[indexPath.row].userImage == "no image yet" {
             cell.userImage.image = UIImage(named: "About us")
         } else if allPost[indexPath.row].userImage == "" {

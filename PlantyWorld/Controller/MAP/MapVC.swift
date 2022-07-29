@@ -46,7 +46,6 @@ class MapVC: UIViewController {
       
         myMap.showsUserLocation = true
         setupUI()
-        secretPin()
         setCollectionView()
         location.titleLabel?.font = UIFont(name: "Chalkboard SE", size: 24)
         print(storeList)
@@ -59,7 +58,7 @@ class MapVC: UIViewController {
         dropPin()
     }
     
-    func getStoreData() {
+    private func getStoreData() {
         StoreManager.shared.fetchAllPlants { stores in
             self.storeList = stores ?? []
             self.collectionView.reloadData()
@@ -67,7 +66,7 @@ class MapVC: UIViewController {
         }
     }
     
-    func dropPin() {
+    private func dropPin() {
         for pin in storeList {
             let mark = MKPointAnnotation()
             mark.coordinate = CLLocationCoordinate2D(latitude: pin.point.latitude, longitude: pin.point.longitude)
@@ -77,17 +76,9 @@ class MapVC: UIViewController {
         
     }
     
-    func secretPin() {
-        let pin = MKPointAnnotation()
-        pin.coordinate = CLLocationCoordinate2D(latitude: 50.102878, longitude: 8.628588)
-        pin.title = "法比"
-        myMap.addAnnotation(pin)
-    }
-    
-    func setCollectionView() {
+    private func setCollectionView() {
         view.addSubview(collectionView)
         view.addSubview(location)
-//        collectionView.isHidden = true
 
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
@@ -98,24 +89,19 @@ class MapVC: UIViewController {
                               right: view.rightAnchor, paddingLeft: 0, paddingBottom: 80,
                               paddingRight: 0, height: 220)
     }
-
-//    func setNBtn() {
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                    image: UIImage(named: "Group")?
-//                        .withTintColor(UIColor.black)
-//                        .withRenderingMode(.alwaysOriginal),
-//                    style: .plain,
-//                    target: self,
-//                    action: #selector(showLocation))
-//    }
     
     func showLocation() {
-        let location = myMap.userLocation
+        if myMap.userLocation != nil {
+        let location = myMap.userLocation 
         let region = MKCoordinateRegion(center: location.coordinate,
                                         latitudinalMeters: 1000, longitudinalMeters: 1000)
         myMap.setRegion(region, animated: true)
+        } else {
+            return
+        }
     }
-    func setupUI() {
+    
+    private func setupUI() {
         
         location.tintColor = .black
         location.backgroundColor = .pgreen
@@ -206,13 +192,3 @@ extension MapVC: UICollectionViewDelegateFlowLayout {
 
 }
 
-extension MapVC: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-//        let pin = myMap.annotations as?
-//        let selectedLocation = CLLocationCoordinate2D(latitude: self.store.point.latitude,
-//                                                      longitude: self.store.point.longitude)
-//        myMap.setRegion(MKCoordinateRegion(center: selectedLocation,
-//                                           latitudinalMeters: 800, longitudinalMeters: 800), animated: true)
-    }
-}

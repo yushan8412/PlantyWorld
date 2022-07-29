@@ -20,7 +20,8 @@ class DetailWaterCell: UITableViewCell {
     @IBOutlet weak var water5: UIButton!
     @IBOutlet weak var waterView: UIStackView!
     var waterLevel: Int = 1
-    var delegate: WaterLevelDelegate?
+    
+    weak var delegate: WaterLevelDelegate?
     
     @IBAction func waterLevel(_ sender: UIButton) {
         

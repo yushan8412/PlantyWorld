@@ -22,7 +22,7 @@ class DetailSunCell: UITableViewCell {
     @IBOutlet weak var sun5: UIButton!
     @IBOutlet weak var sunView: UIStackView!
     
-    var delegate: SunLevelDelegate?
+    weak var delegate: SunLevelDelegate?
     
     @IBAction func tapBtnToSunLevel(_ sender: UIButton) {
         switch sender {
@@ -47,7 +47,6 @@ class DetailSunCell: UITableViewCell {
             sun3.tintColor = .systemYellow
             sun4.tintColor = .systemGray2
             sun5.tintColor = .systemGray2
-//            print(sunLevel.rawValue)
         case sun4:
             sunLevel = 4
             sun1.tintColor = .systemYellow
@@ -119,7 +118,7 @@ class DetailSunCell: UITableViewCell {
         
     }
         
-    func setup() {
+    private func setup() {
         sunLB.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                      right: contentView.rightAnchor, paddingTop: 8,
                      paddingLeft: 16, paddingRight: 8)

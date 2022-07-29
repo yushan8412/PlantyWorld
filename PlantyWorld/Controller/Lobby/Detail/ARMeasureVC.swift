@@ -61,7 +61,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func setup() {
+    private func setup() {
         sceneView.anchor(top: view.topAnchor, left: view.leftAnchor,
                          bottom: view.bottomAnchor, right: view.rightAnchor,
                          paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
@@ -74,7 +74,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         
     }
 //    紅點越小，測量結果越精準\n 若黃點消失\n 請稍微移開鏡頭再對準測量物
-    func usageAlert() {
+    private func usageAlert() {
         let alertController = UIAlertController(
             title: "Usage",
             message: "The smaller red dot is, the measurement would be more precise. If yellow dot disappear,\n please recalibrate camera.",
@@ -91,7 +91,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
             completion: nil)
     }
     
-    @objc func tapToSave() {
+    @objc private func tapToSave() {
         let deleteAlert = UIAlertController(title: "Save data",
                                             message: "Save \(finalMeasurement ?? "") cm as your data?",
                                             preferredStyle: UIAlertController.Style.alert)
@@ -105,7 +105,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         present(deleteAlert, animated: true, completion: nil)
     }
     
-    func addEvent() {
+    private func addEvent() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
@@ -138,7 +138,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
             completion: nil)
     }
     
-    func addDot(at hitResult: ARHitTestResult) {
+    private func addDot(at hitResult: ARHitTestResult) {
         let dotGeometry = SCNSphere(radius: 0.005)
         let material = SCNMaterial()
         material.diffuse.contents = UIColor.red
@@ -158,7 +158,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func calculate () {
+    private func calculate () {
         let start = dotNodes[0]
         let end = dotNodes[1]
         
@@ -185,7 +185,7 @@ class MeasureVC: UIViewController, ARSCNViewDelegate {
                 
     }
     
-    func updateText(text: String, atPosition position: SCNVector3) {
+    private func updateText(text: String, atPosition position: SCNVector3) {
         
         textNode.removeFromParentNode()
         

@@ -50,7 +50,7 @@ class LoginVC: UIViewController {
         setupBG()
     }
     
-    func setupBG() {
+    private func setupBG() {
         bgView.addSubview(closeBtn)
         bgView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,
                       right: view.rightAnchor, paddingLeft: 0, paddingBottom: 0,
@@ -71,7 +71,7 @@ class LoginVC: UIViewController {
     
     }
     
-    @objc func dissmiss() {
+    @objc private func dissmiss() {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }

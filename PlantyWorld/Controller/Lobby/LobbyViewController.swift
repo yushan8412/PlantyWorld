@@ -11,8 +11,6 @@ import Kingfisher
 import FirebaseAuth
 
 class LobbyViewController: UIViewController {
-
-//    @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var plantsCollectionView: UICollectionView!
     
@@ -40,28 +38,19 @@ class LobbyViewController: UIViewController {
         setupItem()
         setupBtn()
         plantsCollectionView.backgroundColor = .clear
-
-//        searchBarSearchButtonClicked(searchB: self.searchBar)
-//        searchBar.delegate = self
-
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.searchBar.endEditing(true)
-//        searchBarSearchButtonClicked(searchB: self.searchBar)
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
         plantsCollectionView.backgroundColor = .clear
 
         self.plantList.removeAll()
-//        FirebaseManager.shared.fetchUserPlantsData(uid: "SvPOVniW2hVeiT1kbmXXZGx45Fr2", completion: { plantList in self.plantList = plantList ?? [] })
+        FirebaseManager.shared.fetchUserPlantsData(uid: "zV5zY6NPedNcDOxHe8VawHMGYBJ3", completion: { plantList in self.plantList = plantList ?? [] })
         // MARK: 正式模式
-        FirebaseManager.shared.fetchUserPlantsData(
-            uid: Auth.auth().currentUser?.uid ?? "",
-            completion: { plantList in self.plantList = plantList
-            })
+//        FirebaseManager.shared.fetchUserPlantsData(
+//            uid: Auth.auth().currentUser?.uid ?? "",
+//            completion: { plantList in self.plantList = plantList
+//            })
         
         self.plantsCollectionView.reloadData()
         
@@ -80,12 +69,8 @@ class LobbyViewController: UIViewController {
         plantsCollectionView.layoutIfNeeded()
         
     }
-    
-//    func searchBarSearchButtonClicked(searchB: UISearchBar) {
-//            searchBar.resignFirstResponder()
-//        }
 
-    func setupItem() {
+    private func setupItem() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.sectionInset = UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
@@ -95,12 +80,12 @@ class LobbyViewController: UIViewController {
                                       forCellWithReuseIdentifier: PlantsCollectionViewCell.reuseIdentifier)
     }
     
-    func setupBtn() {
+    private func setupBtn() {
         addPlantBtn.customView?.layer.borderWidth = 1
         addPlantBtn.customView?.layer.borderColor = UIColor.black.cgColor
     }
     
-    func toAddVC () {
+    private func toAddVC () {
         if Auth.auth().currentUser == nil {
             let loginVC = LoginVC()
             loginVC.modalPresentationStyle = .overFullScreen
@@ -169,5 +154,3 @@ extension LobbyViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension LobbyViewController: UISearchBarDelegate {
-}

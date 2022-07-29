@@ -38,7 +38,7 @@ class AddFriendVC: UIViewController {
         setup()
     }
     
-    func generateQRCode(from string: String) -> UIImage? {
+    private func generateQRCode(from string: String) -> UIImage? {
         let data = string.data(using: String.Encoding.ascii)
 
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
@@ -53,7 +53,7 @@ class AddFriendVC: UIViewController {
         return nil
     }
     
-    func setup() {
+    private func setup() {
         bigTitle.anchor(bottom: qrImage.topAnchor, paddingBottom: 24)
         bigTitle.centerX(inView: view)
         bigTitle.text = "Follow Friends Plants"
@@ -98,20 +98,20 @@ class AddFriendVC: UIViewController {
 
     }
     
-    @objc func searchFriend() {
+    @objc private func searchFriend() {
         self.checkEmail(email: searchTXF.text ?? "")
         self.searchTXF.text = ""
         
     }
     
-    @objc func goScan() {
+    @objc private func goScan() {
         let scanVC = ScanVC()
         scanVC.delegate = self
         navigationController?.pushViewController(scanVC, animated: true)
         
     }
     
-    func checkEmail(email: String) {
+    private func checkEmail(email: String) {
         let dataBase = Firestore.firestore()
         
         // 在"user_data"collection裡，when the "email" in firebase is equal to chechEmail的參數email, than get that document.
@@ -119,7 +119,6 @@ class AddFriendVC: UIViewController {
             
             if let querySnapshot = querySnapshot {
                 if let document = querySnapshot.documents.first {
-//                    self.confirm()
                     
                     for data in querySnapshot.documents {
                         let userdata = data.data(with: ServerTimestampBehavior.none)
@@ -190,7 +189,7 @@ class AddFriendVC: UIViewController {
         }
     }
     
-    func successAlert() {
+    private func successAlert() {
         let alertController = UIAlertController(
             title: "Success",
             message: "",
@@ -207,7 +206,7 @@ class AddFriendVC: UIViewController {
             completion: nil)
     }
     
-    func confirm() {
+    private func confirm() {
         // 建立一個提示框
         let dataBase = Firestore.firestore()
 

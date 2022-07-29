@@ -57,13 +57,13 @@ class PlantDetailVC: UIViewController {
     
     }
     
-    func goEditVC() {
+    private func goEditVC() {
         let editVC = EditVC()
         editVC.plant = self.plant
         navigationController?.pushViewController(editVC, animated: true)
     }
     
-    func setupStackView() {
+    private func setupStackView() {
         btnStackView.axis = .horizontal
         btnStackView.alignment = .center
         btnStackView.distribution = .equalSpacing
@@ -74,7 +74,7 @@ class PlantDetailVC: UIViewController {
         
     }
     
-    func setup() {
+    private func setup() {
         
         tableView.anchor(top: view.topAnchor, left: view.leftAnchor,
                          bottom: btnStackView.topAnchor, right: view.rightAnchor,
@@ -135,7 +135,7 @@ class PlantDetailVC: UIViewController {
         present(deleteAlert, animated: true, completion: nil)
     }
     
-    func deletPlant() {
+    private func deletPlant() {
         FirebaseManager.shared.deleteDate(plantID: self.plant?.id ?? "" )
         navigationController?.popToRootViewController(animated: true)
     }
@@ -148,63 +148,53 @@ extension PlantDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let imageCell = tableView.dequeueReusableCell(
-            withIdentifier: PlantDetailImageCell.reuseidentify,
-            for: indexPath) as? PlantDetailImageCell
-        else { return UITableViewCell() }
-        
-        guard let titleCell = tableView.dequeueReusableCell(
-            withIdentifier: "PlantDetailCell") as? PlantDetailCell
-        else { return UITableViewCell() }
-        
-        guard let noteCell = tableView.dequeueReusableCell(
-            withIdentifier: "NoteCell") as? NoteCell
-        else { return UITableViewCell() }
-        
-        guard let swCell = tableView.dequeueReusableCell(
-            withIdentifier: SunAndWaterCell.reuseidentify,
-            for: indexPath) as? SunAndWaterCell
-        else { return UITableViewCell() }
-        
-        titleCell.nameLB.text = "Name : \(plant?.name ?? "")"
-        titleCell.dateLB.text = "Purchase Date : \(plant?.date ?? "")"
-        noteCell.noteLB.text = "Note : "
-        noteCell.noteContent.text = plant?.note ?? "Don't have any note yet"
-        imageCell.image.kf.setImage(with: URL(string: plant?.image ?? ""))
-                
-        if indexPath.row == 0 {
-            
+        switch indexPath.row {
+        case 0:
+            guard let imageCell = tableView.dequeueReusableCell(
+                withIdentifier: PlantDetailImageCell.reuseidentify,
+                for: indexPath) as? PlantDetailImageCell
+            else { return UITableViewCell() }
+            imageCell.image.kf.setImage(with: URL(string: plant?.image ?? ""))
             imageCell.backgroundColor = .clear
             imageCell.isUserInteractionEnabled = false
             return imageCell
             
-        } else if indexPath.row == 1 {
-            
+        case 1:
+            guard let titleCell = tableView.dequeueReusableCell(
+                withIdentifier: "PlantDetailCell") as? PlantDetailCell
+            else { return UITableViewCell() }
+            titleCell.nameLB.text = "Name : \(plant?.name ?? "")"
+            titleCell.dateLB.text = "Purchase Date : \(plant?.date ?? "")"
             titleCell.backgroundColor = .clear
             titleCell.isUserInteractionEnabled = false
             titleCell.bgView.backgroundColor = .pyellow
             titleCell.bgView.layer.cornerRadius = 25
             return titleCell
             
-        } else if indexPath.row == 2 {
+        case 2:
+            guard let swCell = tableView.dequeueReusableCell(
+                withIdentifier: SunAndWaterCell.reuseidentify,
+                for: indexPath) as? SunAndWaterCell
+            else { return UITableViewCell() }
             swCell.backgroundColor = .clear
             swCell.sunLb.text = "\(plant?.sun ?? 0) / 5 "
             swCell.waterLb.text = "\(plant?.water ?? 0) / 5 "
             return swCell
-                
-        } else if indexPath.row == 3 {
-            noteCell.backgroundColor = .clear
-            noteCell.isUserInteractionEnabled = false
+            
+        case 3:
+            guard let noteCell = tableView.dequeueReusableCell(
+                withIdentifier: "NoteCell") as? NoteCell
+            else { return UITableViewCell() }
+            noteCell.noteLB.text = "Note : "
+            noteCell.noteContent.text = plant?.note ?? "Don't have any note yet"
             noteCell.noteContent.text = plant?.note
             noteCell.bgView.backgroundColor = .pyellow
-            noteCell.bgView.layer.cornerRadius = 25
             noteCell.noteLB.textColor = .black
             noteCell.noteContent.textColor = .black
-
             return noteCell
+            
+        default:
+            return UITableViewCell()
         }
-        
-        return UITableViewCell()
     }
 }

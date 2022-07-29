@@ -47,7 +47,6 @@ class SunAndWaterCell: UITableViewCell {
         
         sunBG.anchor(width: (UIScreen.width/2)-20, height: 120)
         sunBG.backgroundColor = .pyellow
-//        sunBG.alpha = 0.8
         sunBG.layer.cornerRadius = 30
 
         sunPic.anchor(top: sunBG.topAnchor, left: sunBG.leftAnchor,

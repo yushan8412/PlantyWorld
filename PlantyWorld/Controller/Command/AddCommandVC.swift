@@ -77,7 +77,7 @@ class AddCommandVC: UIViewController {
         
     }
     
-    func blackViewDynamic() {
+    private func blackViewDynamic() {
            
            blackView.backgroundColor = .black
            blackView.alpha = 0
@@ -88,7 +88,7 @@ class AddCommandVC: UIViewController {
            }
     }
     
-    func setupUI() {
+    private func setupUI() {
         view.backgroundColor = .clear
         view.addSubview(commandView)
         commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -119,27 +119,27 @@ class AddCommandVC: UIViewController {
                               paddingTop: 16, paddingLeft: 16, paddingBottom: 35, paddingRight: 16, height: 40)
     }
     
-    func cornerRadius() {
+    private func cornerRadius() {
         commandView.layer.cornerRadius = 30
         commandView.clipsToBounds = true
         commandView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
     }
     
-    func setupBackBtn() {
+    private func setupBackBtn() {
         backBtn.setTitle("", for: .normal)
         backBtn.tintColor = .black
         backBtn.addTarget(self, action: #selector(tappedToDismiss), for: .touchUpInside)
     }
     
-    func setupSendBtn() {
+    private func setupSendBtn() {
         sendCommandBtn.layer.cornerRadius = 10
         sendCommandBtn.backgroundColor = .dPeach
         sendCommandBtn.setTitle(" Send ", for: .normal)
         sendCommandBtn.addTarget(self, action: #selector(tappedToSend), for: .touchUpInside)
     }
     
-    func setTextfield() {
+    private func setTextfield() {
         commandField.borderStyle = .roundedRect
         commandField.layer.borderWidth = 0.5
         commandField.attributedPlaceholder =
@@ -150,7 +150,7 @@ class AddCommandVC: UIViewController {
         commandField.layer.cornerRadius = 10
     }
     
-    @objc func tappedToDismiss() {
+    @objc private func tappedToDismiss() {
         blackView.removeFromSuperview()
 
         navigationController?.popViewController(animated: true)
@@ -159,7 +159,7 @@ class AddCommandVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func tappedToSend() {
+    @objc private func tappedToSend() {
         
         FirebaseManager.shared.addCommand(name: plant?.name ?? "no name",
                                           id: plant?.id ?? "no id",
@@ -171,7 +171,7 @@ class AddCommandVC: UIViewController {
             self.tableView.reloadData()}) // 要在這裡面reload
     }
 
-    func getComment() {
+    private func getComment() {
         FirebaseManager.shared.fetchCommandData(plantID: plant?.id ?? "") { comments in
             for comment in comments {
                 self.addUserData(comment: comment)
@@ -181,7 +181,7 @@ class AddCommandVC: UIViewController {
         
     }
     
-    func addUserData(comment: PublishModel) {
+    private func addUserData(comment: PublishModel) {
         self.user.removeAll()
         UserManager.shared.fetchUserData(userID: comment.userID) { result in
             switch result {

@@ -17,6 +17,7 @@ class NoteCell: UITableViewCell {
         setup()
         noteLB.textColor = .white
         noteContent.textColor = .white
+        backgroundColor = .clear
     
     }
 
@@ -32,6 +33,7 @@ class NoteCell: UITableViewCell {
         bgView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor,
                       bottom: contentView.bottomAnchor, right: contentView.rightAnchor,
                       paddingTop: 4, paddingLeft: 16, paddingBottom: 4, paddingRight: 16)
+        bgView.layer.cornerRadius = 25
         noteLB.anchor(top: bgView.topAnchor, left: bgView.leftAnchor,
                       right: bgView.rightAnchor, paddingTop: 8,
                       paddingLeft: 16, paddingRight: 16)
